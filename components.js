@@ -141,7 +141,7 @@ function rfDismissSticky() {
 (function () {
   const a = document.createElement('a');
   a.className = 'wa-btn';
-  a.href = 'https://wa.me/3900000000';
+  a.href = 'https://wa.me/393922198185';
   a.target = '_blank';
   a.rel = 'noopener noreferrer';
   a.setAttribute('aria-label', 'Parla con un consulente su WhatsApp');
