@@ -1,23 +1,129 @@
 /* ================================================================
-   RisparmioFacile — Shared Components
-   Sticky bar · WhatsApp button · Exit intent popup
+   Quotami — Shared Components
+   Sticky bar · WhatsApp button · Exit intent popup · Mobile nav
    ================================================================ */
+
+/* ── MOBILE NAV (hamburger + mega-menu accordion) ── */
+(function () {
+  function init() {
+    var nav = document.querySelector('nav');
+    var toggle = document.querySelector('.nav-toggle');
+    if (!nav || !toggle) return;
+
+    var savedScrollY = 0;
+
+    function setNavOpen(open) {
+      nav.setAttribute('data-open', String(open));
+      toggle.setAttribute('aria-expanded', String(open));
+      if (open) {
+        savedScrollY = window.scrollY || window.pageYOffset || 0;
+        document.body.classList.add('nav-open');
+        document.body.style.top = '-' + savedScrollY + 'px';
+      } else {
+        document.body.classList.remove('nav-open');
+        document.body.style.top = '';
+        window.scrollTo(0, savedScrollY);
+      }
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var open = nav.getAttribute('data-open') === 'true';
+      setNavOpen(!open);
+    });
+
+    // Mega-menu: toggle su click — funziona sia desktop che mobile/tablet
+    // Su desktop il :hover apre comunque, ma il click serve per dispositivi touch
+    var megaTriggers = document.querySelectorAll('.has-mega > a');
+    megaTriggers.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        // Solo se href="#": altrimenti è un link vero, lascia passare
+        if (a.getAttribute('href') !== '#') return;
+        e.preventDefault();
+        var li = a.parentElement;
+        var wasOpen = li.getAttribute('data-open') === 'true';
+        // Chiudi altri mega menu aperti
+        document.querySelectorAll('.has-mega[data-open="true"]').forEach(function (other) {
+          if (other !== li) other.setAttribute('data-open', 'false');
+        });
+        li.setAttribute('data-open', String(!wasOpen));
+      });
+    });
+
+    // Click fuori → chiude mega-menu aperti (solo su desktop, su mobile c'è hamburger)
+    document.addEventListener('click', function (e) {
+      if (window.innerWidth <= 900) return;
+      if (e.target.closest('.has-mega')) return;
+      document.querySelectorAll('.has-mega[data-open="true"]').forEach(function (li) {
+        li.setAttribute('data-open', 'false');
+      });
+    });
+
+    // Click su un sottolink del mega-panel (link reale) → blur + chiudi pannello
+    // così focus-within non lo tiene aperto dopo la navigazione
+    document.querySelectorAll('.mega-panel a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var li = link.closest('.has-mega');
+        if (li) li.setAttribute('data-open', 'false');
+        link.blur();
+      });
+    });
+
+    // ESC chiude tutti i mega-menu aperti
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.has-mega[data-open="true"]').forEach(function (li) {
+          li.setAttribute('data-open', 'false');
+        });
+        if (nav.getAttribute('data-open') === 'true') {
+          setNavOpen(false);
+        }
+      }
+    });
+
+    // Chiudi menu mobile cliccando su un link interno (non sui trigger del mega)
+    document.querySelectorAll('nav ul a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (window.innerWidth > 900) return;
+        if (link.parentElement.classList.contains('has-mega') && link.getAttribute('href') === '#') return;
+        setNavOpen(false);
+      });
+    });
+
+    // Chiudi al resize verso desktop
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 900) {
+        if (nav.getAttribute('data-open') === 'true') setNavOpen(false);
+        document.querySelectorAll('.has-mega[data-open]').forEach(function (li) {
+          li.removeAttribute('data-open');
+        });
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 
 /* ── STICKY BAR ── */
 (function () {
   if (sessionStorage.getItem('rfStickyDismissed')) return;
 
   const path = location.pathname;
-  let href = 'piano-pensione.html', label = 'Scopri i vantaggi →';
-  if (path.includes('polizza-auto'))   { href = 'polizza-auto.html#preventivo';   label = 'Calcola ora →'; }
-  else if (path.includes('polizza-casa')){ href = 'polizza-casa.html#preventivo'; label = 'Calcola ora →'; }
+  let href = 'contatti.html', label = 'Parla con me →';
+  if (path.includes('polizza-auto'))   { href = 'polizza-auto.html#preventivo';   label = 'Richiedi preventivo →'; }
+  else if (path.includes('polizza-casa')){ href = 'polizza-casa.html#preventivo'; label = 'Richiedi preventivo →'; }
   else if (path.includes('piano-pensione') || path.includes('landing-pensione')){ href = '#simulatore'; label = 'Calcola il mio piano →'; }
+  else if (path.includes('cyber') || path.includes('salute') || path.includes('rc')) { href = 'contatti.html'; label = 'Parlami →'; }
 
   const bar = document.createElement('div');
   bar.id = 'rf-sticky-bar';
   bar.className = 'sticky-bar';
   bar.innerHTML =
-    '🎁 Consulenza gratuita disponibile oggi &nbsp;·&nbsp; Risparmio medio €261/anno &nbsp;·&nbsp;' +
+    '☕ Primo incontro gratuito &nbsp;·&nbsp; Consulenza personale in tutta Italia &nbsp;·&nbsp;' +
     '<a href="' + href + '">' + label + '</a>' +
     '<button class="sticky-bar-close" onclick="rfDismissSticky()" aria-label="Chiudi">✕</button>';
   document.body.prepend(bar);
@@ -47,34 +153,11 @@ function rfDismissSticky() {
   document.body.appendChild(a);
 })();
 
-/* ── EXIT INTENT POPUP ── */
-(function () {
-  if (sessionStorage.getItem('rfExitShown')) return;
-
-  const overlay = document.createElement('div');
-  overlay.className = 'ei-overlay';
-  overlay.id = 'rf-ei-overlay';
-  overlay.innerHTML =
-    '<div class="ei-box">' +
-      '<button class="ei-close" onclick="rfCloseExit()" aria-label="Chiudi">✕</button>' +
-      '<p class="ei-tag">Prima di andare…</p>' +
-      '<h2 class="ei-title">Scopri quanto risparmieresti sull\'IRPEF con un piano pensione</h2>' +
-      '<p class="ei-sub">In 30 secondi calcoliamo il tuo risparmio fiscale potenziale. Te lo inviamo gratis.</p>' +
-      '<input type="email" class="ei-input" id="rf-ei-email" placeholder="La tua email">' +
-      '<button class="ei-btn" onclick="rfSubmitExit()">Inviami il calcolo gratuito →</button>' +
-      '<p class="ei-skip" onclick="rfCloseExit()">No grazie, rinuncio al risparmio fiscale</p>' +
-    '</div>';
-  document.body.appendChild(overlay);
-
-  let fired = false;
-  document.addEventListener('mouseleave', function (e) {
-    if (e.clientY < 10 && !fired) {
-      fired = true;
-      overlay.classList.add('show');
-      sessionStorage.setItem('rfExitShown', '1');
-    }
-  });
-})();
+/* ── EXIT INTENT POPUP — RIMOSSO ──
+ * Era pressure tactics non allineata al posizionamento da consulente.
+ * Le funzioni rfCloseExit/rfSubmitExit qui sotto sono mantenute solo per
+ * non rompere eventuali handler dimenticati nelle pagine. Sicure perché
+ * cercano elementi che non esistono più. */
 
 function rfCloseExit() {
   const o = document.getElementById('rf-ei-overlay');

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Piano Pensione – RisparmioFacile</title>
+<title>Piano Pensione – Quotami</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260512i">
 <style>
   /* ── LINE CHART ── */
   .chart-section { background: var(--bg-alt); }
@@ -30,7 +30,7 @@
   .compare-table thead { background: var(--primary); }
   .compare-table thead th {
     padding: 1rem 1.25rem; text-align: left;
-    font-family: 'Syne', sans-serif; font-size: .82rem; font-weight: 600;
+    font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 600;
     color: #fff; letter-spacing: .04em; text-transform: uppercase;
   }
   .compare-table thead th:first-child { color: rgba(255,255,255,.6); }
@@ -41,7 +41,7 @@
   .compare-table td:first-child { font-weight: 600; color: var(--text); }
   .td-check { color: var(--green-dark); font-weight: 700; }
   .td-no { color: #aaa; }
-  .td-best { color: #1a7a4a; font-weight: 600; background: rgba(61,214,140,.07); }
+  .td-best { color: #1a7a4a; font-weight: 600; background: rgba(255,216,77,.07); }
 
   /* ── TAX SECTION ── */
   .tax-grid {
@@ -55,10 +55,10 @@
   }
   .tax-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--border-green); }
   .tax-card-num {
-    font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 700;
+    font-family: 'Inter', sans-serif; font-size: 2.2rem; font-weight: 700;
     color: var(--primary); display: block; margin-bottom: .5rem; line-height: 1;
   }
-  .tax-card h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: .4rem; color: var(--text); }
+  .tax-card h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: .4rem; color: var(--text); }
   .tax-card p { font-size: .85rem; color: var(--text-muted); line-height: 1.65; }
 
   /* ── FORM + SIMULATOR ── */
@@ -73,11 +73,11 @@
   .form-group label { font-size: .8rem; font-weight: 600; color: var(--text); letter-spacing: .03em; }
   .form-group input, .form-group select {
     padding: .75rem 1rem; border-radius: 12px; border: 1px solid var(--border);
-    background: var(--bg); font-family: 'DM Sans', sans-serif;
+    background: var(--bg); font-family: 'Inter', sans-serif;
     font-size: .95rem; color: var(--text); outline: none;
     transition: border-color .2s, box-shadow .2s;
   }
-  .form-group input:focus, .form-group select:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(61,214,140,.1); }
+  .form-group input:focus, .form-group select:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1); }
   .form-submit { width: 100%; font-size: 1.05rem; padding: 1rem; border-radius: 14px; }
 
   /* simulator result */
@@ -87,12 +87,12 @@
     padding: 1.75rem; border: 1px solid var(--border-green);
   }
   .sim-result.show { display: block; }
-  .sim-result-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 1.25rem; }
+  .sim-result-title { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 1.25rem; }
   .sim-result.show { animation: fadeUpSim .4s ease-out; }
   @keyframes fadeUpSim { from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);} }
   .sim-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .85rem; }
   .sim-item { text-align: center; background: var(--bg-card); border-radius: 12px; padding: 1rem .75rem; border: 1px solid var(--border); }
-  .sim-num { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--primary); display: block; line-height: 1; }
+  .sim-num { font-family: 'Inter', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--primary); display: block; line-height: 1; }
   .sim-lbl { font-size: .7rem; color: var(--text-muted); margin-top: .35rem; display: block; line-height: 1.4; }
   .sim-disclaimer { font-size: .75rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.5; }
 
@@ -106,11 +106,11 @@
   .shock-card.red   { background: rgba(200,30,30,.12); border-color: #e03030; }
   .shock-card.amber { background: rgba(220,120,0,.12); border-color: #e07020; }
   .shock-card.rust  { background: rgba(180,60,0,.12);  border-color: #c04010; }
-  .shock-num { font-family:'Syne',sans-serif; font-size:1.85rem; font-weight:700; display:block; line-height:1; margin-bottom:.5rem; }
+  .shock-num { font-family:'Inter',sans-serif; font-size:1.85rem; font-weight:700; display:block; line-height:1; margin-bottom:.5rem; }
   .shock-card.red   .shock-num { color:#f05050; }
   .shock-card.amber .shock-num { color:#e88030; }
   .shock-card.rust  .shock-num { color:#d06030; }
-  .shock-card h4 { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:700; color:#fff; margin-bottom:.4rem; }
+  .shock-card h4 { font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; color:#fff; margin-bottom:.4rem; }
   .shock-card p  { font-size:.82rem; color:rgba(255,255,255,.6); line-height:1.6; }
 
   /* ── TRANSFER SECTION ── */
@@ -121,14 +121,14 @@
   }
   .transfer-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin:1.5rem 0; }
   .tr-step { text-align:center; }
-  .tr-step-num { width:36px; height:36px; border-radius:50%; background:var(--green-soft); color:var(--primary); font-family:'Syne',sans-serif; font-weight:700; font-size:.85rem; display:flex; align-items:center; justify-content:center; margin:0 auto .75rem; }
+  .tr-step-num { width:36px; height:36px; border-radius:50%; background:var(--green-soft); color:var(--primary); font-family:'Inter',sans-serif; font-weight:700; font-size:.85rem; display:flex; align-items:center; justify-content:center; margin:0 auto .75rem; }
   .tr-step p { font-size:.82rem; color:var(--text-muted); line-height:1.5; }
 
   /* ── VS BANCARI TABLE ── */
   .vs-table-wrap { overflow-x:auto; margin-top:3rem; }
   .vs-table { width:100%; border-collapse:collapse; background:var(--bg-card); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); }
   .vs-table thead { background:var(--primary); }
-  .vs-table thead th { padding:1rem 1.25rem; font-family:'Syne',sans-serif; font-size:.8rem; font-weight:600; color:#fff; text-transform:uppercase; letter-spacing:.04em; text-align:left; }
+  .vs-table thead th { padding:1rem 1.25rem; font-family:'Inter',sans-serif; font-size:.8rem; font-weight:600; color:#fff; text-transform:uppercase; letter-spacing:.04em; text-align:left; }
   .vs-table thead th:first-child { color:rgba(255,255,255,.6); }
   .vs-table tbody tr { border-bottom:1px solid var(--border); }
   .vs-table tbody tr:last-child { border-bottom:none; }
@@ -147,7 +147,7 @@
   .growth-table th { padding:.5rem .75rem; text-align:left; font-size:.7rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--text-muted); border-bottom:2px solid var(--border); }
   .growth-table td { padding:.6rem .75rem; border-bottom:1px solid var(--border); color:var(--text-muted); }
   .growth-table td:first-child { color:var(--text); font-weight:500; }
-  .growth-table tbody tr:last-child td { border-bottom:none; font-weight:700; color:var(--primary); background:rgba(61,214,140,.06); }
+  .growth-table tbody tr:last-child td { border-bottom:none; font-weight:700; color:var(--primary); background:rgba(255,216,77,.06); }
   .td-best { color:#1a7a4a; font-weight:600; }
   .field-err { display:none; color:#d43a2f; font-size:.75rem; margin-top:.2rem; }
 
@@ -155,7 +155,7 @@
   .benefits-section { background: var(--bg-alt); }
   .benefits-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
   .benefit-item { text-align: center; }
-  .benefit-num { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 700; color: var(--primary); display: block; line-height: 1; }
+  .benefit-num { font-family: 'Inter', sans-serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 700; color: var(--primary); display: block; line-height: 1; }
   .benefit-label { font-size: .9rem; color: var(--text-muted); margin-top: .5rem; line-height: 1.5; display: block; }
 
   @media(max-width:700px){
@@ -169,13 +169,90 @@
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="index.html">Risparmio<span>Facile</span></a>
+  <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
   <ul>
-    <li><a href="polizza-auto.html">Polizza Auto</a></li>
-    <li><a href="polizza-casa.html">Polizza Casa</a></li>
-    <li><a href="piano-pensione.html" class="active">Piano Pensione</a></li>
-    <li><a href="index.html#faq">FAQ</a></li>
-    <li><a href="#simulatore" class="nav-cta">Calcola ora →</a></li>
+    <li class="has-mega">
+      <a href="#">Per privati</a>
+      <div class="mega-panel">
+        <div class="mega-grid">
+          <div class="mega-col">
+            <h4>Auto e mobilità</h4>
+            <a href="polizza-auto.html">Polizza Auto</a>
+            <a href="polizza-auto.html">Polizza Moto</a>
+            <a href="polizza-auto.html">Camper · Autocarro</a>
+          </div>
+          <div class="mega-col">
+            <h4>Casa</h4>
+            <a href="polizza-casa.html">Polizza Casa</a>
+            <a href="polizza-casa.html">RC Capofamiglia</a>
+            <a href="polizza-casa.html">Eventi catastrofali</a>
+          </div>
+          <div class="mega-col">
+            <h4>Salute &amp; vita</h4>
+            <a href="salute.html#sanitarie">Polizza Sanitaria</a>
+            <a href="salute.html#infortuni">Infortuni</a>
+            <a href="salute.html#tutela-reddito">Tutela del reddito</a>
+            <a href="salute.html#vita">Vita</a>
+          </div>
+          <div class="mega-col">
+            <h4>Pensione</h4>
+            <a href="piano-pensione.html">Piano Pensione</a>
+            <a href="piano-pensione.html">Vantaggi fiscali</a>
+            <a href="piano-pensione.html">Simulatore</a>
+          </div>
+          <div class="mega-col">
+            <h4>Cyber</h4>
+            <a href="cyber.html#privati">Cyber Privati</a>
+            <a href="cyber.html">Furto identità</a>
+            <a href="cyber.html">Frodi online</a>
+          </div>
+          <div class="mega-col">
+            <h4>Animali domestici</h4>
+            <a href="polizza-animali.html">Polizza Cane</a>
+            <a href="polizza-animali.html">Polizza Gatto</a>
+            <a href="polizza-animali.html#prevenzione">Prevenzione</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="has-mega">
+      <a href="#">Per imprese</a>
+      <div class="mega-panel">
+        <div class="mega-grid">
+          <div class="mega-col">
+            <h4>Catastrofale PMI</h4>
+            <a href="rc.html#catastrofale" class="featured">Polizza obbligatoria</a>
+            <a href="rc.html#catastrofale">Scadenze normative</a>
+            <a href="rc.html#catastrofale">Coperture base</a>
+          </div>
+          <div class="mega-col">
+            <h4>Responsabilità Civile</h4>
+            <a href="rc.html#professionale">RC Professionale</a>
+            <a href="rc.html#imprese">RCT/RCO</a>
+            <a href="rc.html#do">D&amp;O</a>
+            <a href="rc.html#tutela-legale">Tutela Legale</a>
+          </div>
+          <div class="mega-col">
+            <h4>Cyber business</h4>
+            <a href="cyber.html#pmi">Cyber PMI</a>
+            <a href="cyber.html#aziende">Aziende strutturate</a>
+          </div>
+          <div class="mega-col">
+            <h4>Auto aziendali</h4>
+            <a href="polizza-auto.html">Flotte aziendali</a>
+            <a href="polizza-auto.html">Mezzi agricoli</a>
+          </div>
+          <div class="mega-col mega-col-cta">
+            <h4>Hai una PMI?</h4>
+            <p>Verifichiamo insieme gli obblighi assicurativi della tua impresa.</p>
+            <a href="contatti.html">Parlami →</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li><a href="chi-sono.html">Chi sono</a></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con me →</a></li>
   </ul>
 </nav>
 
@@ -207,7 +284,7 @@
 
   <div class="hero-eyebrow"><span class="dot"></span>FIP · PIP · Fondo Aperto · Vantaggi fiscali IRPEF</div>
 
-  <h1>Costruisci la tua<br>pensione con<br><span class="hero-accent">vantaggi fiscali.</span></h1>
+  <h1>Quotami la pensione<br><span class="hero-accent">che ti spetta.</span></h1>
 
   <p class="hero-sub">Rendimento medio 4.2% annuo. Deduci fino a €5.164 l'anno dall'IRPEF. Inizia con soli €50 al mese.</p>
 
@@ -256,62 +333,62 @@
     <!-- SVG Line Chart: 3 scenarios 50/100/200 €/mese -->
     <svg class="chart-svg" viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
       <!-- grid lines -->
-      <line x1="80" y1="20"  x2="80"  y2="270" stroke="rgba(26,60,46,.1)" stroke-width="1"/>
-      <line x1="80" y1="270" x2="640" y2="270" stroke="rgba(26,60,46,.1)" stroke-width="1"/>
+      <line x1="80" y1="20"  x2="80"  y2="270" stroke="rgba(11,18,32,.1)" stroke-width="1"/>
+      <line x1="80" y1="270" x2="640" y2="270" stroke="rgba(11,18,32,.1)" stroke-width="1"/>
       <!-- horizontal guides -->
-      <line x1="80" y1="220" x2="640" y2="220" stroke="rgba(26,60,46,.06)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="80" y1="170" x2="640" y2="170" stroke="rgba(26,60,46,.06)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="80" y1="120" x2="640" y2="120" stroke="rgba(26,60,46,.06)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="80" y1="70"  x2="640" y2="70"  stroke="rgba(26,60,46,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="80" y1="220" x2="640" y2="220" stroke="rgba(11,18,32,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="80" y1="170" x2="640" y2="170" stroke="rgba(11,18,32,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="80" y1="120" x2="640" y2="120" stroke="rgba(11,18,32,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="80" y1="70"  x2="640" y2="70"  stroke="rgba(11,18,32,.06)" stroke-width="1" stroke-dasharray="4,4"/>
 
       <!-- Y axis labels -->
-      <text x="72" y="274" text-anchor="end" font-size="11" fill="#5a7a6a">€0</text>
-      <text x="72" y="224" text-anchor="end" font-size="11" fill="#5a7a6a">€25k</text>
-      <text x="72" y="174" text-anchor="end" font-size="11" fill="#5a7a6a">€50k</text>
-      <text x="72" y="124" text-anchor="end" font-size="11" fill="#5a7a6a">€100k</text>
-      <text x="72" y="74"  text-anchor="end" font-size="11" fill="#5a7a6a">€150k</text>
+      <text x="72" y="274" text-anchor="end" font-size="11" fill="#6B7280">€0</text>
+      <text x="72" y="224" text-anchor="end" font-size="11" fill="#6B7280">€25k</text>
+      <text x="72" y="174" text-anchor="end" font-size="11" fill="#6B7280">€50k</text>
+      <text x="72" y="124" text-anchor="end" font-size="11" fill="#6B7280">€100k</text>
+      <text x="72" y="74"  text-anchor="end" font-size="11" fill="#6B7280">€150k</text>
 
       <!-- X axis labels -->
-      <text x="80"  y="286" text-anchor="middle" font-size="11" fill="#5a7a6a">0</text>
-      <text x="220" y="286" text-anchor="middle" font-size="11" fill="#5a7a6a">10</text>
-      <text x="360" y="286" text-anchor="middle" font-size="11" fill="#5a7a6a">20</text>
-      <text x="500" y="286" text-anchor="middle" font-size="11" fill="#5a7a6a">30</text>
-      <text x="640" y="286" text-anchor="middle" font-size="11" fill="#5a7a6a">40 anni</text>
+      <text x="80"  y="286" text-anchor="middle" font-size="11" fill="#6B7280">0</text>
+      <text x="220" y="286" text-anchor="middle" font-size="11" fill="#6B7280">10</text>
+      <text x="360" y="286" text-anchor="middle" font-size="11" fill="#6B7280">20</text>
+      <text x="500" y="286" text-anchor="middle" font-size="11" fill="#6B7280">30</text>
+      <text x="640" y="286" text-anchor="middle" font-size="11" fill="#6B7280">40 anni</text>
 
       <!-- Scenario €50/mese: 0→3.7k→7.3k→12.3k→18.8k→27k→36k→47.5k→62.3k -->
       <!-- Y = 270 - (val/160000)*250 -->
       <polyline
         points="80,270 220,264.2 360,258.6 500,251.0 640,232.7"
-        fill="none" stroke="rgba(26,60,46,.25)" stroke-width="2" stroke-dasharray="5,3"/>
+        fill="none" stroke="rgba(11,18,32,.25)" stroke-width="2" stroke-dasharray="5,3"/>
 
       <!-- Scenario €100/mese: 0→7.4k→14.7k→24.6k→37.5k→54k→72k→95k→124.6k -->
       <polyline
         points="80,270 220,258.4 360,247.1 500,232.7 640,175.6"
-        fill="none" stroke="#2ab574" stroke-width="2.5"/>
+        fill="none" stroke="#E6BE3B" stroke-width="2.5"/>
 
       <!-- Fill under €100 line -->
       <polygon
         points="80,270 220,258.4 360,247.1 500,232.7 640,175.6 640,270"
-        fill="rgba(61,214,140,.07)"/>
+        fill="rgba(255,216,77,.07)"/>
 
       <!-- Scenario €200/mese: values * 2 of 100€ -->
       <polyline
         points="80,270 220,246.8 360,224.2 500,195.4 640,81.2"
-        fill="none" stroke="#1a3c2e" stroke-width="2.5"/>
+        fill="none" stroke="#0B1220" stroke-width="2.5"/>
 
       <!-- End value labels -->
-      <circle cx="640" cy="175.6" r="4" fill="#2ab574"/>
-      <text x="648" y="179" font-size="11" font-weight="700" fill="#2ab574">€124k</text>
-      <circle cx="640" cy="81.2" r="4" fill="#1a3c2e"/>
-      <text x="648" y="85" font-size="11" font-weight="700" fill="#1a3c2e">€249k</text>
-      <circle cx="640" cy="232.7" r="3" fill="rgba(26,60,46,.4)"/>
-      <text x="648" y="236" font-size="11" fill="#5a7a6a">€62k</text>
+      <circle cx="640" cy="175.6" r="4" fill="#E6BE3B"/>
+      <text x="648" y="179" font-size="11" font-weight="700" fill="#E6BE3B">€124k</text>
+      <circle cx="640" cy="81.2" r="4" fill="#0B1220"/>
+      <text x="648" y="85" font-size="11" font-weight="700" fill="#0B1220">€249k</text>
+      <circle cx="640" cy="232.7" r="3" fill="rgba(11,18,32,.4)"/>
+      <text x="648" y="236" font-size="11" fill="#6B7280">€62k</text>
     </svg>
 
     <div class="chart-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(26,60,46,.3);border:2px dashed rgba(26,60,46,.4)"></div>€50/mese</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#2ab574"></div>€100/mese</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#1a3c2e"></div>€200/mese</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(11,18,32,.3);border:2px dashed rgba(11,18,32,.4)"></div>€50/mese</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#E6BE3B"></div>€100/mese</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#0B1220"></div>€200/mese</div>
     </div>
     <p class="chart-note">* Simulazione a rendimento costante 4.2%/anno. I rendimenti passati non garantiscono quelli futuri.</p>
   </div>
@@ -365,7 +442,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
       <div class="form-group">
         <label style="font-size:.8rem;font-weight:600;color:var(--text);letter-spacing:.03em">Piano pensione attuale</label>
-        <select style="padding:.75rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--bg);font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--text);outline:none;width:100%">
+        <select style="padding:.75rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--bg);font-family:'Inter',sans-serif;font-size:.95rem;color:var(--text);outline:none;width:100%">
           <option>Generali PIP</option><option>Allianz Previdenza</option><option>AXA MPS</option>
           <option>UnipolSai Previdenza</option><option>Poste Vita Previdenza</option>
           <option>Fondo pensione aziendale</option><option>Altro</option>
@@ -373,7 +450,7 @@
       </div>
       <div class="form-group">
         <label style="font-size:.8rem;font-weight:600;color:var(--text);letter-spacing:.03em">Capitale accumulato (€)</label>
-        <input type="number" placeholder="es. 12000" min="0" style="padding:.75rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--bg);font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--text);outline:none;width:100%">
+        <input type="number" placeholder="es. 12000" min="0" style="padding:.75rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--bg);font-family:'Inter',sans-serif;font-size:.95rem;color:var(--text);outline:none;width:100%">
       </div>
     </div>
     <button class="btn-primary" style="width:100%;padding:1rem;font-size:1rem;border-radius:14px" onclick="this.textContent='Analisi in corso…';setTimeout(()=>this.textContent='Verifica se posso fare meglio →',2000)">Verifica se posso fare meglio →</button>
@@ -394,7 +471,7 @@
         <tr>
           <th>Caratteristica</th>
           <th>Banca tipica</th>
-          <th>RisparmioFacile</th>
+          <th>Quotami</th>
         </tr>
       </thead>
       <tbody>
@@ -542,54 +619,62 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <a class="logo" href="index.html">Risparmio<span>Facile</span></a>
-      <p class="footer-tagline">Il comparatore assicurativo italiano. Fondi pensione COVIP vigilati. Consulenza e confronto sempre gratuiti.</p>
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+      <p class="footer-tagline">Il tuo punto di riferimento personale per le tue assicurazioni. Confronto, consulenza e assistenza nel tempo, anche sui sinistri.</p>
+
+      <span class="footer-role-label">Il tuo consulente</span>
+      <p><strong>[Nome Cognome]</strong></p>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. [E000XXXXXX]</span>
+      <p>📞 <a href="tel:+39[TELDIRETTO]">[+39 XXX XXX XXXX]</a></p>
+      <p>✉️ <a href="mailto:[nome.cognome@dominio-broker.it]">[nome.cognome@dominio-broker.it]</a></p>
+
       <div class="footer-social">
         <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
         <a class="social-btn" href="#" aria-label="Instagram">ig</a>
-        <a class="social-btn" href="#" aria-label="X">𝕏</a>
-        <a class="social-btn" href="#" aria-label="Facebook">f</a>
+        <a class="social-btn" href="https://wa.me/3900000000" aria-label="WhatsApp" target="_blank" rel="noopener">w</a>
       </div>
     </div>
+
+    <div class="footer-col footer-col--broker">
+      <span class="footer-role-label">La struttura</span>
+      <p><strong>[Ragione Sociale Broker S.r.l.]</strong></p>
+      <p>[Via, civico]<br>[CAP] [Città] ([Prov])</p>
+      <p>P.IVA / C.F. <strong>[00000000000]</strong></p>
+      <p>Iscritta RUI sez. B</p>
+      <span class="footer-rui-num">n. [B000XXXXXX]</span>
+      <p style="margin-top:.4rem">PEC <a href="mailto:[pec@brokerpec.it]">[pec@brokerpec.it]</a></p>
+      <span class="footer-vigilanza">Vigilato IVASS</span>
+    </div>
+
     <div class="footer-col">
       <h5>Prodotti</h5>
       <ul>
         <li><a href="polizza-auto.html">Polizza Auto</a></li>
         <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Polizza Salute</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
         <li><a href="piano-pensione.html">Piano Pensione</a></li>
-        <li><a href="#">Polizza Vita</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Azienda</h5>
-      <ul>
-        <li><a href="#">Chi siamo</a></li>
-        <li><a href="#">Blog & Guide</a></li>
-        <li><a href="#">Lavora con noi</a></li>
-        <li><a href="#">Sala stampa</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Supporto</h5>
-      <ul>
-        <li><a href="#">Centro assistenza</a></li>
-        <li><a href="#">Consulenza pensione</a></li>
-        <li><a href="#">Contattaci</a></li>
-        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="rc.html">RC e Catastrofale PMI</a></li>
       </ul>
     </div>
   </div>
+
   <div class="footer-trust">
-    <span class="ftrust-label">Certificazioni</span>
-    <div class="ftrust-badge"><span class="ftb-dot"></span> COVIP Vigilato</div>
-    <div class="ftrust-badge"><span class="ftb-dot"></span> IVASS Registrato</div>
+    <span class="ftrust-label">Garanzie</span>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> Vigilato IVASS</div>
     <div class="ftrust-badge"><span class="ftb-dot"></span> SSL 256-bit</div>
     <div class="ftrust-badge"><span class="ftb-dot"></span> GDPR Compliant</div>
   </div>
+
+  <p class="footer-disclaimer">
+    Questo sito è gestito da <strong>[Nome Cognome]</strong>, collaboratore iscritto al RUI sezione E n. <strong>[E000XXXXXX]</strong>, operante per conto di <strong>[Ragione Sociale Broker]</strong>, broker iscritto al RUI sezione B n. <strong>[B000XXXXXX]</strong>. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile presso la sede del broker. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener">www.ivass.it</a>.
+  </p>
+
   <div class="footer-bottom">
-    <p>© 2026 RisparmioFacile S.r.l. — P.IVA IT00000000000 — Intermediario IVASS iscritto al RUI</p>
-    <div class="footer-links"><a href="#">Privacy</a><a href="#">Termini</a><a href="#">Cookie</a></div>
+    <p>© 2026 Quotami · gestito da [Ragione Sociale Broker S.r.l.] · P.IVA [00000000000] · RUI sez. B n. [B000XXXXXX]</p>
   </div>
 </footer>
 
@@ -668,6 +753,6 @@ function calcolaPensione() {
   },1500);
 }
 </script>
-<script src="components.js"></script>
+<script src="components.js?v=20260512i"></script>
 </body>
 </html>

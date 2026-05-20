@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polizza Salute · Quotami — Sanitarie, infortuni, vita, tutela del reddito</title>
+<meta name="description" content="Polizze Salute: sanitarie con rete convenzionata, infortuni, tutela del reddito (LTC, invalidità), vita TCM. Soluzioni per famiglie, professionisti e imprese in tutta Italia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260512i">
+<style>
+  .page-hero { padding: 9rem 5vw 5rem; background: var(--bg); position: relative; overflow: hidden; }
+  .page-hero .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+  .page-hero-blob-1 { width: 580px; height: 580px; background: #F3F0E8; opacity: .45; top: -220px; right: -150px; }
+  .page-hero-blob-2 { width: 360px; height: 360px; background: #EFE7D2; opacity: .35; bottom: -120px; left: -80px; }
+  .page-hero-inner { max-width: 920px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+  .page-hero h1 { font-family: 'Inter', sans-serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; color: var(--text); margin-bottom: 1.25rem; }
+  .page-hero h1 .accent { color: var(--green-dark); }
+  .page-hero p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; max-width: 720px; margin: 0 auto 2rem; }
+  .page-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  .seg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .seg-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 2rem; transition: transform .3s, border-color .25s, box-shadow .3s; }
+  .seg-card:hover { transform: translateY(-6px); border-color: var(--border-green); box-shadow: var(--shadow-lg); }
+  .seg-icon { width: 52px; height: 52px; background: var(--green-soft); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; }
+  .seg-card h3 { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+  .seg-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.7; margin: 0 0 1rem; }
+  .seg-card ul { list-style: none; padding: 0; margin: 0; }
+  .seg-card ul li { font-size: .82rem; color: var(--text-2); padding: .25rem 0 .25rem 1.25rem; position: relative; }
+  .seg-card ul li::before { content: '✓'; position: absolute; left: 0; color: var(--green-dark); font-weight: 700; }
+
+  .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+  .case-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow-sm); }
+  .case-tag { display: inline-block; background: rgba(255,216,77,.12); color: #1a7a4a; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .25rem .7rem; border-radius: 50px; margin-bottom: .75rem; }
+  .case-card h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+  .case-card p { color: var(--text-muted); font-size: .87rem; line-height: 1.7; margin: 0; }
+
+  .approach-list { max-width: 780px; margin: 2.5rem auto 0; list-style: none; padding: 0; }
+  .approach-list li { padding: 1rem 1.5rem 1rem 3rem; position: relative; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: .75rem; color: var(--text-2); font-size: .95rem; line-height: 1.65; }
+  .approach-list li strong { color: var(--text); }
+  .approach-list li::before { content: '✓'; position: absolute; left: 1rem; top: 1.05rem; width: 24px; height: 24px; border-radius: 50%; background: var(--green-dark); color: #fff; display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
+
+  .form-section { background: var(--bg-alt); padding: 5rem 5vw; }
+  .form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 720px; margin: 2rem auto 0; box-shadow: var(--shadow-md); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .35rem; }
+  .form-group label { font-size: .82rem; font-weight: 600; color: var(--text); }
+  .form-group input, .form-group select, .form-group textarea { padding: .75rem 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text); outline: none; transition: border-color .15s, box-shadow .15s; width: 100%; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1); }
+  .form-group textarea { min-height: 110px; resize: vertical; }
+  .form-check { display: flex; gap: .5rem; align-items: flex-start; font-size: .82rem; color: var(--text-muted); line-height: 1.5; margin: 1rem 0; }
+  .form-check input { margin-top: .2rem; }
+  .form-check a { color: var(--green-dark); text-decoration: underline; }
+  .form-submit { width: 100%; padding: 1rem; border-radius: 14px; background: var(--primary); color: #fff; border: none; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; transition: background .2s, transform .15s; margin-top: .5rem; }
+  .form-submit:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .form-success { background: rgba(255,216,77,.12); border: 1px solid var(--border-green); color: #1a7a4a; padding: 1rem 1.25rem; border-radius: 12px; margin-top: 1rem; font-size: .92rem; display: none; }
+  .form-success.show { display: block; }
+
+  @media (max-width: 700px) { .form-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li class="has-mega"><a href="#">Per privati</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col"><h4>Auto e mobilità</h4><a href="polizza-auto.html">Polizza Auto</a><a href="polizza-auto.html">Polizza Moto</a><a href="polizza-auto.html">Camper · Autocarro</a></div>
+      <div class="mega-col"><h4>Casa</h4><a href="polizza-casa.html">Polizza Casa</a><a href="polizza-casa.html">RC Capofamiglia</a><a href="polizza-casa.html">Eventi catastrofali</a></div>
+      <div class="mega-col"><h4>Salute &amp; vita</h4><a href="salute.html#sanitarie" class="featured">Polizza Sanitaria</a><a href="salute.html#infortuni">Infortuni</a><a href="salute.html#tutela-reddito">Tutela del reddito</a><a href="salute.html#vita">Vita</a></div>
+      <div class="mega-col"><h4>Pensione</h4><a href="piano-pensione.html">Piano Pensione</a><a href="piano-pensione.html">Vantaggi fiscali</a><a href="piano-pensione.html">Simulatore</a></div>
+      <div class="mega-col"><h4>Cyber</h4><a href="cyber.html#privati">Cyber Privati</a><a href="cyber.html">Furto identità</a><a href="cyber.html">Frodi online</a></div>
+          <div class="mega-col">
+            <h4>Animali domestici</h4>
+            <a href="polizza-animali.html">Polizza Cane</a>
+            <a href="polizza-animali.html">Polizza Gatto</a>
+            <a href="polizza-animali.html#prevenzione">Prevenzione</a>
+          </div>
+    </div></div></li>
+    <li class="has-mega"><a href="#">Per imprese</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col"><h4>Catastrofale PMI</h4><a href="rc.html#catastrofale" class="featured">Polizza obbligatoria</a><a href="rc.html#catastrofale">Scadenze normative</a><a href="rc.html#catastrofale">Coperture base</a></div>
+      <div class="mega-col"><h4>Responsabilità Civile</h4><a href="rc.html#professionale">RC Professionale</a><a href="rc.html#imprese">RCT/RCO</a><a href="rc.html#do">D&amp;O</a><a href="rc.html#tutela-legale">Tutela Legale</a></div>
+      <div class="mega-col"><h4>Cyber business</h4><a href="cyber.html#pmi">Cyber PMI</a><a href="cyber.html#aziende">Aziende strutturate</a></div>
+      <div class="mega-col"><h4>Auto aziendali</h4><a href="polizza-auto.html">Flotte aziendali</a><a href="polizza-auto.html">Mezzi agricoli</a></div>
+      <div class="mega-col mega-col-cta"><h4>Hai una PMI?</h4><p>Verifichiamo insieme gli obblighi assicurativi della tua impresa.</p><a href="contatti.html">Parlami →</a></div>
+    </div></div></li>
+    <li><a href="chi-sono.html">Chi sono</a></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con me →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="blob page-hero-blob-1"></div>
+  <div class="blob page-hero-blob-2"></div>
+  <div class="page-hero-inner">
+    <span class="hero-eyebrow"><span class="dot"></span>Sanitarie · Infortuni · Vita · Tutela reddito</span>
+    <h1>Quotami il futuro<br>della <span class="accent">mia famiglia.</span></h1>
+    <p>Quando il Servizio Sanitario non basta o quando un imprevisto blocca il tuo reddito. Costruiamo coperture su misura: rete convenzionata, accesso diretto agli specialisti, indennità in caso di stop al lavoro.</p>
+    <div class="page-hero-actions">
+      <a href="#preventivo" class="btn-primary">Richiedi un'analisi</a>
+      <a href="contatti.html" class="btn-secondary">Parlami</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENTI -->
+<section id="segmenti">
+  <div class="centered">
+    <span class="section-label">Cosa puoi proteggere</span>
+    <h2 class="section-title">Quattro aree di protezione</h2>
+    <p class="section-sub">Combinazioni mirate in base alla tua situazione: famiglia, lavoro, età.</p>
+  </div>
+
+  <div class="seg-grid">
+    <article id="sanitarie" class="seg-card">
+      <div class="seg-icon">🏥</div>
+      <h3>Polizze Sanitarie</h3>
+      <p>Rimborso spese mediche, ricoveri, alta diagnostica, visite specialistiche, ticket. Reti convenzionate per accesso diretto senza anticipare le spese.</p>
+      <ul>
+        <li>Individuali, familiari, collettive</li>
+        <li>Rete convenzionata in tutta Italia</li>
+        <li>Rimborso ticket SSN</li>
+        <li>Alta diagnostica e ricoveri</li>
+      </ul>
+    </article>
+
+    <article id="infortuni" class="seg-card">
+      <div class="seg-icon">🦴</div>
+      <h3>Infortuni</h3>
+      <p>Indennità per invalidità permanente, diaria da ricovero, rimborsi spese cure post-infortunio. Protezione 24h o solo lavoro.</p>
+      <ul>
+        <li>Invalidità permanente</li>
+        <li>Diaria da ricovero</li>
+        <li>Rimborsi cure post-infortunio</li>
+        <li>Copertura 24h o limitata al lavoro</li>
+      </ul>
+    </article>
+
+    <article id="tutela-reddito" class="seg-card">
+      <div class="seg-icon">🛡️</div>
+      <h3>Tutela del Reddito</h3>
+      <p>Long Term Care (LTC) per la non autosufficienza in età avanzata e Invalidità Permanente da Malattia: rendita o capitale se non puoi più lavorare.</p>
+      <ul>
+        <li>LTC — non autosufficienza</li>
+        <li>Invalidità permanente da malattia</li>
+        <li>Rendita o capitale</li>
+        <li>Detraibili al 19%</li>
+      </ul>
+    </article>
+
+    <article id="vita" class="seg-card">
+      <div class="seg-icon">🌿</div>
+      <h3>Vita</h3>
+      <p>Polizze Temporanee Caso Morte (TCM), polizze a vita intera con finalità successoria, prodotti misti vita/risparmio.</p>
+      <ul>
+        <li>TCM — protezione famiglia</li>
+        <li>Vita intera, finalità successoria</li>
+        <li>Misti vita/risparmio</li>
+        <li>Detraibili al 19% entro tetto</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="how-section">
+  <div class="centered">
+    <span class="section-label">Casi reali, anonimizzati</span>
+    <h2 class="section-title">Tre situazioni che ho gestito</h2>
+  </div>
+  <div class="case-grid">
+    <article class="case-card">
+      <span class="case-tag">Famiglia</span>
+      <h4>Sanitaria con rete convenzionata</h4>
+      <p>Famiglia con due figli. Strutturata sanitaria familiare con accesso diretto a strutture convenzionate, eliminando il problema delle liste d'attesa per accertamenti diagnostici.</p>
+    </article>
+    <article class="case-card">
+      <span class="case-tag">Professionista</span>
+      <h4>Tutela del reddito per libero professionista</h4>
+      <p>Architetto libero professionista, single, mutuo in corso. Combinazione TCM + Invalidità permanente da malattia che, in caso di stop al lavoro, garantisce continuità del reddito e del mutuo.</p>
+    </article>
+    <article class="case-card">
+      <span class="case-tag">PMI</span>
+      <h4>Sanitaria collettiva per dipendenti</h4>
+      <p>Azienda manifatturiera con [XX] dipendenti. Sanitaria collettiva con coperture base, possibilità di estensione familiare a carico del dipendente. Beneficio fiscale per l'azienda.</p>
+    </article>
+  </div>
+</section>
+
+<!-- APPROCCIO -->
+<section>
+  <div class="centered">
+    <span class="section-label">Il mio approccio</span>
+    <h2 class="section-title">Cosa faccio per te di concreto</h2>
+  </div>
+  <ul class="approach-list">
+    <li><strong>Mappa familiare</strong> — chi siete, chi guadagna, chi è fiscalmente a carico, eventuali patologie pregresse.</li>
+    <li><strong>Calcolo del fabbisogno reale</strong> — quanto reddito coprire per quanti anni, quanto serve per non gravare sui figli in caso di non autosufficienza.</li>
+    <li><strong>Confronto trasparente delle compagnie</strong> partner del broker: copertura, esclusioni, periodi di carenza, durata.</li>
+    <li><strong>Coordinamento con il commercialista</strong> sui benefici fiscali (detrazioni 19%, deducibilità per professionisti e aziende).</li>
+    <li><strong>Sinistri e rimborsi</strong> — ti aiuto con la documentazione clinica, le pratiche di rimborso, l'eventuale appello in caso di rifiuto.</li>
+  </ul>
+</section>
+
+<!-- FORM -->
+<section id="preventivo" class="form-section">
+  <div class="centered">
+    <span class="section-label">Richiesta consulenza</span>
+    <h2 class="section-title">Parliamone insieme</h2>
+    <p class="section-sub">Sulle polizze Salute il prezzo non è la prima variabile. Servono dati su composizione familiare e situazione: ti chiamo io e li raccogliamo insieme.</p>
+  </div>
+  <div class="form-card">
+    <form id="salute-form" onsubmit="saluteSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="sa-line">Cosa ti interessa *</label>
+          <select id="sa-line" required>
+            <option value="">Seleziona…</option>
+            <option>Polizza Sanitaria individuale</option>
+            <option>Sanitaria familiare</option>
+            <option>Sanitaria aziendale / collettiva</option>
+            <option>Infortuni</option>
+            <option>Tutela del reddito (LTC, Invalidità)</option>
+            <option>Vita / TCM</option>
+            <option>Non lo so ancora</option>
+          </select>
+        </div>
+        <div class="form-group"><label for="sa-age">Età</label><input type="text" id="sa-age"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="sa-name">Nome e cognome *</label><input type="text" id="sa-name" required></div>
+        <div class="form-group"><label for="sa-tel">Telefono *</label><input type="tel" id="sa-tel" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="sa-email">Email *</label><input type="email" id="sa-email" required></div>
+        <div class="form-group"><label for="sa-city">Città</label><input type="text" id="sa-city"></div>
+      </div>
+      <div class="form-group" style="margin-bottom:1rem"><label for="sa-msg">Note (composizione familiare, esigenze, polizze già attive…)</label><textarea id="sa-msg"></textarea></div>
+      <label class="form-check"><input type="checkbox" required><span>Ho letto l'informativa privacy e acconsento al trattamento dei dati. *</span></label>
+      <button type="submit" class="form-submit">Invia richiesta →</button>
+      <div id="sa-success" class="form-success">✓ Richiesta inviata. Ti contatto entro la giornata lavorativa.</div>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="centered">
+    <span class="section-label">FAQ</span>
+    <h2 class="section-title">Domande frequenti</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Le polizze sanitarie coprono patologie pregresse? <span class="faq-chevron">▾</span></button><div class="faq-answer"><p>In genere no, salvo dichiarazione e accettazione specifica della compagnia. È un punto fondamentale del questionario sanitario: rispondere con precisione tutela il diritto al rimborso.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Cos'è il periodo di carenza? <span class="faq-chevron">▾</span></button><div class="faq-answer"><p>È il periodo iniziale (es. 30, 90, 180 giorni a seconda del tipo di evento) durante il quale la polizza non rimborsa. Serve a evitare adesioni "sapendo già" che si avrà bisogno. Te lo spiego prodotto per prodotto.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Quanto costa una polizza vita TCM? <span class="faq-chevron">▾</span></button><div class="faq-answer"><p>Una TCM su un capitale di 200.000 € per un quarantenne in salute parte da poche centinaia di euro l'anno. Il costo dipende da età, capitale, durata e stato di salute.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Le polizze sanitarie sono detraibili? <span class="faq-chevron">▾</span></button><div class="faq-answer"><p>I premi delle polizze infortuni gravi e LTC sono detraibili al 19% entro un tetto annuo. Le sanitarie pure di solito non lo sono per i privati, ma per i professionisti e le aziende possono essere deducibili. Verifichiamo caso per caso.</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+      <p class="footer-tagline">Il tuo punto di riferimento personale per le tue assicurazioni. Confronto, consulenza e assistenza nel tempo, anche sui sinistri.</p>
+      <span class="footer-role-label">Il tuo consulente</span>
+      <p><strong>[Nome Cognome]</strong></p>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. [E000XXXXXX]</span>
+      <p>📞 <a href="tel:+39[TELDIRETTO]">[+39 XXX XXX XXXX]</a></p>
+      <p>✉️ <a href="mailto:[nome.cognome@dominio-broker.it]">[nome.cognome@dominio-broker.it]</a></p>
+      <div class="footer-social">
+        <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
+        <a class="social-btn" href="#" aria-label="Instagram">ig</a>
+        <a class="social-btn" href="https://wa.me/3900000000" aria-label="WhatsApp" target="_blank" rel="noopener">w</a>
+      </div>
+    </div>
+    <div class="footer-col footer-col--broker">
+      <span class="footer-role-label">La struttura</span>
+      <p><strong>[Ragione Sociale Broker S.r.l.]</strong></p>
+      <p>[Via, civico]<br>[CAP] [Città] ([Prov])</p>
+      <p>P.IVA / C.F. <strong>[00000000000]</strong></p>
+      <p>Iscritta RUI sez. B</p>
+      <span class="footer-rui-num">n. [B000XXXXXX]</span>
+      <p style="margin-top:.4rem">PEC <a href="mailto:[pec@brokerpec.it]">[pec@brokerpec.it]</a></p>
+      <span class="footer-vigilanza">Vigilato IVASS</span>
+    </div>
+    <div class="footer-col">
+      <h5>Prodotti</h5>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Polizza Salute</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
+        <li><a href="piano-pensione.html">Piano Pensione</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="rc.html">RC e Catastrofale PMI</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-trust">
+    <span class="ftrust-label">Garanzie</span>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> Vigilato IVASS</div>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> SSL 256-bit</div>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> GDPR Compliant</div>
+  </div>
+  <p class="footer-disclaimer">
+    Questo sito è gestito da <strong>[Nome Cognome]</strong>, collaboratore iscritto al RUI sezione E n. <strong>[E000XXXXXX]</strong>, operante per conto di <strong>[Ragione Sociale Broker]</strong>, broker iscritto al RUI sezione B n. <strong>[B000XXXXXX]</strong>. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile presso la sede del broker. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener">www.ivass.it</a>.
+  </p>
+  <div class="footer-bottom">
+    <p>© 2026 Quotami · gestito da [Ragione Sociale Broker S.r.l.] · P.IVA [00000000000] · RUI sez. B n. [B000XXXXXX]</p>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) { const item = btn.closest('.faq-item'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open')); if (!isOpen) item.classList.add('open'); }
+function saluteSubmit(e) { e.preventDefault(); document.getElementById('sa-success').classList.add('show'); document.getElementById('salute-form').reset(); }
+</script>
+<script src="components.js?v=20260512i"></script>
+</body>
+</html>

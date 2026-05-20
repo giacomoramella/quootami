@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi sono · Quotami — [Nome Cognome], il volto dietro Quotami</title>
+<meta name="description" content="Chi sono: [Nome Cognome], collaboratore iscritto al RUI sez. E della società di brokeraggio [Ragione Sociale]. Formazione IVASS, IDD, esperienza, filosofia di consulenza assicurativa professionale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260512i">
+<style>
+  .page-hero { padding: 9rem 5vw 5rem; background: var(--bg); position: relative; overflow: hidden; }
+  .page-hero .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+  .page-hero-blob-1 { width: 580px; height: 580px; background: #F3F0E8; opacity: .45; top: -220px; right: -150px; }
+  .page-hero-blob-2 { width: 360px; height: 360px; background: #EFE7D2; opacity: .35; bottom: -120px; left: -80px; }
+  .page-hero-grid { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: center; }
+  .page-hero h1 { font-family: 'Inter', sans-serif; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; color: var(--text); margin-bottom: 1.25rem; }
+  .page-hero h1 .accent { color: var(--green-dark); }
+  .page-hero p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
+  .page-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+  .photo-placeholder {
+    aspect-ratio: 4/5; background: linear-gradient(135deg, var(--primary) 0%, var(--navy-mid) 100%);
+    border-radius: var(--radius-lg); display: grid; place-items: center;
+    color: rgba(255,255,255,.5); font-family: 'Inter', sans-serif; text-align: center; padding: 2rem;
+    box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
+  }
+  .photo-placeholder::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,216,77,.15), transparent 60%);
+  }
+  @media (max-width: 800px) { .page-hero-grid { grid-template-columns: 1fr; } .photo-placeholder { max-width: 320px; margin: 0 auto; } }
+
+  .bio-section { padding: 5rem 5vw; max-width: 880px; margin: 0 auto; }
+  .bio-section p { color: var(--text-2); font-size: 1rem; line-height: 1.8; margin-bottom: 1.25rem; }
+  .bio-section p strong { color: var(--text); }
+
+  .creds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+  .cred-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow-sm); }
+  .cred-card h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; color: var(--green-dark); margin-bottom: .65rem; }
+  .cred-card p { color: var(--text-muted); font-size: .88rem; line-height: 1.7; margin: 0; }
+  .cred-card p strong { color: var(--text); }
+
+  .broker-feature { background: var(--primary); color: #fff; border-radius: var(--radius-lg); padding: 3rem; margin: 5rem 5vw; display: grid; grid-template-columns: 1fr 1.5fr; gap: 2.5rem; align-items: center; position: relative; overflow: hidden; }
+  .broker-feature::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,216,77,.08), transparent); pointer-events: none; }
+  .broker-feature-logo { aspect-ratio: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius); display: grid; place-items: center; color: rgba(255,255,255,.5); font-family: 'Inter', sans-serif; text-align: center; padding: 2rem; max-width: 220px; margin: 0 auto; position: relative; z-index: 1; }
+  .broker-feature h2 { font-family: 'Inter', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.1rem); font-weight: 700; color: #fff; margin-bottom: 1rem; position: relative; z-index: 1; }
+  .broker-feature p { color: rgba(255,255,255,.75); font-size: .95rem; line-height: 1.7; margin-bottom: 1rem; position: relative; z-index: 1; }
+  .broker-feature p strong { color: #fff; }
+  .broker-feature .tag { display: inline-block; background: rgba(255,216,77,.12); border: 1px solid rgba(255,216,77,.3); color: var(--green); font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .25rem .8rem; border-radius: 50px; margin-bottom: 1rem; position: relative; z-index: 1; }
+  @media (max-width: 800px) { .broker-feature { grid-template-columns: 1fr; padding: 2rem; } .broker-feature-logo { max-width: 160px; } }
+
+  .principles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .principle-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow-sm); }
+  .principle-card h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: .65rem; }
+  .principle-card p { color: var(--text-muted); font-size: .88rem; line-height: 1.7; margin: 0; }
+
+  .contact-cta { background: var(--bg-alt); padding: 4rem 5vw; text-align: center; }
+  .contact-cta h2 { font-family: 'Inter', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.2rem); font-weight: 700; color: var(--text); margin-bottom: .75rem; }
+  .contact-cta p { color: var(--text-muted); font-size: 1rem; margin-bottom: 1.75rem; }
+  .contact-cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li class="has-mega"><a href="#">Per privati</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col"><h4>Auto e mobilità</h4><a href="polizza-auto.html">Polizza Auto</a><a href="polizza-auto.html">Polizza Moto</a><a href="polizza-auto.html">Camper · Autocarro</a></div>
+      <div class="mega-col"><h4>Casa</h4><a href="polizza-casa.html">Polizza Casa</a><a href="polizza-casa.html">RC Capofamiglia</a><a href="polizza-casa.html">Eventi catastrofali</a></div>
+      <div class="mega-col"><h4>Salute &amp; vita</h4><a href="salute.html#sanitarie">Polizza Sanitaria</a><a href="salute.html#infortuni">Infortuni</a><a href="salute.html#tutela-reddito">Tutela del reddito</a><a href="salute.html#vita">Vita</a></div>
+      <div class="mega-col"><h4>Pensione</h4><a href="piano-pensione.html">Piano Pensione</a><a href="piano-pensione.html">Vantaggi fiscali</a><a href="piano-pensione.html">Simulatore</a></div>
+      <div class="mega-col"><h4>Cyber</h4><a href="cyber.html#privati">Cyber Privati</a><a href="cyber.html">Furto identità</a><a href="cyber.html">Frodi online</a></div>
+          <div class="mega-col">
+            <h4>Animali domestici</h4>
+            <a href="polizza-animali.html">Polizza Cane</a>
+            <a href="polizza-animali.html">Polizza Gatto</a>
+            <a href="polizza-animali.html#prevenzione">Prevenzione</a>
+          </div>
+    </div></div></li>
+    <li class="has-mega"><a href="#">Per imprese</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col"><h4>Catastrofale PMI</h4><a href="rc.html#catastrofale" class="featured">Polizza obbligatoria</a><a href="rc.html#catastrofale">Scadenze normative</a><a href="rc.html#catastrofale">Coperture base</a></div>
+      <div class="mega-col"><h4>Responsabilità Civile</h4><a href="rc.html#professionale">RC Professionale</a><a href="rc.html#imprese">RCT/RCO</a><a href="rc.html#do">D&amp;O</a><a href="rc.html#tutela-legale">Tutela Legale</a></div>
+      <div class="mega-col"><h4>Cyber business</h4><a href="cyber.html#pmi">Cyber PMI</a><a href="cyber.html#aziende">Aziende strutturate</a></div>
+      <div class="mega-col"><h4>Auto aziendali</h4><a href="polizza-auto.html">Flotte aziendali</a><a href="polizza-auto.html">Mezzi agricoli</a></div>
+      <div class="mega-col mega-col-cta"><h4>Hai una PMI?</h4><p>Verifichiamo insieme gli obblighi assicurativi della tua impresa.</p><a href="contatti.html">Parlami →</a></div>
+    </div></div></li>
+    <li><a href="chi-sono.html" class="active">Chi sono</a></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con me →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="blob page-hero-blob-1"></div>
+  <div class="blob page-hero-blob-2"></div>
+  <div class="page-hero-grid">
+    <div>
+      <span class="hero-eyebrow"><span class="dot"></span>Chi sono</span>
+      <h1>Sono <span class="accent">[Nome Cognome]</span>, il volto dietro Quotami.</h1>
+      <p>Collaboratore iscritto al RUI sezione E n. <strong>[E000XXXXXX]</strong>, opero per conto di <strong>[Ragione Sociale Broker]</strong>, società di brokeraggio iscritta al RUI sezione B. Quotami è il modo in cui porto la consulenza assicurativa di un grande broker a privati, professionisti e PMI in tutta Italia.</p>
+      <div class="page-hero-actions">
+        <a href="contatti.html" class="btn-primary">Fissiamo un caffè</a>
+        Vai alla trasparenza
+      </div>
+    </div>
+    <div class="photo-placeholder">[Foto profilo professionale<br>placeholder 4:5]</div>
+  </div>
+</section>
+
+<!-- BIO -->
+<section class="bio-section">
+  <span class="section-label">La mia storia</span>
+  <h2 class="section-title" style="margin-bottom:1.5rem">Come sono arrivato a questo lavoro</h2>
+  <p>[Personalizzare con la propria storia. Esempio: "Sono nato e cresciuto in Italia. Dopo gli studi in [ambito] ho iniziato a lavorare nel settore [X]. Ho conosciuto il mondo assicurativo da cliente prima ancora che da consulente, e ho scoperto quanto la differenza tra una polizza generica e una scelta con cura possa cambiare un momento difficile della vita di una famiglia o di un'impresa."]</p>
+  <p>[Continuare con: il momento in cui ho deciso di entrare nel settore, perché ho scelto il broker [Ragione Sociale], cosa mi piace di questo lavoro.]</p>
+  <p>Oggi seguo personalmente clienti in tutta Italia, su tutte le aree principali — Auto, Casa, Salute, Cyber, Pensione, RC e la nuova Polizza Catastrofale obbligatoria — con il supporto del team della struttura per cui lavoro.</p>
+</section>
+
+<!-- CREDENZIALI -->
+<section style="background:var(--bg-alt); padding: 5rem 5vw">
+  <div class="centered" style="max-width:880px;margin:0 auto">
+    <span class="section-label">Formazione e iscrizione</span>
+    <h2 class="section-title centered" style="margin:0 auto">Su cosa si basa la mia consulenza</h2>
+  </div>
+  <div class="creds-grid" style="max-width:1080px;margin:3rem auto 0">
+    <article class="cred-card">
+      <h3>Iscrizione RUI sezione E</h3>
+      <p>Sono iscritto al Registro Unico degli Intermediari assicurativi (RUI) tenuto dall'IVASS, sezione E (collaboratori), con il numero <strong>[E000XXXXXX]</strong> dal <strong>[gg/mm/aaaa]</strong>.</p>
+      <p style="margin-top:.5rem"><a href="https://servizi.ivass.it/RuirPubblica/" target="_blank" rel="external noopener" style="color:var(--green-dark);font-weight:600;text-decoration:underline">Verifica su ivass.it →</a></p>
+    </article>
+    <article class="cred-card">
+      <h3>Esami IVASS e IDD</h3>
+      <p>Ho superato l'esame IVASS previsto dal Reg. 40/2018 con verifica delle competenze tecniche, normative e deontologiche. Soggetto agli obblighi della direttiva europea IDD.</p>
+    </article>
+    <article class="cred-card">
+      <h3>Aggiornamento continuo</h3>
+      <p>Ogni anno completo le <strong>30 ore di aggiornamento professionale</strong> previste dalla normativa, su prodotti, fiscalità, antiriciclaggio, tutela del consumatore.</p>
+    </article>
+    <article class="cred-card">
+      <h3>Specializzazioni</h3>
+      <p>[Personalizzare. Es: "Sto approfondendo in particolare le linee Cyber per le PMI e la nuova Polizza Catastrofale obbligatoria, due aree dove la normativa si è evoluta rapidamente e dove la consulenza fa la differenza."]</p>
+    </article>
+  </div>
+</section>
+
+<!-- BROKER -->
+<section style="padding:0">
+  <div class="broker-feature">
+    <div class="broker-feature-logo">[Logo<br>broker<br>placeholder]</div>
+    <div>
+      <span class="tag">La struttura per cui lavoro</span>
+      <h2>[Ragione Sociale Broker]</h2>
+      <p><strong>[Ragione Sociale Broker]</strong> è una società di brokeraggio assicurativo strutturata, attiva da oltre [XX] anni. Iscritta al RUI sezione B con il numero <strong>[B000XXXXXX]</strong>, è vigilata dall'IVASS.</p>
+      <p>Il broker lavora per conto del cliente, non delle compagnie: confronta più soluzioni di mercato, negozia condizioni e ti assiste nella gestione del contratto e dei sinistri. È la differenza fondamentale rispetto a un'agenzia mono-mandataria.</p>
+      <p>Lavoro al fianco di un team di [XX] persone tra consulenti, account, ufficio sinistri e back office. Quando segui un cliente con me, ricevi l'attenzione personale di un consulente dedicato e la solidità di una struttura.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRINCIPI -->
+<section style="padding: 5rem 5vw">
+  <div class="centered">
+    <span class="section-label">La mia filosofia</span>
+    <h2 class="section-title">Tre principi che guidano il mio lavoro</h2>
+  </div>
+  <div class="principles-grid" style="max-width:1080px;margin:3rem auto 0">
+    <article class="principle-card">
+      <h3>Ascolto prima di proporre</h3>
+      <p>Il primo incontro con un cliente è quasi sempre senza polizze sul tavolo. Voglio capire chi sei, cosa fai, cosa ti preoccupa davvero, prima di parlare di prodotti.</p>
+    </article>
+    <article class="principle-card">
+      <h3>Trasparenza, non vendita</h3>
+      <p>Ti spiego esclusioni, franchigie, retroattività e conflitti potenziali. Se la polizza giusta non c'è, te lo dico. Se il rischio si gestisce meglio in altro modo, te lo dico.</p>
+    </article>
+    <article class="principle-card">
+      <h3>Relazione nel tempo</h3>
+      <p>Il valore della consulenza non si vede alla firma, si vede a 5 anni: quando rinegoziamo le condizioni, quando arriva un sinistro, quando la tua vita cambia.</p>
+    </article>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="contact-cta">
+  <h2>Vuoi conoscermi?</h2>
+  <p>Il primo contatto è una chiamata di 15 minuti senza impegno. Da lì decidiamo se ha senso vederci.</p>
+  <div class="contact-cta-actions">
+    <a href="contatti.html" class="btn-primary">Vai alla pagina contatti</a>
+    <a href="tel:+39[TELDIRETTO]" class="btn-secondary">Chiamami direttamente</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+      <p class="footer-tagline">Il tuo punto di riferimento personale per le tue assicurazioni. Confronto, consulenza e assistenza nel tempo, anche sui sinistri.</p>
+      <span class="footer-role-label">Il tuo consulente</span>
+      <p><strong>[Nome Cognome]</strong></p>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. [E000XXXXXX]</span>
+      <p>📞 <a href="tel:+39[TELDIRETTO]">[+39 XXX XXX XXXX]</a></p>
+      <p>✉️ <a href="mailto:[nome.cognome@dominio-broker.it]">[nome.cognome@dominio-broker.it]</a></p>
+      <div class="footer-social"><a class="social-btn" href="#" aria-label="LinkedIn">in</a><a class="social-btn" href="#" aria-label="Instagram">ig</a><a class="social-btn" href="https://wa.me/3900000000" aria-label="WhatsApp" target="_blank" rel="noopener">w</a></div>
+    </div>
+    <div class="footer-col footer-col--broker">
+      <span class="footer-role-label">La struttura</span>
+      <p><strong>[Ragione Sociale Broker S.r.l.]</strong></p>
+      <p>[Via, civico]<br>[CAP] [Città] ([Prov])</p>
+      <p>P.IVA / C.F. <strong>[00000000000]</strong></p>
+      <p>Iscritta RUI sez. B</p>
+      <span class="footer-rui-num">n. [B000XXXXXX]</span>
+      <p style="margin-top:.4rem">PEC <a href="mailto:[pec@brokerpec.it]">[pec@brokerpec.it]</a></p>
+      <span class="footer-vigilanza">Vigilato IVASS</span>
+    </div>
+    <div class="footer-col">
+      <h5>Prodotti</h5>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Polizza Salute</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
+        <li><a href="piano-pensione.html">Piano Pensione</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="rc.html">RC e Catastrofale PMI</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-trust">
+    <span class="ftrust-label">Garanzie</span>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> Vigilato IVASS</div>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> SSL 256-bit</div>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> GDPR Compliant</div>
+  </div>
+  <p class="footer-disclaimer">
+    Questo sito è gestito da <strong>[Nome Cognome]</strong>, collaboratore iscritto al RUI sezione E n. <strong>[E000XXXXXX]</strong>, operante per conto di <strong>[Ragione Sociale Broker]</strong>, broker iscritto al RUI sezione B n. <strong>[B000XXXXXX]</strong>. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile presso la sede del broker. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener">www.ivass.it</a>.
+  </p>
+  <div class="footer-bottom">
+    <p>© 2026 Quotami · gestito da [Ragione Sociale Broker S.r.l.] · P.IVA [00000000000] · RUI sez. B n. [B000XXXXXX]</p>
+  </div>
+</footer>
+
+<script src="components.js?v=20260512i"></script>
+</body>
+</html>
