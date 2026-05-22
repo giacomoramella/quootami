@@ -42,7 +42,8 @@
 
   .broker-feature { background: var(--primary); color: #fff; border-radius: var(--radius-lg); padding: 3rem; margin: 5rem 5vw; display: grid; grid-template-columns: 1fr 1.5fr; gap: 2.5rem; align-items: center; position: relative; overflow: hidden; }
   .broker-feature::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,216,77,.08), transparent); pointer-events: none; }
-  .broker-feature-logo { aspect-ratio: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius); display: grid; place-items: center; color: rgba(255,255,255,.5); font-family: 'Inter', sans-serif; text-align: center; padding: 2rem; max-width: 220px; margin: 0 auto; position: relative; z-index: 1; }
+  .broker-feature-logo { aspect-ratio: 1; background: #fff; border: 1px solid rgba(255,255,255,.18); border-radius: var(--radius); display: grid; place-items: center; color: rgba(0,0,0,.4); font-family: 'Inter', sans-serif; text-align: center; padding: 1.5rem; max-width: 240px; margin: 0 auto; position: relative; z-index: 1; }
+  .broker-feature-logo img { max-width: 100%; max-height: 100%; height: auto; width: auto; object-fit: contain; }
   .broker-feature h2 { font-family: 'Inter', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2.1rem); font-weight: 700; color: #fff; margin-bottom: 1rem; position: relative; z-index: 1; }
   .broker-feature p { color: rgba(255,255,255,.75); font-size: .95rem; line-height: 1.7; margin-bottom: 1rem; position: relative; z-index: 1; }
   .broker-feature p strong { color: #fff; }
@@ -114,9 +115,10 @@
 <section class="bio-section">
   <span class="section-label">La mia storia</span>
   <h2 class="section-title" style="margin-bottom:1.5rem">Come sono arrivato a questo lavoro</h2>
-  <p>[Personalizzare con la propria storia. Esempio: "Sono nato e cresciuto in Italia. Dopo gli studi in [ambito] ho iniziato a lavorare nel settore [X]. Ho conosciuto il mondo assicurativo da cliente prima ancora che da consulente, e ho scoperto quanto la differenza tra una polizza generica e una scelta con cura possa cambiare un momento difficile della vita di una famiglia o di un'impresa."]</p>
-  <p>[Continuare con: il momento in cui ho deciso di entrare nel settore, perché ho scelto il broker Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C., cosa mi piace di questo lavoro.]</p>
-  <p>Oggi seguo personalmente clienti in tutta Italia, su tutte le aree principali — Auto, Casa, Salute, Cyber, Pensione, RC e la nuova Polizza Catastrofale obbligatoria — con il supporto del team della struttura per cui lavoro.</p>
+  <p>Mi chiamo <strong>Giacomo Ramella Pollone</strong> e lavoro come collaboratore per <strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong>, società di brokeraggio con sede a Biella, in Via Torino 47. Sisto Assicurazioni nasce nel 1992 dall'esperienza del fondatore <strong>Paolo Sisto</strong> e oggi è una realtà consolidata sul territorio, con un team che lavora ogni giorno per proteggere famiglie, professionisti e imprese.</p>
+  <p>Ho scelto di entrare in questa struttura perché credo nel modello del broker: lavorare per il cliente, non per la compagnia. Confrontare le soluzioni di mercato, negoziare le condizioni, assistere il cliente nella gestione del contratto e nei momenti difficili — un sinistro, una scadenza, una vita che cambia. È un mestiere di relazione, prima ancora che di prodotti.</p>
+  <p>Sono iscritto al RUI in <strong>sezione E n. E000821549</strong>, ovvero come collaboratore di un intermediario iscritto in sezione B. Questo significa che opero sotto la responsabilità diretta di Sisto Assicurazioni, applicando gli stessi standard di trasparenza, formazione continua e tutela del cliente previsti dalla normativa IVASS.</p>
+  <p>Oggi seguo personalmente clienti in tutta Italia su tutte le aree principali — Auto, Casa, Salute, Cyber, Pensione, RC e la nuova Polizza Catastrofale obbligatoria per le PMI — con il supporto operativo del team di Sisto Assicurazioni a Biella.</p>
 </section>
 
 <!-- CREDENZIALI -->
@@ -141,7 +143,7 @@
     </article>
     <article class="cred-card">
       <h3>Specializzazioni</h3>
-      <p>[Personalizzare. Es: "Sto approfondendo in particolare le linee Cyber per le PMI e la nuova Polizza Catastrofale obbligatoria, due aree dove la normativa si è evoluta rapidamente e dove la consulenza fa la differenza."]</p>
+      <p>Approfondisco in particolare le linee <strong>Cyber per le PMI</strong>, la nuova <strong>Polizza Catastrofale obbligatoria</strong> e i <strong>piani pensione individuali (PIP)</strong>, tre aree dove la normativa si è evoluta rapidamente e dove la consulenza fa la differenza.</p>
     </article>
   </div>
 </section>
@@ -149,13 +151,18 @@
 <!-- BROKER -->
 <section style="padding:0">
   <div class="broker-feature">
-    <div class="broker-feature-logo">[Logo<br>broker<br>placeholder]</div>
+    <div class="broker-feature-logo">
+      <img src="assets/sisto-logo.png" alt="Sisto Assicurazioni" style="max-width:100%;height:auto;display:block" onerror="this.outerHTML='[Logo<br>Sisto<br>Assicurazioni]'">
+    </div>
     <div>
       <span class="tag">La struttura per cui lavoro</span>
       <h2>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</h2>
-      <p><strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong> è una società di brokeraggio assicurativo strutturata, attiva da oltre [XX] anni. Iscritta al RUI sezione B con il numero <strong>B000639183</strong>, è vigilata dall'IVASS.</p>
-      <p>Il broker lavora per conto del cliente, non delle compagnie: confronta più soluzioni di mercato, negozia condizioni e ti assiste nella gestione del contratto e dei sinistri. È la differenza fondamentale rispetto a un'agenzia mono-mandataria.</p>
-      <p>Lavoro al fianco di un team di [XX] persone tra consulenti, account, ufficio sinistri e back office. Quando segui un cliente con me, ricevi l'attenzione personale di un consulente dedicato e la solidità di una struttura.</p>
+      <p><strong>Sisto Assicurazioni</strong> nasce a <strong>Biella nel 1992</strong> dall'esperienza del fondatore <strong>Paolo Sisto</strong>. Oggi è una società di brokeraggio assicurativo strutturata, iscritta al <strong>RUI sezione B n. B000639183</strong> e vigilata dall'IVASS. Sede operativa in Via Torino 47, 13900 Biella · P.IVA 02696750021.</p>
+      <p>Il broker lavora per conto del cliente, non delle compagnie: confronta più soluzioni di mercato, negozia condizioni e assiste nella gestione del contratto e dei sinistri. È la differenza fondamentale rispetto a un'agenzia mono-mandataria.</p>
+      <p>Lavoro al fianco del team di Sisto Assicurazioni, tra consulenti, ufficio sinistri e back office. Quando segui un cliente con me, ricevi l'attenzione personale di un consulente dedicato e la solidità di una struttura attiva sul territorio da oltre trent'anni.</p>
+      <p style="margin-top:1.5rem">
+        <a href="https://www.sistoassicurazioni.net/" target="_blank" rel="external noopener" style="color:var(--green);font-weight:600;text-decoration:underline">Visita sistoassicurazioni.net →</a>
+      </p>
     </div>
   </div>
 </section>
