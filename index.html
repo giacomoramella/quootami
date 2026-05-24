@@ -11,13 +11,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=20260512i">
 <style>
+  /* ── HERO CATEGORIES — HEADER ── */
+  .hero-cats-header {
+    max-width: 720px; margin: 5rem auto 1.5rem; text-align: center;
+  }
+  .hero-cats-eyebrow {
+    display: inline-block; font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: .68rem; font-weight: 600; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--text-muted);
+    background: #fff; border: 1px solid var(--border); border-radius: 50px;
+    padding: .35rem 1rem; margin-bottom: 1.25rem;
+  }
+  .hero-cats-title {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.2;
+    letter-spacing: -.02em; color: var(--text);
+    margin: 0 0 .85rem;
+  }
+  .hero-cats-intro {
+    color: var(--text-muted); font-size: 1rem; line-height: 1.65;
+    max-width: 540px; margin: 0 auto;
+  }
+
   /* ── HERO CATEGORIES GRID (nuovo: niente card, solo divisori) ── */
   .hero-cats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: var(--border);
-    margin-top: 3rem;
+    margin-top: 1rem;
     width: 100%;
     max-width: 980px;
   }
@@ -547,6 +569,12 @@
   <div class="hero-actions">
     <a href="contatti.html#form" class="btn-primary">Richiedi un preventivo →</a>
     <a href="contatti.html" class="btn-secondary">Parla con me</a>
+  </div>
+
+  <!-- HERO CATEGORIES — HEADER -->
+  <div class="hero-cats-header">
+    <span class="hero-cats-eyebrow">Quota la tua polizza</span>
+    <h2 class="hero-cats-title">Cosa vuoi proteggere?</h2>
   </div>
 
   <!-- HERO CATEGORIES GRID -->
