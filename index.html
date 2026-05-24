@@ -14,16 +14,16 @@
   /* ── HERO CATEGORIES GRID (nuovo: niente card, solo divisori) ── */
   .hero-cats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     background: var(--border);
     margin-top: 3rem;
     width: 100%;
-    max-width: 1100px;
+    max-width: 980px;
   }
-  @media (max-width: 1000px) { .hero-cats-grid { grid-template-columns: repeat(3, 1fr); } }
   @media (max-width: 800px) { .hero-cats-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 480px) { .hero-cats-grid { grid-template-columns: 1fr; } }
+  .hero-cat--full { grid-column: 1 / -1; }
 
   .hero-cat {
     background: var(--bg);
@@ -84,6 +84,31 @@
   }
   .hero-cat--featured:hover {
     background: rgba(255, 216, 77, 0.14);
+  }
+
+  .hero-cat--pensione {
+    background: rgba(255, 216, 77, 0.10);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 1.75rem;
+  }
+  .hero-cat--pensione .hero-cat-icon { margin-bottom: 0; flex-shrink: 0; }
+  .hero-cat--pensione h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    white-space: nowrap;
+  }
+  .hero-cat--pensione p {
+    margin: 0;
+    flex: 1;
+    font-size: .9rem;
+    color: var(--text);
+  }
+  .hero-cat--pensione:hover { background: rgba(255, 216, 77, 0.20); }
+  @media (max-width: 480px) {
+    .hero-cat--pensione { flex-direction: column; align-items: flex-start; gap: .65rem; padding: 1.65rem 1.25rem 1.85rem; }
+    .hero-cat--pensione p { font-size: .82rem; }
   }
   .hero-cat-badge {
     background: var(--green-dark);
@@ -548,28 +573,28 @@
       <p>Sanitarie, infortuni, tutela del reddito, vita TCM</p>
       <span class="hero-cat-arrow">→</span>
     </a>
-    <a href="cyber.html" class="hero-cat">
-      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-shield-lock"/></svg></div>
-      <h3>Cyber</h3>
-      <p>Furto identità, ransomware, frodi online, GDPR breach</p>
-      <span class="hero-cat-arrow">→</span>
-    </a>
-    <a href="piano-pensione.html" class="hero-cat">
-      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-piggy"/></svg></div>
-      <h3>Pensione</h3>
-      <p>Previdenza complementare, piani risparmio, rendite</p>
-      <span class="hero-cat-arrow">→</span>
-    </a>
     <a href="polizza-animali.html" class="hero-cat">
       <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-dog"/></svg></div>
       <h3>Animali</h3>
       <p>Spese veterinarie, infortuni e prevenzione per cane e gatto</p>
       <span class="hero-cat-arrow">→</span>
     </a>
+    <a href="cyber.html" class="hero-cat">
+      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-shield-lock"/></svg></div>
+      <h3>Cyber</h3>
+      <p>Furto identità, ransomware, frodi online, GDPR breach</p>
+      <span class="hero-cat-arrow">→</span>
+    </a>
     <a href="rc.html" class="hero-cat hero-cat--featured">
       <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-briefcase"/></svg></div>
       <h3>RC <span class="hero-cat-badge">PMI</span></h3>
       <p>RC Professionale, RCT/RCO, D&amp;O, Polizza Catastrofale obbligatoria</p>
+      <span class="hero-cat-arrow">→</span>
+    </a>
+    <a href="piano-pensione.html" class="hero-cat hero-cat--full hero-cat--pensione">
+      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-piggy"/></svg></div>
+      <h3>Pensione</h3>
+      <p>Scopri come risparmiare facendo il fondo pensione.</p>
       <span class="hero-cat-arrow">→</span>
     </a>
   </div>
