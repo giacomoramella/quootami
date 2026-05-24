@@ -10,6 +10,102 @@
 <style>
   /* ── BAR CHART ── */
   .chart-section { background: var(--bg-alt); }
+
+  /* ── OPZIONE A: FATTORI ── */
+  .factors-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2.5rem 2rem; max-width: 1080px; margin: 3.5rem auto 0;
+  }
+  .factor-card { padding: 0 .5rem; }
+  .factor-num {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 1.5rem; color: var(--yellow-deep);
+    display: block; margin-bottom: .5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .factor-card h3 {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 1.05rem; color: var(--text); margin: 0;
+  }
+  .factor-card h3::after {
+    content: ''; display: block; width: 28px; height: 2px;
+    background: var(--yellow); margin-top: .65rem; border-radius: 2px;
+  }
+  .factor-card p {
+    font-size: .9rem; color: var(--text-muted); line-height: 1.65;
+    margin: 1rem 0 0;
+  }
+
+  /* ── OPZIONE B: PROCESSO ── */
+  .process-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; max-width: 1080px; margin: 3.5rem auto 0;
+  }
+  @media (max-width:900px) { .process-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width:500px) { .process-grid { grid-template-columns: 1fr; } }
+  .process-step { text-align: center; padding: 0 .5rem; }
+  .process-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 56px; height: 56px;
+    background: var(--yellow); color: var(--text);
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 1.3rem; border-radius: 50%;
+    margin-bottom: 1.25rem;
+  }
+  .process-step h3 {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 1rem; color: var(--text); margin: 0 0 .65rem;
+  }
+  .process-step p {
+    font-size: .88rem; color: var(--text-muted); line-height: 1.65; margin: 0;
+  }
+
+  /* ── OPZIONE C: PERCHÉ I PREZZI CAMBIANO ── */
+  .range-viz { max-width: 720px; margin: 3.5rem auto 0; }
+  .range-bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.5rem; }
+  .range-low, .range-high { text-align: center; }
+  .range-low .range-tag, .range-high .range-tag {
+    display: block; font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: .85rem; color: var(--text-muted);
+  }
+  .range-arrow { display: block; color: var(--yellow-deep); font-size: 1rem; margin-top: .3rem; }
+  .range-track {
+    width: 280px; height: 8px; border-radius: 50px;
+    background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow-deep) 50%, var(--primary) 100%);
+    position: relative;
+  }
+  .range-dot {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #fff; border: 3px solid var(--text);
+  }
+  .range-dot-l { left: 0; }
+  .range-dot-r { right: 0; }
+  .range-caption {
+    text-align: center; font-size: .85rem; color: var(--text-muted);
+    margin: 1.5rem auto 0; max-width: 540px; font-style: italic;
+  }
+  .range-explain {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; max-width: 980px; margin: 3.5rem auto 0;
+  }
+  @media (max-width:800px) {
+    .range-explain { grid-template-columns: 1fr; gap: 1.5rem; }
+    .range-bar { grid-template-columns: 1fr; gap: 1rem; }
+    .range-track { width: 100%; max-width: 280px; margin: 0 auto; }
+  }
+  .range-explain-item { text-align: left; }
+  .range-explain-item strong {
+    font-family: 'Inter', sans-serif; font-weight: 700; color: var(--text);
+    font-size: 1rem; display: block; margin-bottom: .5rem;
+  }
+  .range-explain-item strong::after {
+    content: ''; display: inline-block; width: 28px; height: 2px;
+    background: var(--yellow); margin-left: .5rem; vertical-align: middle; border-radius: 2px;
+  }
+  .range-explain-item p {
+    font-size: .9rem; color: var(--text-muted); line-height: 1.65; margin: 0;
+  }
   .bar-chart { max-width: 720px; margin: 3rem auto 0; }
   .bar-row {
     display: flex; align-items: center; gap: 1rem;
@@ -230,41 +326,120 @@
   </div>
 </section>
 
-<!-- BAR CHART -->
-<section class="chart-section">
+<!-- OPZIONE A — FATTORI DEL PREZZO -->
+<section class="chart-section" style="border-top:4px solid var(--yellow); position:relative">
+  <span style="position:absolute;top:1rem;left:1rem;background:var(--primary);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:4px">OPZIONE A</span>
   <div class="centered">
-    <span class="section-label">Confronto prezzi</span>
-    <h2 class="section-title">Quanto pagano gli italiani<br>per la RC Auto</h2>
-    <p class="section-sub">Confronto prezzi medi per profilo standard: guidatore 35 anni, auto berlina, Milano. Dati aggiornati 2026.</p>
+    <span class="section-label">I fattori del preventivo</span>
+    <h2 class="section-title">Cosa fa salire<br>o scendere il prezzo</h2>
+    <p class="section-sub">Le compagnie calcolano la RC Auto in base a sei variabili principali. Conoscerle ti aiuta a capire le differenze tra preventivi.</p>
   </div>
+  <div class="factors-grid">
+    <div class="factor-card reveal">
+      <span class="factor-num">01</span>
+      <h3>Classe di merito</h3>
+      <p>Il sistema Bonus-Malus va dalla classe 1 (migliore) alla 18 (peggiore). Ogni anno senza sinistri scendi di una classe.</p>
+    </div>
+    <div class="factor-card reveal">
+      <span class="factor-num">02</span>
+      <h3>Età ed esperienza</h3>
+      <p>Conducenti giovani (under 26) e neopatentati pagano significativamente di più.</p>
+    </div>
+    <div class="factor-card reveal">
+      <span class="factor-num">03</span>
+      <h3>Residenza (CAP)</h3>
+      <p>Le grandi città del sud Italia hanno mediamente premi più alti per maggiore frequenza sinistri.</p>
+    </div>
+    <div class="factor-card reveal">
+      <span class="factor-num">04</span>
+      <h3>Tipo di veicolo</h3>
+      <p>Cilindrata, cavalli, valore commerciale e potenza incidono sul premio, oltre alla categoria del veicolo.</p>
+    </div>
+    <div class="factor-card reveal">
+      <span class="factor-num">05</span>
+      <h3>Chilometri annui</h3>
+      <p>Meno chilometri percorri, minore è il rischio statistico di sinistro: alcune polizze premiano i bassi chilometraggi.</p>
+    </div>
+    <div class="factor-card reveal">
+      <span class="factor-num">06</span>
+      <h3>Scatola nera</h3>
+      <p>L'installazione del dispositivo telematico può portare uno sconto fino al 30% e premia la guida prudente.</p>
+    </div>
+  </div>
+</section>
 
-  <div class="bar-chart">
-    <div class="bar-row reveal">
-      <div class="bar-company">Generali</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0" data-width="100%"><span class="bar-price">€650</span></div></div>
+<!-- OPZIONE B — IL PROCESSO -->
+<section class="chart-section" style="border-top:4px solid var(--yellow); background:var(--bg); position:relative">
+  <span style="position:absolute;top:1rem;left:1rem;background:var(--primary);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:4px">OPZIONE B</span>
+  <div class="centered">
+    <span class="section-label">Come lavoro</span>
+    <h2 class="section-title">Come trovo<br>la tua polizza</h2>
+    <p class="section-sub">Quattro passaggi semplici. Niente form interminabili, nessun bombardamento di call center.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <span class="process-num">1</span>
+      <h3>Mi mandi i dati base</h3>
+      <p>Targa, dati patente, classe di merito. Bastano 2 minuti via WhatsApp o email.</p>
     </div>
-    <div class="bar-row reveal">
-      <div class="bar-company">UnipolSai</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0" data-width="89.2%"><span class="bar-price">€580</span></div></div>
+    <div class="process-step reveal">
+      <span class="process-num">2</span>
+      <h3>Interrogo le compagnie</h3>
+      <p>Invio la richiesta alle compagnie partner del broker. Ognuna risponde col proprio prezzo migliore.</p>
     </div>
-    <div class="bar-row reveal">
-      <div class="bar-company">Allianz</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0" data-width="80%"><span class="bar-price">€520</span></div></div>
+    <div class="process-step reveal">
+      <span class="process-num">3</span>
+      <h3>Confronto coperture e prezzi</h3>
+      <p>Non solo il premio. Valuto franchigie, massimali, esclusioni e affidabilità sui sinistri.</p>
     </div>
-    <div class="bar-row reveal">
-      <div class="bar-company">AXA</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0" data-width="75.4%"><span class="bar-price">€490</span></div></div>
-    </div>
-    <div class="bar-row reveal">
-      <div class="bar-company">Zurich</div>
-      <div class="bar-track"><div class="bar-fill" style="width:0" data-width="72.3%"><span class="bar-price">€470</span></div></div>
-    </div>
-    <div class="bar-row reveal">
-      <div class="bar-company">Nostra selezione</div>
-      <div class="bar-track"><div class="bar-fill best" style="width:0" data-width="59.8%"><span class="bar-price">€389</span><span class="bar-best-label">Miglior prezzo</span></div></div>
+    <div class="process-step reveal">
+      <span class="process-num">4</span>
+      <h3>Ti presento le migliori opzioni</h3>
+      <p>Tabella comparativa chiara: 2 o 3 alternative spiegate, decidi tu in autonomia.</p>
     </div>
   </div>
-  <p class="chart-note">* Prezzi indicativi per profilo standard. Il tuo preventivo personalizzato potrebbe essere ancora più basso.</p>
+</section>
+
+<!-- OPZIONE C — PERCHÉ I PREZZI CAMBIANO -->
+<section class="chart-section" style="border-top:4px solid var(--yellow); position:relative">
+  <span style="position:absolute;top:1rem;left:1rem;background:var(--primary);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:4px">OPZIONE C</span>
+  <div class="centered">
+    <span class="section-label">Confrontare conviene</span>
+    <h2 class="section-title">Perché lo stesso profilo<br>riceve preventivi diversi</h2>
+    <p class="section-sub">Ogni compagnia usa il proprio algoritmo di pricing. Lo stesso conducente, con la stessa auto, può ricevere preventivi che variano anche del 30-50%.</p>
+  </div>
+  <div class="range-viz">
+    <div class="range-bar">
+      <div class="range-low">
+        <span class="range-tag">Compagnia più economica</span>
+        <span class="range-arrow">▼</span>
+      </div>
+      <div class="range-track">
+        <div class="range-fill"></div>
+        <div class="range-dot range-dot-l"></div>
+        <div class="range-dot range-dot-r"></div>
+      </div>
+      <div class="range-high">
+        <span class="range-tag">Compagnia più cara</span>
+        <span class="range-arrow">▼</span>
+      </div>
+    </div>
+    <p class="range-caption">Stesso conducente. Stessa auto. Stesso CAP. Premi che possono differire di centinaia di euro all'anno.</p>
+  </div>
+  <div class="range-explain">
+    <div class="range-explain-item">
+      <strong>Strategie commerciali diverse.</strong>
+      <p>Alcune compagnie puntano sui giovani, altre sugli over 50. Una ti vede come cliente ideale, un'altra no.</p>
+    </div>
+    <div class="range-explain-item">
+      <strong>Algoritmi diversi.</strong>
+      <p>Ogni compagnia pesa in modo proprio CAP, cilindrata, classe di merito. Le combinazioni possibili sono migliaia.</p>
+    </div>
+    <div class="range-explain-item">
+      <strong>Ecco perché serve confrontare.</strong>
+      <p>Senza un broker che interroga più compagnie contemporaneamente è difficile sapere quale ti sta offrendo davvero il miglior prezzo.</p>
+    </div>
+  </div>
 </section>
 
 <!-- COVERAGES -->
