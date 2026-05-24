@@ -79,36 +79,32 @@
     color: var(--yellow-deep);
   }
 
-  .hero-cat--featured {
-    background: rgba(255, 216, 77, 0.06);
-  }
-  .hero-cat--featured:hover {
-    background: rgba(255, 216, 77, 0.14);
-  }
-
   .hero-cat--pensione {
-    background: rgba(255, 216, 77, 0.10);
+    background: rgba(255, 216, 77, 0.22);
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    padding: 1.5rem 1.75rem;
+    padding: 1.9rem 2rem;
+    border-top: 2px solid var(--yellow);
+    border-bottom: 2px solid var(--yellow);
   }
   .hero-cat--pensione .hero-cat-icon { margin-bottom: 0; flex-shrink: 0; }
   .hero-cat--pensione h3 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     white-space: nowrap;
   }
   .hero-cat--pensione p {
     margin: 0;
     flex: 1;
-    font-size: .9rem;
+    font-size: .92rem;
     color: var(--text);
+    font-weight: 500;
   }
-  .hero-cat--pensione:hover { background: rgba(255, 216, 77, 0.20); }
+  .hero-cat--pensione:hover { background: rgba(255, 216, 77, 0.32); }
   @media (max-width: 480px) {
-    .hero-cat--pensione { flex-direction: column; align-items: flex-start; gap: .65rem; padding: 1.65rem 1.25rem 1.85rem; }
-    .hero-cat--pensione p { font-size: .82rem; }
+    .hero-cat--pensione { flex-direction: column; align-items: flex-start; gap: .75rem; padding: 1.85rem 1.25rem 2rem; }
+    .hero-cat--pensione p { font-size: .85rem; }
   }
   .hero-cat-badge {
     background: var(--green-dark);
@@ -585,7 +581,7 @@
       <p>Furto identità, ransomware, frodi online, GDPR breach</p>
       <span class="hero-cat-arrow">→</span>
     </a>
-    <a href="rc.html" class="hero-cat hero-cat--featured">
+    <a href="rc.html" class="hero-cat">
       <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-briefcase"/></svg></div>
       <h3>RC <span class="hero-cat-badge">PMI</span></h3>
       <p>RC Professionale, RCT/RCO, D&amp;O, Polizza Catastrofale obbligatoria</p>
