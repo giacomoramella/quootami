@@ -279,16 +279,17 @@
 
   /* ── WHY ── */
   .why-section { background: var(--bg-alt); }
-  .why-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:1.5rem; margin-top:3.5rem; }
+  .why-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:2.5rem 1.75rem; margin-top:3.5rem; max-width:1080px; margin-left:auto; margin-right:auto; }
   .why-item {
-    background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
-    padding:2rem 1.75rem; text-align:center; box-shadow:var(--shadow-sm);
-    transition:transform .3s cubic-bezier(.22,.68,0,1.2),box-shadow .3s; will-change:transform;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    padding:.5rem .75rem;
+    transition:transform .3s cubic-bezier(.22,.68,0,1.2); will-change:transform;
   }
-  .why-item:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--border-green); }
-  .why-icon { width:56px; height:56px; background:var(--green-soft); border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin:0 auto 1.1rem; }
-  .why-item h4 { font-family:'Inter',sans-serif; font-weight:600; font-size:1rem; margin-bottom:.5rem; color:var(--text); }
-  .why-item p { color:var(--text-muted); font-size:.85rem; line-height:1.65; }
+  .why-item:hover { transform:translateY(-4px); }
+  .why-item:hover .why-icon { background:var(--yellow); transform:scale(1.05); }
+  .why-icon { width:64px; height:64px; background:var(--green-soft); border-radius:18px; display:flex; align-items:center; justify-content:center; font-size:1.75rem; margin:0 auto 1.25rem; transition:background .25s, transform .25s; }
+  .why-item h4 { font-family:'Inter',sans-serif; font-weight:700; font-size:1.05rem; margin-bottom:.6rem; color:var(--text); max-width:240px; }
+  .why-item p { color:var(--text-muted); font-size:.9rem; line-height:1.65; margin:0; max-width:260px; }
 
   /* ── TESTIMONIALS ── */
   .testimonials-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; margin-top:3.5rem; }
