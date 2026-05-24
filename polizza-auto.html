@@ -176,7 +176,30 @@
     border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1);
   }
   .form-submit { width: 100%; margin-top: 1.5rem; font-size: 1.05rem; padding: 1rem; border-radius: 14px; }
+  .form-submit[disabled] { opacity:.65; cursor:wait; }
   .form-note { text-align: center; font-size: .78rem; color: var(--text-muted); margin-top: 1rem; }
+  .form-consent {
+    display: flex; align-items: flex-start; gap: .65rem;
+    font-size: .82rem; color: var(--text-muted); line-height: 1.5;
+    margin-top: 1.25rem; cursor: pointer;
+  }
+  .form-consent input[type="checkbox"] { margin-top: .15rem; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--green-dark); }
+  .form-consent a { color: var(--green-dark); text-decoration: underline; }
+  .form-feedback {
+    margin-top: 1.5rem; padding: 1.25rem 1.5rem;
+    border-radius: 12px; font-size: .9rem; line-height: 1.6;
+  }
+  .form-feedback strong { display: block; margin-bottom: .35rem; font-size: 1rem; }
+  .form-feedback p { margin: 0; color: inherit; }
+  .form-feedback a { color: inherit; font-weight: 600; text-decoration: underline; }
+  .form-success {
+    background: rgba(31, 157, 85, .08); border: 1px solid rgba(31, 157, 85, .25);
+    color: #1a7a4a;
+  }
+  .form-error {
+    background: rgba(212, 58, 47, .07); border: 1px solid rgba(212, 58, 47, .25);
+    color: #c2382f;
+  }
 
   /* ── VALIDATION + LOADING + RESULTS ── */
   .field-err { display:none; color:#d43a2f; font-size:.75rem; margin-top:.2rem; }
@@ -414,38 +437,103 @@
 <section id="preventivo" class="form-section">
   <div class="centered">
     <span class="section-label">Preventivo gratuito</span>
-    <h2 class="section-title">Il tuo preventivo<br>personalizzato</h2>
-    <p class="section-sub">Solo 3 dati. Nessuna registrazione. Risultati in 30 secondi.</p>
+    <h2 class="section-title">Richiedi il tuo<br>preventivo personalizzato</h2>
+    <p class="section-sub">Compila i tuoi dati: ti contatto io entro 24h con le migliori offerte delle compagnie partner.</p>
   </div>
 
   <div class="quote-box">
-    <div class="form-row">
-      <div class="form-group">
-        <label>Targa del veicolo</label>
-        <input type="text" id="a-targa" placeholder="es. AB123CD" maxlength="7" style="text-transform:uppercase">
-        <span class="field-err" id="a-targa-err"></span>
+    <form id="quote-form-auto" class="quote-form" novalidate>
+      <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
+      <input type="hidden" name="subject" value="Quotami • Richiesta preventivo RC Auto">
+      <input type="hidden" name="from_name" value="Quotami — sito web">
+      <input type="hidden" name="redirect" value="false">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="qf-nome">Nome e cognome *</label>
+          <input type="text" id="qf-nome" name="Nome e cognome" placeholder="Mario Rossi" required>
+        </div>
+        <div class="form-group">
+          <label for="qf-dob">Data di nascita *</label>
+          <input type="date" id="qf-dob" name="Data di nascita" required>
+        </div>
       </div>
-      <div class="form-group">
-        <label>CAP di residenza</label>
-        <input type="text" id="a-cap" placeholder="es. 20121" maxlength="5">
-        <span class="field-err" id="a-cap-err"></span>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="qf-cap">CAP di residenza *</label>
+          <input type="text" id="qf-cap" name="CAP residenza" placeholder="13900" maxlength="5" pattern="[0-9]{5}" inputmode="numeric" required>
+        </div>
+        <div class="form-group">
+          <label for="qf-targa">Targa veicolo *</label>
+          <input type="text" id="qf-targa" name="Targa veicolo" placeholder="AB123CD" maxlength="7" style="text-transform:uppercase" required>
+        </div>
       </div>
-    </div>
-    <div class="form-row single">
-      <div class="form-group">
-        <label>Data di nascita del contraente</label>
-        <input type="date" id="a-dob">
-        <span class="field-err" id="a-dob-err"></span>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="qf-tel">Telefono *</label>
+          <input type="tel" id="qf-tel" name="Telefono" placeholder="+39 333 1234567" required>
+        </div>
+        <div class="form-group">
+          <label for="qf-email">Email *</label>
+          <input type="email" id="qf-email" name="Email" placeholder="mario@esempio.it" required>
+        </div>
       </div>
-    </div>
-    <button id="a-btn" class="btn-primary form-submit" onclick="confrontaAuto()">
-      Confronta ora →
-    </button>
-    <p class="form-note">🔒 Dati protetti · Nessun costo · Nessun obbligo di acquisto</p>
-    <div class="form-loading" id="a-loading"><div class="spinner"></div>Stiamo confrontando le migliori offerte…</div>
-    <div class="results-wrap" id="a-results"></div>
+
+      <label class="form-consent">
+        <input type="checkbox" id="qf-consent" required>
+        <span>Acconsento al trattamento dei miei dati personali per essere ricontattato in merito alla richiesta di preventivo (<a href="privacy.html" target="_blank">privacy policy</a>) *</span>
+      </label>
+
+      <button type="submit" class="btn-primary form-submit" id="qf-submit">
+        Richiedi il preventivo →
+      </button>
+      <p class="form-note">🔒 Dati protetti · Nessun costo · Nessun obbligo</p>
+
+      <div class="form-feedback form-success" id="qf-success" hidden>
+        <strong>Richiesta inviata! ✓</strong>
+        <p>Ti ricontatto entro 24 ore lavorative all'email o al numero che hai indicato. Nel frattempo, se serve, puoi scrivermi direttamente su <a href="https://wa.me/393922198185" target="_blank">WhatsApp</a>.</p>
+      </div>
+      <div class="form-feedback form-error" id="qf-error" hidden>
+        <strong>Errore di invio</strong>
+        <p>Qualcosa non ha funzionato. Riprova o scrivimi direttamente a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a> o su <a href="https://wa.me/393922198185" target="_blank">WhatsApp</a>.</p>
+      </div>
+    </form>
   </div>
 </section>
+
+<script>
+(function(){
+  var form = document.getElementById('quote-form-auto');
+  if (!form) return;
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var btn = document.getElementById('qf-submit');
+    var ok = document.getElementById('qf-success');
+    var err = document.getElementById('qf-error');
+    ok.hidden = true; err.hidden = true;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    btn.disabled = true; btn.textContent = 'Invio in corso…';
+    try {
+      var fd = new FormData(form);
+      var res = await fetch('https://api.web3forms.com/submit', { method:'POST', body: fd });
+      var json = await res.json();
+      if (json.success) {
+        form.reset();
+        ok.hidden = false;
+        ok.scrollIntoView({behavior:'smooth', block:'center'});
+      } else {
+        err.hidden = false;
+      }
+    } catch(_){
+      err.hidden = false;
+    } finally {
+      btn.disabled = false; btn.textContent = 'Richiedi il preventivo →';
+    }
+  });
+})();
+</script>
 
 <!-- BENEFITS -->
 <section class="benefits-section">
