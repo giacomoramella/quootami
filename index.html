@@ -45,10 +45,17 @@
     background: rgba(255, 255, 255, 0.95);
   }
   .hero-cat-icon {
-    font-size: 1.85rem;
-    margin-bottom: .65rem;
-    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: var(--yellow);
+    border-radius: 14px;
+    color: var(--text);
+    margin-bottom: .85rem;
   }
+  .hero-cat-icon svg { display: block; width: 28px; height: 28px; }
   .hero-cat h3 {
     font-family: 'Inter', sans-serif;
     font-size: 1.05rem;
@@ -320,6 +327,54 @@
 </head>
 <body>
 
+<!-- SVG ICON SPRITE (hidden) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="icon-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 11.5 6.6 7a2 2 0 0 1 1.9-1.3h7a2 2 0 0 1 1.9 1.3l1.6 4.5"/>
+      <path d="M3 16v-3.4a1 1 0 0 1 .7-.95L5 11.5h14l1.3.15a1 1 0 0 1 .7.95V16a1 1 0 0 1-1 1h-1.3"/>
+      <path d="M6.3 17H4.5"/>
+      <path d="M19.5 17h-2"/>
+      <circle cx="7.5" cy="17" r="2"/>
+      <circle cx="16.5" cy="17" r="2"/>
+    </symbol>
+    <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 11 12 3.5 21 11"/>
+      <path d="M5.5 9.5V20h13V9.5"/>
+      <path d="M10 20v-5.5h4V20"/>
+    </symbol>
+    <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12h3l1.6-3.5 2.4 7.5 2.2-6 1.7 3.3H21"/>
+    </symbol>
+    <symbol id="icon-shield-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3 19.5 5.7v6.6c0 4.2-3.1 7.6-7.5 8.7-4.4-1.1-7.5-4.5-7.5-8.7V5.7L12 3z"/>
+      <rect x="9.7" y="11.8" width="4.6" height="4.2" rx="0.6"/>
+      <path d="M10.6 11.8v-1.4a1.4 1.4 0 0 1 2.8 0v1.4"/>
+    </symbol>
+    <symbol id="icon-piggy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 13.2c0-3.4 3.2-6.2 7.2-6.2s7.3 2.8 7.3 6.2c0 1.4-.6 2.7-1.5 3.7v1.6a.8.8 0 0 1-.8.8h-1.4a.8.8 0 0 1-.8-.8v-.6c-.6.1-1.2.2-1.8.2-.7 0-1.3-.1-1.9-.2v.6a.8.8 0 0 1-.8.8H8.1a.8.8 0 0 1-.8-.8v-1.6C6.1 16 5 14.7 5 13.2z"/>
+      <path d="M3 11.5v2"/>
+      <circle cx="15.5" cy="11.5" r="0.7" fill="currentColor" stroke="none"/>
+      <path d="M9.5 7.5 9 5.5l2.2 1"/>
+      <path d="M9.5 10.5h3"/>
+    </symbol>
+    <symbol id="icon-dog" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7.5 8.5C7 5.5 5 4.5 5 6.5v4.7c0 3.8 3 6.8 7 6.8s7-3 7-6.8V6.5c0-2-2-1-2.5 2"/>
+      <circle cx="9.7" cy="11.2" r="0.7" fill="currentColor" stroke="none"/>
+      <circle cx="14.3" cy="11.2" r="0.7" fill="currentColor" stroke="none"/>
+      <path d="M11 14.5a1 1 0 0 0 2 0"/>
+      <ellipse cx="12" cy="13.4" rx="0.8" ry="0.6" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="icon-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="7.5" width="18" height="12.5" rx="1.5"/>
+      <path d="M9 7.5V5.8a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1.7"/>
+      <path d="M3 13.5h18"/>
+      <rect x="10.5" y="12.4" width="3" height="2.4" rx="0.4"/>
+    </symbol>
+  </defs>
+</svg>
+
+
 <!-- NAV -->
 <nav>
   <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
@@ -427,43 +482,43 @@
   <!-- HERO CATEGORIES GRID -->
   <div class="hero-cats-grid">
     <a href="polizza-auto.html" class="hero-cat">
-      <div class="hero-cat-icon">🚗</div>
+      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-car"/></svg></div>
       <h3>Auto</h3>
       <p>RC Auto, Moto, Furgone, Camper, mezzi agricoli, flotte aziendali</p>
       <span class="hero-cat-arrow">→</span>
     </a>
     <a href="polizza-casa.html" class="hero-cat">
-      <div class="hero-cat-icon">🏠</div>
+      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-home"/></svg></div>
       <h3>Casa</h3>
       <p>Incendio, furto, RC Capofamiglia, eventi catastrofali</p>
       <span class="hero-cat-arrow">→</span>
     </a>
     <a href="salute.html" class="hero-cat">
-      <div class="hero-cat-icon">❤️</div>
+      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-heart"/></svg></div>
       <h3>Salute</h3>
       <p>Sanitarie, infortuni, tutela del reddito, vita TCM</p>
       <span class="hero-cat-arrow">→</span>
     </a>
     <a href="cyber.html" class="hero-cat">
-      <div class="hero-cat-icon">🛡️</div>
+      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-shield-lock"/></svg></div>
       <h3>Cyber</h3>
       <p>Furto identità, ransomware, frodi online, GDPR breach</p>
       <span class="hero-cat-arrow">→</span>
     </a>
     <a href="piano-pensione.html" class="hero-cat">
-      <div class="hero-cat-icon">📈</div>
+      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-piggy"/></svg></div>
       <h3>Pensione</h3>
       <p>Previdenza complementare, piani risparmio, rendite</p>
       <span class="hero-cat-arrow">→</span>
     </a>
     <a href="polizza-animali.html" class="hero-cat">
-      <div class="hero-cat-icon">🐾</div>
+      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-dog"/></svg></div>
       <h3>Animali</h3>
       <p>Spese veterinarie, infortuni e prevenzione per cane e gatto</p>
       <span class="hero-cat-arrow">→</span>
     </a>
     <a href="rc.html" class="hero-cat hero-cat--featured">
-      <div class="hero-cat-icon">⚖️</div>
+      <div class="hero-cat-icon"><svg width="36" height="36"><use href="#icon-briefcase"/></svg></div>
       <h3>RC <span class="hero-cat-badge">PMI</span></h3>
       <p>RC Professionale, RCT/RCO, D&amp;O, Polizza Catastrofale obbligatoria</p>
       <span class="hero-cat-arrow">→</span>
