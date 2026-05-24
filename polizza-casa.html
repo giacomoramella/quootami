@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Polizza Casa – RisparmioFacile</title>
+<title>Polizza Casa – Quotami</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260512i">
 <style>
   /* ── BAR CHART ── */
   .chart-section { background: var(--bg-alt); }
@@ -15,12 +15,12 @@
   .bar-company { width:130px; font-size:.875rem; font-weight:500; color:var(--text); text-align:right; flex-shrink:0; }
   .bar-track { flex:1; background:var(--border); border-radius:50px; height:36px; overflow:hidden; }
   .bar-fill {
-    height:100%; border-radius:50px; background:rgba(26,60,46,.12);
+    height:100%; border-radius:50px; background:rgba(11,18,32,.12);
     display:flex; align-items:center; padding:0 1rem;
     transition:width 1.2s cubic-bezier(.22,.68,0,1.2);
   }
   .bar-fill.best { background:linear-gradient(90deg,var(--green-dark),var(--green)); }
-  .bar-price { font-family:'Syne',sans-serif; font-size:.875rem; font-weight:700; color:var(--text); white-space:nowrap; }
+  .bar-price { font-family:'Inter',sans-serif; font-size:.875rem; font-weight:700; color:var(--text); white-space:nowrap; }
   .bar-fill.best .bar-price { color:var(--primary); }
   .bar-best-label { margin-left:.75rem; background:var(--primary); color:#fff; font-size:.68rem; font-weight:700; padding:.2rem .6rem; border-radius:50px; white-space:nowrap; }
   .chart-note { text-align:center; color:var(--text-muted); font-size:.8rem; margin-top:1.5rem; }
@@ -35,9 +35,9 @@
   .coverage-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); border-color:var(--border-green); }
   .cov-icon { font-size:2rem; margin-bottom:1rem; display:block; }
   .cov-badge { display:inline-block; font-size:.68rem; font-weight:600; letter-spacing:.04em; padding:.2rem .6rem; border-radius:50px; margin-bottom:.75rem; }
-  .cov-base     { background:rgba(26,60,46,.1); color:var(--primary); }
-  .cov-optional { background:rgba(61,214,140,.12); color:#1a7a4a; }
-  .coverage-card h3 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:600; margin-bottom:.4rem; color:var(--text); }
+  .cov-base     { background:rgba(11,18,32,.1); color:var(--primary); }
+  .cov-optional { background:rgba(255,216,77,.12); color:#1a7a4a; }
+  .coverage-card h3 { font-family:'Inter',sans-serif; font-size:1rem; font-weight:600; margin-bottom:.4rem; color:var(--text); }
   .coverage-card p  { font-size:.85rem; color:var(--text-muted); line-height:1.65; }
 
   /* ── FORM ── */
@@ -53,10 +53,10 @@
   .form-group label { font-size:.8rem; font-weight:600; color:var(--text); letter-spacing:.03em; }
   .form-group input, .form-group select {
     padding:.75rem 1rem; border-radius:12px; border:1px solid var(--border);
-    background:var(--bg); font-family:'DM Sans',sans-serif;
+    background:var(--bg); font-family:'Inter',sans-serif;
     font-size:.95rem; color:var(--text); outline:none; transition:border-color .2s,box-shadow .2s;
   }
-  .form-group input:focus, .form-group select:focus { border-color:var(--border-green); box-shadow:0 0 0 3px rgba(61,214,140,.1); }
+  .form-group input:focus, .form-group select:focus { border-color:var(--border-green); box-shadow:0 0 0 3px rgba(255,216,77,.1); }
   .form-submit { width:100%; margin-top:1.5rem; font-size:1.05rem; padding:1rem; border-radius:14px; }
   .form-note { text-align:center; font-size:.78rem; color:var(--text-muted); margin-top:1rem; }
 
@@ -68,17 +68,17 @@
   .results-wrap { display:none; margin-top:1.5rem; animation:fadeUp .4s ease-out; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);} }
   .res-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:.75rem; margin-bottom:1rem; }
-  .res-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--text); display:block; }
+  .res-title { font-family:'Inter',sans-serif; font-size:1rem; font-weight:700; color:var(--text); display:block; }
   .res-sub { font-size:.78rem; color:var(--text-muted); display:block; margin-top:.25rem; }
   .res-table { width:100%; border-collapse:collapse; font-size:.875rem; }
   .res-table thead th { padding:.6rem .75rem; text-align:left; font-size:.72rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--text-muted); border-bottom:2px solid var(--border); }
   .res-table tbody td { padding:.75rem; vertical-align:middle; border-bottom:1px solid var(--border); color:var(--text-muted); }
   .res-table tbody td:first-child { color:var(--text); }
-  .res-table tbody tr.best-row td { background:rgba(61,214,140,.06); }
+  .res-table tbody tr.best-row td { background:rgba(255,216,77,.06); }
   .res-table tbody tr:last-child td { border-bottom:none; }
   .best-badge { display:inline-block; background:var(--green-dark); color:#fff; font-size:.65rem; font-weight:700; padding:.15rem .5rem; border-radius:50px; margin-left:.5rem; vertical-align:middle; }
-  .res-price { font-family:'Syne',sans-serif; font-weight:700; color:var(--primary); white-space:nowrap; }
-  .btn-attiva { background:var(--primary); color:#fff; border:none; border-radius:8px; padding:.45rem .9rem; font-size:.8rem; font-weight:600; cursor:pointer; transition:background .2s,transform .15s; font-family:'DM Sans',sans-serif; }
+  .res-price { font-family:'Inter',sans-serif; font-weight:700; color:var(--primary); white-space:nowrap; }
+  .btn-attiva { background:var(--primary); color:#fff; border:none; border-radius:8px; padding:.45rem .9rem; font-size:.8rem; font-weight:600; cursor:pointer; transition:background .2s,transform .15s; font-family:'Inter',sans-serif; }
   .btn-attiva:hover { background:var(--green-dark); transform:translateY(-1px); }
   .res-note { font-size:.72rem; color:var(--text-muted); margin-top:.75rem; }
 
@@ -86,7 +86,7 @@
   .benefits-section { background:var(--bg-alt); }
   .benefits-row { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3rem; }
   .benefit-item { text-align:center; }
-  .benefit-num { font-family:'Syne',sans-serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:700; color:var(--primary); display:block; line-height:1; }
+  .benefit-num { font-family:'Inter',sans-serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:700; color:var(--primary); display:block; line-height:1; }
   .benefit-label { font-size:.9rem; color:var(--text-muted); margin-top:.5rem; line-height:1.5; display:block; }
 
   @media(max-width:600px){
@@ -99,13 +99,90 @@
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="index.html">Risparmio<span>Facile</span></a>
+  <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
   <ul>
-    <li><a href="polizza-auto.html">Polizza Auto</a></li>
-    <li><a href="polizza-casa.html" class="active">Polizza Casa</a></li>
-    <li><a href="piano-pensione.html">Piano Pensione</a></li>
-    <li><a href="index.html#faq">FAQ</a></li>
-    <li><a href="#preventivo" class="nav-cta">Preventivo gratis →</a></li>
+    <li class="has-mega">
+      <a href="#">Per privati</a>
+      <div class="mega-panel">
+        <div class="mega-grid">
+          <div class="mega-col">
+            <h4>Auto e mobilità</h4>
+            <a href="polizza-auto.html">Polizza Auto</a>
+            <a href="polizza-auto.html">Polizza Moto</a>
+            <a href="polizza-auto.html">Camper · Autocarro</a>
+          </div>
+          <div class="mega-col">
+            <h4>Casa</h4>
+            <a href="polizza-casa.html">Polizza Casa</a>
+            <a href="polizza-casa.html">RC Capofamiglia</a>
+            <a href="polizza-casa.html">Eventi catastrofali</a>
+          </div>
+          <div class="mega-col">
+            <h4>Salute &amp; vita</h4>
+            <a href="salute.html#sanitarie">Polizza Sanitaria</a>
+            <a href="salute.html#infortuni">Infortuni</a>
+            <a href="salute.html#tutela-reddito">Tutela del reddito</a>
+            <a href="salute.html#vita">Vita</a>
+          </div>
+          <div class="mega-col">
+            <h4>Pensione</h4>
+            <a href="piano-pensione.html">Piano Pensione</a>
+            <a href="piano-pensione.html">Vantaggi fiscali</a>
+            <a href="piano-pensione.html">Simulatore</a>
+          </div>
+          <div class="mega-col">
+            <h4>Cyber</h4>
+            <a href="cyber.html#privati">Cyber Privati</a>
+            <a href="cyber.html">Furto identità</a>
+            <a href="cyber.html">Frodi online</a>
+          </div>
+          <div class="mega-col">
+            <h4>Animali domestici</h4>
+            <a href="polizza-animali.html">Polizza Cane</a>
+            <a href="polizza-animali.html">Polizza Gatto</a>
+            <a href="polizza-animali.html#prevenzione">Prevenzione</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="has-mega">
+      <a href="#">Per imprese</a>
+      <div class="mega-panel">
+        <div class="mega-grid">
+          <div class="mega-col">
+            <h4>Catastrofale PMI</h4>
+            <a href="rc.html#catastrofale" class="featured">Polizza obbligatoria</a>
+            <a href="rc.html#catastrofale">Scadenze normative</a>
+            <a href="rc.html#catastrofale">Coperture base</a>
+          </div>
+          <div class="mega-col">
+            <h4>Responsabilità Civile</h4>
+            <a href="rc.html#professionale">RC Professionale</a>
+            <a href="rc.html#imprese">RCT/RCO</a>
+            <a href="rc.html#do">D&amp;O</a>
+            <a href="rc.html#tutela-legale">Tutela Legale</a>
+          </div>
+          <div class="mega-col">
+            <h4>Cyber business</h4>
+            <a href="cyber.html#pmi">Cyber PMI</a>
+            <a href="cyber.html#aziende">Aziende strutturate</a>
+          </div>
+          <div class="mega-col">
+            <h4>Auto aziendali</h4>
+            <a href="polizza-auto.html">Flotte aziendali</a>
+            <a href="polizza-auto.html">Mezzi agricoli</a>
+          </div>
+          <div class="mega-col mega-col-cta">
+            <h4>Hai una PMI?</h4>
+            <p>Verifichiamo insieme gli obblighi assicurativi della tua impresa.</p>
+            <a href="contatti.html">Parlami →</a>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li><a href="chi-sono.html">Chi sono</a></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con me →</a></li>
   </ul>
 </nav>
 
@@ -116,7 +193,7 @@
 
   <div class="hero-eyebrow"><span class="dot"></span>Incendio · Furto · RC Capofamiglia · Catastrofi</div>
 
-  <h1>Proteggi la tua casa<br>al <span class="hero-accent">prezzo giusto.</span><br>Da €150/anno.</h1>
+  <h1>Quotami la casa<br><span class="hero-accent">al sicuro.</span></h1>
 
   <p class="hero-sub">Confrontiamo le polizze casa di tutte le principali compagnie italiane. Risparmio medio del 28%, attivazione digitale in 24 ore.</p>
 
@@ -278,7 +355,7 @@
 <section class="benefits-section">
   <div class="centered">
     <span class="section-label">I numeri che contano</span>
-    <h2 class="section-title">Perché scegliere<br>RisparmioFacile Casa</h2>
+    <h2 class="section-title">Perché scegliere<br>Quotami Casa</h2>
   </div>
   <div class="benefits-row">
     <div class="benefit-item reveal">
@@ -307,14 +384,17 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
-    <div class="footer-brand">
-      <a class="logo" href="index.html">Risparmio<span>Facile</span></a>
-      <p class="footer-tagline">Il comparatore assicurativo italiano. Intermediario IVASS registrato. Confronto gratuito e neutrale.</p>
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+      <p class="footer-tagline">Il tuo punto di riferimento personale per le tue assicurazioni. Confronto, consulenza e assistenza nel tempo, anche sui sinistri.</p>
+      <p><strong>Giacomo Ramella Pollone</strong></p>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. E000821549</span>
+      <p>📞 <a href="tel:+393922198185">+39 392 219 8185</a></p>
+      <p>✉️ <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a></p>
+
       <div class="footer-social">
-        <a class="social-btn" href="#" aria-label="LinkedIn">in</a>
-        <a class="social-btn" href="#" aria-label="Instagram">ig</a>
-        <a class="social-btn" href="#" aria-label="X">𝕏</a>
-        <a class="social-btn" href="#" aria-label="Facebook">f</a>
+        <a class="social-btn" href="https://wa.me/393922198185" aria-label="WhatsApp" target="_blank" rel="noopener">w</a>
       </div>
     </div>
     <div class="footer-col">
@@ -322,39 +402,27 @@
       <ul>
         <li><a href="polizza-auto.html">Polizza Auto</a></li>
         <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Polizza Salute</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
         <li><a href="piano-pensione.html">Piano Pensione</a></li>
-        <li><a href="#">Polizza Vita</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Azienda</h5>
-      <ul>
-        <li><a href="#">Chi siamo</a></li>
-        <li><a href="#">Blog & Guide</a></li>
-        <li><a href="#">Lavora con noi</a></li>
-        <li><a href="#">Sala stampa</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h5>Supporto</h5>
-      <ul>
-        <li><a href="#">Centro assistenza</a></li>
-        <li><a href="#">Gestione sinistri</a></li>
-        <li><a href="#">Contattaci</a></li>
-        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="rc.html">RC e Catastrofale PMI</a></li>
       </ul>
     </div>
   </div>
+
   <div class="footer-trust">
-    <span class="ftrust-label">Certificazioni</span>
-    <div class="ftrust-badge"><span class="ftb-dot"></span> IVASS Registrato</div>
+    <span class="ftrust-label">Conformità</span>
     <div class="ftrust-badge"><span class="ftb-dot"></span> SSL 256-bit</div>
     <div class="ftrust-badge"><span class="ftb-dot"></span> GDPR Compliant</div>
-    <div class="ftrust-badge"><span class="ftb-dot"></span> Trustpilot 4.9 ★</div>
   </div>
+
+  <p class="footer-disclaimer">
+    Questo sito è gestito da <strong>Giacomo Ramella Pollone</strong>, collaboratore iscritto al RUI sezione E n. <strong>E000821549</strong>, operante per conto di <strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong>, broker iscritto al RUI sezione B n. <strong>B000639183</strong>. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile presso la sede del broker. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener">www.ivass.it</a>.
+  </p>
+
   <div class="footer-bottom">
-    <p>© 2026 RisparmioFacile S.r.l. — P.IVA IT00000000000 — Intermediario IVASS iscritto al RUI</p>
-    <div class="footer-links"><a href="#">Privacy</a><a href="#">Termini</a><a href="#">Cookie</a></div>
+    <p>© 2026 Quotami · gestito da Sisto Assicurazioni S.a.s. · P.IVA 02696750021 · RUI sez. B n. B000639183</p>
   </div>
 </footer>
 
@@ -433,6 +501,6 @@ function confrontaCasa() {
   },1500);
 }
 </script>
-<script src="components.js"></script>
+<script src="components.js?v=20260512i"></script>
 </body>
 </html>

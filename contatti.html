@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contatti · Quotami — Parla direttamente con Giacomo Ramella Pollone</title>
+<meta name="description" content="Contatti diretti: telefono, email, WhatsApp, LinkedIn. Form di contatto con consensi GDPR separati. Sede di ricevimento e orari.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260512i">
+<style>
+  .page-hero { padding: 9rem 5vw 4rem; background: var(--bg); position: relative; overflow: hidden; }
+  .page-hero .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+  .page-hero-blob-1 { width: 580px; height: 580px; background: #F3F0E8; opacity: .45; top: -220px; right: -150px; }
+  .page-hero-blob-2 { width: 360px; height: 360px; background: #EFE7D2; opacity: .35; bottom: -120px; left: -80px; }
+  .page-hero-inner { max-width: 880px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+  .page-hero h1 { font-family: 'Inter', sans-serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 700; line-height: 1.1; letter-spacing: -.02em; color: var(--text); margin-bottom: 1.25rem; }
+  .page-hero h1 .accent { color: var(--green-dark); }
+  .page-hero p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 700px; margin: 0 auto; }
+
+  .quick-contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; max-width: 1080px; margin: 4rem auto 0; padding: 0 5vw; }
+  .qc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; box-shadow: var(--shadow-sm); transition: transform .3s, border-color .25s, box-shadow .3s; }
+  .qc-card:hover { transform: translateY(-6px); border-color: var(--border-green); box-shadow: var(--shadow-lg); }
+  .qc-icon { width: 56px; height: 56px; background: var(--green-soft); border-radius: 16px; display: grid; place-items: center; font-size: 1.5rem; margin: 0 auto 1.25rem; }
+  .qc-card h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+  .qc-card p { color: var(--text-muted); font-size: .87rem; line-height: 1.65; margin-bottom: 1.25rem; }
+  .qc-card a { display: inline-block; padding: .55rem 1.25rem; border-radius: 50px; background: var(--bg-alt); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 600; font-size: .82rem; text-decoration: none; border: 1px solid var(--border); transition: background .2s, border-color .2s; }
+  .qc-card a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+  .form-section { padding: 5rem 5vw; }
+  .form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 760px; margin: 2rem auto 0; box-shadow: var(--shadow-md); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .35rem; margin-bottom: 1rem; }
+  .form-group label { font-size: .82rem; font-weight: 600; color: var(--text); }
+  .form-group input, .form-group select, .form-group textarea { padding: .75rem 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text); outline: none; transition: border-color .15s, box-shadow .15s; width: 100%; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1); }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-section h3.consents-h { font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 700; color: var(--green-dark); text-transform: uppercase; letter-spacing: .1em; margin: 1.5rem 0 .75rem; }
+  .form-check { display: flex; gap: .6rem; align-items: flex-start; font-size: .82rem; color: var(--text-muted); line-height: 1.55; margin-bottom: .75rem; padding: .85rem; background: var(--bg-alt); border-radius: 10px; border: 1px solid var(--border); }
+  .form-check input { margin-top: .15rem; flex-shrink: 0; }
+  .form-check a { color: var(--green-dark); text-decoration: underline; }
+  .form-check strong { color: var(--text); font-weight: 600; }
+  .form-submit { width: 100%; padding: 1rem; border-radius: 14px; background: var(--primary); color: #fff; border: none; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; transition: background .2s, transform .15s; margin-top: 1rem; }
+  .form-submit:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .form-success { background: rgba(255,216,77,.12); border: 1px solid var(--border-green); color: #1a7a4a; padding: 1rem 1.25rem; border-radius: 12px; margin-top: 1rem; font-size: .92rem; display: none; }
+  .form-success.show { display: block; }
+
+  .where-section { background: var(--bg-alt); padding: 5rem 5vw; }
+  .where-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .where-info p { color: var(--text-2); font-size: 1rem; line-height: 1.75; margin-bottom: 1rem; }
+  .where-info p strong { color: var(--text); }
+  .where-info h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin: 2rem 0 .5rem; }
+  .map-placeholder { aspect-ratio: 4/3; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); display: grid; place-items: center; padding: 2rem; text-align: center; color: var(--text-muted); }
+  .map-placeholder p { margin: 0; font-size: .87rem; line-height: 1.6; }
+  .map-placeholder code { background: var(--bg-alt); padding: .15rem .5rem; border-radius: 6px; font-size: .78rem; }
+  @media (max-width: 800px) { .where-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li class="has-mega"><a href="#">Per privati</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col"><h4>Auto e mobilità</h4><a href="polizza-auto.html">Polizza Auto</a><a href="polizza-auto.html">Polizza Moto</a><a href="polizza-auto.html">Camper · Autocarro</a></div>
+      <div class="mega-col"><h4>Casa</h4><a href="polizza-casa.html">Polizza Casa</a><a href="polizza-casa.html">RC Capofamiglia</a><a href="polizza-casa.html">Eventi catastrofali</a></div>
+      <div class="mega-col"><h4>Salute &amp; vita</h4><a href="salute.html#sanitarie">Polizza Sanitaria</a><a href="salute.html#infortuni">Infortuni</a><a href="salute.html#tutela-reddito">Tutela del reddito</a><a href="salute.html#vita">Vita</a></div>
+      <div class="mega-col"><h4>Pensione</h4><a href="piano-pensione.html">Piano Pensione</a><a href="piano-pensione.html">Vantaggi fiscali</a><a href="piano-pensione.html">Simulatore</a></div>
+      <div class="mega-col"><h4>Cyber</h4><a href="cyber.html#privati">Cyber Privati</a><a href="cyber.html">Furto identità</a><a href="cyber.html">Frodi online</a></div>
+          <div class="mega-col">
+            <h4>Animali domestici</h4>
+            <a href="polizza-animali.html">Polizza Cane</a>
+            <a href="polizza-animali.html">Polizza Gatto</a>
+            <a href="polizza-animali.html#prevenzione">Prevenzione</a>
+          </div>
+    </div></div></li>
+    <li class="has-mega"><a href="#">Per imprese</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col"><h4>Catastrofale PMI</h4><a href="rc.html#catastrofale" class="featured">Polizza obbligatoria</a><a href="rc.html#catastrofale">Scadenze normative</a><a href="rc.html#catastrofale">Coperture base</a></div>
+      <div class="mega-col"><h4>Responsabilità Civile</h4><a href="rc.html#professionale">RC Professionale</a><a href="rc.html#imprese">RCT/RCO</a><a href="rc.html#do">D&amp;O</a><a href="rc.html#tutela-legale">Tutela Legale</a></div>
+      <div class="mega-col"><h4>Cyber business</h4><a href="cyber.html#pmi">Cyber PMI</a><a href="cyber.html#aziende">Aziende strutturate</a></div>
+      <div class="mega-col"><h4>Auto aziendali</h4><a href="polizza-auto.html">Flotte aziendali</a><a href="polizza-auto.html">Mezzi agricoli</a></div>
+      <div class="mega-col mega-col-cta"><h4>Hai una PMI?</h4><p>Verifichiamo insieme gli obblighi assicurativi della tua impresa.</p><a href="contatti.html">Parlami →</a></div>
+    </div></div></li>
+    <li><a href="chi-sono.html">Chi sono</a></li>
+    <li><a href="contatti.html" class="nav-cta active">Parla con me →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="blob page-hero-blob-1"></div>
+  <div class="blob page-hero-blob-2"></div>
+  <div class="page-hero-inner">
+    <span class="hero-eyebrow"><span class="dot"></span>Contatti</span>
+    <h1>Parla <span class="accent">direttamente</span> con me.</h1>
+    <p>Tre modi per raggiungermi: la chiamata, l'email, oppure il modulo qui sotto. Quando scrivi a me, scrivi a una persona, non a un centralino.</p>
+  </div>
+</section>
+
+<!-- QUICK CONTACT -->
+<section style="padding-bottom:3rem">
+  <div class="centered" style="padding:0 5vw">
+    <span class="section-label">Recapiti diretti</span>
+    <h2 class="section-title">Come raggiungermi</h2>
+  </div>
+  <div class="quick-contact-grid">
+    <article class="qc-card">
+      <div class="qc-icon">📞</div>
+      <h3>Telefono</h3>
+      <p>Chiamami. Se non rispondo, sono in appuntamento. Ti richiamo io entro qualche ora.</p>
+      <a href="tel:+393922198185">+39 392 219 8185</a>
+    </article>
+    <article class="qc-card">
+      <div class="qc-icon">✉️</div>
+      <h3>Email</h3>
+      <p>Per richieste articolate, allegati di polizze esistenti, scambio di documenti.</p>
+      <a href="mailto:giacomo.rp@sistoassicurazioni.com">Scrivimi una mail</a>
+    </article>
+    <article class="qc-card">
+      <div class="qc-icon">💬</div>
+      <h3>WhatsApp</h3>
+      <p>Per messaggi veloci, prime domande, condivisione di documenti.</p>
+      <a href="https://wa.me/393922198185" target="_blank" rel="noopener">Apri WhatsApp</a>
+    </article>
+    <article class="qc-card">
+      <div class="qc-icon">💼</div>
+      <h3>LinkedIn</h3>
+      <p>Per restare in contatto su novità del settore e casi pubblici.</p>
+      <a href="https://www.linkedin.com/in/[username]" target="_blank" rel="external noopener">Profilo LinkedIn</a>
+    </article>
+  </div>
+</section>
+
+<!-- FORM -->
+<section id="form" class="form-section how-section">
+  <div class="centered">
+    <span class="section-label">Modulo di contatto</span>
+    <h2 class="section-title">Scrivimi qui</h2>
+    <p class="section-sub">Tutti i campi con * sono obbligatori. Trovi i due consensi GDPR (necessario + facoltativo) in fondo al modulo.</p>
+  </div>
+
+  <div class="form-card">
+    <form id="ct-form" onsubmit="ctSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ct-type">Tipo cliente *</label>
+          <select id="ct-type" required>
+            <option value="">Seleziona…</option>
+            <option>Privato</option>
+            <option>Professionista</option>
+            <option>Azienda</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ct-line">Linea di interesse *</label>
+          <select id="ct-line" required>
+            <option value="">Seleziona…</option>
+            <option>Auto</option>
+            <option>Casa</option>
+            <option>Salute</option>
+            <option>Cyber</option>
+            <option>Pensione</option>
+            <option>RC</option>
+            <option>Polizza Catastrofale Obbligatoria PMI</option>
+            <option>Non lo so ancora</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label for="ct-name">Nome *</label><input type="text" id="ct-name" required></div>
+        <div class="form-group"><label for="ct-surname">Cognome *</label><input type="text" id="ct-surname" required></div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label for="ct-tel">Telefono *</label><input type="tel" id="ct-tel" required></div>
+        <div class="form-group"><label for="ct-email">Email *</label><input type="email" id="ct-email" required></div>
+      </div>
+
+      <div class="form-group"><label for="ct-city">Città</label><input type="text" id="ct-city"></div>
+
+      <div class="form-group">
+        <label for="ct-msg">Messaggio *</label>
+        <textarea id="ct-msg" required placeholder="Raccontami di cosa hai bisogno: scadenze, polizze già attive, situazione familiare o aziendale…"></textarea>
+      </div>
+
+      <h3 class="consents-h">Consensi privacy (GDPR)</h3>
+
+      <label class="form-check">
+        <input type="checkbox" required>
+        <span><strong>Necessario:</strong> ho letto l'informativa privacy ai sensi del Reg. UE 2016/679 e acconsento al trattamento dei miei dati personali per essere ricontattato in merito alla mia richiesta. *</span>
+      </label>
+
+      <label class="form-check">
+        <input type="checkbox">
+        <span><strong>Facoltativo:</strong> acconsento, in via facoltativa, a ricevere comunicazioni informative su prodotti, scadenze normative e novità del settore. Posso revocare il consenso in qualsiasi momento scrivendo a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a>.</span>
+      </label>
+
+      <button type="submit" class="form-submit">Invia il messaggio →</button>
+      <div id="ct-success" class="form-success">✓ Grazie! Ho ricevuto il tuo messaggio. Ti contatto personalmente entro la giornata lavorativa.</div>
+    </form>
+  </div>
+</section>
+
+<!-- DOVE RICEVO -->
+<section class="where-section">
+  <div class="where-grid">
+    <div class="where-info">
+      <span class="section-label">Dove ricevo</span>
+      <h2 class="section-title">La sede del broker dove ricevo i clienti</h2>
+      <p>Ricevo su appuntamento presso la sede di <strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong> in <strong>Via Torino 47</strong>, 13900 Biella (BI). Posso anche venire presso la tua sede o casa, in particolare per i primi incontri con clienti aziendali e per le polizze che richiedono sopralluogo.</p>
+
+      <h3>Orari di disponibilità</h3>
+      <p>
+        <strong>Lunedì – Venerdì</strong> · 9.00 – 13.00 / 14.30 – 18.30<br>
+        <strong>Sabato</strong> · su appuntamento<br>
+        <strong>Domenica e festivi</strong> · solo per emergenze sinistri
+      </p>
+
+      <p style="font-size:.88rem;color:var(--text-muted)">Per emergenze sinistri fuori orario, il broker mette a disposizione un numero verde dedicato. Te lo comunico al momento della sottoscrizione.</p>
+    </div>
+
+    <div class="map-placeholder">
+      <p style="font-family:'Inter',sans-serif;font-size:1rem;color:var(--text);margin-bottom:.5rem">📍 [Mappa Google]</p>
+      <p>Sostituire questo blocco con un <code>&lt;iframe&gt;</code> di Google Maps della sede effettiva del broker.<br><br>Da Google Maps: <em>Condividi → Incorpora una mappa</em>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+      <p class="footer-tagline">Il tuo punto di riferimento personale per le tue assicurazioni. Confronto, consulenza e assistenza nel tempo, anche sui sinistri.</p>
+      <p><strong>Giacomo Ramella Pollone</strong></p>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. E000821549</span>
+      <p>📞 <a href="tel:+393922198185">+39 392 219 8185</a></p>
+      <p>✉️ <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a></p>
+      <div class="footer-social"><a class="social-btn" href="https://wa.me/393922198185" aria-label="WhatsApp" target="_blank" rel="noopener">w</a></div>
+    </div>
+    <div class="footer-col">
+      <h5>Prodotti</h5>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Polizza Salute</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
+        <li><a href="piano-pensione.html">Piano Pensione</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="rc.html">RC e Catastrofale PMI</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-trust">
+    <span class="ftrust-label">Conformità</span>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> SSL 256-bit</div>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> GDPR Compliant</div>
+  </div>
+  <p class="footer-disclaimer">
+    Questo sito è gestito da <strong>Giacomo Ramella Pollone</strong>, collaboratore iscritto al RUI sezione E n. <strong>E000821549</strong>, operante per conto di <strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong>, broker iscritto al RUI sezione B n. <strong>B000639183</strong>. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile presso la sede del broker. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener">www.ivass.it</a>.
+  </p>
+  <div class="footer-bottom">
+    <p>© 2026 Quotami · gestito da Sisto Assicurazioni S.a.s. · P.IVA 02696750021 · RUI sez. B n. B000639183</p>
+  </div>
+</footer>
+
+<script>
+function ctSubmit(e) { e.preventDefault(); document.getElementById('ct-success').classList.add('show'); document.getElementById('ct-form').reset(); }
+</script>
+<script src="components.js?v=20260512i"></script>
+</body>
+</html>

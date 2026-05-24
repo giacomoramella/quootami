@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Risparmia sull'IRPEF con il Piano Pensione – RisparmioFacile</title>
+<title>Risparmia sull'IRPEF con il Piano Pensione – Quotami</title>
 <meta name="description" content="Scopri quanto risparmieresti sull'IRPEF con un piano pensione integrativo. Fino a €5.164 deducibili ogni anno. Calcolo gratuito in 3 minuti.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --green: #3dd68c; --green-dark: #2ab574; --green-soft: rgba(61,214,140,.12);
-  --primary: #1a3c2e; --text: #1a3c2e; --text-muted: #5a7a6a;
-  --bg: #f8faf9; --bg-card: #ffffff; --bg-alt: #eef2ef;
-  --border: rgba(26,60,46,.1); --border-green: rgba(61,214,140,.28);
-  --shadow-md: 0 8px 32px rgba(26,60,46,.1); --shadow-lg: 0 20px 60px rgba(26,60,46,.13);
-  --navy: #0f1a14; --radius: 18px; --radius-lg: 28px;
+  --green: #FFD84D; --green-dark: #E6BE3B; --green-soft: rgba(255,216,77,.12);
+  --primary: #0B1220; --text: #0B1220; --text-muted: #6B7280;
+  --bg: #FAFAF7; --bg-card: #ffffff; --bg-alt: #F3F0E8;
+  --border: rgba(11,18,32,.1); --border-green: rgba(255,216,77,.28);
+  --shadow-md: 0 8px 32px rgba(11,18,32,.1); --shadow-lg: 0 20px 60px rgba(11,18,32,.13);
+  --navy: #0B1220; --radius: 18px; --radius-lg: 28px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
 
 /* NAV — minimal, no distracting links */
 .lp-nav {
@@ -27,7 +27,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
   position: sticky; top: 0; z-index: 100;
 }
-.logo { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--primary); text-decoration: none; }
+.logo { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--primary); text-decoration: none; }
 .logo span { color: var(--green-dark); }
 
 /* HERO */
@@ -37,16 +37,16 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 }
 .lp-hero::before {
   content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(61,214,140,.12) 0%, transparent 70%);
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,216,77,.12) 0%, transparent 70%);
 }
 .lp-tag {
-  display: inline-block; background: rgba(61,214,140,.15); color: var(--green);
+  display: inline-block; background: rgba(255,216,77,.15); color: var(--green);
   font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-  padding: .35rem .9rem; border-radius: 50px; border: 1px solid rgba(61,214,140,.25);
+  padding: .35rem .9rem; border-radius: 50px; border: 1px solid rgba(255,216,77,.25);
   margin-bottom: 1.5rem; position: relative;
 }
 .lp-hero h1 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: clamp(1.7rem, 4.5vw, 2.8rem); font-weight: 800;
   color: #fff; line-height: 1.2; margin-bottom: 1rem; position: relative;
   max-width: 760px; margin-left: auto; margin-right: auto;
@@ -66,23 +66,23 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   padding: 2.5rem; box-shadow: 0 24px 80px rgba(0,0,0,.3);
   border: 1px solid rgba(255,255,255,.08);
 }
-.lp-form-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; text-align: center; }
+.lp-form-title { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; text-align: center; }
 .lp-field { margin-bottom: 1rem; }
 .lp-label { display: block; font-size: .8rem; font-weight: 600; color: var(--text); letter-spacing: .03em; margin-bottom: .4rem; }
 .lp-input {
   width: 100%; padding: .8rem 1rem; border-radius: 12px;
   border: 1.5px solid var(--border); background: var(--bg);
-  font-family: 'DM Sans', sans-serif; font-size: .95rem; color: var(--text);
+  font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text);
   outline: none; transition: border-color .2s, box-shadow .2s;
 }
-.lp-input:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(61,214,140,.1); }
+.lp-input:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1); }
 .lp-input::placeholder { color: var(--text-muted); }
 .field-err { display: none; color: #d43a2f; font-size: .75rem; margin-top: .25rem; }
 .lp-btn {
   width: 100%; padding: 1.1rem; border-radius: 14px;
   background: linear-gradient(135deg, var(--green-dark), #1a9e5a);
   color: #fff; border: none; margin-top: .5rem;
-  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.05rem;
   cursor: pointer; transition: transform .2s, box-shadow .2s;
   box-shadow: 0 8px 24px rgba(42,181,116,.4);
 }
@@ -97,39 +97,39 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 @keyframes fadeUp { from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);} }
 .lp-result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-bottom: 1.25rem; }
 .lp-res-item { background: var(--bg-alt); border-radius: 14px; padding: 1.1rem; text-align: center; border: 1px solid var(--border); }
-.lp-res-num { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--primary); display: block; line-height: 1; }
+.lp-res-num { font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--primary); display: block; line-height: 1; }
 .lp-res-lbl { font-size: .72rem; color: var(--text-muted); margin-top: .3rem; display: block; line-height: 1.4; }
 .lp-lead-box {
-  background: linear-gradient(135deg, rgba(61,214,140,.1), rgba(26,60,46,.06));
+  background: linear-gradient(135deg, rgba(255,216,77,.1), rgba(11,18,32,.06));
   border: 1.5px solid var(--border-green); border-radius: var(--radius);
   padding: 1.5rem; text-align: center;
 }
-.lp-lead-box h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: .35rem; }
+.lp-lead-box h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: .35rem; }
 .lp-lead-box p { font-size: .82rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
 .lp-lead-input {
   width: 100%; padding: .7rem 1rem; border-radius: 10px;
   border: 1px solid var(--border); background: var(--bg-card);
-  font-family: 'DM Sans', sans-serif; font-size: .9rem; color: var(--text);
+  font-family: 'Inter', sans-serif; font-size: .9rem; color: var(--text);
   outline: none; margin-bottom: .6rem;
 }
-.lp-lead-input:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(61,214,140,.1); }
+.lp-lead-input:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1); }
 .lp-lead-btn {
   width: 100%; padding: .85rem; border-radius: 12px;
   background: var(--primary); color: #fff; border: none;
-  font-family: 'Syne', sans-serif; font-weight: 700; font-size: .9rem;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: .9rem;
   cursor: pointer; transition: background .2s;
 }
 .lp-lead-btn:hover { background: var(--green-dark); }
 
 /* SOCIAL PROOF */
 .lp-proof { padding: 3.5rem 5vw; background: var(--bg-alt); text-align: center; }
-.lp-proof h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .4rem; }
+.lp-proof h3 { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .4rem; }
 .lp-proof-sub { font-size: .85rem; color: var(--text-muted); margin-bottom: 2rem; }
 .proof-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.25rem; max-width: 900px; margin: 0 auto; }
 .proof-card {
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 1.5rem; text-align: left;
-  box-shadow: 0 2px 12px rgba(26,60,46,.06);
+  box-shadow: 0 2px 12px rgba(11,18,32,.06);
 }
 .proof-stars { color: #d4960a; font-size: .85rem; margin-bottom: .6rem; }
 .proof-text { font-size: .85rem; color: var(--text-muted); line-height: 1.65; font-style: italic; margin-bottom: 1rem; }
@@ -160,7 +160,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 
 <!-- NAV MINIMAL -->
 <nav class="lp-nav">
-  <a class="logo" href="index.html">Risparmio<span>Facile</span></a>
+  <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
 </nav>
 
 <!-- HERO + FORM -->
@@ -236,7 +236,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
       <div class="proof-stars">★★★★★</div>
       <p class="proof-text">"Guadagno €38.000 l'anno. Con €200 al mese di piano pensione risparmio €840 di IRPEF ogni anno. In 30 anni sarà oltre €25.000 in meno di tasse."</p>
       <div class="proof-author">
-        <div class="proof-avatar" style="background:#1a3c2e">GM</div>
+        <div class="proof-avatar" style="background:#0B1220">GM</div>
         <div>
           <div class="proof-name">Giuseppe M., 38 anni</div>
           <div class="proof-saving">Risparmio fiscale: €840/anno</div>
@@ -247,7 +247,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
       <div class="proof-stars">★★★★★</div>
       <p class="proof-text">"Da libera professionista pensavo di non poter accedere ai fondi pensione. Mi sbagliavo. Ora deduco €4.800/anno, con la mia aliquota al 43% risparmio €2.064 di tasse ogni anno."</p>
       <div class="proof-author">
-        <div class="proof-avatar" style="background:#2ab574">FC</div>
+        <div class="proof-avatar" style="background:#E6BE3B">FC</div>
         <div>
           <div class="proof-name">Federica C., 44 anni</div>
           <div class="proof-saving">Risparmio fiscale: €2.064/anno</div>
@@ -276,10 +276,26 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   <div class="lp-trust-item"><span class="lp-trust-dot"></span><strong>Consulenza gratuita</strong> · Nessun obbligo</div>
 </div>
 
-<!-- FOOTER MINIMAL -->
+<!-- FOOTER MINIMAL CONFORME -->
+<div class="lp-footer-conformity">
+  <div class="lp-footer-conformity-grid">
+    <div>
+      <p><strong>Il tuo consulente</strong></p>
+      <p>Giacomo Ramella Pollone · iscritto RUI sez. E n. <strong>E000821549</strong><br>
+      📞 <a href="tel:+393922198185" style="color:rgba(255,255,255,.7)">+39 392 219 8185</a> · ✉️ <a href="mailto:giacomo.rp@sistoassicurazioni.com" style="color:rgba(255,255,255,.7)">giacomo.rp@sistoassicurazioni.com</a></p>
+    </div>
+    <div>
+      <p><strong>La struttura</strong></p>
+      <p>Sisto Assicurazioni S.a.s. · Via Torino 47 13900 Biella · P.IVA <strong>02696750021</strong><br>
+      Iscritta RUI sez. B n. <strong>B000639183</strong> · Vigilato IVASS · PEC <a href="mailto:sistoassicurazioni@pec.esseweb.eu" style="color:rgba(255,255,255,.7)">sistoassicurazioni@pec.esseweb.eu</a></p>
+    </div>
+  </div>
+  <p class="lp-footer-disclaimer-mini">
+    Pagina gestita da <strong style="color:rgba(255,255,255,.6)">Giacomo Ramella Pollone</strong>, collaboratore RUI sez. E n. E000821549, operante per conto di Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C., broker RUI sez. B n. B000639183. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener" style="color:rgba(255,255,255,.55)">www.ivass.it</a>.
+  </p>
+</div>
 <div class="lp-footer-bottom">
-  © 2026 RisparmioFacile S.r.l. · P.IVA IT00000000000 · Intermediario IVASS iscritto al RUI ·
-  <a href="index.html" style="color:rgba(255,255,255,.5);text-decoration:none">Torna al sito</a>
+  © 2026 Quotami · gestito da Sisto Assicurazioni S.a.s. · <a href="index.html" style="color:rgba(255,255,255,.5);text-decoration:none">Torna al sito</a>
 </div>
 
 <script>
@@ -333,7 +349,7 @@ function submitLead() {
     return;
   }
   const box=document.querySelector('.lp-lead-box');
-  box.innerHTML='<div style="text-align:center;padding:.5rem 0"><div style="font-size:2rem;margin-bottom:.75rem">✅</div><h4 style="font-family:\'Syne\',sans-serif;font-size:1rem;color:var(--text);margin-bottom:.4rem">Perfetto! Ti contatteremo presto</h4><p style="font-size:.82rem;color:var(--text-muted);line-height:1.6">Un consulente ti contatterà entro 24 ore all\'indirizzo <strong>'+email+'</strong> per fissare la consulenza gratuita.</p></div>';
+  box.innerHTML='<div style="text-align:center;padding:.5rem 0"><div style="font-size:2rem;margin-bottom:.75rem">✅</div><h4 style="font-family:\'Inter\',sans-serif;font-size:1rem;color:var(--text);margin-bottom:.4rem">Perfetto! Ti contatteremo presto</h4><p style="font-size:.82rem;color:var(--text-muted);line-height:1.6">Un consulente ti contatterà entro 24 ore all\'indirizzo <strong>'+email+'</strong> per fissare la consulenza gratuita.</p></div>';
 }
 
 /* Pre-fill from URL params */
@@ -351,8 +367,8 @@ function submitLead() {
   if(sessionStorage.getItem('rfStickyDismissed'))return;
   const bar=document.createElement('div');
   bar.id='rf-sticky-bar';
-  bar.style.cssText='position:fixed;top:0;left:0;right:0;z-index:150;background:#0f1a14;height:40px;display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:DM Sans,sans-serif;font-size:.8rem;color:rgba(255,255,255,.88);padding:0 3rem';
-  bar.innerHTML='🔒 Dati protetti SSL &nbsp;·&nbsp; IVASS Registrato &nbsp;·&nbsp; Consulenza gratuita &nbsp;·&nbsp; <a href="#" onclick="document.getElementById(\'lp-calc-btn\').click()" style="color:#3dd68c;font-weight:700;text-decoration:none">Calcola ora →</a><button onclick="this.parentNode.remove();sessionStorage.setItem(\'rfStickyDismissed\',\'1\')" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:.95rem">✕</button>';
+  bar.style.cssText='position:fixed;top:0;left:0;right:0;z-index:150;background:#0B1220;height:40px;display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:Inter,sans-serif;font-size:.8rem;color:rgba(255,255,255,.88);padding:0 3rem';
+  bar.innerHTML='🔒 Dati protetti SSL &nbsp;·&nbsp; IVASS Registrato &nbsp;·&nbsp; Consulenza gratuita &nbsp;·&nbsp; <a href="#" onclick="document.getElementById(\'lp-calc-btn\').click()" style="color:#FFD84D;font-weight:700;text-decoration:none">Calcola ora →</a><button onclick="this.parentNode.remove();sessionStorage.setItem(\'rfStickyDismissed\',\'1\')" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:.95rem">✕</button>';
   document.body.prepend(bar);
   document.querySelector('.lp-nav').style.top='40px';
 })();

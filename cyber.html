@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polizza Cyber · Quotami — Furto identità, ransomware, frodi online</title>
+<meta name="description" content="Polizza Cyber per privati, PMI e aziende: protezione contro ransomware, furto d'identità, frodi su carte e home banking, business interruption. Confronto e consulenza personale in tutta Italia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260512i">
+<style>
+  /* ── PAGE: CYBER ── */
+  .page-hero { padding: 9rem 5vw 5rem; background: var(--bg); position: relative; overflow: hidden; }
+  .page-hero .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+  .page-hero-blob-1 { width: 580px; height: 580px; background: #F3F0E8; opacity: .45; top: -220px; right: -150px; }
+  .page-hero-blob-2 { width: 360px; height: 360px; background: #EFE7D2; opacity: .35; bottom: -120px; left: -80px; }
+  .page-hero-inner { max-width: 920px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+  .page-hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700; line-height: 1.1; letter-spacing: -.02em;
+    color: var(--text); margin-bottom: 1.25rem;
+  }
+  .page-hero h1 .accent { color: var(--green-dark); }
+  .page-hero p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; max-width: 720px; margin: 0 auto 2rem; }
+  .page-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  /* ── SEGMENTI ── */
+  .seg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .seg-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow-sm);
+    padding: 2rem; transition: transform .3s, border-color .25s, box-shadow .3s;
+  }
+  .seg-card:hover { transform: translateY(-6px); border-color: var(--border-green); box-shadow: var(--shadow-lg); }
+  .seg-icon { width: 52px; height: 52px; background: var(--green-soft); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; }
+  .seg-card h3 { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+  .seg-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.7; margin-bottom: 1rem; }
+  .seg-card ul { list-style: none; padding: 0; margin: 0; }
+  .seg-card ul li { font-size: .82rem; color: var(--text-2); padding: .25rem 0; padding-left: 1.25rem; position: relative; }
+  .seg-card ul li::before { content: '✓'; position: absolute; left: 0; color: var(--green-dark); font-weight: 700; }
+
+  /* ── CASE STUDIES ── */
+  .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+  .case-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow-sm); }
+  .case-tag {
+    display: inline-block; background: rgba(255,216,77,.12); color: #1a7a4a;
+    font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: .25rem .7rem; border-radius: 50px; margin-bottom: .75rem;
+  }
+  .case-card h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+  .case-card p { color: var(--text-muted); font-size: .87rem; line-height: 1.7; margin: 0; }
+
+  /* ── APPROCCIO ── */
+  .approach-list { max-width: 780px; margin: 2.5rem auto 0; list-style: none; padding: 0; }
+  .approach-list li {
+    padding: 1rem 1.5rem 1rem 3rem; position: relative;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    margin-bottom: .75rem; color: var(--text-2); font-size: .95rem; line-height: 1.65;
+  }
+  .approach-list li strong { color: var(--text); }
+  .approach-list li::before {
+    content: '✓'; position: absolute; left: 1rem; top: 1.05rem;
+    width: 24px; height: 24px; border-radius: 50%; background: var(--green-dark); color: #fff;
+    display: grid; place-items: center; font-size: .8rem; font-weight: 700;
+  }
+
+  /* ── FORM ── */
+  .form-section { background: var(--bg-alt); padding: 5rem 5vw; }
+  .form-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 2.5rem; max-width: 720px; margin: 2rem auto 0;
+    box-shadow: var(--shadow-md);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .35rem; }
+  .form-group label { font-size: .82rem; font-weight: 600; color: var(--text); }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: .75rem 1rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg);
+    font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text);
+    outline: none; transition: border-color .15s, box-shadow .15s; width: 100%;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1);
+  }
+  .form-group textarea { min-height: 110px; resize: vertical; }
+  .form-check { display: flex; gap: .5rem; align-items: flex-start; font-size: .82rem; color: var(--text-muted); line-height: 1.5; margin: 1rem 0; }
+  .form-check input { margin-top: .2rem; }
+  .form-check a { color: var(--green-dark); text-decoration: underline; }
+  .form-submit {
+    width: 100%; padding: 1rem; border-radius: 14px;
+    background: var(--primary); color: #fff; border: none;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem;
+    cursor: pointer; transition: background .2s, transform .15s; margin-top: .5rem;
+  }
+  .form-submit:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .form-success {
+    background: rgba(255,216,77,.12); border: 1px solid var(--border-green); color: #1a7a4a;
+    padding: 1rem 1.25rem; border-radius: 12px; margin-top: 1rem; font-size: .92rem;
+    display: none;
+  }
+  .form-success.show { display: block; }
+
+  @media (max-width: 700px) { .form-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li class="has-mega">
+      <a href="#">Per privati</a>
+      <div class="mega-panel">
+        <div class="mega-grid">
+          <div class="mega-col"><h4>Auto e mobilità</h4><a href="polizza-auto.html">Polizza Auto</a><a href="polizza-auto.html">Polizza Moto</a><a href="polizza-auto.html">Camper · Autocarro</a></div>
+          <div class="mega-col"><h4>Casa</h4><a href="polizza-casa.html">Polizza Casa</a><a href="polizza-casa.html">RC Capofamiglia</a><a href="polizza-casa.html">Eventi catastrofali</a></div>
+          <div class="mega-col"><h4>Salute &amp; vita</h4><a href="salute.html#sanitarie">Polizza Sanitaria</a><a href="salute.html#infortuni">Infortuni</a><a href="salute.html#tutela-reddito">Tutela del reddito</a><a href="salute.html#vita">Vita</a></div>
+          <div class="mega-col"><h4>Pensione</h4><a href="piano-pensione.html">Piano Pensione</a><a href="piano-pensione.html">Vantaggi fiscali</a><a href="piano-pensione.html">Simulatore</a></div>
+          <div class="mega-col"><h4>Cyber</h4><a href="cyber.html#privati" class="featured">Cyber Privati</a><a href="cyber.html">Furto identità</a><a href="cyber.html">Frodi online</a></div>
+        </div>
+      </div>
+    </li>
+    <li class="has-mega">
+      <a href="#">Per imprese</a>
+      <div class="mega-panel">
+        <div class="mega-grid">
+          <div class="mega-col"><h4>Catastrofale PMI</h4><a href="rc.html#catastrofale" class="featured">Polizza obbligatoria</a><a href="rc.html#catastrofale">Scadenze normative</a><a href="rc.html#catastrofale">Coperture base</a></div>
+          <div class="mega-col"><h4>Responsabilità Civile</h4><a href="rc.html#professionale">RC Professionale</a><a href="rc.html#imprese">RCT/RCO</a><a href="rc.html#do">D&amp;O</a><a href="rc.html#tutela-legale">Tutela Legale</a></div>
+          <div class="mega-col"><h4>Cyber business</h4><a href="cyber.html#pmi" class="featured">Cyber PMI</a><a href="cyber.html#aziende">Aziende strutturate</a></div>
+          <div class="mega-col"><h4>Auto aziendali</h4><a href="polizza-auto.html">Flotte aziendali</a><a href="polizza-auto.html">Mezzi agricoli</a></div>
+          <div class="mega-col mega-col-cta"><h4>Hai una PMI?</h4><p>Verifichiamo insieme gli obblighi assicurativi della tua impresa.</p><a href="contatti.html">Parlami →</a></div>
+        </div>
+      </div>
+    </li>
+    <li><a href="chi-sono.html">Chi sono</a></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con me →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="blob page-hero-blob-1"></div>
+  <div class="blob page-hero-blob-2"></div>
+  <div class="page-hero-inner">
+    <span class="hero-eyebrow"><span class="dot"></span>Cyber risk · Privati &amp; PMI</span>
+    <h1>Proteggi i tuoi dati,<br>la tua azienda, <span class="accent">il tuo lavoro.</span></h1>
+    <p>Ransomware, furto d'identità, frodi su carte e home banking: il cyber non è più "roba da multinazionali". Ti propongo coperture studiate insieme alle compagnie partner del broker, con assistenza dalla denuncia al ripristino.</p>
+    <div class="page-hero-actions">
+      <a href="#preventivo" class="btn-primary">Richiedi un'analisi gratuita</a>
+      <a href="contatti.html" class="btn-secondary">Parlami della tua situazione</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENTI -->
+<section id="segmenti">
+  <div class="centered">
+    <span class="section-label">Cosa puoi proteggere</span>
+    <h2 class="section-title">Cyber per ogni profilo</h2>
+    <p class="section-sub">Tre soluzioni dedicate. Stesso principio: proteggere prima, intervenire subito quando succede qualcosa.</p>
+  </div>
+
+  <div class="seg-grid">
+    <article id="privati" class="seg-card">
+      <div class="seg-icon">🏠</div>
+      <h3>Cyber Privati</h3>
+      <p>Per famiglie digitalmente attive: banking online, smart working, social, scuola digitale.</p>
+      <ul>
+        <li>Furto d'identità</li>
+        <li>Frodi su carte e home banking</li>
+        <li>Acquisti online truffaldini</li>
+        <li>Cyberbullismo</li>
+        <li>Recupero dati personali</li>
+      </ul>
+    </article>
+
+    <article id="pmi" class="seg-card">
+      <div class="seg-icon">🏢</div>
+      <h3>Cyber PMI</h3>
+      <p>Per imprese fino a [10] mln di fatturato: gestionali, fatturazione elettronica, dati clienti.</p>
+      <ul>
+        <li>Ransomware e ripristino sistemi</li>
+        <li>Business interruption</li>
+        <li>Costi di gestione crisi</li>
+        <li>Notifica al Garante GDPR</li>
+        <li>Danni a terzi e perdita dati clienti</li>
+      </ul>
+    </article>
+
+    <article id="aziende" class="seg-card">
+      <div class="seg-icon">🛰️</div>
+      <h3>Cyber Aziende strutturate</h3>
+      <p>Per aziende con processi critici, dati massivi, e-commerce, esposizione internazionale.</p>
+      <ul>
+        <li>Massimali alti (10+ mln)</li>
+        <li>Incident response 24/7</li>
+        <li>Team forense dedicato</li>
+        <li>Social engineering / CEO fraud</li>
+        <li>Responsabilità GDPR estesa</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="how-section">
+  <div class="centered">
+    <span class="section-label">Casi reali, anonimizzati</span>
+    <h2 class="section-title">Tre situazioni che ho gestito</h2>
+    <p class="section-sub">Servono a far capire come lavoriamo, non a vantarci di prezzi.</p>
+  </div>
+  <div class="case-grid">
+    <article class="case-card">
+      <span class="case-tag">Privato</span>
+      <h4>Frode bancaria su SPID</h4>
+      <p>Cliente vittima di phishing con accesso non autorizzato al conto. Polizza Cyber Privati ha rimborsato la somma sottratta dopo verifica e ha coperto le spese legali per il recupero.</p>
+    </article>
+    <article class="case-card">
+      <span class="case-tag">PMI</span>
+      <h4>Ransomware su PMI manifatturiera</h4>
+      <p>Studio manifatturiero di [XX] dipendenti. Cifratura totale del gestionale. Polizza ha coperto il fermo produzione, il ripristino dei sistemi, la consulenza forense e la notifica al Garante.</p>
+    </article>
+    <article class="case-card">
+      <span class="case-tag">Studio</span>
+      <h4>Data breach su studio professionale</h4>
+      <p>Esfiltrazione dati di un commercialista. Attivati incident response e supporto legale GDPR; comunicazioni ai clienti gestite. Polizza ha sostenuto i costi senza intaccare la liquidità.</p>
+    </article>
+  </div>
+</section>
+
+<!-- APPROCCIO -->
+<section>
+  <div class="centered">
+    <span class="section-label">Il mio approccio</span>
+    <h2 class="section-title">Cosa faccio per te di concreto</h2>
+    <p class="section-sub">Sul cyber il preventivo è solo il secondo passo: prima dobbiamo capire la tua esposizione.</p>
+  </div>
+  <ul class="approach-list">
+    <li><strong>Risk assessment iniziale</strong> — fatturato, dati trattati, dipendenze IT, presenza su Internet, eventuali pregressi.</li>
+    <li><strong>Scelta del prodotto adeguato</strong> tra le compagnie partner del broker, in base a esposizione reale e budget.</li>
+    <li><strong>Spiegazione delle esclusioni</strong> — stati di guerra, war exclusion, pregressi non noti, esclusioni geografiche: zone d'ombra spiegate prima.</li>
+    <li><strong>Coordinamento con l'IT</strong> — se hai un fornitore, parlo con lui per capire MFA, backup, EDR. La polizza è la rete, non il muro.</li>
+    <li><strong>Sinistri e incident response</strong> — attivazione del numero verde della compagnia, supporto del back office del broker, tracciamento dei costi.</li>
+  </ul>
+</section>
+
+<!-- APPROFONDIMENTI -->
+<section id="approfondimenti" class="how-section">
+  <div class="centered">
+    <span class="section-label">Approfondimenti</span>
+    <h2 class="section-title">Domande che mi fanno spesso</h2>
+  </div>
+  <div class="seg-grid">
+    <article class="seg-card">
+      <h3>"Sono troppo piccolo per essere attaccato"</h3>
+      <p>È il pregiudizio più diffuso. Gli attacchi automatizzati colpiscono in maniera indiscriminata — spesso le PMI sono bersaglio preferito perché hanno protezioni più deboli e sono più disposte a pagare per ripartire.</p>
+    </article>
+    <article class="seg-card">
+      <h3>"Ho già un buon antivirus"</h3>
+      <p>L'antivirus è il primo strato. La polizza Cyber interviene quando lo strato fallisce: gestione crisi, costi forensi, fermo attività, danni a terzi. È un piano B, non sostituisce l'IT.</p>
+    </article>
+    <article class="seg-card">
+      <h3>Cosa chiedono le compagnie</h3>
+      <p>MFA su accessi critici, backup off-line, formazione anti-phishing, presenza di un referente IT. Più sei in regola, più la copertura è ampia ed economica.</p>
+    </article>
+    <article class="seg-card">
+      <h3>GDPR e obbligo di notifica</h3>
+      <p>In caso di data breach grave, hai 72 ore per notificarlo al Garante. La polizza Cyber include solitamente assistenza legale per gestire questa fase, che da soli può essere paralizzante.</p>
+    </article>
+  </div>
+</section>
+
+<!-- FORM -->
+<section id="preventivo" class="form-section">
+  <div class="centered">
+    <span class="section-label">Richiedi una valutazione</span>
+    <h2 class="section-title">Iniziamo dal tuo profilo di rischio</h2>
+    <p class="section-sub">Compila i dati base, ti chiamo io entro la giornata lavorativa.</p>
+  </div>
+
+  <div class="form-card">
+    <form id="cyber-form" onsubmit="cyberSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cy-type">Tipologia *</label>
+          <select id="cy-type" required>
+            <option value="">Seleziona…</option>
+            <option>Privato / famiglia</option>
+            <option>Professionista</option>
+            <option>PMI fino a 10 mln</option>
+            <option>Azienda strutturata</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cy-employees">N. dipendenti (se azienda)</label>
+          <input type="text" id="cy-employees">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cy-name">Nome e cognome *</label>
+          <input type="text" id="cy-name" required>
+        </div>
+        <div class="form-group">
+          <label for="cy-tel">Telefono *</label>
+          <input type="tel" id="cy-tel" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cy-email">Email *</label>
+          <input type="email" id="cy-email" required>
+        </div>
+        <div class="form-group">
+          <label for="cy-city">Città</label>
+          <input type="text" id="cy-city">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1rem">
+        <label for="cy-msg">Note (incidenti pregressi, dati trattati, IT interno o esterno…)</label>
+        <textarea id="cy-msg"></textarea>
+      </div>
+
+      <label class="form-check">
+        <input type="checkbox" required>
+        <span>Ho letto l'informativa privacy e acconsento al trattamento dei dati. *</span>
+      </label>
+
+      <button type="submit" class="form-submit">Invia richiesta →</button>
+      <div id="cy-success" class="form-success">✓ Richiesta ricevuta. Ti contatto entro la giornata lavorativa.</div>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="centered">
+    <span class="section-label">FAQ</span>
+    <h2 class="section-title">Domande frequenti</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">La polizza Cyber rimborsa il riscatto del ransomware? <span class="faq-chevron">▾</span></button>
+      <div class="faq-answer"><p>Dipende dalla compagnia e dal contesto: alcuni prodotti coprono anche il pagamento del riscatto, sempre nei limiti della normativa antiriciclaggio. Te lo verifico prodotto per prodotto.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Devo fare un audit IT prima di sottoscrivere? <span class="faq-chevron">▾</span></button>
+      <div class="faq-answer"><p>Per le PMI normalmente basta compilare un questionario assuntivo. Per aziende strutturate la compagnia può richiedere un'autovalutazione approfondita, e in alcuni casi un audit di terza parte.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Cosa succede se mento sul questionario? <span class="faq-chevron">▾</span></button>
+      <div class="faq-answer"><p>La compagnia può rifiutare l'indennizzo. È fondamentale rispondere con accuratezza: se non sei sicuro, chiamiamo insieme l'IT manager o il fornitore IT esterno e rispondiamo correttamente.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">Quanto costa una polizza Cyber per una PMI? <span class="faq-chevron">▾</span></button>
+      <div class="faq-answer"><p>Varia molto: da poche centinaia di euro per coperture base a diverse migliaia per profili strutturati. Costruiamo il preventivo dopo aver fatto il risk assessment, non al contrario.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER (identico alle altre pagine) -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+      <p class="footer-tagline">Il tuo punto di riferimento personale per le tue assicurazioni. Confronto, consulenza e assistenza nel tempo, anche sui sinistri.</p>
+      <p><strong>Giacomo Ramella Pollone</strong></p>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. E000821549</span>
+      <p>📞 <a href="tel:+393922198185">+39 392 219 8185</a></p>
+      <p>✉️ <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a></p>
+      <div class="footer-social">
+        <a class="social-btn" href="https://wa.me/393922198185" aria-label="WhatsApp" target="_blank" rel="noopener">w</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Prodotti</h5>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Polizza Salute</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
+        <li><a href="piano-pensione.html">Piano Pensione</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="rc.html">RC e Catastrofale PMI</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-trust">
+    <span class="ftrust-label">Conformità</span>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> SSL 256-bit</div>
+    <div class="ftrust-badge"><span class="ftb-dot"></span> GDPR Compliant</div>
+  </div>
+  <p class="footer-disclaimer">
+    Questo sito è gestito da <strong>Giacomo Ramella Pollone</strong>, collaboratore iscritto al RUI sezione E n. <strong>E000821549</strong>, operante per conto di <strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong>, broker iscritto al RUI sezione B n. <strong>B000639183</strong>. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile presso la sede del broker. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener">www.ivass.it</a>.
+  </p>
+  <div class="footer-bottom">
+    <p>© 2026 Quotami · gestito da Sisto Assicurazioni S.a.s. · P.IVA 02696750021 · RUI sez. B n. B000639183</p>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+function cyberSubmit(e) {
+  e.preventDefault();
+  document.getElementById('cy-success').classList.add('show');
+  document.getElementById('cyber-form').reset();
+}
+</script>
+<script src="components.js?v=20260512i"></script>
+</body>
+</html>
