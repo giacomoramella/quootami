@@ -106,6 +106,10 @@
   .range-explain-item p {
     font-size: .9rem; color: var(--text-muted); line-height: 1.65; margin: 0;
   }
+  .range-cta {
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+    margin-top: 3.5rem;
+  }
   .bar-chart { max-width: 720px; margin: 3rem auto 0; }
   .bar-row {
     display: flex; align-items: center; gap: 1rem;
@@ -326,92 +330,17 @@
   </div>
 </section>
 
-<!-- OPZIONE A — FATTORI DEL PREZZO -->
-<section class="chart-section" style="border-top:4px solid var(--yellow); position:relative">
-  <span style="position:absolute;top:1rem;left:1rem;background:var(--primary);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:4px">OPZIONE A</span>
-  <div class="centered">
-    <span class="section-label">I fattori del preventivo</span>
-    <h2 class="section-title">Cosa fa salire<br>o scendere il prezzo</h2>
-    <p class="section-sub">Le compagnie calcolano la RC Auto in base a sei variabili principali. Conoscerle ti aiuta a capire le differenze tra preventivi.</p>
-  </div>
-  <div class="factors-grid">
-    <div class="factor-card reveal">
-      <span class="factor-num">01</span>
-      <h3>Classe di merito</h3>
-      <p>Il sistema Bonus-Malus va dalla classe 1 (migliore) alla 18 (peggiore). Ogni anno senza sinistri scendi di una classe.</p>
-    </div>
-    <div class="factor-card reveal">
-      <span class="factor-num">02</span>
-      <h3>Età ed esperienza</h3>
-      <p>Conducenti giovani (under 26) e neopatentati pagano significativamente di più.</p>
-    </div>
-    <div class="factor-card reveal">
-      <span class="factor-num">03</span>
-      <h3>Residenza (CAP)</h3>
-      <p>Le grandi città del sud Italia hanno mediamente premi più alti per maggiore frequenza sinistri.</p>
-    </div>
-    <div class="factor-card reveal">
-      <span class="factor-num">04</span>
-      <h3>Tipo di veicolo</h3>
-      <p>Cilindrata, cavalli, valore commerciale e potenza incidono sul premio, oltre alla categoria del veicolo.</p>
-    </div>
-    <div class="factor-card reveal">
-      <span class="factor-num">05</span>
-      <h3>Chilometri annui</h3>
-      <p>Meno chilometri percorri, minore è il rischio statistico di sinistro: alcune polizze premiano i bassi chilometraggi.</p>
-    </div>
-    <div class="factor-card reveal">
-      <span class="factor-num">06</span>
-      <h3>Scatola nera</h3>
-      <p>L'installazione del dispositivo telematico può portare uno sconto fino al 30% e premia la guida prudente.</p>
-    </div>
-  </div>
-</section>
-
-<!-- OPZIONE B — IL PROCESSO -->
-<section class="chart-section" style="border-top:4px solid var(--yellow); background:var(--bg); position:relative">
-  <span style="position:absolute;top:1rem;left:1rem;background:var(--primary);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:4px">OPZIONE B</span>
-  <div class="centered">
-    <span class="section-label">Come lavoro</span>
-    <h2 class="section-title">Come trovo<br>la tua polizza</h2>
-    <p class="section-sub">Quattro passaggi semplici. Niente form interminabili, nessun bombardamento di call center.</p>
-  </div>
-  <div class="process-grid">
-    <div class="process-step reveal">
-      <span class="process-num">1</span>
-      <h3>Mi mandi i dati base</h3>
-      <p>Targa, dati patente, classe di merito. Bastano 2 minuti via WhatsApp o email.</p>
-    </div>
-    <div class="process-step reveal">
-      <span class="process-num">2</span>
-      <h3>Interrogo le compagnie</h3>
-      <p>Invio la richiesta alle compagnie partner del broker. Ognuna risponde col proprio prezzo migliore.</p>
-    </div>
-    <div class="process-step reveal">
-      <span class="process-num">3</span>
-      <h3>Confronto coperture e prezzi</h3>
-      <p>Non solo il premio. Valuto franchigie, massimali, esclusioni e affidabilità sui sinistri.</p>
-    </div>
-    <div class="process-step reveal">
-      <span class="process-num">4</span>
-      <h3>Ti presento le migliori opzioni</h3>
-      <p>Tabella comparativa chiara: 2 o 3 alternative spiegate, decidi tu in autonomia.</p>
-    </div>
-  </div>
-</section>
-
-<!-- OPZIONE C — PERCHÉ I PREZZI CAMBIANO -->
-<section class="chart-section" style="border-top:4px solid var(--yellow); position:relative">
-  <span style="position:absolute;top:1rem;left:1rem;background:var(--primary);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;padding:.3rem .7rem;border-radius:4px">OPZIONE C</span>
+<!-- PERCHÉ I PREZZI CAMBIANO -->
+<section class="chart-section">
   <div class="centered">
     <span class="section-label">Confrontare conviene</span>
-    <h2 class="section-title">Perché lo stesso profilo<br>riceve preventivi diversi</h2>
-    <p class="section-sub">Ogni compagnia usa il proprio algoritmo di pricing. Lo stesso conducente, con la stessa auto, può ricevere preventivi che variano anche del 30-50%.</p>
+    <h2 class="section-title">Stessa auto, stessa persona,<br>prezzi diversi.</h2>
+    <p class="section-sub">Ogni compagnia ha la sua formula per calcolare il prezzo. Per la stessa polizza, i preventivi possono cambiare anche di centinaia di euro all'anno.</p>
   </div>
   <div class="range-viz">
     <div class="range-bar">
       <div class="range-low">
-        <span class="range-tag">Compagnia più economica</span>
+        <span class="range-tag">Più economica</span>
         <span class="range-arrow">▼</span>
       </div>
       <div class="range-track">
@@ -420,25 +349,29 @@
         <div class="range-dot range-dot-r"></div>
       </div>
       <div class="range-high">
-        <span class="range-tag">Compagnia più cara</span>
+        <span class="range-tag">Più cara</span>
         <span class="range-arrow">▼</span>
       </div>
     </div>
-    <p class="range-caption">Stesso conducente. Stessa auto. Stesso CAP. Premi che possono differire di centinaia di euro all'anno.</p>
+    <p class="range-caption">Stesso conducente. Stessa auto. Stesso CAP. Prezzi che possono cambiare di centinaia di euro.</p>
   </div>
   <div class="range-explain">
     <div class="range-explain-item">
-      <strong>Strategie commerciali diverse.</strong>
-      <p>Alcune compagnie puntano sui giovani, altre sugli over 50. Una ti vede come cliente ideale, un'altra no.</p>
+      <strong>Ogni compagnia ha la sua formula.</strong>
+      <p>Una dà più peso alla tua età, un'altra al CAP, un'altra ancora al tipo di auto.</p>
     </div>
     <div class="range-explain-item">
-      <strong>Algoritmi diversi.</strong>
-      <p>Ogni compagnia pesa in modo proprio CAP, cilindrata, classe di merito. Le combinazioni possibili sono migliaia.</p>
+      <strong>Ogni compagnia cerca clienti diversi.</strong>
+      <p>Una preferisce i giovani, un'altra gli over 50. Cambiando compagnia, il prezzo può crollare.</p>
     </div>
     <div class="range-explain-item">
-      <strong>Ecco perché serve confrontare.</strong>
-      <p>Senza un broker che interroga più compagnie contemporaneamente è difficile sapere quale ti sta offrendo davvero il miglior prezzo.</p>
+      <strong>Da solo ne controlli 2 o 3. Io le confronto tutte.</strong>
+      <p>Chiedo a tutte le compagnie partner del broker e ti porto la più conveniente per te.</p>
     </div>
+  </div>
+  <div class="range-cta">
+    <a href="#preventivo" class="btn-primary">Richiedi il preventivo →</a>
+    <a href="https://wa.me/393922198185" target="_blank" rel="noopener" class="btn-secondary">Scrivimi su WhatsApp</a>
   </div>
 </section>
 
