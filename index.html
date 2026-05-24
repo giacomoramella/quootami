@@ -278,18 +278,67 @@
   .btn-offer:hover { background:var(--green-dark); transform:translateY(-2px); box-shadow:0 8px 24px rgba(11,18,32,.2); }
 
   /* ── WHY ── */
-  .why-section { background: var(--bg-alt); }
-  .why-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:2.5rem 1.75rem; margin-top:3.5rem; max-width:1080px; margin-left:auto; margin-right:auto; }
-  .why-item {
-    display:flex; flex-direction:column; align-items:center; text-align:center;
-    padding:.5rem .75rem;
-    transition:transform .3s cubic-bezier(.22,.68,0,1.2); will-change:transform;
+  .why-section { background: var(--bg-alt); padding: 7rem 5vw; }
+  .why-header { max-width: 720px; margin: 0 auto 4.5rem; text-align: center; }
+  .why-eyebrow {
+    display:inline-block; font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-size:.7rem; font-weight:600; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--text-muted);
+    background:#fff; border:1px solid var(--border); border-radius:50px;
+    padding:.35rem 1rem; margin-bottom:1.5rem;
   }
-  .why-item:hover { transform:translateY(-4px); }
-  .why-item:hover .why-icon { background:var(--yellow); transform:scale(1.05); }
-  .why-icon { width:64px; height:64px; background:var(--green-soft); border-radius:18px; display:flex; align-items:center; justify-content:center; font-size:1.75rem; margin:0 auto 1.25rem; transition:background .25s, transform .25s; }
-  .why-item h4 { font-family:'Inter',sans-serif; font-weight:700; font-size:1.05rem; margin-bottom:.6rem; color:var(--text); max-width:240px; }
-  .why-item p { color:var(--text-muted); font-size:.9rem; line-height:1.65; margin:0; max-width:260px; }
+  .why-title {
+    font-family:'Inter', sans-serif; font-weight:700;
+    font-size: clamp(1.75rem, 3.5vw, 2.7rem); line-height:1.18;
+    letter-spacing:-.025em; color:var(--text);
+    margin: 0 0 1.25rem;
+  }
+  .why-title .why-accent { position:relative; display:inline-block; white-space:nowrap; }
+  .why-title .why-accent::before {
+    content:''; position:absolute; left:-3px; right:-3px;
+    top:62%; bottom:6%; background:var(--yellow); z-index:-1;
+    transform:skewY(-1.5deg);
+  }
+  .why-intro {
+    color:var(--text-muted); font-size:1.02rem; line-height:1.75;
+    max-width:580px; margin:0 auto; font-style:italic;
+  }
+  .why-grid {
+    display:grid; grid-template-columns:repeat(2, 1fr);
+    max-width:960px; margin:0 auto;
+    gap:3.5rem 4.5rem;
+  }
+  @media (max-width: 760px) { .why-grid { grid-template-columns: 1fr; gap:2.75rem; } }
+  .why-item {
+    display:grid; grid-template-columns:auto 1fr;
+    gap:.25rem 1.75rem; align-items:start; text-align:left;
+    padding:0;
+    transition:transform .25s cubic-bezier(.22,.68,0,1.2);
+  }
+  .why-item:hover { transform:translateY(-3px); }
+  .why-num {
+    font-family:'Inter', sans-serif; font-weight:700;
+    font-size:3rem; line-height:.9; letter-spacing:-.05em;
+    color:var(--yellow-deep); font-variant-numeric:tabular-nums;
+    grid-row:1 / span 2; align-self:start;
+  }
+  .why-item h4 {
+    font-family:'Inter', sans-serif; font-weight:700;
+    font-size:1.15rem; color:var(--text); margin:0;
+    padding-top:.15rem;
+  }
+  .why-item h4::after {
+    content:''; display:block; width:28px; height:2px;
+    background:var(--yellow); margin-top:.7rem; border-radius:2px;
+  }
+  .why-item p {
+    color:var(--text-muted); font-size:.95rem; line-height:1.7;
+    margin:1.1rem 0 0;
+  }
+  @media (max-width: 760px) {
+    .why-num { font-size:2.25rem; }
+    .why-item { gap:.25rem 1.25rem; }
+  }
 
   /* ── TESTIMONIALS ── */
   .testimonials-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; margin-top:3.5rem; }
@@ -555,15 +604,33 @@
 </div>
 
 <!-- WHY US -->
-<section class="why-section centered">
-  <span class="section-label">Perché un broker</span>
-  <h2 class="section-title">Il broker lavora per te:<br>confronta le compagnie e trova la polizza migliore.</h2>
-  <p class="section-sub">Una polizza scelta in fretta costa poco solo finché non succede qualcosa.</p>
+<section class="why-section">
+  <div class="why-header">
+    <span class="why-eyebrow">Perché un broker</span>
+    <h2 class="why-title">Il broker lavora <span class="why-accent">per te.</span></h2>
+    <p class="why-intro">Confronta le compagnie, trova la polizza migliore. Una scelta in fretta costa poco — solo finché non succede qualcosa.</p>
+  </div>
   <div class="why-grid">
-    <div class="why-item reveal"><h4>Persona vera</h4><p>Un solo punto di contatto. Quando chiami, rispondo io.</p></div>
-    <div class="why-item reveal"><h4>Confronto multi-compagnia</h4><p>Ti propongo alternative reali.</p></div>
-    <div class="why-item reveal"><h4>Analisi prima di proporre</h4><p>Eseguo l'analisi di adeguatezza prevista da IVASS (art. 119-bis CAP). Prima capisci, poi firmi.</p></div>
-    <div class="why-item reveal"><h4>Assistenza sinistri</h4><p>Tu hai una persona, non un numero verde.</p></div>
+    <article class="why-item reveal">
+      <span class="why-num">01</span>
+      <h4>Persona vera</h4>
+      <p>Un solo punto di contatto. Quando chiami, rispondo io.</p>
+    </article>
+    <article class="why-item reveal">
+      <span class="why-num">02</span>
+      <h4>Confronto multi-compagnia</h4>
+      <p>Ti propongo alternative reali.</p>
+    </article>
+    <article class="why-item reveal">
+      <span class="why-num">03</span>
+      <h4>Analisi prima di proporre</h4>
+      <p>Eseguo l'analisi di adeguatezza prevista da IVASS (art. 119-bis CAP). Prima capisci, poi firmi.</p>
+    </article>
+    <article class="why-item reveal">
+      <span class="why-num">04</span>
+      <h4>Assistenza sinistri</h4>
+      <p>Tu hai una persona, non un numero verde.</p>
+    </article>
   </div>
 </section>
 
