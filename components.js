@@ -108,35 +108,6 @@
   }
 })();
 
-/* ── STICKY BAR ── */
-(function () {
-  if (sessionStorage.getItem('rfStickyDismissed')) return;
-
-  const path = location.pathname;
-  let href = 'contatti.html', label = 'Parla con me →';
-  if (path.includes('polizza-auto'))   { href = 'polizza-auto.html#preventivo';   label = 'Richiedi preventivo →'; }
-  else if (path.includes('polizza-casa')){ href = 'polizza-casa.html#preventivo'; label = 'Richiedi preventivo →'; }
-  else if (path.includes('piano-pensione') || path.includes('landing-pensione')){ href = '#simulatore'; label = 'Calcola il mio piano →'; }
-  else if (path.includes('cyber') || path.includes('salute') || path.includes('rc')) { href = 'contatti.html'; label = 'Parlami →'; }
-
-  const bar = document.createElement('div');
-  bar.id = 'rf-sticky-bar';
-  bar.className = 'sticky-bar';
-  bar.innerHTML =
-    '☕ Primo incontro gratuito &nbsp;·&nbsp; Consulenza personale in tutta Italia &nbsp;·&nbsp;' +
-    '<a href="' + href + '">' + label + '</a>' +
-    '<button class="sticky-bar-close" onclick="rfDismissSticky()" aria-label="Chiudi">✕</button>';
-  document.body.prepend(bar);
-  document.body.classList.add('has-sticky');
-})();
-
-function rfDismissSticky() {
-  const bar = document.getElementById('rf-sticky-bar');
-  if (bar) bar.remove();
-  document.body.classList.remove('has-sticky');
-  sessionStorage.setItem('rfStickyDismissed', '1');
-}
-
 /* ── WHATSAPP BUTTON ── */
 (function () {
   const a = document.createElement('a');

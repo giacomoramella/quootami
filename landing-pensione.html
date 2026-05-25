@@ -360,18 +360,5 @@ function submitLead() {
 })();
 </script>
 
-<!-- Shared components (sticky bar only — no exit intent on landing page distracts) -->
-<script>
-/* Sticky bar for landing */
-(function(){
-  if(sessionStorage.getItem('rfStickyDismissed'))return;
-  const bar=document.createElement('div');
-  bar.id='rf-sticky-bar';
-  bar.style.cssText='position:fixed;top:0;left:0;right:0;z-index:150;background:#0B1220;height:40px;display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:Inter,sans-serif;font-size:.8rem;color:rgba(255,255,255,.88);padding:0 3rem';
-  bar.innerHTML='🔒 Dati protetti SSL &nbsp;·&nbsp; IVASS Registrato &nbsp;·&nbsp; Consulenza gratuita &nbsp;·&nbsp; <a href="#" onclick="document.getElementById(\'lp-calc-btn\').click()" style="color:#FFD84D;font-weight:700;text-decoration:none">Calcola ora →</a><button onclick="this.parentNode.remove();sessionStorage.setItem(\'rfStickyDismissed\',\'1\')" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:.95rem">✕</button>';
-  document.body.prepend(bar);
-  document.querySelector('.lp-nav').style.top='40px';
-})();
-</script>
 </body>
 </html>

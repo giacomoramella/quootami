@@ -148,11 +148,16 @@
   </div>
 
   <div class="form-card">
-    <form id="ct-form" onsubmit="ctSubmit(event)">
+    <form id="ct-form" novalidate>
+      <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
+      <input type="hidden" name="subject" value="Quotami • Nuovo messaggio dal modulo di contatto">
+      <input type="hidden" name="from_name" value="Quotami — sito web">
+      <input type="hidden" name="redirect" value="false">
+
       <div class="form-row">
         <div class="form-group">
           <label for="ct-type">Tipo cliente *</label>
-          <select id="ct-type" required>
+          <select id="ct-type" name="Tipo cliente" required>
             <option value="">Seleziona…</option>
             <option>Privato</option>
             <option>Professionista</option>
@@ -161,7 +166,7 @@
         </div>
         <div class="form-group">
           <label for="ct-line">Linea di interesse *</label>
-          <select id="ct-line" required>
+          <select id="ct-line" name="Linea di interesse" required>
             <option value="">Seleziona…</option>
             <option>Auto</option>
             <option>Casa</option>
@@ -176,36 +181,42 @@
       </div>
 
       <div class="form-row">
-        <div class="form-group"><label for="ct-name">Nome *</label><input type="text" id="ct-name" required></div>
-        <div class="form-group"><label for="ct-surname">Cognome *</label><input type="text" id="ct-surname" required></div>
+        <div class="form-group"><label for="ct-name">Nome *</label><input type="text" id="ct-name" name="Nome" required></div>
+        <div class="form-group"><label for="ct-surname">Cognome *</label><input type="text" id="ct-surname" name="Cognome" required></div>
       </div>
 
       <div class="form-row">
-        <div class="form-group"><label for="ct-tel">Telefono *</label><input type="tel" id="ct-tel" required></div>
-        <div class="form-group"><label for="ct-email">Email *</label><input type="email" id="ct-email" required></div>
+        <div class="form-group"><label for="ct-tel">Telefono *</label><input type="tel" id="ct-tel" name="Telefono" required></div>
+        <div class="form-group"><label for="ct-email">Email *</label><input type="email" id="ct-email" name="Email" required></div>
       </div>
 
-      <div class="form-group"><label for="ct-city">Città</label><input type="text" id="ct-city"></div>
+      <div class="form-group"><label for="ct-city">Città</label><input type="text" id="ct-city" name="Città"></div>
 
       <div class="form-group">
         <label for="ct-msg">Messaggio *</label>
-        <textarea id="ct-msg" required placeholder="Raccontami di cosa hai bisogno: scadenze, polizze già attive, situazione familiare o aziendale…"></textarea>
+        <textarea id="ct-msg" name="Messaggio" required placeholder="Raccontami di cosa hai bisogno: scadenze, polizze già attive, situazione familiare o aziendale…"></textarea>
       </div>
 
       <h3 class="consents-h">Consensi privacy (GDPR)</h3>
 
       <label class="form-check">
-        <input type="checkbox" required>
+        <input type="checkbox" name="Consenso privacy obbligatorio" value="Sì — accettato" required>
         <span><strong>Necessario:</strong> ho letto l'informativa privacy ai sensi del Reg. UE 2016/679 e acconsento al trattamento dei miei dati personali per essere ricontattato in merito alla mia richiesta. *</span>
       </label>
 
       <label class="form-check">
-        <input type="checkbox">
+        <input type="checkbox" name="Consenso marketing facoltativo" value="Sì — accettato">
         <span><strong>Facoltativo:</strong> acconsento, in via facoltativa, a ricevere comunicazioni informative su prodotti, scadenze normative e novità del settore. Posso revocare il consenso in qualsiasi momento scrivendo a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a>.</span>
       </label>
 
-      <button type="submit" class="form-submit">Invia il messaggio →</button>
+      <button type="submit" class="form-submit" id="ct-submit">Invia il messaggio →</button>
+
       <div id="ct-success" class="form-success">✓ Grazie! Ho ricevuto il tuo messaggio. Ti contatto personalmente entro la giornata lavorativa.</div>
+      <div id="ct-error" class="form-feedback form-error" hidden>
+        <strong>Errore di invio</strong>
+        <p>Qualcosa non ha funzionato. Riprova o scrivimi direttamente a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a> o su <a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">Dettaglio tecnico: <code id="ct-error-msg" style="font-family:monospace;"></code></p>
+      </div>
     </form>
   </div>
 </section>
@@ -275,8 +286,47 @@
 </footer>
 
 <script>
-function ctSubmit(e) { e.preventDefault(); document.getElementById('ct-success').classList.add('show'); document.getElementById('ct-form').reset(); }
+(function(){
+  var form = document.getElementById('ct-form');
+  if (!form) return;
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var btn = document.getElementById('ct-submit');
+    var ok = document.getElementById('ct-success');
+    var err = document.getElementById('ct-error');
+    var errMsg = document.getElementById('ct-error-msg');
+    ok.classList.remove('show'); err.hidden = true;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    btn.disabled = true;
+    var originalLabel = btn.textContent;
+    btn.textContent = 'Invio in corso…';
+    try {
+      var fd = new FormData(form);
+      var res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: fd
+      });
+      var json = await res.json().catch(function(){ return { success:false, message:'Risposta non valida dal server' }; });
+      console.log('[Quotami contatti] response:', res.status, json);
+      if (res.ok && json.success) {
+        form.reset();
+        ok.classList.add('show');
+        ok.scrollIntoView({behavior:'smooth', block:'center'});
+      } else {
+        if (errMsg) errMsg.textContent = '[' + res.status + '] ' + (json.message || 'errore sconosciuto');
+        err.hidden = false;
+      }
+    } catch(ex){
+      console.error('[Quotami contatti] exception:', ex);
+      if (errMsg) errMsg.textContent = ex && ex.message ? ex.message : String(ex);
+      err.hidden = false;
+    } finally {
+      btn.disabled = false; btn.textContent = originalLabel;
+    }
+  });
+})();
 </script>
-<script src="components.js?v=20260512i"></script>
+<script src="components.js?v=20260525a"></script>
 </body>
 </html>
