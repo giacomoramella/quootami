@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=20260512i">
 <style>
-  .page-hero { padding: 9rem 5vw 4rem; background: var(--bg); position: relative; overflow: hidden; }
+  .page-hero { padding: 8rem 5vw 1.5rem; background: var(--bg); position: relative; overflow: hidden; }
   .page-hero .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
   .page-hero-blob-1 { width: 580px; height: 580px; background: #F3F0E8; opacity: .45; top: -220px; right: -150px; }
   .page-hero-blob-2 { width: 360px; height: 360px; background: #EFE7D2; opacity: .35; bottom: -120px; left: -80px; }
@@ -19,6 +19,7 @@
   .page-hero p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 700px; margin: 0 auto; }
 
   .quick-contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; max-width: 1080px; margin: 4rem auto 0; padding: 0 5vw; }
+  .quick-contact-grid--tight { margin-top: 1.5rem; }
   .qc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; box-shadow: var(--shadow-sm); transition: transform .3s, border-color .25s, box-shadow .3s; }
   .qc-card:hover { transform: translateY(-6px); border-color: var(--border-green); box-shadow: var(--shadow-lg); }
   .qc-icon { width: 56px; height: 56px; background: var(--green-soft); border-radius: 16px; display: grid; place-items: center; font-size: 1.5rem; margin: 0 auto 1.25rem; }
@@ -105,12 +106,8 @@
 </section>
 
 <!-- QUICK CONTACT -->
-<section style="padding-bottom:3rem">
-  <div class="centered" style="padding:0 5vw">
-    <span class="section-label">Recapiti diretti</span>
-    <h2 class="section-title">Come raggiungermi</h2>
-  </div>
-  <div class="quick-contact-grid">
+<section style="padding-bottom:2rem">
+  <div class="quick-contact-grid quick-contact-grid--tight">
     <article class="qc-card">
       <div class="qc-icon">📞</div>
       <h3>Telefono</h3>
