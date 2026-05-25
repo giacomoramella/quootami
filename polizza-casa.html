@@ -8,36 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=20260525b">
 <style>
-  /* ── PROPOSTE A/B/C ── */
-  .alt-marker { background: var(--primary); color: #fff; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .3rem .9rem; border-radius: 50px; display: inline-block; margin-bottom: 1.5rem; }
-
-  /* OPZIONE A — RANGE */
-  .range-viz { max-width: 720px; margin: 3rem auto 0; }
-  .range-bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.5rem; }
-  .range-low, .range-high { text-align: center; }
-  .range-low .range-tag, .range-high .range-tag { display: block; font-family: 'Inter', sans-serif; font-weight: 600; font-size: .85rem; color: var(--text-muted); }
-  .range-arrow { display: block; color: var(--yellow-deep); font-size: 1rem; margin-top: .3rem; }
-  .range-track { width: 280px; height: 8px; border-radius: 50px; background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow-deep) 50%, var(--primary) 100%); position: relative; }
-  .range-dot { position: absolute; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; border-radius: 50%; background: #fff; border: 3px solid var(--text); }
-  .range-dot-l { left: 0; }
-  .range-dot-r { right: 0; }
-  .range-caption { text-align: center; font-size: .85rem; color: var(--text-muted); margin: 1.5rem auto 0; max-width: 540px; font-style: italic; }
-  .range-explain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 980px; margin: 3.5rem auto 0; }
-  @media (max-width: 800px) { .range-explain { grid-template-columns: 1fr; gap: 1.5rem; } .range-bar { grid-template-columns: 1fr; gap: 1rem; } .range-track { width: 100%; max-width: 280px; margin: 0 auto; } }
-  .range-explain-item strong { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--text); font-size: 1rem; display: block; margin-bottom: .5rem; }
-  .range-explain-item strong::after { content: ''; display: inline-block; width: 28px; height: 2px; background: var(--yellow); margin-left: .5rem; vertical-align: middle; border-radius: 2px; }
-  .range-explain-item p { font-size: .9rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+  /* ── RANGE NUMERICO ── */
   .range-cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 3rem; }
-
-  /* OPZIONE B — FATTORI NUMERATI */
-  .factors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2.5rem 2rem; max-width: 1080px; margin: 3rem auto 0; }
-  .factor-card { padding: 0 .5rem; }
-  .factor-num { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.5rem; color: var(--yellow-deep); display: block; margin-bottom: .5rem; font-variant-numeric: tabular-nums; }
-  .factor-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--text); margin: 0; }
-  .factor-card h3::after { content: ''; display: block; width: 28px; height: 2px; background: var(--yellow); margin-top: .65rem; border-radius: 2px; }
-  .factor-card p { font-size: .9rem; color: var(--text-muted); line-height: 1.65; margin: 1rem 0 0; }
-
-  /* OPZIONE C — RANGE NUMERICO GRANDE */
   .price-range-block { max-width: 720px; margin: 3rem auto 0; text-align: center; padding: 3rem 2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
   .price-range-num { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(2rem, 5vw, 3rem); color: var(--text); margin: 0 0 .5rem; letter-spacing: -.02em; }
   .price-range-num .accent { color: var(--yellow-deep); }
@@ -219,90 +191,9 @@
   </div>
 </section>
 
-<!-- ═══ OPZIONE A — STESSA CASA, PREZZI DIVERSI ═══ -->
+<!-- RANGE NUMERICO -->
 <section class="chart-section">
   <div class="centered">
-    <span class="alt-marker">Opzione A</span>
-    <span class="section-label">Confronto prezzi</span>
-    <h2 class="section-title">Stessa casa, prezzi diversi.</h2>
-    <p class="section-sub">Le polizze casa partono da prezzi molto diversi a seconda della compagnia. Il mio lavoro è capire dove conviene davvero per il tuo caso specifico.</p>
-  </div>
-
-  <div class="range-viz">
-    <div class="range-bar">
-      <div class="range-low">
-        <span class="range-tag">Prezzo minimo</span>
-        <span class="range-arrow">€</span>
-      </div>
-      <div class="range-track">
-        <div class="range-dot range-dot-l"></div>
-        <div class="range-dot range-dot-r"></div>
-      </div>
-      <div class="range-high">
-        <span class="range-tag">Prezzo massimo</span>
-        <span class="range-arrow">€€€</span>
-      </div>
-    </div>
-    <p class="range-caption">Per uno stesso immobile la forbice di mercato può essere anche del doppio. Confrontare conviene.</p>
-  </div>
-
-  <div class="range-explain">
-    <div class="range-explain-item">
-      <strong>Ubicazione (CAP)</strong>
-      <p>Centro città, periferia, zona sismica o alluvionale: lo stesso appartamento paga molto diversamente.</p>
-    </div>
-    <div class="range-explain-item">
-      <strong>Valore del contenuto</strong>
-      <p>Mobili, elettrodomestici, oggetti di valore. Sotto-assicurare significa rischiare di non essere risarciti.</p>
-    </div>
-    <div class="range-explain-item">
-      <strong>Garanzie scelte</strong>
-      <p>Incendio, furto, danni acqua, RC del capofamiglia: scegliamo insieme cosa serve davvero.</p>
-    </div>
-  </div>
-
-  <div class="range-cta">
-    <a href="#preventivo" class="btn-primary">Richiedi il preventivo →</a>
-    <a href="https://wa.me/393922198185" target="_blank" rel="noopener" class="btn-secondary">Scrivimi su WhatsApp</a>
-  </div>
-</section>
-
-<!-- ═══ OPZIONE B — FATTORI NUMERATI ═══ -->
-<section style="padding: 5rem 5vw; background: var(--bg)">
-  <div class="centered">
-    <span class="alt-marker">Opzione B</span>
-    <span class="section-label">Cosa cambia il prezzo</span>
-    <h2 class="section-title">Perché il preventivo di due case<br>identiche può differire del doppio.</h2>
-    <p class="section-sub">Sono i fattori reali che influenzano il premio. Capirli serve a leggere il tuo preventivo con consapevolezza.</p>
-  </div>
-  <div class="factors-grid">
-    <div class="factor-card">
-      <span class="factor-num">01</span>
-      <h3>Tipo di immobile</h3>
-      <p>Appartamento, villetta indipendente o bifamiliare. Anche il piano e la presenza di portineria cambiano il rischio.</p>
-    </div>
-    <div class="factor-card">
-      <span class="factor-num">02</span>
-      <h3>Ubicazione</h3>
-      <p>Il CAP determina rischio sismico, alluvionale, frequenza di furti. Le compagnie hanno mappe diverse e prezzano in modo diverso.</p>
-    </div>
-    <div class="factor-card">
-      <span class="factor-num">03</span>
-      <h3>Valore del contenuto</h3>
-      <p>Il massimale del contenuto è uno dei pesi maggiori sul premio. Va dimensionato bene, né troppo basso né gonfiato.</p>
-    </div>
-    <div class="factor-card">
-      <span class="factor-num">04</span>
-      <h3>Garanzie aggiuntive</h3>
-      <p>Incendio, furto, danni acqua, RC capofamiglia, tutela legale, cristalli. Ogni garanzia ha un costo e un senso o no.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ OPZIONE C — RANGE NUMERICO ═══ -->
-<section style="padding: 5rem 5vw; background: var(--bg-alt)">
-  <div class="centered">
-    <span class="alt-marker">Opzione C</span>
     <span class="section-label">Forbice di mercato</span>
     <h2 class="section-title">Quanto può variare<br>il prezzo della tua polizza</h2>
     <p class="section-sub">Per un appartamento standard, la forbice tipica di mercato è ampia. Solo il preventivo personalizzato dà la cifra reale.</p>
