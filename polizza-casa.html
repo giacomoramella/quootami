@@ -25,7 +25,7 @@
   .bar-best-label { margin-left:.75rem; background:var(--primary); color:#fff; font-size:.68rem; font-weight:700; padding:.2rem .6rem; border-radius:50px; white-space:nowrap; }
   .chart-note { text-align:center; color:var(--text-muted); font-size:.8rem; margin-top:1.5rem; }
 
-  /* ── COVERAGE (text-only, centered grid) ── */
+  /* ── COVERAGE (text-only, centered grid, colored accents) ── */
   .cov-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 3rem 2.5rem; max-width: 1080px;
@@ -33,13 +33,40 @@
   }
   @media (max-width: 900px) { .cov-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 2rem; } }
   @media (max-width: 560px) { .cov-grid { grid-template-columns: 1fr; gap: 2.25rem; max-width: 420px; } }
-  .cov-item { text-align: center; }
-  .cov-badge { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .08em; padding: .25rem .75rem; border-radius: 50px; margin-bottom: .9rem; text-transform: uppercase; }
+  .cov-item {
+    text-align: center; padding: 1.75rem 1.25rem; border-radius: var(--radius);
+    background: var(--bg-card); border: 1px solid var(--border);
+    transition: transform .25s cubic-bezier(.22,.68,0,1.2), box-shadow .25s, border-color .25s;
+    position: relative; overflow: hidden;
+    --cov-c: var(--yellow-deep);
+  }
+  .cov-item::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--cov-c); border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .cov-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--cov-c); }
+  .cov-dot {
+    display: inline-grid; place-items: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: color-mix(in srgb, var(--cov-c) 14%, transparent);
+    color: var(--cov-c); font-size: 1.15rem; font-weight: 700;
+    margin: 0 auto 1rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .cov-badge { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .08em; padding: .25rem .75rem; border-radius: 50px; margin-bottom: .85rem; text-transform: uppercase; }
   .cov-base     { background: rgba(11,18,32,.08); color: var(--primary); }
-  .cov-optional { background: rgba(255,216,77,.16); color: #1a7a4a; }
+  .cov-optional { background: rgba(255,216,77,.18); color: #1a7a4a; }
   .cov-item h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; margin: 0 0 .5rem; color: var(--text); }
-  .cov-item h3::after { content: ''; display: block; width: 32px; height: 2px; background: var(--yellow); margin: .55rem auto 0; border-radius: 2px; }
-  .cov-item p { font-size: .92rem; color: var(--text-muted); line-height: 1.65; margin: .9rem 0 0; max-width: 280px; margin-left: auto; margin-right: auto; }
+  .cov-item h3::after { content: ''; display: block; width: 32px; height: 2px; background: var(--cov-c); margin: .55rem auto 0; border-radius: 2px; }
+  .cov-item p { font-size: .92rem; color: var(--text-muted); line-height: 1.65; margin: .9rem auto 0; max-width: 280px; }
+
+  /* palette per categoria */
+  .cov-item.c-fire    { --cov-c: #E76F51; }
+  .cov-item.c-theft   { --cov-c: #264653; }
+  .cov-item.c-family  { --cov-c: #2A9D8F; }
+  .cov-item.c-nature  { --cov-c: #8E5BB5; }
+  .cov-item.c-water   { --cov-c: #4A9EBA; }
+  .cov-item.c-legal   { --cov-c: #E9B440; }
 
   /* ── FORM ── */
   .form-section { background: var(--bg); }
@@ -188,32 +215,32 @@
     <p class="section-sub">Le coperture base, più quelle che davvero possono fare la differenza.</p>
   </div>
   <div class="cov-grid">
-    <div class="cov-item">
+    <div class="cov-item c-fire">
       <span class="cov-badge cov-base">Base</span>
       <h3>Incendio &amp; Scoppio</h3>
       <p>Se brucia, ti rimborsiamo casa e contenuto.</p>
     </div>
-    <div class="cov-item">
+    <div class="cov-item c-theft">
       <span class="cov-badge cov-base">Base</span>
       <h3>Furto &amp; Rapina</h3>
       <p>Se ti svaligiano, recuperi il valore di quello che hai perso.</p>
     </div>
-    <div class="cov-item">
+    <div class="cov-item c-family">
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>RC Capofamiglia</h3>
       <p>Tu, i tuoi cari o il cane fate un danno? Paghiamo noi.</p>
     </div>
-    <div class="cov-item">
+    <div class="cov-item c-nature">
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Catastrofi Naturali</h3>
       <p>Alluvione, terremoto, grandine. Imprevisti che da soli non reggi.</p>
     </div>
-    <div class="cov-item">
+    <div class="cov-item c-water">
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Danni da Acqua</h3>
       <p>Tubo rotto o vicino allagato. Ti copriamo entrambe le cose.</p>
     </div>
-    <div class="cov-item">
+    <div class="cov-item c-legal">
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Tutela Legale</h3>
       <p>Lite con condominio o vicini? Avvocato e spese coperti.</p>
