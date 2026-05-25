@@ -158,6 +158,63 @@
   .benefit-num { font-family: 'Inter', sans-serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 700; color: var(--primary); display: block; line-height: 1; }
   .benefit-label { font-size: .9rem; color: var(--text-muted); margin-top: .5rem; line-height: 1.5; display: block; }
 
+  /* ── PROBLEMA: tasso di sostituzione ── */
+  .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1080px; margin: 3rem auto 0; }
+  @media (max-width: 800px) { .problem-grid { grid-template-columns: 1fr; max-width: 480px; } }
+  .problem-card { text-align: center; padding: 2rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
+  .problem-num { font-family: 'Inter', sans-serif; font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 700; color: var(--green-dark); display: block; line-height: 1; margin-bottom: .5rem; }
+  .problem-card h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin: 0 0 .65rem; }
+  .problem-card p { font-size: .9rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+  .data-source { text-align: center; font-size: .8rem; color: var(--text-muted); font-style: italic; margin: 2rem auto 0; max-width: 720px; }
+
+  /* ── STEP (Come funziona / Datore) ── */
+  .step-grid, .datore-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 1080px; margin: 3rem auto 0; }
+  @media (max-width: 800px) { .step-grid, .datore-steps { grid-template-columns: 1fr; max-width: 540px; } }
+  .step-item, .datore-step { text-align: left; padding: 0 .5rem; }
+  .step-num, .datore-num { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--yellow-deep); display: block; margin-bottom: .5rem; font-variant-numeric: tabular-nums; }
+  .step-item h3, .datore-step h4 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--text); margin: 0; }
+  .step-item h3::after, .datore-step h4::after { content: ''; display: block; width: 32px; height: 2px; background: var(--yellow); margin-top: .55rem; border-radius: 2px; }
+  .step-item p, .datore-step p { font-size: .92rem; color: var(--text-muted); line-height: 1.7; margin: 1rem 0 0; }
+
+  /* ── TIPI DI FONDO ── */
+  .fund-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1080px; margin: 3rem auto 0; }
+  @media (max-width: 900px) { .fund-grid { grid-template-columns: 1fr; max-width: 480px; } }
+  .fund-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.75rem; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s, border-color .25s; --fc: var(--yellow-deep); }
+  .fund-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--fc); }
+  .fund-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--fc); }
+  .fund-badge { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .08em; padding: .25rem .75rem; border-radius: 50px; margin-bottom: .9rem; text-transform: uppercase; background: color-mix(in srgb, var(--fc) 16%, transparent); color: var(--fc); }
+  .fund-card h3 { font-family: 'Inter', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--text); margin: 0 0 .55rem; }
+  .fund-card > p { font-size: .92rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 1.1rem; }
+  .fund-card ul { list-style: none; padding: 0; margin: 0; }
+  .fund-card ul li { font-size: .87rem; color: var(--text-2); padding: .35rem 0 .35rem 1.25rem; position: relative; line-height: 1.55; }
+  .fund-card ul li::before { content: '✓'; position: absolute; left: 0; color: var(--fc); font-weight: 700; }
+  .fund-card.c-collective { --fc: #2A9D8F; }
+  .fund-card.c-open       { --fc: #4A9EBA; }
+  .fund-card.c-pip        { --fc: #E9B440; }
+
+  /* ── TFR COMPARE ── */
+  .tfr-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: stretch; max-width: 1080px; margin: 3rem auto 0; }
+  @media (max-width: 800px) { .tfr-compare { grid-template-columns: 1fr; gap: 1.25rem; max-width: 540px; } .tfr-vs { display: none; } }
+  .tfr-side { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem 1.75rem; }
+  .tfr-azienda { border-left: 4px solid #B86A3F; }
+  .tfr-fondo { border-left: 4px solid #2A9D8F; background: rgba(42,157,143,.04); }
+  .tfr-side h3 { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 0 0 1rem; }
+  .tfr-side ul { list-style: none; padding: 0; margin: 0; }
+  .tfr-side ul li { font-size: .9rem; color: var(--text-muted); padding: .45rem 0 .45rem 1.25rem; position: relative; line-height: 1.55; }
+  .tfr-side ul li::before { content: '•'; position: absolute; left: 0; color: var(--green-dark); font-weight: 700; }
+  .tfr-fondo ul li strong { color: var(--text); }
+  .tfr-vs { display: flex; align-items: center; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .1em; }
+  .tfr-note { text-align: center; font-size: .9rem; color: var(--text-muted); margin: 2rem auto 0; max-width: 720px; line-height: 1.65; }
+
+  /* ── ANTICIPAZIONI ── */
+  .antic-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1180px; margin: 3rem auto 0; }
+  @media (max-width: 1000px) { .antic-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .antic-grid { grid-template-columns: 1fr; max-width: 420px; } }
+  .antic-item { text-align: center; padding: 1.75rem 1.25rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
+  .antic-pct { font-family: 'Inter', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--green-dark); display: block; line-height: 1; margin-bottom: .65rem; }
+  .antic-item h4 { font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 700; color: var(--text); margin: 0 0 .5rem; }
+  .antic-item p { font-size: .85rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+
   @media(max-width:700px){
     .form-row { grid-template-columns: 1fr; }
     .sim-grid { grid-template-columns: 1fr 1fr; }
@@ -213,365 +270,258 @@
   </ul>
 </nav>
 
-<!-- SHOCK SECTION -->
-<div class="shock-section" style="padding-top:6rem">
-  <div class="shock-grid">
-    <div class="shock-card red">
-      <span class="shock-num">€1.240</span>
-      <h4>Se aspetti 1 anno perdi €1.240 di deduzioni fiscali</h4>
-      <p>Con reddito di €35.000 e versamento mensile di €100, l'aliquota marginale al 35% ti costa €1.240/anno di tasse in più che potresti evitare.</p>
-    </div>
-    <div class="shock-card amber">
-      <span class="shock-num">€847</span>
-      <h4>Ogni mese di ritardo = €847 in meno a 67 anni</h4>
-      <p>Per chi inizia a 30 anni, ogni mese perso di versamento a €100/mese equivale a €847 di capitale in meno al momento della pensione, grazie alla capitalizzazione composta al 4.2%.</p>
-    </div>
-    <div class="shock-card rust">
-      <span class="shock-num">50%</span>
-      <h4>Il tuo datore versa il TFR: stai perdendo il 50% del rendimento</h4>
-      <p>Il TFR lasciato in azienda rende circa l'1.5%/anno. Trasferito al fondo pensione, lo stesso capitale può rendere il 4.2%, quasi il triplo.</p>
-    </div>
-  </div>
-</div>
-
 <!-- HERO -->
-<section class="hero">
+<section class="hero" style="padding-top: 8rem">
   <div class="hero-grid"></div>
   <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div>
 
-  <div class="hero-eyebrow"><span class="dot"></span>FIP · PIP · Fondo Aperto · Vantaggi fiscali IRPEF</div>
+  <div class="hero-eyebrow"><span class="dot"></span>Previdenza complementare · Fondi pensione · TFR</div>
 
-  <h1>Quotami la pensione<br><span class="hero-accent">che ti spetta.</span></h1>
+  <h1>Costruisci oggi<br><span class="hero-accent">la pensione di domani.</span></h1>
 
-  <p class="hero-sub">Rendimento medio 4.2% annuo. Deduci fino a €5.164 l'anno dall'IRPEF. Inizia con soli €50 al mese.</p>
+  <p class="hero-sub">L'INPS ti darà <strong>solo una parte</strong> dello stipendio quando smetterai di lavorare. Capiamo insieme come <strong>integrarla</strong>, sfruttando i vantaggi fiscali della previdenza complementare.</p>
 
   <div class="hero-actions">
-    <a href="#simulatore" class="btn-primary">Calcola il tuo piano →</a>
-    <a href="#prodotti" class="btn-secondary">Confronta i prodotti</a>
+    <a href="contatti.html" class="btn-primary">Parlami della tua situazione →</a>
+    <a href="#come-funziona" class="btn-secondary">Come funziona</a>
   </div>
 
   <div class="hero-stats">
     <div class="hstat">
-      <span class="hstat-num" data-target="4.2" data-suffix="%" data-float>0</span>
-      <span class="hstat-label">Rendimento medio<br>annuo composto</span>
+      <span class="hstat-num">€5.164</span>
+      <span class="hstat-label">Deduzione massima<br>dal reddito ogni anno</span>
     </div>
     <div class="hstat">
-      <span class="hstat-num" data-prefix="€" data-target="5164">0</span>
-      <span class="hstat-label">Importo massimo<br>deducibile/anno</span>
+      <span class="hstat-num">9 – 15%</span>
+      <span class="hstat-label">Tassazione finale<br>(vs 23 – 43% IRPEF)</span>
     </div>
     <div class="hstat">
-      <span class="hstat-num" data-target="15" data-suffix="%">0</span>
-      <span class="hstat-label">Tassazione agevolata<br>al riscatto (vs 26%)</span>
+      <span class="hstat-num">TFR</span>
+      <span class="hstat-label">Puoi destinarlo<br>al fondo pensione</span>
     </div>
     <div class="hstat">
-      <span class="hstat-num" data-prefix="€" data-target="50">0</span>
-      <span class="hstat-label">Versamento minimo<br>mensile per iniziare</span>
+      <span class="hstat-num">COVIP</span>
+      <span class="hstat-label">Tutti i fondi sono<br>vigilati per legge</span>
     </div>
   </div>
 </section>
 
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="tb-item"><div class="tb-icon">🏛️</div><div><span class="tb-label">COVIP Vigilato</span><span class="tb-sub">Fondi pensione autorizzati</span></div></div>
-  <div class="tb-item"><div class="tb-icon">💰</div><div><span class="tb-label">Deducibile IRPEF</span><span class="tb-sub">Fino a €5.164/anno</span></div></div>
-  <div class="tb-item"><div class="tb-icon">🔐</div><div><span class="tb-label">Capitale protetto</span><span class="tb-sub">Linee garantite disponibili</span></div></div>
-  <div class="tb-item"><div class="tb-icon">↔️</div><div><span class="tb-label">Portabilità totale</span><span class="tb-sub">Trasferisci quando vuoi</span></div></div>
-</div>
-
-<!-- LINE CHART -->
-<section class="chart-section">
+<!-- PROBLEMA -->
+<section style="padding: 5rem 5vw; background: var(--bg)">
   <div class="centered">
-    <span class="section-label">Simulazione crescita</span>
-    <h2 class="section-title">Come cresce il tuo capitale<br>nel tempo</h2>
-    <p class="section-sub">Simulazione con versamento di €100/mese a rendimento medio 4.2% annuo. Prima contribuzione a 27 anni.</p>
+    <span class="section-label">Perché serve</span>
+    <h2 class="section-title">La pensione INPS<br>non basterà.</h2>
+    <p class="section-sub">Il "tasso di sostituzione" è quanta parte del tuo ultimo stipendio riceverai come pensione INPS. Per chi entra oggi nel mondo del lavoro, sarà sensibilmente più basso rispetto alle generazioni precedenti.</p>
   </div>
-
-  <div class="chart-wrap reveal">
-    <!-- SVG Line Chart: 3 scenarios 50/100/200 €/mese -->
-    <svg class="chart-svg" viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
-      <!-- grid lines -->
-      <line x1="80" y1="20"  x2="80"  y2="270" stroke="rgba(11,18,32,.1)" stroke-width="1"/>
-      <line x1="80" y1="270" x2="640" y2="270" stroke="rgba(11,18,32,.1)" stroke-width="1"/>
-      <!-- horizontal guides -->
-      <line x1="80" y1="220" x2="640" y2="220" stroke="rgba(11,18,32,.06)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="80" y1="170" x2="640" y2="170" stroke="rgba(11,18,32,.06)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="80" y1="120" x2="640" y2="120" stroke="rgba(11,18,32,.06)" stroke-width="1" stroke-dasharray="4,4"/>
-      <line x1="80" y1="70"  x2="640" y2="70"  stroke="rgba(11,18,32,.06)" stroke-width="1" stroke-dasharray="4,4"/>
-
-      <!-- Y axis labels -->
-      <text x="72" y="274" text-anchor="end" font-size="11" fill="#6B7280">€0</text>
-      <text x="72" y="224" text-anchor="end" font-size="11" fill="#6B7280">€25k</text>
-      <text x="72" y="174" text-anchor="end" font-size="11" fill="#6B7280">€50k</text>
-      <text x="72" y="124" text-anchor="end" font-size="11" fill="#6B7280">€100k</text>
-      <text x="72" y="74"  text-anchor="end" font-size="11" fill="#6B7280">€150k</text>
-
-      <!-- X axis labels -->
-      <text x="80"  y="286" text-anchor="middle" font-size="11" fill="#6B7280">0</text>
-      <text x="220" y="286" text-anchor="middle" font-size="11" fill="#6B7280">10</text>
-      <text x="360" y="286" text-anchor="middle" font-size="11" fill="#6B7280">20</text>
-      <text x="500" y="286" text-anchor="middle" font-size="11" fill="#6B7280">30</text>
-      <text x="640" y="286" text-anchor="middle" font-size="11" fill="#6B7280">40 anni</text>
-
-      <!-- Scenario €50/mese: 0→3.7k→7.3k→12.3k→18.8k→27k→36k→47.5k→62.3k -->
-      <!-- Y = 270 - (val/160000)*250 -->
-      <polyline
-        points="80,270 220,264.2 360,258.6 500,251.0 640,232.7"
-        fill="none" stroke="rgba(11,18,32,.25)" stroke-width="2" stroke-dasharray="5,3"/>
-
-      <!-- Scenario €100/mese: 0→7.4k→14.7k→24.6k→37.5k→54k→72k→95k→124.6k -->
-      <polyline
-        points="80,270 220,258.4 360,247.1 500,232.7 640,175.6"
-        fill="none" stroke="#E6BE3B" stroke-width="2.5"/>
-
-      <!-- Fill under €100 line -->
-      <polygon
-        points="80,270 220,258.4 360,247.1 500,232.7 640,175.6 640,270"
-        fill="rgba(255,216,77,.07)"/>
-
-      <!-- Scenario €200/mese: values * 2 of 100€ -->
-      <polyline
-        points="80,270 220,246.8 360,224.2 500,195.4 640,81.2"
-        fill="none" stroke="#0B1220" stroke-width="2.5"/>
-
-      <!-- End value labels -->
-      <circle cx="640" cy="175.6" r="4" fill="#E6BE3B"/>
-      <text x="648" y="179" font-size="11" font-weight="700" fill="#E6BE3B">€124k</text>
-      <circle cx="640" cy="81.2" r="4" fill="#0B1220"/>
-      <text x="648" y="85" font-size="11" font-weight="700" fill="#0B1220">€249k</text>
-      <circle cx="640" cy="232.7" r="3" fill="rgba(11,18,32,.4)"/>
-      <text x="648" y="236" font-size="11" fill="#6B7280">€62k</text>
-    </svg>
-
-    <div class="chart-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(11,18,32,.3);border:2px dashed rgba(11,18,32,.4)"></div>€50/mese</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#E6BE3B"></div>€100/mese</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#0B1220"></div>€200/mese</div>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <span class="problem-num">~70%</span>
+      <h4>Dipendenti</h4>
+      <p>Stima del tasso di sostituzione INPS per un dipendente medio che arriverà alla pensione con carriera regolare di 35–40 anni. Significa che ricevi circa 7 € ogni 10 € dell'ultimo stipendio.</p>
     </div>
-    <p class="chart-note">* Simulazione a rendimento costante 4.2%/anno. I rendimenti passati non garantiscono quelli futuri.</p>
-  </div>
-</section>
-
-<!-- PRODUCTS COMPARISON -->
-<section id="prodotti" style="background:var(--bg)">
-  <div class="centered">
-    <span class="section-label">Confronta i prodotti</span>
-    <h2 class="section-title">FIP, PIP o Fondo Aperto:<br>qual è il giusto per te?</h2>
-    <p class="section-sub">Tre strumenti diversi per costruire la pensione integrativa. Scopri le differenze.</p>
-  </div>
-
-  <div class="compare-table-wrap reveal">
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th>Caratteristica</th>
-          <th>FIP – Fondo Pensione Chiuso</th>
-          <th>PIP – Piano Individuale</th>
-          <th>Fondo Aperto</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Chi può aderire</td><td>Solo lavoratori della categoria</td><td class="td-best">Chiunque, anche autonomi</td><td class="td-best">Chiunque, anche minorenni</td></tr>
-        <tr><td>Costi di gestione</td><td class="td-best">Molto bassi (0.1–0.3%)</td><td>Medi (1–2%)</td><td>Medi (0.8–1.5%)</td></tr>
-        <tr><td>Conferimento TFR</td><td class="td-check">✓ Sì</td><td class="td-no">✗ No</td><td class="td-check">✓ Sì</td></tr>
-        <tr><td>Flessibilità versamenti</td><td>Bassa (importo fisso)</td><td class="td-best">Alta (varia quando vuoi)</td><td class="td-best">Alta (varia quando vuoi)</td></tr>
-        <tr><td>Rendimento medio storico</td><td>3.5–4.5%/anno</td><td>3.8–5.5%/anno</td><td>3.5–5%/anno</td></tr>
-        <tr><td>Anticipo per acquisto casa</td><td class="td-check">✓ Sì (dopo 8 anni)</td><td class="td-check">✓ Sì (dopo 8 anni)</td><td class="td-check">✓ Sì (dopo 8 anni)</td></tr>
-        <tr><td>Portabilità</td><td>Solo verso altro FIP categoria</td><td class="td-best">Totale dopo 2 anni</td><td class="td-best">Totale dopo 2 anni</td></tr>
-        <tr><td>Adatto a</td><td>Dipendenti con contratto collettivo</td><td>Autonomi, liberi professionisti</td><td>Tutti, ottimo per diversificazione</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- TRANSFER SECTION -->
-<section style="background:var(--bg-alt)">
-  <div class="centered">
-    <span class="section-label">Trasferimento gratuito</span>
-    <h2 class="section-title">Hai già un piano pensione?<br>Trasferiscilo senza perdere nulla</h2>
-    <p class="section-sub">Puoi trasferire il tuo fondo pensione attuale a un fondo migliore dopo soli 2 anni di adesione, completamente gratis e senza perdere la posizione maturata.</p>
-  </div>
-  <div class="transfer-box reveal">
-    <div class="transfer-steps">
-      <div class="tr-step"><div class="tr-step-num">1</div><p><strong>Compila il form</strong><br>Ci dici dove hai il piano attuale e quanto hai accumulato</p></div>
-      <div class="tr-step"><div class="tr-step-num">2</div><p><strong>Analizziamo</strong><br>Confrontiamo rendimento, costi e condizioni col tuo piano attuale</p></div>
-      <div class="tr-step"><div class="tr-step-num">3</div><p><strong>Trasferiamo</strong><br>Se conviene, gestiamo tutto noi. Gratis, senza burocrazia</p></div>
+    <div class="problem-card">
+      <span class="problem-num">~50%</span>
+      <h4>Autonomi e professionisti</h4>
+      <p>Per i lavoratori autonomi il tasso di sostituzione è ancora più basso: la pensione INPS coprirà circa metà del reddito che si percepiva prima.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
-      <div class="form-group">
-        <label style="font-size:.8rem;font-weight:600;color:var(--text);letter-spacing:.03em">Piano pensione attuale</label>
-        <select style="padding:.75rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--bg);font-family:'Inter',sans-serif;font-size:.95rem;color:var(--text);outline:none;width:100%">
-          <option>Generali PIP</option><option>Allianz Previdenza</option><option>AXA MPS</option>
-          <option>UnipolSai Previdenza</option><option>Poste Vita Previdenza</option>
-          <option>Fondo pensione aziendale</option><option>Altro</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label style="font-size:.8rem;font-weight:600;color:var(--text);letter-spacing:.03em">Capitale accumulato (€)</label>
-        <input type="number" placeholder="es. 12000" min="0" style="padding:.75rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--bg);font-family:'Inter',sans-serif;font-size:.95rem;color:var(--text);outline:none;width:100%">
-      </div>
+    <div class="problem-card">
+      <span class="problem-num">−10%</span>
+      <h4>Per ogni gap</h4>
+      <p>Ogni anno fuori dal lavoro (precariato, maternità, periodi all'estero) abbassa ulteriormente il futuro assegno INPS. Il complementare aiuta a colmare il gap.</p>
     </div>
-    <button class="btn-primary" style="width:100%;padding:1rem;font-size:1rem;border-radius:14px" onclick="this.textContent='Analisi in corso…';setTimeout(()=>this.textContent='Verifica se posso fare meglio →',2000)">Verifica se posso fare meglio →</button>
-    <p style="text-align:center;font-size:.75rem;color:var(--text-muted);margin-top:.75rem">🔒 Analisi gratuita · Nessun obbligo · Portabilità garantita per legge</p>
   </div>
+  <p class="data-source">Fonti: Ragioneria Generale dello Stato (Rapporto N. 25), COVIP — Relazione Annuale. Le stime variano in base a carriera, reddito e contribuzione.</p>
 </section>
 
-<!-- VS BANCARI TABLE -->
-<section style="background:var(--bg)">
+<!-- COME FUNZIONA -->
+<section id="come-funziona" style="padding: 5rem 5vw; background: var(--bg-alt)">
   <div class="centered">
-    <span class="section-label">Confronto diretto</span>
-    <h2 class="section-title">Il nostro fondo vs<br>i fondi bancari tipici</h2>
-    <p class="section-sub">I costi nascosti dei fondi pensione bancari erodono silenziosamente il tuo capitale. Ecco la differenza.</p>
+    <span class="section-label">Come funziona</span>
+    <h2 class="section-title">Un fondo pensione<br>in 3 passi.</h2>
   </div>
-  <div class="vs-table-wrap reveal">
-    <table class="vs-table">
-      <thead>
-        <tr>
-          <th>Caratteristica</th>
-          <th>Banca tipica</th>
-          <th>Quotami</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Rendimento medio storico</td><td class="vs-bad">2.1% / anno</td><td class="vs-good">4.2% / anno</td></tr>
-        <tr><td>Costi di gestione</td><td class="vs-bad">2.8% / anno</td><td class="vs-good">0.9% / anno</td></tr>
-        <tr><td>Costo netto reale (rendimento – costi)</td><td class="vs-bad">−0.7% / anno</td><td class="vs-good">+3.3% / anno</td></tr>
-        <tr><td>Deducibilità IRPEF fino a €5.164</td><td class="vs-good">✓ Sì</td><td class="vs-good">✓ Sì</td></tr>
-        <tr><td>Portabilità dopo 2 anni</td><td class="vs-good">✓ Sì</td><td class="vs-good">✓ Sì</td></tr>
-        <tr><td>Consulenza dedicata inclusa</td><td class="vs-bad">✗ No</td><td class="vs-good">✓ Sì</td></tr>
-        <tr><td>Report annuale personalizzato</td><td class="vs-bad">✗ No</td><td class="vs-good">✓ Sì</td></tr>
-        <tr><td>Avviso proattivo se il fondo sottoperforma</td><td class="vs-bad">✗ No</td><td class="vs-good">✓ Sì</td></tr>
-      </tbody>
-    </table>
+  <div class="step-grid">
+    <div class="step-item">
+      <span class="step-num">01</span>
+      <h3>Versi</h3>
+      <p>Decidi quanto e quando versare: bonifico mensile, una tantum, contributo del datore di lavoro, TFR. Si può iniziare anche da poche decine di euro al mese.</p>
+    </div>
+    <div class="step-item">
+      <span class="step-num">02</span>
+      <h3>Si rivaluta</h3>
+      <p>I soldi versati vengono investiti dal fondo (linea garantita, prudente, bilanciata o azionaria — scegli tu) e si rivalutano nel tempo grazie alla capitalizzazione composta.</p>
+    </div>
+    <div class="step-item">
+      <span class="step-num">03</span>
+      <h3>Ricevi la pensione</h3>
+      <p>Quando arrivi all'età pensionabile INPS scegli come incassare: rendita mensile a vita, capitale (fino al 50%) o combinazione delle due. Sempre tassato in modo agevolato.</p>
+    </div>
   </div>
 </section>
 
-<!-- TAX BENEFITS -->
-<section style="background:var(--bg-alt)">
+<!-- TIPI DI FONDO -->
+<section id="prodotti" style="padding: 5rem 5vw; background: var(--bg)">
+  <div class="centered">
+    <span class="section-label">I tipi di fondo</span>
+    <h2 class="section-title">Tre strade per costruire<br>la pensione complementare.</h2>
+    <p class="section-sub">La legge italiana prevede tre forme di previdenza complementare. Sono tutte vigilate dalla COVIP e godono degli stessi vantaggi fiscali. Cambia il "come": chi le gestisce, quanto costano, chi può aderire.</p>
+  </div>
+  <div class="fund-grid">
+    <div class="fund-card c-collective">
+      <span class="fund-badge">Collettivi</span>
+      <h3>Fondi negoziali</h3>
+      <p>Istituiti tramite contrattazione collettiva (CCNL). Riservati ai lavoratori della categoria.</p>
+      <ul>
+        <li>Costi bassissimi (0,1 – 0,4% / anno)</li>
+        <li>Contributo del datore di lavoro</li>
+        <li>Esempi: Cometa, Fonchim, Fopen, Eurofer</li>
+      </ul>
+    </div>
+    <div class="fund-card c-open">
+      <span class="fund-badge">Aperti a tutti</span>
+      <h3>Fondi aperti</h3>
+      <p>Istituiti da banche, SGR, SIM o assicurazioni. Aperti a tutti, anche autonomi e minorenni.</p>
+      <ul>
+        <li>Costi medi (1 – 2% / anno)</li>
+        <li>Si può conferire il TFR</li>
+        <li>Più scelta di linee di investimento</li>
+      </ul>
+    </div>
+    <div class="fund-card c-pip">
+      <span class="fund-badge">Polizze</span>
+      <h3>PIP — Piani Individuali</h3>
+      <p>Polizze assicurative con finalità previdenziale. Attivabili da chiunque, anche senza CCNL.</p>
+      <ul>
+        <li>Costi tipicamente più alti (1,5 – 3%)</li>
+        <li>Possibili garanzie aggiuntive</li>
+        <li>Adatti a chi non ha un fondo di categoria</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TFR -->
+<section style="padding: 5rem 5vw; background: var(--bg-alt)">
+  <div class="centered">
+    <span class="section-label">Cosa fare con il TFR</span>
+    <h2 class="section-title">Il TFR è già tuo.<br>La domanda è dove tenerlo.</h2>
+    <p class="section-sub">Ogni mese il tuo datore di lavoro accantona circa il <strong>6,91% della retribuzione lorda</strong> come Trattamento di Fine Rapporto. Quei soldi possono restare in azienda oppure essere versati a un fondo pensione.</p>
+  </div>
+  <div class="tfr-compare">
+    <div class="tfr-side tfr-azienda">
+      <h3>TFR in azienda</h3>
+      <ul>
+        <li>Rivalutazione fissa per legge: <strong>1,5% + 75% dell'inflazione</strong></li>
+        <li>Negli anni di bassa inflazione, rendimento netto reale spesso vicino a zero</li>
+        <li>Tassazione finale all'aliquota IRPEF media (in genere <strong>23 – 35%</strong>)</li>
+        <li>Anticipazione possibile solo dopo 8 anni di servizio, limitata</li>
+      </ul>
+    </div>
+    <div class="tfr-vs">vs</div>
+    <div class="tfr-side tfr-fondo">
+      <h3>TFR nel fondo pensione</h3>
+      <ul>
+        <li>Rendimento legato alla linea d'investimento scelta</li>
+        <li>Tassazione finale agevolata: <strong>15%, scende fino al 9%</strong></li>
+        <li>Su fondo negoziale: spesso scatta anche il <strong>contributo del datore di lavoro</strong></li>
+        <li>Anticipazioni più ampie (75% per casa o spese sanitarie)</li>
+      </ul>
+    </div>
+  </div>
+  <p class="tfr-note">La scelta è personale e per legge va fatta entro 6 mesi dall'inizio del nuovo lavoro (silenzio-assenso per il fondo). Capiamo insieme cosa conviene per la tua situazione.</p>
+</section>
+
+<!-- CONTRIBUTO DATORE -->
+<section style="padding: 5rem 5vw; background: var(--bg)">
+  <div class="centered">
+    <span class="section-label">Contributo del datore</span>
+    <h2 class="section-title">Se sei dipendente,<br>fatti versare anche dal tuo capo.</h2>
+    <p class="section-sub">Per quasi tutti i lavoratori dipendenti italiani, il CCNL prevede che — se aderisci al fondo pensione di categoria — il datore di lavoro versi un contributo aggiuntivo (di solito <strong>1 – 2% della RAL</strong>). Sono soldi che hai diritto a richiedere: basta aderire.</p>
+  </div>
+  <div class="datore-steps">
+    <div class="datore-step">
+      <span class="datore-num">01</span>
+      <h4>Identifica il fondo di categoria</h4>
+      <p>Controlla il tuo CCNL o chiedi all'ufficio HR qual è il fondo pensione negoziale del tuo settore. Es: Cometa (metalmeccanici), Fonchim (chimici), Fopen (Enel), Eurofer (ferrovie), Fonte (commercio).</p>
+    </div>
+    <div class="datore-step">
+      <span class="datore-num">02</span>
+      <h4>Aderisci</h4>
+      <p>Compili il modulo di adesione, scegli quanto vuoi versare di tasca tua (di solito basta una piccola % della RAL — l'1% è la soglia tipica per attivare il contributo del datore) e indichi se conferire anche il TFR.</p>
+    </div>
+    <div class="datore-step">
+      <span class="datore-num">03</span>
+      <h4>Ricevi il contributo</h4>
+      <p>Il datore versa la sua quota direttamente al fondo, oltre allo stipendio. Sono soldi che altrimenti non avresti — un "aumento nascosto" a cui hai diritto. Su una RAL di €30.000 sono €300–600/anno in più.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VANTAGGI FISCALI -->
+<section style="padding: 5rem 5vw; background: var(--bg-alt)">
   <div class="centered">
     <span class="section-label">Vantaggi fiscali</span>
-    <h2 class="section-title">Risparmia le tasse<br>mentre costruisci il futuro</h2>
-    <p class="section-sub">La previdenza integrativa è uno degli strumenti fiscali più vantaggiosi per i lavoratori italiani.</p>
+    <h2 class="section-title">Tre vantaggi fiscali<br>previsti dalla legge.</h2>
+    <p class="section-sub">La previdenza complementare è uno degli strumenti più agevolati del fisco italiano, su tutti e tre i momenti: versamento, rendimenti, prestazione finale.</p>
   </div>
   <div class="tax-grid">
-    <div class="tax-card reveal">
-      <span class="tax-card-num">€5.164</span>
-      <h4>Deducibilità annua</h4>
-      <p>I versamenti alla previdenza integrativa sono deducibili dal reddito imponibile IRPEF fino a €5.164,57 ogni anno. Con un'aliquota del 35% significano oltre €1.800 di tasse risparmiate.</p>
+    <div class="tax-card">
+      <span class="tax-card-num">€5.164,57</span>
+      <h4>Deduzione annua</h4>
+      <p>I contributi versati alla previdenza complementare sono <strong>deducibili dal reddito IRPEF</strong> fino a €5.164,57 ogni anno. Con aliquota marginale al 35%, deducendo €5.164 paghi <strong>~€1.807 di IRPEF in meno</strong>.</p>
     </div>
-    <div class="tax-card reveal">
-      <span class="tax-card-num">15%</span>
-      <h4>Tassazione agevolata al riscatto</h4>
-      <p>Al momento della pensione, la rendita è tassata al 15% (anziché fino al 43% dell'IRPEF ordinaria). Dopo 35 anni di adesione scende ulteriormente fino al 9%.</p>
-    </div>
-    <div class="tax-card reveal">
+    <div class="tax-card">
       <span class="tax-card-num">20%</span>
-      <h4>Ritenuta sui rendimenti</h4>
-      <p>I rendimenti maturati all'interno del fondo pensione sono tassati al 20% anziché al 26% applicato sugli strumenti finanziari ordinari.</p>
+      <h4>Sui rendimenti</h4>
+      <p>I rendimenti generati ogni anno dal fondo sono tassati al <strong>20%</strong>, contro il <strong>26%</strong> applicato agli altri strumenti finanziari (azioni, obbligazioni, fondi comuni, ETF).</p>
+    </div>
+    <div class="tax-card">
+      <span class="tax-card-num">9 → 15%</span>
+      <h4>Alla pensione</h4>
+      <p>La prestazione finale è tassata al <strong>15%</strong> di base, e <strong>scende dello 0,3% per ogni anno oltre il 15esimo</strong> di partecipazione, fino a un minimo del <strong>9%</strong> dopo 35 anni. Aliquota IRPEF ordinaria: 23 – 43%.</p>
     </div>
   </div>
 </section>
 
-<!-- SIMULATOR -->
-<section id="simulatore" class="form-section">
+<!-- ANTICIPAZIONI -->
+<section style="padding: 5rem 5vw; background: var(--bg)">
   <div class="centered">
-    <span class="section-label">Simulatore previdenziale</span>
-    <h2 class="section-title">Calcola il tuo<br>piano pensione</h2>
-    <p class="section-sub">Inserisci tre dati e scopri il capitale accumulato a 67 anni e il risparmio fiscale annuo.</p>
+    <span class="section-label">Quando puoi prendere i soldi</span>
+    <h2 class="section-title">Non sono soldi bloccati<br>fino alla pensione.</h2>
+    <p class="section-sub">La legge prevede situazioni in cui puoi accedere parzialmente o totalmente al capitale anche prima dell'età pensionabile.</p>
   </div>
-
-  <div class="simulator-box">
-    <div class="form-row">
-      <div class="form-group">
-        <label>La tua età</label>
-        <input type="number" id="s-eta" placeholder="es. 35" min="18" max="65">
-        <span class="field-err" id="s-eta-err"></span>
-      </div>
-      <div class="form-group">
-        <label>Reddito annuo lordo (€)</label>
-        <input type="number" id="s-reddito" placeholder="es. 32000" min="1000">
-        <span class="field-err" id="s-reddito-err"></span>
-      </div>
-      <div class="form-group">
-        <label>Versamento mensile (€)</label>
-        <input type="number" id="s-versamento" placeholder="es. 100" min="50" max="2000">
-        <span class="field-err" id="s-versamento-err"></span>
-      </div>
+  <div class="antic-grid">
+    <div class="antic-item">
+      <span class="antic-pct">75%</span>
+      <h4>Spese sanitarie gravi</h4>
+      <p>Per te o i tuoi familiari. <strong>Sempre</strong>, in qualsiasi momento dell'adesione.</p>
     </div>
-    <button id="s-btn" class="btn-primary form-submit" onclick="calcolaPensione()">
-      Calcola il mio piano →
-    </button>
-    <div class="sim-loading" id="s-loading"><div class="sim-spinner"></div>Elaborazione piano previdenziale…</div>
-
-    <div class="sim-result" id="sim-result">
-      <div class="sim-result-title">📊 La tua proiezione previdenziale</div>
-      <div class="sim-grid">
-        <div class="sim-item">
-          <span class="sim-num" id="r-capitale">—</span>
-          <span class="sim-lbl">Capitale accumulato<br>stimato a 67 anni</span>
-        </div>
-        <div class="sim-item">
-          <span class="sim-num" id="r-rendita">—</span>
-          <span class="sim-lbl">Rendita mensile stimata<br>(su 20 anni di erogazione)</span>
-        </div>
-        <div class="sim-item">
-          <span class="sim-num" id="r-fiscale">—</span>
-          <span class="sim-lbl">Risparmio fiscale IRPEF<br>ogni anno</span>
-        </div>
-        <div class="sim-item">
-          <span class="sim-num" id="r-totFiscale">—</span>
-          <span class="sim-lbl">Risparmio fiscale totale<br>stimato nel periodo</span>
-        </div>
-        <div class="sim-item">
-          <span class="sim-num" id="r-anni">—</span>
-          <span class="sim-lbl">Anni al piano</span>
-        </div>
-        <div class="sim-item">
-          <span class="sim-num" id="r-aliquota">—</span>
-          <span class="sim-lbl">Aliquota marginale<br>IRPEF applicata</span>
-        </div>
-      </div>
-
-      <div class="growth-table-wrap">
-        <table class="growth-table">
-          <thead><tr><th>Orizzonte</th><th>Versato</th><th>Rendimento accumulato</th><th>Capitale totale</th></tr></thead>
-          <tbody id="r-growth-rows"></tbody>
-        </table>
-      </div>
-
-      <p class="sim-disclaimer" style="margin-top:1rem">* Simulazione indicativa basata su rendimento costante 4.2%/anno. I rendimenti effettivi dipendono dall'andamento dei mercati. La rendita mensile è calcolata su un orizzonte di erogazione di 20 anni senza rivalutazione.</p>
+    <div class="antic-item">
+      <span class="antic-pct">75%</span>
+      <h4>Prima casa</h4>
+      <p>Per te o per i tuoi figli. <strong>Dopo 8 anni</strong> dall'adesione al fondo.</p>
+    </div>
+    <div class="antic-item">
+      <span class="antic-pct">30%</span>
+      <h4>Altre esigenze</h4>
+      <p>Senza vincolo di motivazione. <strong>Dopo 8 anni</strong> dall'adesione.</p>
+    </div>
+    <div class="antic-item">
+      <span class="antic-pct">50 – 100%</span>
+      <h4>Disoccupazione, invalidità, decesso</h4>
+      <p>Riscatto parziale o totale anche prima degli 8 anni in queste situazioni.</p>
     </div>
   </div>
 </section>
 
-<!-- BENEFITS -->
-<section class="benefits-section">
-  <div class="centered">
-    <span class="section-label">I numeri che contano</span>
-    <h2 class="section-title">Perché iniziare<br>oggi conviene</h2>
-  </div>
-  <div class="benefits-row">
-    <div class="benefit-item reveal">
-      <span class="benefit-num">4.2%</span>
-      <span class="benefit-label">Rendimento medio annuo<br>dei nostri fondi bilanciati</span>
-    </div>
-    <div class="benefit-item reveal">
-      <span class="benefit-num">€1.800+</span>
-      <span class="benefit-label">Risparmio IRPEF medio<br>con versamento €5.000/anno</span>
-    </div>
-    <div class="benefit-item reveal">
-      <span class="benefit-num">9%</span>
-      <span class="benefit-label">Tassazione minima<br>al riscatto (dopo 35 anni)</span>
-    </div>
+<!-- CTA FINALE -->
+<section style="padding: 5rem 5vw; background: var(--primary); color: #fff; text-align: center">
+  <div style="max-width: 720px; margin: 0 auto">
+    <h2 style="font-family:'Inter',sans-serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; color: #fff; margin: 0 0 1rem">Capiamo insieme cosa fa per te.</h2>
+    <p style="color: rgba(255,255,255,.78); font-size: 1.05rem; line-height: 1.7; margin: 0 0 2rem">Ti spiego le opzioni partendo dalla tua situazione: dipendente, autonomo o libero professionista, il tuo CCNL, la tua età. Senza impegno, senza pressioni.</p>
+    <a href="contatti.html" class="btn-primary" style="background: var(--yellow); color: var(--text); font-size: 1rem; padding: 1.05rem 2.6rem; display: inline-block">Parlami della tua situazione →</a>
   </div>
 </section>
 
-<!-- CTA BANNER -->
-<div class="cta-banner">
-  <h2>Il momento migliore<br>per iniziare è adesso.</h2>
-  <p>Ogni anno che passa senza un piano pensione è un anno di vantaggi fiscali perso.</p>
-  <a href="#simulatore" class="btn-primary" style="font-size:1rem;padding:1.05rem 2.6rem">Calcola il tuo piano →</a>
-  <div class="cta-trust-note">🏛️ Fondi COVIP vigilati &nbsp;·&nbsp; 💰 Deducibile IRPEF &nbsp;·&nbsp; 🇮🇹 Consulenza gratuita</div>
-</div>
 
 <!-- FOOTER -->
 <footer>
@@ -618,7 +568,7 @@
   </div>
 </footer>
 
-<a class="floating-badge" href="#simulatore">📈 Calcola piano</a>
+<a class="floating-badge" href="contatti.html">💬 Parlami</a>
 
 <script>
 /* reveal */
@@ -630,68 +580,6 @@ function animateCounter(el){const target=parseFloat(el.dataset.target),prefix=el
 const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animateCounter(e.target);co.unobserve(e.target);}});},{threshold:.5});
 document.querySelectorAll('.hstat-num[data-target]').forEach(el=>co.observe(el));
 
-/* helpers */
-function showFe(id,msg){const el=document.getElementById(id);if(el){el.textContent=msg;el.style.display='block';}}
-function hideFe(id){const el=document.getElementById(id);if(el){el.textContent='';el.style.display='none';}}
-
-/* pre-fill from URL params */
-(function(){
-  const p=new URLSearchParams(location.search);
-  if(p.get('eta'))        document.getElementById('s-eta').value=p.get('eta');
-  if(p.get('versamento')) document.getElementById('s-versamento').value=p.get('versamento');
-})();
-
-/* ── PENSION SIMULATOR ── */
-function calcolaPensione() {
-  const eta = parseInt(document.getElementById('s-eta').value);
-  const reddito = parseInt(document.getElementById('s-reddito').value);
-  const versamento = parseInt(document.getElementById('s-versamento').value);
-  let valid = true;
-
-  if(!eta||eta<18||eta>=67){showFe('s-eta-err','Inserisci un\'età tra 18 e 66 anni');valid=false;}else hideFe('s-eta-err');
-  if(!reddito||reddito<1000){showFe('s-reddito-err','Inserisci il tuo reddito annuo lordo');valid=false;}else hideFe('s-reddito-err');
-  if(!versamento||versamento<50){showFe('s-versamento-err','Versamento minimo €50/mese');valid=false;}else hideFe('s-versamento-err');
-  if(!valid) return;
-
-  const btn=document.getElementById('s-btn'),loadEl=document.getElementById('s-loading'),resEl=document.getElementById('sim-result');
-  btn.disabled=true;btn.textContent='Calcolo in corso…';loadEl.style.display='flex';resEl.classList.remove('show');
-
-  setTimeout(()=>{
-    const anniRimasti=67-eta, r=0.042/12, n=anniRimasti*12;
-    const capitale=Math.round(versamento*((Math.pow(1+r,n)-1)/r));
-    const rendita=Math.round(capitale/240);
-
-    let aliquota;
-    if(reddito<=28000)      aliquota=0.23;
-    else if(reddito<=50000) aliquota=0.35;
-    else                    aliquota=0.43;
-
-    const versamentoAnnuo=Math.min(versamento*12,5164);
-    const risparmioAnno=Math.round(versamentoAnnuo*aliquota);
-    const risparmioTot=risparmioAnno*anniRimasti;
-
-    document.getElementById('r-capitale').textContent   ='€'+capitale.toLocaleString('it-IT');
-    document.getElementById('r-rendita').textContent    ='€'+rendita.toLocaleString('it-IT')+'/mese';
-    document.getElementById('r-fiscale').textContent    ='€'+risparmioAnno.toLocaleString('it-IT')+'/anno';
-    document.getElementById('r-totFiscale').textContent ='€'+risparmioTot.toLocaleString('it-IT');
-    document.getElementById('r-anni').textContent       =anniRimasti+' anni';
-    document.getElementById('r-aliquota').textContent   =Math.round(aliquota*100)+'% IRPEF';
-
-    /* growth table */
-    let rows='';
-    for(let y=5;y<=anniRimasti;y+=5){
-      const nY=y*12,capY=Math.round(versamento*((Math.pow(1+r,nY)-1)/r));
-      const versato=versamento*12*y, rend=capY-versato;
-      const isLast=(y+5>anniRimasti);
-      rows+=`<tr><td>${y} anni (età ${eta+y})</td><td>€${versato.toLocaleString('it-IT')}</td><td>+€${rend.toLocaleString('it-IT')}</td><td class="td-best">€${capY.toLocaleString('it-IT')}</td></tr>`;
-    }
-    document.getElementById('r-growth-rows').innerHTML=rows;
-
-    btn.disabled=false;btn.textContent='Calcola il mio piano →';
-    loadEl.style.display='none';resEl.classList.add('show');
-    resEl.scrollIntoView({behavior:'smooth',block:'nearest'});
-  },1500);
-}
 </script>
 <script src="components.js?v=20260525a"></script>
 </body>
