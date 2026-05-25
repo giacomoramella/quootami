@@ -135,24 +135,26 @@
 
   /* ── COVERAGES ── */
   .coverage-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
-    gap: 1.25rem; margin-top: 3rem;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem; margin: 3rem auto 0; max-width: 1080px; padding: 0 5vw;
   }
+  @media (max-width: 1000px) { .coverage-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .coverage-grid { grid-template-columns: 1fr; max-width: 480px; } }
   .coverage-card {
     background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow-sm);
+    border-radius: var(--radius); padding: 2rem 1.75rem; box-shadow: var(--shadow-sm);
     transition: transform .3s cubic-bezier(.22,.68,0,1.2), box-shadow .3s;
+    text-align: center;
   }
   .coverage-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--border-green); }
-  .cov-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
   .cov-badge {
     display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .04em;
-    padding: .2rem .6rem; border-radius: 50px; margin-bottom: .75rem;
+    padding: .25rem .75rem; border-radius: 50px; margin-bottom: 1rem;
   }
   .cov-required { background: rgba(11,18,32,.1); color: var(--primary); }
   .cov-optional { background: rgba(255,216,77,.12); color: #1a7a4a; }
-  .coverage-card h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: .4rem; color: var(--text); }
-  .coverage-card p { font-size: .85rem; color: var(--text-muted); line-height: 1.65; }
+  .coverage-card h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: .55rem; color: var(--text); }
+  .coverage-card p { font-size: .85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
 
   /* ── QUOTE FORM ── */
   .form-section { background: var(--bg); }
@@ -407,25 +409,21 @@
   </div>
   <div class="coverage-grid">
     <div class="coverage-card reveal">
-      <span class="cov-icon">🚗</span>
       <span class="cov-badge cov-required">Obbligatoria</span>
       <h3>Responsabilità Civile (RCA)</h3>
       <p>Copre i danni causati a persone e cose di terzi in caso di incidente. È obbligatoria per legge per tutti i veicoli a motore.</p>
     </div>
     <div class="coverage-card reveal">
-      <span class="cov-icon">🔥</span>
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Furto & Incendio</h3>
       <p>Rimborso del valore commerciale del veicolo in caso di furto totale o parziale, e danni da incendio o scoppio.</p>
     </div>
     <div class="coverage-card reveal">
-      <span class="cov-icon">💥</span>
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Kasko Completa</h3>
       <p>Copre i danni al tuo veicolo indipendentemente dalla colpa: urti, grandine, atti vandalici e incidenti con animali.</p>
     </div>
     <div class="coverage-card reveal">
-      <span class="cov-icon">🛟</span>
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Assistenza Stradale</h3>
       <p>Soccorso 24/7, traino gratuito, auto sostitutiva e rimborso spese alberghiere in caso di fermo prolungato.</p>
