@@ -117,6 +117,15 @@
   .cyber-pro h4::after { content: ''; display: block; width: 28px; height: 2px; background: var(--cp); margin: .55rem auto 0; border-radius: 2px; }
   .cyber-pro p { font-size: .87rem; color: var(--text-muted); line-height: 1.6; margin: .85rem 0 0; }
 
+  /* ── INSIGHTS (approfondimenti) ── */
+  .insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 880px; margin: 3rem auto 0; padding: 0 5vw; }
+  @media (max-width: 700px) { .insights-grid { grid-template-columns: 1fr; max-width: 480px; } }
+  .insight-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 1.5rem; text-align: center; transition: transform .25s, box-shadow .25s, border-color .25s; }
+  .insight-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--border-green); }
+  .insight-card h3 { font-family: 'Inter', sans-serif; font-size: 1.02rem; font-weight: 700; color: var(--text); margin: 0 0 .65rem; line-height: 1.4; }
+  .insight-card h3::after { content: ''; display: block; width: 30px; height: 2px; background: var(--yellow); margin: .55rem auto 0; border-radius: 2px; }
+  .insight-card p { font-size: .9rem; color: var(--text-muted); line-height: 1.65; margin: 1rem auto 0; max-width: 360px; }
+
   @media (max-width: 700px) { .form-row { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -284,22 +293,22 @@
     <span class="section-label">Approfondimenti</span>
     <h2 class="section-title">Domande che mi fanno spesso</h2>
   </div>
-  <div class="seg-grid">
-    <article class="seg-card">
+  <div class="insights-grid">
+    <article class="insight-card">
       <h3>"Sono troppo piccolo per essere attaccato"</h3>
-      <p>È il pregiudizio più diffuso. Gli attacchi automatizzati colpiscono in maniera indiscriminata — spesso le PMI sono bersaglio preferito perché hanno protezioni più deboli e sono più disposte a pagare per ripartire.</p>
+      <p>Falso. Gli attacchi sono automatizzati e colpiscono tutti. Le piccole imprese sono spesso il bersaglio preferito: meno difese e più disposte a pagare per ripartire.</p>
     </article>
-    <article class="seg-card">
+    <article class="insight-card">
       <h3>"Ho già un buon antivirus"</h3>
-      <p>L'antivirus è il primo strato. La polizza Cyber interviene quando lo strato fallisce: gestione crisi, costi forensi, fermo attività, danni a terzi. È un piano B, non sostituisce l'IT.</p>
+      <p>L'antivirus è il primo strato di difesa. Quando fallisce, la polizza paga i costi: tecnici, fermo attività, danni a terzi. È un piano B, non sostituisce l'IT.</p>
     </article>
-    <article class="seg-card">
+    <article class="insight-card">
       <h3>Cosa chiedono le compagnie</h3>
-      <p>MFA su accessi critici, backup off-line, formazione anti-phishing, presenza di un referente IT. Più sei in regola, più la copertura è ampia ed economica.</p>
+      <p>Autenticazione a due fattori, backup offline, un referente IT, formazione anti-phishing. Più sei in regola, meno paghi e più sei coperto.</p>
     </article>
-    <article class="seg-card">
+    <article class="insight-card">
       <h3>GDPR e obbligo di notifica</h3>
-      <p>In caso di data breach grave, hai 72 ore per notificarlo al Garante. La polizza Cyber include solitamente assistenza legale per gestire questa fase, che da soli può essere paralizzante.</p>
+      <p>Se subisci un data breach grave hai 72 ore per notificarlo al Garante. La polizza ti assiste anche legalmente in questa fase, che da soli è un incubo.</p>
     </article>
   </div>
 </section>
