@@ -498,6 +498,7 @@
       <div class="form-feedback form-error" id="qf-error" hidden>
         <strong>Errore di invio</strong>
         <p>Qualcosa non ha funzionato. Riprova o scrivimi direttamente a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a> o su <a href="https://wa.me/393922198185" target="_blank">WhatsApp</a>.</p>
+        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">Dettaglio tecnico: <code id="qf-error-msg" style="font-family:monospace;"></code></p>
       </div>
     </form>
   </div>
@@ -512,21 +513,30 @@
     var btn = document.getElementById('qf-submit');
     var ok = document.getElementById('qf-success');
     var err = document.getElementById('qf-error');
+    var errMsg = document.getElementById('qf-error-msg');
     ok.hidden = true; err.hidden = true;
     if (!form.checkValidity()) { form.reportValidity(); return; }
     btn.disabled = true; btn.textContent = 'Invio in corso…';
     try {
       var fd = new FormData(form);
-      var res = await fetch('https://api.web3forms.com/submit', { method:'POST', body: fd });
-      var json = await res.json();
-      if (json.success) {
+      var res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: fd
+      });
+      var json = await res.json().catch(function(){ return { success:false, message:'Risposta non valida dal server' }; });
+      console.log('[Quotami form] response:', res.status, json);
+      if (res.ok && json.success) {
         form.reset();
         ok.hidden = false;
         ok.scrollIntoView({behavior:'smooth', block:'center'});
       } else {
+        if (errMsg) errMsg.textContent = '[' + res.status + '] ' + (json.message || 'errore sconosciuto');
         err.hidden = false;
       }
-    } catch(_){
+    } catch(ex){
+      console.error('[Quotami form] exception:', ex);
+      if (errMsg) errMsg.textContent = ex && ex.message ? ex.message : String(ex);
       err.hidden = false;
     } finally {
       btn.disabled = false; btn.textContent = 'Richiedi il preventivo →';
