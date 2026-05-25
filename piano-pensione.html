@@ -43,23 +43,48 @@
   .td-no { color: #aaa; }
   .td-best { color: #1a7a4a; font-weight: 600; background: rgba(255,216,77,.07); }
 
-  /* ── TAX SECTION ── */
+  /* ── TAX SECTION (colored, centered) ── */
   .tax-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
-    gap: 1.25rem; margin-top: 3rem;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; max-width: 1080px; margin: 3rem auto 0; padding: 0 5vw;
   }
+  @media (max-width: 900px) { .tax-grid { grid-template-columns: 1fr; max-width: 480px; } }
   .tax-card {
     background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow-sm);
-    transition: transform .3s cubic-bezier(.22,.68,0,1.2), box-shadow .3s;
+    border-radius: var(--radius); padding: 2.25rem 1.75rem 2rem;
+    text-align: center; position: relative; overflow: hidden;
+    transition: transform .25s cubic-bezier(.22,.68,0,1.2), box-shadow .25s, border-color .25s;
+    --tc: var(--green-dark);
   }
-  .tax-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--border-green); }
+  .tax-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: var(--tc);
+  }
+  .tax-card::after {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: var(--tc); opacity: .06; pointer-events: none;
+  }
+  .tax-card:hover { transform: translateY(-5px); box-shadow: 0 14px 32px -8px color-mix(in srgb, var(--tc) 25%, transparent); border-color: var(--tc); }
   .tax-card-num {
-    font-family: 'Inter', sans-serif; font-size: 2.2rem; font-weight: 700;
-    color: var(--primary); display: block; margin-bottom: .5rem; line-height: 1;
+    font-family: 'Inter', sans-serif; font-size: clamp(2rem, 4vw, 2.6rem); font-weight: 700;
+    color: var(--tc); display: block; margin-bottom: .65rem; line-height: 1; letter-spacing: -.02em;
   }
-  .tax-card h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: .4rem; color: var(--text); }
-  .tax-card p { font-size: .85rem; color: var(--text-muted); line-height: 1.65; }
+  .tax-card h4 {
+    font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
+    margin: 0 0 .85rem; color: var(--text);
+    position: relative; padding-bottom: .65rem;
+  }
+  .tax-card h4::after {
+    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 32px; height: 2px; background: var(--tc); border-radius: 2px;
+  }
+  .tax-card p { font-size: .9rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+  .tax-card p strong { color: var(--text); }
+  /* palette per le 3 carte */
+  .tax-card.t-deduzione { --tc: #2A9D8F; }
+  .tax-card.t-rendimenti { --tc: #4A7AE8; }
+  .tax-card.t-pensione { --tc: #E9B440; }
 
   /* ── FORM + SIMULATOR ── */
   .form-section { background: var(--bg); }
@@ -314,17 +339,17 @@
     <p class="section-sub">Quando versi, quando il fondo guadagna, quando vai in pensione: paghi sempre meno tasse.</p>
   </div>
   <div class="tax-grid">
-    <div class="tax-card">
+    <div class="tax-card t-deduzione">
       <span class="tax-card-num">€5.164</span>
       <h4>Deduzione ogni anno</h4>
       <p>I versamenti sono <strong>deducibili dal reddito IRPEF</strong> fino a €5.164,57/anno. Su aliquota 35% sono <strong>~€1.800 di tasse in meno</strong>.</p>
     </div>
-    <div class="tax-card">
+    <div class="tax-card t-rendimenti">
       <span class="tax-card-num">20%</span>
       <h4>Sui rendimenti</h4>
       <p>Il fondo paga il <strong>20%</strong> sui guadagni, contro il <strong>26%</strong> di azioni, ETF e fondi comuni.</p>
     </div>
-    <div class="tax-card">
+    <div class="tax-card t-pensione">
       <span class="tax-card-num">9 → 15%</span>
       <h4>Alla pensione</h4>
       <p>Al momento del riscatto paghi il <strong>15%</strong>. Dopo 35 anni di adesione scende al <strong>9%</strong>. (IRPEF ordinaria: 23–43%.)</p>
