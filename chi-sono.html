@@ -18,6 +18,9 @@
   .page-hero h1 .accent { color: var(--green-dark); }
   .page-hero p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 520px; }
   .page-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+  .photo-real { aspect-ratio: 1/1; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border); max-width: 420px; }
+  .photo-real img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (max-width: 800px) { .photo-real { max-width: 320px; margin: 0 auto; } }
   .photo-placeholder {
     aspect-ratio: 4/5; background: linear-gradient(135deg, var(--primary) 0%, var(--navy-mid) 100%);
     border-radius: var(--radius-lg); display: grid; place-items: center;
@@ -109,7 +112,9 @@
       <h1>Sono <span class="accent">Giacomo Ramella Pollone</span>, il volto dietro Quotami.</h1>
       <p>Collaboratore iscritto al RUI sezione E n. <strong>E000821549</strong>, opero per conto di <strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong>, società di brokeraggio iscritta al RUI sezione B. Quotami è il modo in cui porto la consulenza assicurativa di un grande broker a privati, professionisti e PMI in tutta Italia.</p>
     </div>
-    <div class="photo-placeholder">[Foto profilo professionale<br>placeholder 4:5]</div>
+    <div class="photo-real">
+      <img src="assets/giacomo.jpg" alt="Giacomo Ramella Pollone — broker assicurativo Quotami" loading="lazy" decoding="async">
+    </div>
   </div>
 </section>
 
