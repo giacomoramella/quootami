@@ -133,28 +133,42 @@
   }
   .chart-note { text-align: center; color: var(--text-muted); font-size: .8rem; margin-top: 1.5rem; }
 
-  /* ── COVERAGES ── */
-  .coverage-grid {
+  /* ── COVERAGES (centered grid, colored accents) ── */
+  .cov-grid {
     display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem; margin: 3rem auto 0; max-width: 1080px; padding: 0 5vw;
+    gap: 1.75rem 1.5rem; max-width: 1180px;
+    margin: 3rem auto 0; padding: 0 5vw;
   }
-  @media (max-width: 1000px) { .coverage-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .coverage-grid { grid-template-columns: 1fr; max-width: 480px; } }
-  .coverage-card {
+  @media (max-width: 1000px) { .cov-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .cov-grid { grid-template-columns: 1fr; max-width: 420px; } }
+  .cov-item {
+    text-align: center; padding: 1.75rem 1.25rem; border-radius: var(--radius);
     background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 2rem 1.75rem; box-shadow: var(--shadow-sm);
-    transition: transform .3s cubic-bezier(.22,.68,0,1.2), box-shadow .3s;
-    text-align: center;
+    transition: transform .25s cubic-bezier(.22,.68,0,1.2), box-shadow .25s, border-color .25s;
+    position: relative; overflow: hidden;
+    --cov-c: var(--yellow-deep);
   }
-  .coverage-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--border-green); }
-  .cov-badge {
-    display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .04em;
-    padding: .25rem .75rem; border-radius: 50px; margin-bottom: 1rem;
+  .cov-item::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--cov-c); border-radius: var(--radius) var(--radius) 0 0;
   }
+  .cov-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--cov-c); }
+  .cov-badge { display: inline-block; font-size: .66rem; font-weight: 700; letter-spacing: .08em; padding: .25rem .75rem; border-radius: 50px; margin-bottom: .85rem; text-transform: uppercase; }
   .cov-required { background: rgba(11,18,32,.1); color: var(--primary); }
-  .cov-optional { background: rgba(255,216,77,.12); color: #1a7a4a; }
-  .coverage-card h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: .55rem; color: var(--text); }
-  .coverage-card p { font-size: .85rem; color: var(--text-muted); line-height: 1.65; margin: 0; }
+  .cov-optional { background: rgba(255,216,77,.18); color: #1a7a4a; }
+  .cov-item h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; margin: 0 0 .45rem; color: var(--text); }
+  .cov-item h3::after { content: ''; display: block; width: 32px; height: 2px; background: var(--cov-c); margin: .5rem auto 0; border-radius: 2px; }
+  .cov-item p { font-size: .88rem; color: var(--text-muted); line-height: 1.6; margin: .85rem auto 0; max-width: 260px; }
+
+  /* palette per categoria */
+  .cov-item.c-rc       { --cov-c: #264653; }
+  .cov-item.c-fire     { --cov-c: #E76F51; }
+  .cov-item.c-kasko    { --cov-c: #B86A3F; }
+  .cov-item.c-nature   { --cov-c: #8E5BB5; }
+  .cov-item.c-glass    { --cov-c: #4A9EBA; }
+  .cov-item.c-injury   { --cov-c: #2A9D8F; }
+  .cov-item.c-legal    { --cov-c: #E9B440; }
+  .cov-item.c-road     { --cov-c: #5B8B3F; }
 
   /* ── QUOTE FORM ── */
   .form-section { background: var(--bg); }
@@ -384,26 +398,46 @@
     <h2 class="section-title">Cosa copre la tua polizza auto</h2>
     <p class="section-sub">Dalla RC obbligatoria alle garanzie accessorie: scegli il livello di protezione adatto a te.</p>
   </div>
-  <div class="coverage-grid">
-    <div class="coverage-card reveal">
+  <div class="cov-grid">
+    <div class="cov-item c-rc">
       <span class="cov-badge cov-required">Obbligatoria</span>
-      <h3>Responsabilità Civile (RCA)</h3>
-      <p>Copre i danni causati a persone e cose di terzi in caso di incidente. È obbligatoria per legge per tutti i veicoli a motore.</p>
+      <h3>RC Auto</h3>
+      <p>Copre i danni che provochi a terzi (persone, veicoli, cose) alla guida.</p>
     </div>
-    <div class="coverage-card reveal">
+    <div class="cov-item c-fire">
       <span class="cov-badge cov-optional">Opzionale</span>
-      <h3>Furto & Incendio</h3>
-      <p>Rimborso del valore commerciale del veicolo in caso di furto totale o parziale, e danni da incendio o scoppio.</p>
+      <h3>Furto e Incendio</h3>
+      <p>Rimborso in caso di furto, tentato furto, incendio o esplosione del veicolo.</p>
     </div>
-    <div class="coverage-card reveal">
+    <div class="cov-item c-kasko">
       <span class="cov-badge cov-optional">Opzionale</span>
-      <h3>Kasko Completa</h3>
-      <p>Copre i danni al tuo veicolo indipendentemente dalla colpa: urti, grandine, atti vandalici e incidenti con animali.</p>
+      <h3>Kasko</h3>
+      <p>Copre i danni al tuo veicolo anche se la colpa è tua: urti, ribaltamenti, uscite di strada.</p>
     </div>
-    <div class="coverage-card reveal">
+    <div class="cov-item c-nature">
+      <span class="cov-badge cov-optional">Opzionale</span>
+      <h3>Eventi naturali e atti vandalici</h3>
+      <p>Grandine, alluvioni, trombe d'aria, danneggiamenti volontari da parte di terzi.</p>
+    </div>
+    <div class="cov-item c-glass">
+      <span class="cov-badge cov-optional">Opzionale</span>
+      <h3>Cristalli</h3>
+      <p>Rottura e sostituzione di parabrezza, lunotto e finestrini.</p>
+    </div>
+    <div class="cov-item c-injury">
+      <span class="cov-badge cov-optional">Opzionale</span>
+      <h3>Infortuni del Conducente</h3>
+      <p>Indennizzo in caso di morte o invalidità del conducente, che la RC non copre.</p>
+    </div>
+    <div class="cov-item c-legal">
+      <span class="cov-badge cov-optional">Opzionale</span>
+      <h3>Tutela Legale</h3>
+      <p>Spese legali e peritali per controversie nate dalla circolazione.</p>
+    </div>
+    <div class="cov-item c-road">
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Assistenza Stradale</h3>
-      <p>Soccorso 24/7, traino gratuito, auto sostitutiva e rimborso spese alberghiere in caso di fermo prolungato.</p>
+      <p>Soccorso 24/7, traino, auto sostitutiva e rimborsi in caso di fermo.</p>
     </div>
   </div>
 </section>
