@@ -8,19 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=20260525b">
 <style>
-  /* ── RANGE NUMERICO ── */
-  .range-cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 3rem; }
-  .price-range-block { max-width: 720px; margin: 3rem auto 0; text-align: center; padding: 3rem 2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
-  .price-range-num { font-family: 'Inter', sans-serif; font-weight: 700; font-size: clamp(2rem, 5vw, 3rem); color: var(--text); margin: 0 0 .5rem; letter-spacing: -.02em; }
-  .price-range-num .accent { color: var(--yellow-deep); }
-  .price-range-sub { font-size: .95rem; color: var(--text-muted); margin: 0 auto; max-width: 480px; line-height: 1.6; }
-  .drivers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 980px; margin: 2.5rem auto 0; }
-  @media (max-width: 700px) { .drivers-grid { grid-template-columns: 1fr; max-width: 480px; } }
-  .driver-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: left; }
-  .driver-card strong { display: block; font-family: 'Inter', sans-serif; font-weight: 700; color: var(--text); font-size: .95rem; margin-bottom: .5rem; }
-  .driver-card p { font-size: .85rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
-
-  /* ── BAR CHART (vecchia, da rimuovere quando scegli) ── */
+  /* ── CHART SECTION background ── */
   .chart-section { background: var(--bg-alt); }
   .bar-chart { max-width: 720px; margin: 3rem auto 0; }
   .bar-row { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
@@ -189,40 +177,6 @@
       <span class="hstat-num">0 vincoli</span>
       <span class="hstat-label">Niente mono-mandato,<br>scegli liberamente</span>
     </div>
-  </div>
-</section>
-
-<!-- RANGE NUMERICO -->
-<section class="chart-section">
-  <div class="centered">
-    <span class="section-label">Forbice di mercato</span>
-    <h2 class="section-title">Quanto può variare<br>il prezzo della tua polizza</h2>
-    <p class="section-sub">Per un appartamento standard, la forbice tipica di mercato è ampia. Solo il preventivo personalizzato dà la cifra reale.</p>
-  </div>
-
-  <div class="price-range-block">
-    <h3 class="price-range-num">da <span class="accent">€150</span> a <span class="accent">€450</span> / anno</h3>
-    <p class="price-range-sub">Forbice tipica per un appartamento 80mq con coperture base. Le variabili individuali (vedi sotto) spostano l'ago in alto o in basso nella forbice.</p>
-  </div>
-
-  <div class="drivers-grid">
-    <div class="driver-card">
-      <strong>CAP</strong>
-      <p>L'indirizzo è il primo fattore. Compagnie diverse pesano diversamente la stessa città.</p>
-    </div>
-    <div class="driver-card">
-      <strong>Valore contenuto</strong>
-      <p>Mobili, elettrodomestici, oggetti di valore: definisce gran parte del premio.</p>
-    </div>
-    <div class="driver-card">
-      <strong>Livello di copertura</strong>
-      <p>Solo incendio, oppure pacchetto completo con furto, danni acqua e RC: scegli con me cosa serve davvero.</p>
-    </div>
-  </div>
-
-  <div class="range-cta">
-    <a href="#preventivo" class="btn-primary">Richiedi il preventivo →</a>
-    <a href="https://wa.me/393922198185" target="_blank" rel="noopener" class="btn-secondary">Scrivimi su WhatsApp</a>
   </div>
 </section>
 
