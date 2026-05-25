@@ -37,20 +37,21 @@
   .bar-best-label { margin-left:.75rem; background:var(--primary); color:#fff; font-size:.68rem; font-weight:700; padding:.2rem .6rem; border-radius:50px; white-space:nowrap; }
   .chart-note { text-align:center; color:var(--text-muted); font-size:.8rem; margin-top:1.5rem; }
 
-  /* ── COVERAGE ── */
-  .coverage-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.25rem; margin-top:3rem; }
-  .coverage-card {
-    background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius);
-    padding:1.75rem; box-shadow:var(--shadow-sm);
-    transition:transform .3s cubic-bezier(.22,.68,0,1.2),box-shadow .3s;
+  /* ── COVERAGE (text-only, centered grid) ── */
+  .cov-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 2.5rem; max-width: 1080px;
+    margin: 3.5rem auto 0; padding: 0 5vw;
   }
-  .coverage-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); border-color:var(--border-green); }
-  .cov-icon { font-size:2rem; margin-bottom:1rem; display:block; }
-  .cov-badge { display:inline-block; font-size:.68rem; font-weight:600; letter-spacing:.04em; padding:.2rem .6rem; border-radius:50px; margin-bottom:.75rem; }
-  .cov-base     { background:rgba(11,18,32,.1); color:var(--primary); }
-  .cov-optional { background:rgba(255,216,77,.12); color:#1a7a4a; }
-  .coverage-card h3 { font-family:'Inter',sans-serif; font-size:1rem; font-weight:600; margin-bottom:.4rem; color:var(--text); }
-  .coverage-card p  { font-size:.85rem; color:var(--text-muted); line-height:1.65; }
+  @media (max-width: 900px) { .cov-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 2rem; } }
+  @media (max-width: 560px) { .cov-grid { grid-template-columns: 1fr; gap: 2.25rem; max-width: 420px; } }
+  .cov-item { text-align: center; }
+  .cov-badge { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .08em; padding: .25rem .75rem; border-radius: 50px; margin-bottom: .9rem; text-transform: uppercase; }
+  .cov-base     { background: rgba(11,18,32,.08); color: var(--primary); }
+  .cov-optional { background: rgba(255,216,77,.16); color: #1a7a4a; }
+  .cov-item h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; margin: 0 0 .5rem; color: var(--text); }
+  .cov-item h3::after { content: ''; display: block; width: 32px; height: 2px; background: var(--yellow); margin: .55rem auto 0; border-radius: 2px; }
+  .cov-item p { font-size: .92rem; color: var(--text-muted); line-height: 1.65; margin: .9rem 0 0; max-width: 280px; margin-left: auto; margin-right: auto; }
 
   /* ── FORM ── */
   .form-section { background: var(--bg); }
@@ -230,44 +231,38 @@
   <div class="centered">
     <span class="section-label">Le coperture</span>
     <h2 class="section-title">Cosa copre la polizza casa</h2>
-    <p class="section-sub">Dalla protezione base alle garanzie complete: costruisci la polizza su misura per la tua abitazione.</p>
+    <p class="section-sub">Le coperture base, più quelle che davvero possono fare la differenza.</p>
   </div>
-  <div class="coverage-grid">
-    <div class="coverage-card reveal">
-      <span class="cov-icon">🔥</span>
+  <div class="cov-grid">
+    <div class="cov-item">
       <span class="cov-badge cov-base">Base</span>
-      <h3>Incendio & Scoppio</h3>
-      <p>Rimborso dei danni causati da incendio, fulmine, esplosione e scoppio alla struttura e al contenuto dell'abitazione.</p>
+      <h3>Incendio &amp; Scoppio</h3>
+      <p>Se brucia, ti rimborsiamo casa e contenuto.</p>
     </div>
-    <div class="coverage-card reveal">
-      <span class="cov-icon">🔓</span>
+    <div class="cov-item">
       <span class="cov-badge cov-base">Base</span>
-      <h3>Furto & Rapina</h3>
-      <p>Rimborso di oggetti, contanti e preziosi sottratti dall'abitazione. Include i danni da effrazione alle porte e finestre.</p>
+      <h3>Furto &amp; Rapina</h3>
+      <p>Se ti svaligiano, recuperi il valore di quello che hai perso.</p>
     </div>
-    <div class="coverage-card reveal">
-      <span class="cov-icon">🤝</span>
+    <div class="cov-item">
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>RC Capofamiglia</h3>
-      <p>Copre i danni accidentali causati a terzi da te, dai tuoi familiari conviventi e dagli animali domestici.</p>
+      <p>Tu, i tuoi cari o il cane fate un danno? Paghiamo noi.</p>
     </div>
-    <div class="coverage-card reveal">
-      <span class="cov-icon">🌊</span>
+    <div class="cov-item">
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Catastrofi Naturali</h3>
-      <p>Protezione da eventi atmosferici eccezionali: alluvioni, terremoti, frane, grandine e trombe d'aria.</p>
+      <p>Alluvione, terremoto, grandine. Imprevisti che da soli non reggi.</p>
     </div>
-    <div class="coverage-card reveal">
-      <span class="cov-icon">💧</span>
+    <div class="cov-item">
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Danni da Acqua</h3>
-      <p>Copre i danni da rottura accidentale di tubature, infiltrazioni dal tetto e danni causati a vicini.</p>
+      <p>Tubo rotto o vicino allagato. Ti copriamo entrambe le cose.</p>
     </div>
-    <div class="coverage-card reveal">
-      <span class="cov-icon">⚖️</span>
+    <div class="cov-item">
       <span class="cov-badge cov-optional">Opzionale</span>
       <h3>Tutela Legale</h3>
-      <p>Assistenza legale e rimborso spese per controversie con il condominio, i vicini o il proprietario di casa.</p>
+      <p>Lite con condominio o vicini? Avvocato e spese coperti.</p>
     </div>
   </div>
 </section>
