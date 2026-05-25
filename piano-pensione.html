@@ -85,6 +85,17 @@
   .tax-card.t-deduzione { --tc: #2A9D8F; }
   .tax-card.t-rendimenti { --tc: #4A7AE8; }
   .tax-card.t-pensione { --tc: #E9B440; }
+  .tax-kicker {
+    max-width: 720px; margin: 3rem auto 0; text-align: center;
+    padding: 2rem 1.5rem; background: linear-gradient(135deg, rgba(42,157,143,.08) 0%, rgba(233,180,64,.08) 100%);
+    border: 1px solid rgba(42,157,143,.2); border-radius: var(--radius);
+  }
+  .tax-kicker-headline {
+    font-family: 'Inter', sans-serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 700; color: var(--text); line-height: 1.35; margin: 0 0 .6rem;
+  }
+  .tax-kicker-headline strong { color: #1a7a4a; }
+  .tax-kicker-sub { font-size: .92rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
 
   /* ── FORM + SIMULATOR ── */
   .form-section { background: var(--bg); }
@@ -354,6 +365,11 @@
       <h4>Alla pensione</h4>
       <p>Al momento del riscatto paghi il <strong>15%</strong>. Dopo 35 anni di adesione scende al <strong>9%</strong>. (IRPEF ordinaria: 23–43%.)</p>
     </div>
+  </div>
+
+  <div class="tax-kicker">
+    <p class="tax-kicker-headline">Versi <strong>100 €</strong>, te ne tornano fino a <strong>43 €</strong> dallo Stato.</p>
+    <p class="tax-kicker-sub">Il fondo pensione ti restituisce una parte dei soldi che versi, sotto forma di tasse in meno.</p>
   </div>
 </section>
 
