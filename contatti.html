@@ -51,9 +51,10 @@
   .where-info p { color: var(--text-2); font-size: 1rem; line-height: 1.75; margin-bottom: 1rem; }
   .where-info p strong { color: var(--text); }
   .where-info h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin: 2rem 0 .5rem; }
-  .map-placeholder { aspect-ratio: 4/3; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); display: grid; place-items: center; padding: 2rem; text-align: center; color: var(--text-muted); }
-  .map-placeholder p { margin: 0; font-size: .87rem; line-height: 1.6; }
-  .map-placeholder code { background: var(--bg-alt); padding: .15rem .5rem; border-radius: 6px; font-size: .78rem; }
+  .map-wrap { display: flex; flex-direction: column; gap: .75rem; }
+  .map-iframe { width: 100%; aspect-ratio: 4/3; border: 1px solid var(--border); border-radius: var(--radius); display: block; filter: grayscale(.15); }
+  .map-link { display: inline-flex; align-items: center; gap: .4rem; align-self: flex-start; padding: .55rem 1.1rem; border-radius: 50px; background: var(--bg-alt); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 600; font-size: .85rem; text-decoration: none; border: 1px solid var(--border); transition: background .2s, border-color .2s, color .2s; }
+  .map-link:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
   @media (max-width: 800px) { .where-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -229,9 +230,17 @@
       <p style="font-size:.88rem;color:var(--text-muted)">Per emergenze sinistri fuori orario, il broker mette a disposizione un numero verde dedicato. Te lo comunico al momento della sottoscrizione.</p>
     </div>
 
-    <div class="map-placeholder">
-      <p style="font-family:'Inter',sans-serif;font-size:1rem;color:var(--text);margin-bottom:.5rem">📍 [Mappa Google]</p>
-      <p>Sostituire questo blocco con un <code>&lt;iframe&gt;</code> di Google Maps della sede effettiva del broker.<br><br>Da Google Maps: <em>Condividi → Incorpora una mappa</em>.</p>
+    <div class="map-wrap">
+      <iframe
+        class="map-iframe"
+        src="https://www.google.com/maps?q=Via+Torino+47,+13900+Biella+BI&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Sede broker — Via Torino 47, 13900 Biella"
+        allowfullscreen></iframe>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Via+Torino+47%2C+13900+Biella+BI" target="_blank" rel="noopener">
+        <span aria-hidden="true">📍</span> Apri su Google Maps
+      </a>
     </div>
   </div>
 </section>
