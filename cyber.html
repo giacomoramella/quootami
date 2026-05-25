@@ -7,7 +7,7 @@
 <meta name="description" content="Polizza Cyber per privati, PMI e aziende: protezione contro ransomware, furto d'identità, frodi su carte e home banking, business interruption. Confronto e consulenza personale in tutta Italia.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260512i">
+<link rel="stylesheet" href="style.css?v=20260525b">
 <style>
   /* ── PAGE: CYBER ── */
   .page-hero { padding: 9rem 5vw 5rem; background: var(--bg); position: relative; overflow: hidden; }
@@ -294,11 +294,16 @@
   </div>
 
   <div class="form-card">
-    <form id="cyber-form" onsubmit="cyberSubmit(event)">
+    <form id="cyber-form" novalidate>
+      <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
+      <input type="hidden" name="subject" value="Quotami • Richiesta preventivo Cyber">
+      <input type="hidden" name="from_name" value="Quotami — sito web">
+      <input type="hidden" name="redirect" value="false">
+
       <div class="form-row">
         <div class="form-group">
           <label for="cy-type">Tipologia *</label>
-          <select id="cy-type" required>
+          <select id="cy-type" name="Tipologia" required>
             <option value="">Seleziona…</option>
             <option>Privato / famiglia</option>
             <option>Professionista</option>
@@ -308,44 +313,50 @@
         </div>
         <div class="form-group">
           <label for="cy-employees">N. dipendenti (se azienda)</label>
-          <input type="text" id="cy-employees">
+          <input type="text" id="cy-employees" name="N. dipendenti">
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group">
           <label for="cy-name">Nome e cognome *</label>
-          <input type="text" id="cy-name" required>
+          <input type="text" id="cy-name" name="Nome e cognome" required>
         </div>
         <div class="form-group">
           <label for="cy-tel">Telefono *</label>
-          <input type="tel" id="cy-tel" required>
+          <input type="tel" id="cy-tel" name="Telefono" required>
         </div>
       </div>
 
       <div class="form-row">
         <div class="form-group">
           <label for="cy-email">Email *</label>
-          <input type="email" id="cy-email" required>
+          <input type="email" id="cy-email" name="Email" required>
         </div>
         <div class="form-group">
           <label for="cy-city">Città</label>
-          <input type="text" id="cy-city">
+          <input type="text" id="cy-city" name="Città">
         </div>
       </div>
 
       <div class="form-group" style="margin-bottom:1rem">
         <label for="cy-msg">Note (incidenti pregressi, dati trattati, IT interno o esterno…)</label>
-        <textarea id="cy-msg"></textarea>
+        <textarea id="cy-msg" name="Note"></textarea>
       </div>
 
       <label class="form-check">
-        <input type="checkbox" required>
-        <span>Ho letto l'informativa privacy e acconsento al trattamento dei dati. *</span>
+        <input type="checkbox" name="Consenso privacy" value="Sì — accettato" required>
+        <span>Ho letto l'<a href="privacy.html" target="_blank">informativa privacy</a> e acconsento al trattamento dei dati. *</span>
       </label>
 
-      <button type="submit" class="form-submit">Invia richiesta →</button>
+      <button type="submit" class="form-submit" id="cy-submit">Invia richiesta →</button>
+
       <div id="cy-success" class="form-success">✓ Richiesta ricevuta. Ti contatto entro la giornata lavorativa.</div>
+      <div id="cy-error" class="form-feedback form-error" hidden>
+        <strong>Errore di invio</strong>
+        <p>Riprova o scrivimi a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a> o su <a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">Dettaglio tecnico: <code id="cy-error-msg" style="font-family:monospace;"></code></p>
+      </div>
     </form>
   </div>
 </section>
@@ -424,11 +435,28 @@ function toggleFaq(btn) {
   document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
-function cyberSubmit(e) {
-  e.preventDefault();
-  document.getElementById('cy-success').classList.add('show');
-  document.getElementById('cyber-form').reset();
-}
+(function(){
+  var form = document.getElementById('cyber-form');
+  if (!form) return;
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var btn = document.getElementById('cy-submit');
+    var ok = document.getElementById('cy-success');
+    var err = document.getElementById('cy-error');
+    var errMsg = document.getElementById('cy-error-msg');
+    ok.classList.remove('show'); err.hidden = true;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    btn.disabled = true; var origLabel = btn.textContent; btn.textContent = 'Invio in corso…';
+    try {
+      var fd = new FormData(form);
+      var res = await fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body: fd });
+      var json = await res.json().catch(function(){ return { success:false, message:'Risposta non valida' }; });
+      if (res.ok && json.success) { form.reset(); ok.classList.add('show'); ok.scrollIntoView({behavior:'smooth',block:'center'}); }
+      else { if (errMsg) errMsg.textContent = '[' + res.status + '] ' + (json.message || 'errore'); err.hidden = false; }
+    } catch(ex){ if (errMsg) errMsg.textContent = ex.message || String(ex); err.hidden = false; }
+    finally { btn.disabled = false; btn.textContent = origLabel; }
+  });
+})();
 </script>
 <script src="components.js?v=20260525a"></script>
 </body>

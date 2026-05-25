@@ -886,3 +886,24 @@ body.nav-open .floating-cta { opacity: 0; visibility: hidden; pointer-events: no
   .tb-item { border-right: none; border-bottom: 1px solid var(--border); width: 100%; justify-content: center; }
   .tb-item:last-child { border-bottom: none; }
 }
+
+/* ── FORM FEEDBACK & CONSENT (shared across all quote forms) ── */
+.form-consent {
+  display: flex; align-items: flex-start; gap: .65rem;
+  font-size: .82rem; color: var(--text-muted); line-height: 1.5;
+  margin-top: 1.25rem; cursor: pointer;
+}
+.form-consent input[type="checkbox"] { margin-top: .15rem; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--green-dark); }
+.form-consent a { color: var(--green-dark); text-decoration: underline; }
+.form-feedback {
+  margin-top: 1.5rem; padding: 1.25rem 1.5rem;
+  border-radius: 12px; font-size: .9rem; line-height: 1.6;
+}
+.form-feedback strong { display: block; margin-bottom: .35rem; font-size: 1rem; }
+.form-feedback p { margin: 0; color: inherit; }
+.form-feedback a { color: inherit; font-weight: 600; text-decoration: underline; }
+.form-feedback.form-error {
+  background: rgba(212, 58, 47, .07); border: 1px solid rgba(212, 58, 47, .25);
+  color: #c2382f;
+}
+.form-submit[disabled] { opacity: .65; cursor: wait; }

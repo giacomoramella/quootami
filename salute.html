@@ -7,7 +7,7 @@
 <meta name="description" content="Polizze Salute: sanitarie con rete convenzionata, infortuni, tutela del reddito (LTC, invalidità), vita TCM. Soluzioni per famiglie, professionisti e imprese in tutta Italia.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260512i">
+<link rel="stylesheet" href="style.css?v=20260525b">
 <style>
   .page-hero { padding: 9rem 5vw 5rem; background: var(--bg); position: relative; overflow: hidden; }
   .page-hero .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
@@ -219,11 +219,16 @@
     <p class="section-sub">Sulle polizze Salute il prezzo non è la prima variabile. Servono dati su composizione familiare e situazione: ti chiamo io e li raccogliamo insieme.</p>
   </div>
   <div class="form-card">
-    <form id="salute-form" onsubmit="saluteSubmit(event)">
+    <form id="salute-form" novalidate>
+      <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
+      <input type="hidden" name="subject" value="Quotami • Richiesta preventivo Salute/Vita">
+      <input type="hidden" name="from_name" value="Quotami — sito web">
+      <input type="hidden" name="redirect" value="false">
+
       <div class="form-row">
         <div class="form-group">
           <label for="sa-line">Cosa ti interessa *</label>
-          <select id="sa-line" required>
+          <select id="sa-line" name="Linea" required>
             <option value="">Seleziona…</option>
             <option>Polizza Sanitaria individuale</option>
             <option>Sanitaria familiare</option>
@@ -234,20 +239,26 @@
             <option>Non lo so ancora</option>
           </select>
         </div>
-        <div class="form-group"><label for="sa-age">Età</label><input type="text" id="sa-age"></div>
+        <div class="form-group"><label for="sa-age">Età</label><input type="text" id="sa-age" name="Età"></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label for="sa-name">Nome e cognome *</label><input type="text" id="sa-name" required></div>
-        <div class="form-group"><label for="sa-tel">Telefono *</label><input type="tel" id="sa-tel" required></div>
+        <div class="form-group"><label for="sa-name">Nome e cognome *</label><input type="text" id="sa-name" name="Nome e cognome" required></div>
+        <div class="form-group"><label for="sa-tel">Telefono *</label><input type="tel" id="sa-tel" name="Telefono" required></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label for="sa-email">Email *</label><input type="email" id="sa-email" required></div>
-        <div class="form-group"><label for="sa-city">Città</label><input type="text" id="sa-city"></div>
+        <div class="form-group"><label for="sa-email">Email *</label><input type="email" id="sa-email" name="Email" required></div>
+        <div class="form-group"><label for="sa-city">Città</label><input type="text" id="sa-city" name="Città"></div>
       </div>
-      <div class="form-group" style="margin-bottom:1rem"><label for="sa-msg">Note (composizione familiare, esigenze, polizze già attive…)</label><textarea id="sa-msg"></textarea></div>
-      <label class="form-check"><input type="checkbox" required><span>Ho letto l'informativa privacy e acconsento al trattamento dei dati. *</span></label>
-      <button type="submit" class="form-submit">Invia richiesta →</button>
+      <div class="form-group" style="margin-bottom:1rem"><label for="sa-msg">Note (composizione familiare, esigenze, polizze già attive…)</label><textarea id="sa-msg" name="Note"></textarea></div>
+      <label class="form-check"><input type="checkbox" name="Consenso privacy" value="Sì — accettato" required><span>Ho letto l'<a href="privacy.html" target="_blank">informativa privacy</a> e acconsento al trattamento dei dati. *</span></label>
+      <button type="submit" class="form-submit" id="sa-submit">Invia richiesta →</button>
+
       <div id="sa-success" class="form-success">✓ Richiesta inviata. Ti contatto entro la giornata lavorativa.</div>
+      <div id="sa-error" class="form-feedback form-error" hidden>
+        <strong>Errore di invio</strong>
+        <p>Riprova o scrivimi a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a> o su <a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">Dettaglio tecnico: <code id="sa-error-msg" style="font-family:monospace;"></code></p>
+      </div>
     </form>
   </div>
 </section>
@@ -309,7 +320,28 @@
 
 <script>
 function toggleFaq(btn) { const item = btn.closest('.faq-item'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open')); if (!isOpen) item.classList.add('open'); }
-function saluteSubmit(e) { e.preventDefault(); document.getElementById('sa-success').classList.add('show'); document.getElementById('salute-form').reset(); }
+(function(){
+  var form = document.getElementById('salute-form');
+  if (!form) return;
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var btn = document.getElementById('sa-submit');
+    var ok = document.getElementById('sa-success');
+    var err = document.getElementById('sa-error');
+    var errMsg = document.getElementById('sa-error-msg');
+    ok.classList.remove('show'); err.hidden = true;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    btn.disabled = true; var origLabel = btn.textContent; btn.textContent = 'Invio in corso…';
+    try {
+      var fd = new FormData(form);
+      var res = await fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body: fd });
+      var json = await res.json().catch(function(){ return { success:false, message:'Risposta non valida' }; });
+      if (res.ok && json.success) { form.reset(); ok.classList.add('show'); ok.scrollIntoView({behavior:'smooth',block:'center'}); }
+      else { if (errMsg) errMsg.textContent = '[' + res.status + '] ' + (json.message || 'errore'); err.hidden = false; }
+    } catch(ex){ if (errMsg) errMsg.textContent = ex.message || String(ex); err.hidden = false; }
+    finally { btn.disabled = false; btn.textContent = origLabel; }
+  });
+})();
 </script>
 <script src="components.js?v=20260525a"></script>
 </body>

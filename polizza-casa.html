@@ -6,7 +6,7 @@
 <title>Polizza Casa – Quotami</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260512i">
+<link rel="stylesheet" href="style.css?v=20260525b">
 <style>
   /* ── BAR CHART ── */
   .chart-section { background: var(--bg-alt); }
@@ -302,32 +302,87 @@
   </div>
 
   <div class="quote-box">
-    <div class="form-row single">
-      <div class="form-group">
-        <label>CAP dell'abitazione</label>
-        <input type="text" id="c-cap" placeholder="es. 00100" maxlength="5">
-        <span class="field-err" id="c-cap-err"></span>
+    <form id="casa-form" novalidate>
+      <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
+      <input type="hidden" name="subject" value="Quotami • Richiesta preventivo Casa">
+      <input type="hidden" name="from_name" value="Quotami — sito web">
+      <input type="hidden" name="redirect" value="false">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="c-nome">Nome e cognome *</label>
+          <input type="text" id="c-nome" name="Nome e cognome" placeholder="Mario Rossi" required>
+        </div>
+        <div class="form-group">
+          <label for="c-tel">Telefono *</label>
+          <input type="tel" id="c-tel" name="Telefono" placeholder="+39 333 1234567" required>
+        </div>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Superficie (mq)</label>
-        <input type="number" id="c-mq" placeholder="es. 80" min="20" max="500">
-        <span class="field-err" id="c-mq-err"></span>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="c-email">Email *</label>
+          <input type="email" id="c-email" name="Email" placeholder="mario@esempio.it" required>
+        </div>
+        <div class="form-group">
+          <label for="c-cap">CAP dell'abitazione *</label>
+          <input type="text" id="c-cap" name="CAP abitazione" placeholder="13900" maxlength="5" pattern="[0-9]{5}" inputmode="numeric" required>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Valore del contenuto (€)</label>
-        <input type="number" id="c-contenuto" placeholder="es. 30000" min="1000" max="500000">
-        <span class="field-err" id="c-contenuto-err"></span>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="c-mq">Superficie (mq)</label>
+          <input type="number" id="c-mq" name="Superficie mq" placeholder="es. 80" min="20" max="500">
+        </div>
+        <div class="form-group">
+          <label for="c-contenuto">Valore del contenuto (€)</label>
+          <input type="number" id="c-contenuto" name="Valore contenuto" placeholder="es. 30000" min="1000" max="500000">
+        </div>
       </div>
-    </div>
-    <button id="c-btn" class="btn-primary form-submit" onclick="confrontaCasa()">
-      Ottieni preventivo →
-    </button>
-    <p class="form-note">🔒 Dati protetti · Nessun costo · Nessun obbligo di acquisto</p>
-    <div class="form-loading" id="c-loading"><div class="spinner"></div>Stiamo confrontando le migliori offerte…</div>
-    <div class="results-wrap" id="c-results"></div>
+
+      <label class="form-consent">
+        <input type="checkbox" name="Consenso privacy" value="Sì — accettato" required>
+        <span>Acconsento al trattamento dei miei dati personali per essere ricontattato (<a href="privacy.html" target="_blank">privacy policy</a>) *</span>
+      </label>
+
+      <button type="submit" class="btn-primary form-submit" id="c-btn">Richiedi preventivo →</button>
+      <p class="form-note">🔒 Dati protetti · Nessun costo · Nessun obbligo di acquisto</p>
+
+      <div class="form-feedback form-success" id="c-success" hidden>
+        <strong>Richiesta inviata! ✓</strong>
+        <p>Ti ricontatto entro 24 ore lavorative. Per emergenze: <a href="https://wa.me/393922198185" target="_blank">WhatsApp</a>.</p>
+      </div>
+      <div class="form-feedback form-error" id="c-error" hidden>
+        <strong>Errore di invio</strong>
+        <p>Riprova o scrivimi a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a>.</p>
+        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">Dettaglio tecnico: <code id="c-error-msg" style="font-family:monospace;"></code></p>
+      </div>
+    </form>
   </div>
+
+  <script>
+  (function(){
+    var form = document.getElementById('casa-form');
+    if (!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var btn = document.getElementById('c-btn');
+      var ok = document.getElementById('c-success');
+      var err = document.getElementById('c-error');
+      var errMsg = document.getElementById('c-error-msg');
+      ok.hidden = true; err.hidden = true;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      btn.disabled = true; var origLabel = btn.textContent; btn.textContent = 'Invio in corso…';
+      try {
+        var fd = new FormData(form);
+        var res = await fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body: fd });
+        var json = await res.json().catch(function(){ return { success:false, message:'Risposta non valida' }; });
+        if (res.ok && json.success) { form.reset(); ok.hidden = false; ok.scrollIntoView({behavior:'smooth',block:'center'}); }
+        else { if (errMsg) errMsg.textContent = '[' + res.status + '] ' + (json.message || 'errore'); err.hidden = false; }
+      } catch(ex){ if (errMsg) errMsg.textContent = ex.message || String(ex); err.hidden = false; }
+      finally { btn.disabled = false; btn.textContent = origLabel; }
+    });
+  })();
+  </script>
 </section>
 
 <!-- BENEFITS -->
