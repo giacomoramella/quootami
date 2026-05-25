@@ -102,6 +102,18 @@
   }
   .form-success.show { display: block; }
 
+  /* ── CYBER PROS (vantaggi sotto i segmenti) ── */
+  .cyber-pros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1180px; margin: 3rem auto 0; padding: 0 5vw; }
+  @media (max-width: 1000px) { .cyber-pros { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .cyber-pros { grid-template-columns: 1fr; max-width: 420px; } }
+  .cyber-pro { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 1.25rem; text-align: center; position: relative; overflow: hidden; transition: transform .25s, box-shadow .25s, border-color .25s; }
+  .cyber-pro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--cp); }
+  .cyber-pro:hover { transform: translateY(-4px); box-shadow: 0 12px 28px -8px color-mix(in srgb, var(--cp) 25%, transparent); border-color: var(--cp); }
+  .cyber-pro-num { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--cp); display: block; line-height: 1; margin-bottom: .75rem; font-variant-numeric: tabular-nums; }
+  .cyber-pro h4 { font-family: 'Inter', sans-serif; font-size: .98rem; font-weight: 700; color: var(--text); margin: 0 0 .55rem; }
+  .cyber-pro h4::after { content: ''; display: block; width: 28px; height: 2px; background: var(--cp); margin: .55rem auto 0; border-radius: 2px; }
+  .cyber-pro p { font-size: .87rem; color: var(--text-muted); line-height: 1.6; margin: .85rem 0 0; }
+
   @media (max-width: 700px) { .form-row { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -215,6 +227,35 @@
         <li>Responsabilità GDPR estesa</li>
       </ul>
     </article>
+  </div>
+
+  <!-- VANTAGGI -->
+  <div class="centered" style="margin-top: 5rem">
+    <span class="section-label">Perché ti conviene</span>
+    <h2 class="section-title">Cosa ottieni con una polizza cyber.</h2>
+    <p class="section-sub">Quattro vantaggi concreti quando qualcosa va storto online.</p>
+  </div>
+  <div class="cyber-pros">
+    <div class="cyber-pro" style="--cp:#2A9D8F">
+      <span class="cyber-pro-num">01</span>
+      <h4>Assistenza immediata 24/7</h4>
+      <p>Quando ti accorgi del problema, parli subito con esperti veri. Niente call center, niente attese.</p>
+    </div>
+    <div class="cyber-pro" style="--cp:#4A9EBA">
+      <span class="cyber-pro-num">02</span>
+      <h4>Recupero dati e sistemi</h4>
+      <p>Tecnici, decrittazione, ripristino: la compagnia paga. Tu non metti un euro di tasca tua.</p>
+    </div>
+    <div class="cyber-pro" style="--cp:#E76F51">
+      <span class="cyber-pro-num">03</span>
+      <h4>Rimborso perdite economiche</h4>
+      <p>Conto svuotato, attività ferma per giorni, frode bancaria: ricevi un indennizzo per il danno.</p>
+    </div>
+    <div class="cyber-pro" style="--cp:#E9B440">
+      <span class="cyber-pro-num">04</span>
+      <h4>Tutela legale e GDPR</h4>
+      <p>Avvocato, perito, notifica al Garante e comunicazioni ai clienti: gestiscono loro.</p>
+    </div>
   </div>
 </section>
 
