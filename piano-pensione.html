@@ -228,6 +228,16 @@
   .fund-card.c-open       { --fc: #4A9EBA; }
   .fund-card.c-pip        { --fc: #E9B440; }
 
+  /* ── PROS BLOCKS (2 vantaggi per fondo) ── */
+  .pros-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1080px; margin: 2.5rem auto 0; }
+  @media (max-width: 900px) { .pros-grid { grid-template-columns: 1fr; max-width: 600px; } }
+  .pros-block { padding: 1.5rem; background: color-mix(in srgb, var(--pc) 5%, transparent); border-left: 4px solid var(--pc); border-radius: 8px; }
+  .pros-label { display: block; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--pc); margin-bottom: .85rem; }
+  .pros-block ol { padding-left: 1.25rem; margin: 0; }
+  .pros-block ol li { font-size: .9rem; color: var(--text-muted); line-height: 1.65; padding: .35rem 0; }
+  .pros-block ol li strong { color: var(--text); }
+  .pros-block ol li::marker { color: var(--pc); font-weight: 700; }
+
   /* ── TFR COMPARE ── */
   .tfr-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: stretch; max-width: 1080px; margin: 3rem auto 0; }
   @media (max-width: 800px) { .tfr-compare { grid-template-columns: 1fr; gap: 1.25rem; max-width: 540px; } .tfr-vs { display: none; } }
@@ -463,6 +473,30 @@
         <li>Garanzie aggiuntive possibili</li>
         <li>Ideali per autonomi</li>
       </ul>
+    </div>
+  </div>
+
+  <div class="pros-grid">
+    <div class="pros-block" style="--pc:#2A9D8F">
+      <span class="pros-label">Perché scegliere un Negoziale</span>
+      <ol>
+        <li><strong>Costi bassissimi</strong> — fino a 10 volte meno di un PIP. Su 30 anni significa decine di migliaia di euro in più alla pensione.</li>
+        <li><strong>Contributo del datore</strong> — soldi che il tuo capo versa solo se sei iscritto al fondo del CCNL. Quasi sempre 1-2% della RAL.</li>
+      </ol>
+    </div>
+    <div class="pros-block" style="--pc:#4A9EBA">
+      <span class="pros-label">Perché scegliere un Aperto</span>
+      <ol>
+        <li><strong>Aperto a tutti</strong> — dipendenti senza fondo di categoria, autonomi, professionisti, persino i minorenni con i genitori.</li>
+        <li><strong>Flessibilità d'investimento</strong> — più linee tra cui scegliere (garantita, prudente, bilanciata, azionaria) e cambio gratuito ogni anno.</li>
+      </ol>
+    </div>
+    <div class="pros-block" style="--pc:#E9B440">
+      <span class="pros-label">Perché scegliere un PIP</span>
+      <ol>
+        <li><strong>Per chi non ha alternative</strong> — autonomi e professionisti senza CCNL: spesso è l'unica via per avere previdenza complementare.</li>
+        <li><strong>Garanzie assicurative</strong> — alcune polizze includono protezione in caso di premorienza o invalidità durante il piano.</li>
+      </ol>
     </div>
   </div>
 </section>
