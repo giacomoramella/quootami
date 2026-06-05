@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Polizza Auto – Quotami</title>
+<title>Polizza Auto – Quootami</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=20260525c">
@@ -267,7 +267,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+  <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
   <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
   <ul>
     <li class="has-mega">
@@ -306,7 +306,7 @@
       <div class="mega-col">
             <h4><a href="polizza-auto.html">Auto aziendali</a></h4>
           </div></div></div></li>
-    <li><a href="contatti.html" class="nav-cta">Contatti</a></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con Quootami →</a></li>
   </ul>
 </nav>
 
@@ -317,7 +317,7 @@
 
   <div class="hero-eyebrow"><span class="dot"></span>RC Auto obbligatoria · Furto, Incendio & Kasko</div>
 
-  <h1>Quotami l'RC <span class="hero-accent">giusta.</span></h1>
+  <h1>Quootami l'RC <span class="hero-accent">giusta.</span></h1>
 
   <p class="hero-sub">Confrontiamo la polizza migliore per le tue esigenze.</p>
 
@@ -380,7 +380,7 @@
       <p>Io le confronto tutte per te.</p>
     </div>
     <div class="range-explain-item">
-      <strong>Quotami ti porta la migliore.</strong>
+      <strong>Quootami ti porta la migliore.</strong>
       <p>Quella più conveniente per la tua situazione.</p>
     </div>
   </div>
@@ -446,14 +446,14 @@
   <div class="centered">
     <span class="section-label">Preventivo gratuito</span>
     <h2 class="section-title">Richiedi il tuo<br>preventivo personalizzato</h2>
-    <p class="section-sub">Compila i tuoi dati: Quotami ti contatta io entro 24h con le migliori offerte delle compagnie partner.</p>
+    <p class="section-sub">Compila i tuoi dati: Quootami ti contatta io entro 24h con le migliori offerte delle compagnie partner.</p>
   </div>
 
   <div class="quote-box">
     <form id="quote-form-auto" class="quote-form" novalidate>
       <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
-      <input type="hidden" name="subject" value="Quotami • Richiesta preventivo RC Auto">
-      <input type="hidden" name="from_name" value="Quotami — sito web">
+      <input type="hidden" name="subject" value="Quootami • Richiesta preventivo RC Auto">
+      <input type="hidden" name="from_name" value="Quootami — sito web">
       <input type="hidden" name="redirect" value="false">
 
       <div class="form-row">
@@ -533,7 +533,7 @@
         body: fd
       });
       var json = await res.json().catch(function(){ return { success:false, message:'Risposta non valida dal server' }; });
-      console.log('[Quotami form] response:', res.status, json);
+      console.log('[Quootami form] response:', res.status, json);
       if (res.ok && json.success) {
         form.reset();
         ok.hidden = false;
@@ -543,7 +543,7 @@
         err.hidden = false;
       }
     } catch(ex){
-      console.error('[Quotami form] exception:', ex);
+      console.error('[Quootami form] exception:', ex);
       if (errMsg) errMsg.textContent = ex && ex.message ? ex.message : String(ex);
       err.hidden = false;
     } finally {
@@ -564,7 +564,7 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand footer-col footer-col--collab">
-      <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+      <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
       <p>Iscritto RUI sez. E</p>
       <span class="footer-rui-num">n. E000821549</span>
       <p>📞 <a href="tel:+393922198185">+39 392 219 8185</a></p>
@@ -593,7 +593,7 @@
   </p>
 
   <div class="footer-bottom">
-    <p>© 2026 Quotami · gestito da Sisto Assicurazioni S.a.s. · P.IVA 02696750021 · RUI sez. B n. B000639183</p>
+    <p>© 2026 Quootami · gestito da Sisto Assicurazioni S.a.s. · P.IVA 02696750021 · RUI sez. B n. B000639183</p>
   </div>
 </footer>
 

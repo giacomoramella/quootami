@@ -1,4 +1,4 @@
-# Audit di sicurezza — Quotami
+# Audit di sicurezza — Quootami
 
 Stato della sicurezza del sito dopo l'upgrade del 25 maggio 2026.
 
@@ -16,7 +16,7 @@ Le banche italiane (Intesa, UniCredit, ecc.) hanno difese stratificate che inclu
 - Certificazioni ISO 27001
 - Disaster Recovery plan
 
-Un sito statico come Quotami **non può avere identico livello di una banca** (non gestisce conti né credenziali), ma può raggiungere **lo stesso livello sui controlli HTTP/CSP/TLS**, che è il livello tecnicamente rilevante per il browser.
+Un sito statico come Quootami **non può avere identico livello di una banca** (non gestisce conti né credenziali), ma può raggiungere **lo stesso livello sui controlli HTTP/CSP/TLS**, che è il livello tecnicamente rilevante per il browser.
 
 ---
 

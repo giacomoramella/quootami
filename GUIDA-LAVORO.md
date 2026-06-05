@@ -1,4 +1,4 @@
-# Guida — Lavorare sul sito Quotami con Claude
+# Guida — Lavorare sul sito Quootami con Claude
 
 ## 1. Il flusso base in 3 mosse
 
@@ -42,7 +42,7 @@ cd ~/Desktop/quotami && git pull --rebase origin main && git push
 
 ### ✅ Buone richieste
 
-> "Su polizza-auto, cambia il titolo in 'Quotami l'RC giusta'"
+> "Su polizza-auto, cambia il titolo in 'Quootami l'RC giusta'"
 
 > "Sotto la sezione coperture aggiungi un blocco con 3 vantaggi colorati"
 
@@ -101,10 +101,10 @@ cd ~/Desktop/quotami && git pull --rebase origin main && git push
 - Verde oliva `#5B8B3F` — assistenza
 
 ### Stile titoli H1
-Tutti uguali: testo nero + **barra gialla sotto la parola accent**. Esempio: `Quotami l'RC <span class="hero-accent">giusta.</span>`
+Tutti uguali: testo nero + **barra gialla sotto la parola accent**. Esempio: `Quootami l'RC <span class="hero-accent">giusta.</span>`
 
 ### Voce del sito
-Terza persona — non si dice "io" o "una persona". Si parla di "Quotami", "il broker", o si usano forme impersonali ("verrai contattato", "Quotami ti segue"). Eccezione: pagine legali (privacy, cookie, trasparenza) — qui per obbligo IVASS la prima persona è richiesta.
+Terza persona — non si dice "io" o "una persona". Si parla di "Quootami", "il broker", o si usano forme impersonali ("verrai contattato", "Quootami ti segue"). Eccezione: pagine legali (privacy, cookie, trasparenza) — qui per obbligo IVASS la prima persona è richiesta.
 
 ---
 

@@ -1,5 +1,5 @@
 /* ================================================================
-   Quotami — Shared Components
+   Quootami — Shared Components
    Sticky bar · WhatsApp button · Exit intent popup · Mobile nav
    ================================================================ */
 

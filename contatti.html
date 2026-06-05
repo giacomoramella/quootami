@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contatti · Quotami — Parla direttamente con Giacomo Ramella Pollone</title>
+<title>Contatti · Quootami — Parla direttamente con Giacomo Ramella Pollone</title>
 <meta name="description" content="Contatti diretti: telefono, email, WhatsApp. Form di contatto con consensi GDPR separati. Sede di ricevimento e orari.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -68,7 +68,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+  <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
   <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
   <ul>
     <li class="has-mega"><a href="#">Per privati</a><div class="mega-panel"><div class="mega-grid">
@@ -103,7 +103,7 @@
       <div class="mega-col">
             <h4><a href="polizza-auto.html">Auto aziendali</a></h4>
           </div></div></div></li>
-    <li><a href="contatti.html" class="nav-cta active">Contatti</a></li>
+    <li><a href="contatti.html" class="nav-cta active">Parla con Quootami →</a></li>
   </ul>
 </nav>
 
@@ -152,8 +152,8 @@
   <div class="form-card">
     <form id="ct-form" novalidate>
       <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
-      <input type="hidden" name="subject" value="Quotami • Nuovo messaggio dal modulo di contatto">
-      <input type="hidden" name="from_name" value="Quotami — sito web">
+      <input type="hidden" name="subject" value="Quootami • Nuovo messaggio dal modulo di contatto">
+      <input type="hidden" name="from_name" value="Quootami — sito web">
       <input type="hidden" name="redirect" value="false">
 
       <div class="form-row">
@@ -213,7 +213,7 @@
 
       <button type="submit" class="form-submit" id="ct-submit">Invia il messaggio →</button>
 
-      <div id="ct-success" class="form-success">✓ Grazie! Ho ricevuto il tuo messaggio. Quotami ti contatta personalmente entro la giornata lavorativa.</div>
+      <div id="ct-success" class="form-success">✓ Grazie! Ho ricevuto il tuo messaggio. Quootami ti contatta personalmente entro la giornata lavorativa.</div>
       <div id="ct-error" class="form-feedback form-error" hidden>
         <strong>Errore di invio</strong>
         <p>Qualcosa non ha funzionato. Riprova o contattaci direttamente a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a> o su <a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a>.</p>
@@ -262,7 +262,7 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand footer-col footer-col--collab">
-      <a class="logo" href="index.html">quotami<span class="logo-dot"></span></a>
+      <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
       <p>Iscritto RUI sez. E</p>
       <span class="footer-rui-num">n. E000821549</span>
       <p>📞 <a href="tel:+393922198185">+39 392 219 8185</a></p>
@@ -286,7 +286,7 @@
     Questo sito è gestito da <strong>Giacomo Ramella Pollone</strong>, collaboratore iscritto al RUI sezione E n. <strong>E000821549</strong>, operante per conto di <strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong>, broker iscritto al RUI sezione B n. <strong>B000639183</strong>. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile presso la sede del broker. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener">www.ivass.it</a>.
   </p>
   <div class="footer-bottom">
-    <p>© 2026 Quotami · gestito da Sisto Assicurazioni S.a.s. · P.IVA 02696750021 · RUI sez. B n. B000639183</p>
+    <p>© 2026 Quootami · gestito da Sisto Assicurazioni S.a.s. · P.IVA 02696750021 · RUI sez. B n. B000639183</p>
   </div>
 </footer>
 
@@ -313,7 +313,7 @@
         body: fd
       });
       var json = await res.json().catch(function(){ return { success:false, message:'Risposta non valida dal server' }; });
-      console.log('[Quotami contatti] response:', res.status, json);
+      console.log('[Quootami contatti] response:', res.status, json);
       if (res.ok && json.success) {
         form.reset();
         ok.classList.add('show');
@@ -323,7 +323,7 @@
         err.hidden = false;
       }
     } catch(ex){
-      console.error('[Quotami contatti] exception:', ex);
+      console.error('[Quootami contatti] exception:', ex);
       if (errMsg) errMsg.textContent = ex && ex.message ? ex.message : String(ex);
       err.hidden = false;
     } finally {

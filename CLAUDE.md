@@ -6,7 +6,7 @@ Questo file viene letto **automaticamente** da Claude Code ogni volta che operi 
 
 ## Contesto del progetto
 
-Questo è il sito web del broker assicurativo **Quotami** (Giacomo Ramella Pollone, RUI sez. E n. E000821549, collaboratore di Sisto Assicurazioni S.a.s.). Sito statico HTML+CSS+JS, deployato su Vercel da GitHub.
+Questo è il sito web del broker assicurativo **Quootami** (Giacomo Ramella Pollone, RUI sez. E n. E000821549, collaboratore di Sisto Assicurazioni S.a.s.). Sito statico HTML+CSS+JS, deployato su Vercel da GitHub.
 
 URL produzione: `https://quotami-it.vercel.app`
 Repository: `https://github.com/giacomoramella/quotami`
@@ -100,7 +100,7 @@ Esempi:
 - polizza-auto: rimossa sezione benefits con dati inventati
 - sicurezza: aggiunti COOP/CORP/permissions-policy estesa
 - cyber: 4 vantaggi colorati sotto 'cosa puoi proteggere'
-- linguaggio: terza persona/Quotami su tutte le pagine commerciali
+- linguaggio: terza persona/Quootami su tutte le pagine commerciali
 ```
 
 ---

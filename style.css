@@ -1,12 +1,12 @@
 /* ============================================================
-   Quotami — Shared Stylesheet
+   Quootami — Shared Stylesheet
    ============================================================ */
 
 :root {
   /* === QUOTAMI BRAND PALETTE === */
   /* Nomi variabili legacy mantenuti per non rompere nulla, valori aggiornati */
 
-  /* Giallo Quotami (sostituisce il vecchio verde accento) */
+  /* Giallo Quootami (sostituisce il vecchio verde accento) */
   --yellow: #FFD84D;
   --yellow-deep: #E6BE3B;
   --green: #FFD84D;
@@ -48,7 +48,7 @@
 }
 
 /* === SISTEMA HIGHLIGHT ===
-   Marca una parola chiave nei titoli con il giallo Quotami.
+   Marca una parola chiave nei titoli con il giallo Quootami.
    Uso: <span class="hl">parole importanti</span> */
 .hl {
   position: relative;
@@ -68,7 +68,7 @@
 
 /* === PUNTO DEL LOGO ===
    Punto giallo accanto al wordmark "quotami" nel logo.
-   Uso: <a class="logo">quotami<span class="logo-dot"></span></a> */
+   Uso: <a class="logo">quootami<span class="logo-dot"></span></a> */
 .logo-dot {
   display: inline-block;
   width: .42em;
