@@ -133,7 +133,7 @@ Decidi cosa è prioritario:
 
 ## 5. Come testare la sicurezza tu stesso
 
-Apri questi link e inserisci `https://quotami-it.vercel.app`:
+Apri questi link e inserisci `https://quootami-it.vercel.app`:
 
 - **Headers HTTP**: https://securityheaders.com
 - **CSP**: https://csp-evaluator.withgoogle.com

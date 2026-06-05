@@ -8,8 +8,8 @@ Questo file viene letto **automaticamente** da Claude Code ogni volta che operi 
 
 Questo è il sito web del broker assicurativo **Quootami** (Giacomo Ramella Pollone, RUI sez. E n. E000821549, collaboratore di Sisto Assicurazioni S.a.s.). Sito statico HTML+CSS+JS, deployato su Vercel da GitHub.
 
-URL produzione: `https://quotami-it.vercel.app`
-Repository: `https://github.com/giacomoramella/quotami`
+URL produzione: `https://quootami-it.vercel.app`
+Repository: `https://github.com/giacomoramella/quootami`
 
 Prima di modificare qualsiasi cosa, leggi:
 1. `GUIDA-LAVORO.md` — convenzioni stile, struttura, palette colori
@@ -39,8 +39,8 @@ Se uno qualunque di questi punti è stato indebolito, **avvisa l'utente** prima 
 
 Quando l'utente conferma di aver pushato, suggerisci di testare:
 
-- `https://securityheaders.com/?q=quotami-it.vercel.app` (target: **A+**)
-- `https://observatory.mozilla.org/analyze/quotami-it.vercel.app` (target: **A+**)
+- `https://securityheaders.com/?q=quootami-it.vercel.app` (target: **A+**)
+- `https://observatory.mozilla.org/analyze/quootami-it.vercel.app` (target: **A+**)
 
 Se uno scende sotto A, **investiga prima di fare altre modifiche**.
 
@@ -110,13 +110,13 @@ Esempi:
 ### Deploy (incollare in Terminal):
 
 ```bash
-cd ~/Desktop/quotami && rm -f .git/index.lock && find .git -name "*.lock" -delete && git add -A && git commit -m "descrizione" && git push
+cd ~/Desktop/quootami && rm -f .git/index.lock && find .git -name "*.lock" -delete && git add -A && git commit -m "descrizione" && git push
 ```
 
 ### Verifica sicurezza headers live:
 
 ```bash
-curl -sI https://quotami-it.vercel.app/ | grep -iE "strict-transport|content-security|x-frame|x-content-type|referrer|permissions|cross-origin"
+curl -sI https://quootami-it.vercel.app/ | grep -iE "strict-transport|content-security|x-frame|x-content-type|referrer|permissions|cross-origin"
 ```
 
 ### Lista file principali:

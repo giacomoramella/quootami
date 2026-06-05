@@ -3,7 +3,7 @@
 ## 1. Il flusso base in 3 mosse
 
 1. **Tu mi dici cosa vuoi cambiare** (in italiano, senza tecnicismi)
-2. **Io modifico i file** nella tua cartella `~/Desktop/quotami`
+2. **Io modifico i file** nella tua cartella `~/Desktop/quootami`
 3. **Tu lanci il deploy** copiando il comando che ti do nel Terminal
 
 Aspetta 30 secondi dopo il push, poi apri il sito con **Cmd+Shift+R** per vedere le modifiche.
@@ -17,7 +17,7 @@ Aspetta 30 secondi dopo il push, poi apri il sito con **Cmd+Shift+R** per vedere
 Apri Terminal e incolla:
 
 ```
-cd ~/Desktop/quotami && rm -f .git/index.lock && find .git -name "*.lock" -delete && git add -A && git commit -m "descrizione modifiche" && git push
+cd ~/Desktop/quootami && rm -f .git/index.lock && find .git -name "*.lock" -delete && git add -A && git commit -m "descrizione modifiche" && git push
 ```
 
 Sostituisci "descrizione modifiche" con un breve testo (es. "aggiornata sezione coperture casa").
@@ -33,7 +33,7 @@ Aspetta 1-2 minuti e riprova. Sono outage temporanei di GitHub, non problemi del
 ### Se vedi `! [remote rejected]` o conflitti
 
 ```
-cd ~/Desktop/quotami && git pull --rebase origin main && git push
+cd ~/Desktop/quootami && git pull --rebase origin main && git push
 ```
 
 ---
@@ -139,8 +139,8 @@ Tutti i form (preventivo + contatti) inviano via **Web3Forms** a `giacomo.rp@sis
 
 ## 9. Domini e deploy
 
-- **Repository GitHub**: https://github.com/giacomoramella/quotami
-- **URL live**: https://quotami-it.vercel.app
+- **Repository GitHub**: https://github.com/giacomoramella/quootami
+- **URL live**: https://quootami-it.vercel.app
 - **Deploy automatico**: ogni `git push` su `main` triggera Vercel (in ~30 secondi è online)
 
 ---
@@ -162,7 +162,7 @@ Tutti i form (preventivo + contatti) inviano via **Web3Forms** a `giacomo.rp@sis
 ## Quick reference comando deploy
 
 ```
-cd ~/Desktop/quotami && rm -f .git/index.lock && find .git -name "*.lock" -delete && git add -A && git commit -m "modifica" && git push
+cd ~/Desktop/quootami && rm -f .git/index.lock && find .git -name "*.lock" -delete && git add -A && git commit -m "modifica" && git push
 ```
 
 Buon lavoro!

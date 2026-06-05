@@ -50,7 +50,7 @@ echo
 echo "[4/4] Push completato! Vercel sta ridistribuendo…"
 echo
 echo "Tra ~30 secondi:"
-echo "  - apri https://quotami-it.vercel.app"
+echo "  - apri https://quootami-it.vercel.app"
 echo "  - premi Cmd+Shift+R per ricaricare senza cache"
 echo
 echo "=========================================="
