@@ -222,6 +222,23 @@
   }
   .hs-form-btn:hover { background: #22a065; transform: translateY(-1px); }
 
+  /* ── HERO: big brand title + tagline + subtitle ── */
+  .hero h1 { font-size: clamp(4.5rem, 11vw, 9rem); letter-spacing: -.04em; }
+  .hero h1 .hero-accent-warm { display: inline-block; }
+  .hero-pillars {
+    font-size: clamp(1.15rem, 2.2vw, 1.6rem); font-weight: 700;
+    letter-spacing: -.01em; margin-top: 2rem;
+    color: var(--text);
+  }
+  .hero-subtitle {
+    color: var(--text-muted); font-family: 'Inter', sans-serif;
+    font-size: clamp(.98rem, 1.4vw, 1.15rem); font-weight: 400;
+    line-height: 1.7; max-width: 620px;
+    margin: 1.4rem auto 0;
+    animation: fadeUp .7s .25s ease both;
+  }
+  .hero-subtitle strong { color: var(--text); font-weight: 700; }
+
   /* ── SERVICES ── */
   #servizi { background: var(--bg); }
   .services-grid {
@@ -525,17 +542,19 @@
   <div class="blob blob-1"></div><div class="blob blob-2"></div>
   <div class="blob blob-3"></div><div class="blob blob-4"></div><div class="blob blob-5"></div>
 
-  <h1>Dimmi &ldquo;Quootami&rdquo;<br>e <span class="hero-accent-warm">ci penso io.</span></h1>
+  <h1><span class="hero-accent-warm">Quootami.</span></h1>
 
-  <p class="hero-pillars">Preventivi e polizze assicurative. <span class="hero-pillars-sep">·</span> Confronto del mercato. <span class="hero-pillars-sep">·</span> Risparmio reale.</p>
+  <p class="hero-pillars">Polizze per te <span class="hero-pillars-sep">·</span> Fondi pensione</p>
+
+  <p class="hero-subtitle">Confrontiamo il mercato, troviamo la copertura giusta e ti facciamo risparmiare sulle tasse. <strong>Inizia ora a proteggerti.</strong></p>
 
   <div class="hero-actions">
-    <a href="contatti.html#form" class="btn-primary">Richiedi un preventivo →</a>
-    <a href="contatti.html" class="btn-secondary">Parla con Quootami</a>
+    <a href="#categorie" class="btn-primary">Scopri di più →</a>
+    <a href="contatti.html#form" class="btn-secondary">Richiedi un preventivo</a>
   </div>
 
   <!-- HERO CATEGORIES — HEADER -->
-  <div class="hero-cats-header">
+  <div class="hero-cats-header" id="categorie">
     <span class="hero-cats-eyebrow">Quota la tua polizza</span>
     <h2 class="hero-cats-title">Cosa vuoi proteggere?</h2>
   </div>
