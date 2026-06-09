@@ -4,97 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<title>Quootami — Sito in manutenzione</title>
-<meta name="description" content="Sito temporaneamente in manutenzione. Torneremo presto online.">
+<title>Sito in manutenzione</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --yellow: #FFD84D; --yellow-deep: #E6BE3B;
-    --primary: #0B1220; --text: #0B1220; --text-muted: #6B7280;
-    --bg: #FAFAF7; --bg-card: #ffffff; --border: rgba(11,18,32,.1);
-  }
+  :root { --yellow: #FFD84D; --text: #0B1220; --bg: #FAFAF7; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
   body {
     font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 2rem 5vw; line-height: 1.6;
-  }
-  .container { max-width: 640px; text-align: center; }
-  .brand {
-    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 2rem;
-    color: var(--text); margin-bottom: 2.5rem; display: inline-flex; align-items: center; gap: .35rem;
-  }
-  .brand-dot {
-    width: 12px; height: 12px; border-radius: 50%; background: var(--yellow);
-    display: inline-block; margin-left: 2px;
+    padding: 2rem 5vw;
   }
   h1 {
     font-family: 'Inter', sans-serif; font-weight: 700;
-    font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -.02em; line-height: 1.1;
-    margin-bottom: 1.25rem;
+    font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -.02em; line-height: 1.1;
+    text-align: center;
   }
-  h1 .accent {
-    position: relative; display: inline-block; z-index: 1;
-  }
+  h1 .accent { position: relative; display: inline-block; z-index: 1; }
   h1 .accent::before {
     content: ''; position: absolute; left: -4px; right: -4px;
     top: 55%; bottom: 6%; background: var(--yellow); z-index: -1;
   }
-  .lead {
-    font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem;
-    max-width: 480px; margin-left: auto; margin-right: auto;
-  }
-  .contact-card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 1.75rem 2rem;
-    margin: 0 auto; display: inline-block; text-align: left;
-  }
-  .contact-card h3 {
-    font-size: .72rem; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .1em; color: var(--text-muted);
-    margin-bottom: 1rem;
-  }
-  .contact-list { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
-  .contact-list a {
-    color: var(--text); text-decoration: none; font-weight: 600;
-    display: flex; align-items: center; gap: .65rem;
-    transition: color .2s;
-  }
-  .contact-list a:hover { color: var(--yellow-deep); }
-  .contact-list .icon {
-    font-size: 1.1rem; width: 22px; display: inline-block; text-align: center;
-  }
-  .footer-note {
-    margin-top: 3rem; font-size: .78rem; color: var(--text-muted);
-    line-height: 1.65;
-  }
-  .footer-note strong { color: var(--text); }
 </style>
 </head>
 <body>
-  <main class="container">
-    <div class="brand">quootami<span class="brand-dot"></span></div>
-
-    <h1>Sito in <span class="accent">manutenzione.</span></h1>
-
-    <p class="lead">Stiamo aggiornando il sito. Torneremo presto online con tutte le informazioni su polizze e fondi pensione.</p>
-
-    <div class="contact-card">
-      <h3>Per contatti urgenti</h3>
-      <ul class="contact-list">
-        <li><a href="tel:+393922198185"><span class="icon">📞</span> +39 392 219 8185</a></li>
-        <li><a href="mailto:giacomo.rp@sistoassicurazioni.com"><span class="icon">✉️</span> giacomo.rp@sistoassicurazioni.com</a></li>
-        <li><a href="https://wa.me/393922198185" target="_blank" rel="noopener"><span class="icon">💬</span> WhatsApp</a></li>
-      </ul>
-    </div>
-
-    <p class="footer-note">
-      <strong>Giacomo Ramella Pollone</strong> · Iscritto RUI sez. E n. <strong>E000821549</strong><br>
-      Collaboratore di <strong>Sisto Assicurazioni S.a.s.</strong> · RUI sez. B n. B000639183
-    </p>
-  </main>
+  <h1>Sito in <span class="accent">manutenzione.</span></h1>
 </body>
 </html>
