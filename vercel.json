@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "_maintenance_note": "MAINTENANCE MODE: rewrites attivi per servire /index.html per ogni URL tranne /assets/*. Per disattivare la manutenzione, rimuovere il blocco 'rewrites' qui sotto.",
   "rewrites": [
     {
       "source": "/((?!assets/|.*\\.(?:svg|png|jpg|jpeg|webp|ico|css|js|woff2?|json|xml|txt|map)$).*)",
