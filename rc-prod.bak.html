@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>RC e Polizza Catastrofale PMI obbligatoria · Quootami</title>
+<meta name="description" content="Responsabilità Civile professionale, RCT/RCO, D&O, Tutela Legale e la nuova Polizza Catastrofale obbligatoria PMI (Legge di Bilancio 2024 + D.M. 30/2025). Consulenza per professionisti, PMI e aziende in tutta Italia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260608b">
+<style>
+  .page-hero { padding: 9rem 5vw 5rem; background: var(--bg); position: relative; overflow: hidden; }
+  .page-hero .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+  .page-hero-blob-1 { width: 580px; height: 580px; background: #F3F0E8; opacity: .45; top: -220px; right: -150px; }
+  .page-hero-blob-2 { width: 360px; height: 360px; background: #EFE7D2; opacity: .35; bottom: -120px; left: -80px; }
+  .page-hero-inner { max-width: 920px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+  .page-hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(3rem, 6.5vw, 5.8rem); font-weight: 700;
+    line-height: 1.05; letter-spacing: -.025em;
+    color: var(--text); margin-bottom: 1.25rem;
+  }
+  .page-hero h1 .accent { position: relative; display: inline-block; z-index: 1; color: var(--text); }
+  .page-hero h1 .accent::before { content: ''; position: absolute; left: -4px; right: -4px; top: 55%; bottom: 6%; background: var(--yellow); z-index: -1; }
+  .page-hero p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; max-width: 720px; margin: 0 auto 2rem; }
+  .page-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  /* Alert catastrofale */
+  .alert-banner {
+    margin: 0 5vw 2rem;
+    background: linear-gradient(135deg, #fff7d6 0%, #fef5c4 100%);
+    border: 1px solid #e8d27a;
+    border-left: 4px solid #c89220;
+    border-radius: var(--radius); padding: 1.5rem 2rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .alert-banner-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .alert-banner h3 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700; color: #6b4500; margin-bottom: .35rem; }
+  .alert-banner p { color: #6b4500; font-size: .92rem; line-height: 1.6; margin: 0; }
+  .alert-banner a { color: #6b4500; font-weight: 700; text-decoration: underline; }
+
+  .seg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .seg-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 2rem; transition: transform .3s, border-color .25s, box-shadow .3s; }
+  .seg-card:hover { transform: translateY(-6px); border-color: var(--border-green); box-shadow: var(--shadow-lg); }
+  .seg-card.featured { border-color: var(--border-green); box-shadow: 0 4px 24px rgba(255,216,77,.15); }
+  .seg-card.featured::before { content: '★ Obbligatoria'; position: absolute; top: -1px; right: 1.5rem; background: var(--green-dark); color: #fff; font-size: .68rem; font-weight: 700; padding: .25rem .75rem; border-radius: 0 0 8px 8px; }
+  .seg-card { position: relative; }
+  .seg-icon { width: 52px; height: 52px; background: var(--green-soft); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; }
+  .seg-card h3 { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+  .seg-card p { color: var(--text-muted); font-size: .9rem; line-height: 1.7; margin: 0; }
+
+  /* Catastrofale section */
+  .cat-section { background: var(--primary); color: #fff; padding: 5rem 5vw; position: relative; overflow: hidden; }
+  .cat-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(255,216,77,.08), transparent); pointer-events: none; }
+  .cat-section .section-label { color: var(--green); }
+  .cat-section .section-title { color: #fff; }
+  .cat-section .section-sub { color: rgba(255,255,255,.7); }
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+  .cat-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 1.75rem; }
+  .cat-card h4 { font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 700; color: var(--green); margin-bottom: .75rem; }
+  .cat-card p { color: rgba(255,255,255,.7); font-size: .87rem; line-height: 1.7; margin: 0; }
+  .cat-card strong { color: #fff; font-weight: 600; }
+  .cat-card ul { list-style: none; padding: 0; margin: .5rem 0 0; }
+  .cat-card ul li { font-size: .85rem; color: rgba(255,255,255,.7); padding: .25rem 0 .25rem 1.25rem; position: relative; }
+  .cat-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .cat-cta { background: rgba(255,216,77,.1); border: 1px solid rgba(255,216,77,.3); border-radius: 12px; padding: 1.5rem; margin-top: 2.5rem; text-align: center; }
+  .cat-cta a { display: inline-block; background: var(--green-dark); color: #fff; padding: .85rem 2rem; border-radius: 50px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: .92rem; text-decoration: none; margin-top: .75rem; transition: background .2s, transform .15s; }
+  .cat-cta a:hover { background: var(--green); color: var(--primary); transform: translateY(-1px); }
+
+  .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+  .case-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow-sm); }
+  .case-tag { display: inline-block; background: rgba(255,216,77,.12); color: #1a7a4a; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .25rem .7rem; border-radius: 50px; margin-bottom: .75rem; }
+  .case-card h4 { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+  .case-card p { color: var(--text-muted); font-size: .87rem; line-height: 1.7; margin: 0; }
+
+  .approach-list { max-width: 780px; margin: 2.5rem auto 0; list-style: none; padding: 0; }
+  .approach-list li { padding: 1rem 1.5rem 1rem 3rem; position: relative; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: .75rem; color: var(--text-2); font-size: .95rem; line-height: 1.65; }
+  .approach-list li strong { color: var(--text); }
+  .approach-list li::before { content: '✓'; position: absolute; left: 1rem; top: 1.05rem; width: 24px; height: 24px; border-radius: 50%; background: var(--green-dark); color: #fff; display: grid; place-items: center; font-size: .8rem; font-weight: 700; }
+
+  .form-section { background: var(--bg-alt); padding: 5rem 5vw; }
+  .form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 720px; margin: 2rem auto 0; box-shadow: var(--shadow-md); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .35rem; }
+  .form-group label { font-size: .82rem; font-weight: 600; color: var(--text); }
+  .form-group input, .form-group select, .form-group textarea { padding: .75rem 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text); outline: none; transition: border-color .15s, box-shadow .15s; width: 100%; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1); }
+  .form-group textarea { min-height: 110px; resize: vertical; }
+  .form-check { display: flex; gap: .5rem; align-items: flex-start; font-size: .82rem; color: var(--text-muted); line-height: 1.5; margin: 1rem 0; }
+  .form-check input { margin-top: .2rem; }
+  .form-check a { color: var(--green-dark); text-decoration: underline; }
+  .form-submit { width: 100%; padding: 1rem; border-radius: 14px; background: var(--primary); color: #fff; border: none; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; transition: background .2s, transform .15s; margin-top: .5rem; }
+  .form-submit:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .form-success { background: rgba(255,216,77,.12); border: 1px solid var(--border-green); color: #1a7a4a; padding: 1rem 1.25rem; border-radius: 12px; margin-top: 1rem; font-size: .92rem; display: none; }
+  .form-success.show { display: block; }
+
+  @media (max-width: 700px) { .form-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li class="has-mega"><a href="#">Per privati</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col">
+            <h4><a href="polizza-auto.html">Auto e mobilità</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="polizza-casa.html">Casa</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="salute.html">Salute &amp; vita</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="piano-pensione.html">Pensione</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="cyber.html">Cyber</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="polizza-animali.html">Animali domestici</a></h4>
+          </div></div></div></li>
+    <li class="has-mega"><a href="#">Per imprese</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col">
+            <h4><a href="rc.html#catastrofale">Catastrofale PMI</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="rc.html">Responsabilità Civile</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="cyber.html">Cyber business</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="polizza-auto.html">Auto aziendali</a></h4>
+          </div></div></div></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con Quootami →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="blob page-hero-blob-1"></div>
+  <div class="blob page-hero-blob-2"></div>
+  <div class="page-hero-inner">
+    <span class="hero-eyebrow"><span class="dot"></span>Responsabilità civile · Privati &amp; PMI</span>
+    <h1>RC e <span class="accent">Polizza Catastrofale</span><br>obbligatoria PMI.</h1>
+    <p>Dalla RC del libero professionista alla RCT/RCO della tua azienda, dalla D&amp;O degli amministratori alla nuova polizza catastrofale obbligatoria. La RC è l'area dove un singolo sinistro può cambiare la vita: per questo serve consulenza, non un PDF di polizza.</p>
+    <div class="page-hero-actions">
+      <a href="#catastrofale" class="btn-primary">Vai alla Catastrofale obbligatoria</a>
+      <a href="contatti.html" class="btn-secondary">Contattaci</a>
+    </div>
+  </div>
+</section>
+
+<!-- ALERT -->
+<div class="alert-banner">
+  <div class="alert-banner-icon">⚠️</div>
+  <div>
+    <h3>Hai un'impresa? Sei in regola con la Polizza Catastrofale obbligatoria?</h3>
+    <p>La Legge di Bilancio 2024 (L. 213/2023) e il D.M. 30/2025 hanno introdotto l'obbligo per le imprese italiane iscritte al Registro Imprese. La mancata stipula comporta esclusione da contributi e agevolazioni pubbliche. <a href="#catastrofale">Vai alla sezione dedicata →</a></p>
+  </div>
+</div>
+
+<!-- SEGMENTI -->
+<section id="segmenti">
+  <div class="centered">
+    <span class="section-label">Cosa puoi proteggere</span>
+    <h2 class="section-title">Le aree della Responsabilità Civile</h2>
+  </div>
+
+  <div class="seg-grid">
+    <article id="professionale" class="seg-card">
+      <div class="seg-icon">⚖️</div>
+      <h3>RC Professionale</h3>
+      <p>Avvocati, commercialisti, medici, architetti, ingegneri, geometri, consulenti del lavoro, mediatori, periti, amministratori di condominio, agronomi… Coperture per errori professionali, postuma, retroattiva.</p>
+    </article>
+    <article id="privati" class="seg-card">
+      <div class="seg-icon">🏠</div>
+      <h3>RC Privati (Capofamiglia)</h3>
+      <p>RC Capofamiglia per i danni causati a terzi nella vita privata, RC Casa con tutela del fabbricato, danni d'acqua, incendio, eventi atmosferici, ricorso terzi.</p>
+    </article>
+    <article id="imprese" class="seg-card">
+      <div class="seg-icon">🏭</div>
+      <h3>RC Imprese (RCT/RCO)</h3>
+      <p>RCT (verso terzi) e RCO (verso prestatori di lavoro): la coppia di coperture base di ogni impresa. Cucite su rischio specifico, fatturato, lavorazioni e dipendenti.</p>
+    </article>
+    <article id="do" class="seg-card">
+      <div class="seg-icon">👔</div>
+      <h3>D&amp;O — Amministratori</h3>
+      <p>Polizza per amministratori, sindaci, dirigenti contro azioni di responsabilità civile (anche solidale e personale). Indispensabile per S.p.A., S.r.l. con C.d.A., enti pubblici partecipati.</p>
+    </article>
+    <article id="tutela-legale" class="seg-card">
+      <div class="seg-icon">📚</div>
+      <h3>Tutela Legale</h3>
+      <p>Spese legali e peritali per controversie civili e penali (clienti/fornitori, vertenze del lavoro, sanzioni amministrative). Spesso sottovalutata, sempre utile.</p>
+    </article>
+    <article class="seg-card featured">
+      <div class="seg-icon">🌪️</div>
+      <h3>Polizza Catastrofale PMI</h3>
+      <p>La nuova copertura obbligatoria contro terremoto, alluvione, frana ed esondazione, su immobili, impianti e attrezzature delle imprese italiane. <a href="#catastrofale" style="color:var(--green-dark);font-weight:600">Approfondimento →</a></p>
+    </article>
+  </div>
+</section>
+
+<!-- CATASTROFALE -->
+<section id="catastrofale" class="cat-section">
+  <div class="centered">
+    <span class="section-label">Approfondimento</span>
+    <h2 class="section-title">Polizza Catastrofale Obbligatoria PMI</h2>
+    <p class="section-sub">È la novità più impattante degli ultimi anni per chi fa impresa in Italia. La maggioranza delle PMI non l'ha ancora attivata, e molte non sanno cosa rischiano.</p>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-card">
+      <h4>Cos'è</h4>
+      <p>Una polizza che copre i <strong>danni a beni strumentali</strong> dell'impresa (terreni, fabbricati, impianti, macchinari, attrezzature) causati da <strong>terremoti, alluvioni, frane, esondazioni e inondazioni</strong>. Introdotta dall'art. 1, commi 101-111 della Legge di Bilancio 2024 (L. 213/2023) e disciplinata dal D.M. 30/2025.</p>
+    </div>
+    <div class="cat-card">
+      <h4>Chi è obbligato</h4>
+      <p>Tutte le imprese iscritte nel Registro delle Imprese ai sensi dell'art. 2188 c.c. con sede legale in Italia o stabile organizzazione in Italia. Sono <strong>esonerate</strong> alcune categorie (es. imprese agricole con strumenti dedicati come AgriCAT).</p>
+    </div>
+    <div class="cat-card">
+      <h4>Scadenze scaglionate</h4>
+      <ul>
+        <li><strong>Grandi imprese:</strong> 31 marzo 2025</li>
+        <li><strong>Medie imprese:</strong> 1 ottobre 2025</li>
+        <li><strong>Piccole/micro:</strong> 1 gennaio 2026</li>
+      </ul>
+      <p style="margin-top:.5rem;font-size:.78rem;color:rgba(255,255,255,.5)"><em>[Verificare scadenze aggiornate alla pubblicazione]</em></p>
+    </div>
+    <div class="cat-card">
+      <h4>Cosa rischi se non la stipuli</h4>
+      <ul>
+        <li>Esclusione da contributi pubblici</li>
+        <li>Esclusione da bandi PNRR</li>
+        <li>Niente sostegni in caso di calamità</li>
+        <li>Possibile responsabilità dell'organo amministrativo</li>
+      </ul>
+    </div>
+    <div class="cat-card">
+      <h4>Cosa copre</h4>
+      <ul>
+        <li>Sismi (terremoti)</li>
+        <li>Alluvioni e inondazioni</li>
+        <li>Frane e movimenti franosi</li>
+        <li>Esondazioni di corsi d'acqua e laghi</li>
+      </ul>
+    </div>
+    <div class="cat-card">
+      <h4>Beni assicurati</h4>
+      <p>Terreni, fabbricati, impianti, macchinari, attrezzature industriali e commerciali utilizzate per l'esercizio dell'attività d'impresa. Franchigie minime e massimali in funzione del valore dei beni.</p>
+    </div>
+  </div>
+
+  <div class="cat-cta">
+    <h3 style="font-family:'Inter',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.5rem">Hai un'impresa? Ovunque ti trovi in Italia</h3>
+    <p style="color:rgba(255,255,255,.7);font-size:.92rem;line-height:1.6;margin:0">Possiamo fissare un incontro per capire dove sei rispetto all'obbligo e per metterti in regola con la copertura più efficiente.</p>
+    <a href="contatti.html">Richiedi una consulenza →</a>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section>
+  <div class="centered">
+    <span class="section-label">Casi reali, anonimizzati</span>
+    <h2 class="section-title">Tre situazioni che ho gestito</h2>
+  </div>
+  <div class="case-grid">
+    <article class="case-card">
+      <span class="case-tag">Studio</span>
+      <h4>RC Professionale con postuma</h4>
+      <p>Commercialista in pensione. Polizza con copertura postuma di 10 anni: tutela su contestazioni che possono arrivare anni dopo la chiusura dell'attività.</p>
+    </article>
+    <article class="case-card">
+      <span class="case-tag">PMI</span>
+      <h4>D&amp;O per S.r.l. con C.d.A.</h4>
+      <p>PMI metalmeccanica con tre amministratori. D&amp;O che copre azioni di responsabilità solidali e individuali, con tutela penale per consulenti tecnici.</p>
+    </article>
+    <article class="case-card">
+      <span class="case-tag">PMI</span>
+      <h4>Catastrofale per impresa edile</h4>
+      <p>Impresa edile in zona soggetta a esondazioni. Polizza catastrofale + coordinamento con la polizza incendio già in essere, evitando sovrapposizioni di premi.</p>
+    </article>
+  </div>
+</section>
+
+<!-- APPROCCIO -->
+<section class="how-section">
+  <div class="centered">
+    <span class="section-label">Il mio approccio</span>
+    <h2 class="section-title">Cosa faccio per te di concreto</h2>
+  </div>
+  <ul class="approach-list">
+    <li><strong>Mappatura dei rischi</strong> — quali attività svolgi, quali beni hai, chi sono i terzi a cui potresti causare danni, quali sono le esposizioni dei tuoi amministratori.</li>
+    <li><strong>Verifica obblighi normativi</strong> — RC Professionale obbligatoria, polizza catastrofale, eventuali polizze previste da contratti pubblici o capitolati.</li>
+    <li><strong>Confronto compagnie</strong> e analisi delle clausole "trappola" (esclusioni, franchigie, massimali per sinistro/anno, retroattività).</li>
+    <li><strong>Coordinamento delle polizze</strong> aziendali per evitare buchi di copertura e sovrapposizioni.</li>
+    <li><strong>Sinistri</strong> — apertura denuncia, dialogo con i periti, coordinamento legale con il broker, fino alla liquidazione.</li>
+  </ul>
+</section>
+
+<!-- FORM -->
+<section id="preventivo" class="form-section">
+  <div class="centered">
+    <span class="section-label">Richiesta preventivo o verifica</span>
+    <h2 class="section-title">Parlamene</h2>
+  </div>
+  <div class="form-card">
+    <form id="rc-form" onsubmit="rcSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="rc-line">Cosa ti interessa *</label>
+          <select id="rc-line" required>
+            <option value="">Seleziona…</option>
+            <option>RC Professionale</option>
+            <option>RC Privati / Capofamiglia</option>
+            <option>RCT/RCO Imprese</option>
+            <option>D&O</option>
+            <option>Tutela Legale</option>
+            <option>Polizza Catastrofale Obbligatoria PMI</option>
+            <option>Verifica complessiva polizze RC aziendali</option>
+          </select>
+        </div>
+        <div class="form-group"><label for="rc-fatt">Fatturato (se azienda)</label><input type="text" id="rc-fatt"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="rc-name">Nome / Ragione sociale *</label><input type="text" id="rc-name" required></div>
+        <div class="form-group"><label for="rc-tel">Telefono *</label><input type="tel" id="rc-tel" required></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label for="rc-email">Email *</label><input type="email" id="rc-email" required></div>
+        <div class="form-group"><label for="rc-city">Città</label><input type="text" id="rc-city"></div>
+      </div>
+      <div class="form-group" style="margin-bottom:1rem"><label for="rc-msg">Note (attività, polizze esistenti, urgenze normative…)</label><textarea id="rc-msg"></textarea></div>
+      <label class="form-check"><input type="checkbox" required><span>Ho letto l'informativa privacy e acconsento al trattamento dei dati. *</span></label>
+      <button type="submit" class="form-submit">Invia richiesta →</button>
+      <div id="rc-success" class="form-success">✓ Richiesta inviata. Quootami ti contatta entro la giornata lavorativa.</div>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="centered">
+    <span class="section-label">FAQ</span>
+    <h2 class="section-title">Domande frequenti</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Tutte le imprese sono soggette alla Polizza Catastrofale obbligatoria? <span class="faq-chevron">▾</span></button><div class="faq-answer"><p>Sì, salvo specifiche eccezioni. Le imprese agricole hanno strumenti dedicati (AgriCAT) e per alcune categorie sono previste esclusioni o regimi speciali. Verifichiamo insieme la tua situazione specifica.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Cosa cambia tra una polizza incendio e la catastrofale obbligatoria? <span class="faq-chevron">▾</span></button><div class="faq-answer"><p>L'incendio copre danni da incendio, fulmine, esplosione, eventi atmosferici "ordinari". La catastrofale copre eventi naturali "estremi" (terremoti, alluvioni, frane, esondazioni) che spesso sono esclusi nelle polizze incendio. Le due si integrano: vanno coordinate per evitare buchi e sovrapposizioni.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Quanto costa una RCT/RCO per una PMI? <span class="faq-chevron">▾</span></button><div class="faq-answer"><p>Dipende da fatturato, attività, numero dipendenti, sinistralità pregressa. Costruiamo il preventivo dopo aver fatto la mappatura.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">La D&O serve davvero o è una polizza "di lusso"? <span class="faq-chevron">▾</span></button><div class="faq-answer"><p>In contesti normativi sempre più severi (codice della crisi, GDPR, antiriciclaggio) la D&O è uno strumento di protezione personale degli amministratori, non un benefit. Una azione di responsabilità può colpire il patrimonio personale di chi amministra.</p></div></div>
+    <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">La RC Professionale ha sempre copertura postuma? <span class="faq-chevron">▾</span></button><div class="faq-answer"><p>Non sempre, ma è cruciale per chiunque chiuda l'attività: i clienti possono contestare lavori fino a 10 anni dopo. Verifichiamo insieme se la tua polizza ha postuma adeguata.</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. E000821549</span>
+      <p>📞 <a href="tel:+393922198185">+39 392 219 8185</a></p>
+      <p>✉️ <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a></p>
+
+      <div class="footer-social">
+        <a class="social-btn" href="https://wa.me/393922198185" aria-label="WhatsApp" target="_blank" rel="noopener">w</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze privati</h5>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Salute &amp; Vita</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="piano-pensione.html">Fondo Pensione</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze imprese</h5>
+      <ul>
+        <li><a href="rc.html">RC Professionale</a></li>
+        <li><a href="rc.html#catastrofale">Catastrofale PMI</a></li>
+        <li><a href="cyber.html">Cyber Business</a></li>
+        <li><a href="polizza-auto.html">Auto aziendali</a></li>
+        <li><a href="rc.html#do">D&amp;O</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Risorse</h5>
+      <ul>
+        <li><a href="contatti.html">Contatti</a></li>
+        <li><a href="contatti.html#form">Richiedi preventivo</a></li>
+        <li><a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="tel:+393922198185">Telefono</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Informative</h5>
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="cookie.html">Cookie policy</a></li>
+        <li><a href="trasparenza.html">Trasparenza intermediario</a></li>
+        <li><a href="trasparenza.html#reclami">Reclami</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-disclaimer">
+    Questo sito è gestito da <strong>Giacomo Ramella Pollone</strong>, collaboratore iscritto al RUI sezione E n. <strong>E000821549</strong>, operante per conto di <strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong>, broker iscritto al RUI sezione B n. <strong>B000639183</strong>. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile presso la sede del broker. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener">www.ivass.it</a>.
+  </p>
+
+  <div class="footer-bottom">
+    <p>© 2026 Quootami · gestito da Sisto Assicurazioni S.a.s. · P.IVA 02696750021 · RUI sez. B n. B000639183</p>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) { const item = btn.closest('.faq-item'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open')); if (!isOpen) item.classList.add('open'); }
+function rcSubmit(e) { e.preventDefault(); document.getElementById('rc-success').classList.add('show'); document.getElementById('rc-form').reset(); }
+</script>
+<script src="components.js?v=20260525a"></script>
+</body>
+</html>
