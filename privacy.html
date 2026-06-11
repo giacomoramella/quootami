@@ -3,32 +3,595 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://quootami.it/privacy">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<title>Sito in manutenzione</title>
+<title>Privacy Policy · Quootami — Informativa ai sensi del Reg. UE 2016/679 (GDPR)</title>
+<meta name="description" content="Informativa privacy ai sensi degli artt. 13 e 14 del Reg. UE 2016/679 (GDPR) e del D.Lgs. 196/2003. Titolare del trattamento, finalità, basi giuridiche, conservazione, destinatari, trasferimenti extra-UE e diritti dell'interessato.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260608b">
 <style>
-  :root { --yellow: #FFD84D; --text: #0B1220; --bg: #FAFAF7; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 2rem 5vw;
+  /* ── PAGE: PRIVACY (eredita lo stile della trasparenza) ── */
+  .trasp-hero {
+    padding: 8rem 5vw 4rem;
+    background: var(--bg);
+    position: relative; overflow: hidden;
   }
-  h1 {
-    font-family: 'Inter', sans-serif; font-weight: 700;
-    font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -.02em; line-height: 1.1;
-    text-align: center;
+  .trasp-hero .blob { position:absolute; border-radius:50%; filter:blur(100px); pointer-events:none; }
+  .trasp-hero-blob-1 { width:520px; height:520px; background:#F3F0E8; opacity:.45; top:-200px; right:-150px; }
+  .trasp-hero-blob-2 { width:400px; height:400px; background:#EFE7D2; opacity:.35; bottom:-150px; left:-100px; }
+  .trasp-hero-inner { max-width: 880px; margin: 0 auto; position: relative; z-index: 1; }
+  .trasp-hero-eyebrow {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: rgba(255,216,77,.12); border: 1px solid rgba(255,216,77,.3);
+    color: #1a7a4a; font-size: .72rem; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    padding: .35rem 1rem; border-radius: 50px; margin-bottom: 1.5rem;
   }
-  h1 .accent { position: relative; display: inline-block; z-index: 1; }
-  h1 .accent::before {
-    content: ''; position: absolute; left: -4px; right: -4px;
-    top: 55%; bottom: 6%; background: var(--yellow); z-index: -1;
+  .trasp-hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(3rem, 6.5vw, 5.8rem); font-weight: 700;
+    line-height: 1.05; letter-spacing: -.025em;
+    color: var(--text); margin-bottom: 1.25rem;
+  }
+  .trasp-hero h1 .accent { position: relative; display: inline-block; z-index: 1; color: var(--text); }
+  .trasp-hero h1 .accent::before { content: ''; position: absolute; left: -4px; right: -4px; top: 55%; bottom: 6%; background: var(--yellow); z-index: -1; }
+  .trasp-hero p {
+    color: var(--text-muted); font-size: 1.05rem;
+    line-height: 1.7; max-width: 720px;
+  }
+  .last-update {
+    display: inline-block; margin-top: 1rem;
+    font-size: .82rem; color: var(--text-muted);
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: .4rem .9rem; border-radius: 50px;
+  }
+  .last-update strong { color: var(--text); }
+
+  /* TOC */
+  .toc {
+    max-width: 880px; margin: 0 auto;
+    padding: 1.75rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+  .toc h3 {
+    font-family: 'Inter', sans-serif; font-size: .8rem;
+    font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--green-dark); margin-bottom: 1rem;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: .5rem;
+  }
+  .toc a {
+    color: var(--text-2); font-size: .88rem; text-decoration: none;
+    padding: .5rem .65rem; border-radius: 8px; transition: background .15s;
+    display: block;
+  }
+  .toc a::before {
+    content: '→ '; color: var(--green-dark); font-weight: 600; margin-right: .25rem;
+  }
+  .toc a:hover { background: var(--bg-alt); color: var(--green-dark); }
+
+  /* Sezioni */
+  .trasp-section {
+    padding: 4.5rem 5vw 3rem;
+    max-width: 920px; margin: 0 auto;
+    border-top: 1px solid var(--border);
+  }
+  .trasp-section:first-of-type { border-top: none; }
+  .trasp-section h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.95rem); font-weight: 700;
+    letter-spacing: -.015em; color: var(--text);
+    margin-bottom: 1.25rem; line-height: 1.25;
+  }
+  .trasp-section h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--text); margin-top: 1.75rem; margin-bottom: .5rem;
+  }
+  .trasp-section p, .trasp-section li {
+    color: var(--text-2); font-size: .95rem;
+    line-height: 1.75; margin-bottom: 1rem;
+  }
+  .trasp-section ul { padding-left: 1.5rem; }
+  .trasp-section ul li { margin-bottom: .5rem; }
+  .trasp-section a { color: var(--green-dark); font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
+  .trasp-section a:hover { color: var(--primary); }
+  .trasp-section strong { color: var(--text); font-weight: 600; }
+
+  .trasp-callout {
+    background: rgba(255,216,77,.08);
+    border-left: 3px solid var(--green-dark);
+    border-radius: 8px;
+    padding: 1.1rem 1.4rem; margin: 1.5rem 0;
+  }
+  .trasp-callout p { margin: 0; color: var(--text); font-size: .92rem; line-height: 1.7; }
+  .trasp-callout strong { color: var(--primary); }
+
+  /* Tabella finalità / basi giuridiche */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0 1.5rem;
+    font-size: .88rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .data-table thead {
+    background: rgba(255,216,77,.08);
+  }
+  .data-table th, .data-table td {
+    text-align: left;
+    padding: .8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .data-table th {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: var(--green-dark);
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table td { color: var(--text-2); }
+  .data-table td strong { color: var(--text); }
+  .data-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  .placeholder-tag {
+    display: inline-block;
+    background: #fff5e6;
+    border: 1px dashed #d68f3a;
+    color: #8a4a00;
+    padding: .05rem .4rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .85em;
+    font-weight: 500;
   }
 </style>
 </head>
 <body>
-  <h1>Sito in <span class="accent">manutenzione.</span></h1>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li class="has-mega">
+      <a href="#">Per privati</a>
+      <div class="mega-panel">
+        <div class="mega-grid">
+          <div class="mega-col">
+            <h4><a href="polizza-auto.html">Auto e mobilità</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="polizza-casa.html">Casa</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="salute.html">Salute &amp; vita</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="piano-pensione.html">Pensione</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="cyber.html">Cyber</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="polizza-animali.html">Animali domestici</a></h4>
+          </div></div></div>
+    </li>
+    <li class="has-mega"><a href="#">Per imprese</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col">
+            <h4><a href="rc.html#catastrofale">Catastrofale PMI</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="rc.html">Responsabilità Civile</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="cyber.html">Cyber business</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="polizza-auto.html">Auto aziendali</a></h4>
+          </div></div></div></li>
+    <li><a href="trasparenza.html">Trasparenza</a></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con Quootami →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="trasp-hero">
+  <div class="blob trasp-hero-blob-1"></div>
+  <div class="blob trasp-hero-blob-2"></div>
+  <div class="trasp-hero-inner">
+    <span class="trasp-hero-eyebrow"><span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--green-dark)"></span>Reg. UE 2016/679 · GDPR · D.Lgs. 196/2003</span>
+    <h1>Quali dati ti chiedo,<br>perché, e <span class="accent">cosa puoi farne tu.</span></h1>
+    <p>Questa informativa, resa ai sensi degli artt. 13 e 14 del Regolamento UE 2016/679 (GDPR), descrive come tratto i tuoi dati personali quando navighi su questo sito, compili il form di contatto o entri in rapporto con me e con il broker per il quale opero. È scritta per essere letta — non per essere archiviata.</p>
+    <span class="last-update">Ultimo aggiornamento: <strong>20 maggio 2026</strong> · Versione 1</span>
+  </div>
+</section>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>Indice</h3>
+  <div class="toc-grid">
+    <a href="#titolare">1. Titolare del trattamento</a>
+    <a href="#dpo">2. Responsabile della protezione dati (DPO)</a>
+    <a href="#dati">3. Quali dati raccolgo</a>
+    <a href="#finalita">4. Finalità del trattamento</a>
+    <a href="#base-giuridica">5. Basi giuridiche</a>
+    <a href="#conservazione">6. Periodi di conservazione</a>
+    <a href="#destinatari">7. Destinatari e responsabili</a>
+    <a href="#extra-ue">8. Trasferimenti extra-UE</a>
+    <a href="#processi-automatizzati">9. Processi decisionali automatizzati</a>
+    <a href="#diritti">10. I tuoi diritti (artt. 15-22 GDPR)</a>
+    <a href="#esercitare">11. Come esercitare i diritti</a>
+    <a href="#reclamo">12. Reclamo al Garante</a>
+    <a href="#sicurezza">13. Sicurezza dei dati</a>
+    <a href="#minori">14. Trattamento dei minori</a>
+    <a href="#modifiche">15. Modifiche all'informativa</a>
+  </div>
+</div>
+
+<!-- ========= 1. TITOLARE ========= -->
+<section id="titolare" class="trasp-section">
+  <h2>1. Titolare del trattamento</h2>
+  <p>Il titolare del trattamento dei dati personali raccolti tramite questo sito è il broker assicurativo per conto del quale opero come collaboratore iscritto al RUI sez. E:</p>
+  <ul>
+    <li><strong>Denominazione:</strong> <span class="placeholder-tag">Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</span></li>
+    <li><strong>Sede legale:</strong> <span class="placeholder-tag">Via Torino 47</span>, <span class="placeholder-tag">13900</span> <span class="placeholder-tag">Biella</span> <span class="placeholder-tag">(BI)</span></li>
+    <li><strong>P.IVA / C.F.:</strong> <span class="placeholder-tag">02696750021</span></li>
+    <li><strong>Iscrizione RUI sez. B n.</strong> <span class="placeholder-tag">B000639183</span> — vigilato IVASS</li>
+    <li><strong>Email per richieste privacy:</strong> <a href="mailto:info@sistoassicurazioni.net">info@sistoassicurazioni.net</a></li>
+    <li><strong>PEC:</strong> <a href="mailto:sistoassicurazioni@pec.esseweb.eu">sistoassicurazioni@pec.esseweb.eu</a></li>
+    <li><strong>Telefono:</strong> <a href="tel:+393202604666">+39 320 260 4666</a></li>
+  </ul>
+  <p>Il sito è gestito operativamente da <strong>Giacomo Ramella Pollone</strong>, intermediario iscritto al RUI sez. E n. <span class="placeholder-tag">E000821549</span>, che agisce per conto del titolare in qualità di soggetto autorizzato al trattamento ai sensi dell'art. 29 GDPR.</p>
+  <div class="trasp-callout">
+    <p>Per ogni questione legata a questo sito o ai dati che mi hai fornito, puoi scrivere direttamente a me all'indirizzo <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a> oppure rivolgerti al titolare ai recapiti indicati sopra.</p>
+  </div>
+</section>
+
+<!-- ========= 2. DPO ========= -->
+<section id="dpo" class="trasp-section">
+  <h2>2. Responsabile della Protezione dei Dati (DPO)</h2>
+  <p>ai sensi dell'art. 37 GDPR, il titolare non rientra fra i soggetti per cui la nomina del DPO è obbligatoria. Per qualunque richiesta in materia di protezione dei dati personali, è possibile rivolgersi direttamente al titolare ai recapiti indicati al punto 1.</p>
+</section>
+
+<!-- ========= 3. DATI ========= -->
+<section id="dati" class="trasp-section">
+  <h2>3. Quali dati raccolgo</h2>
+  <p>I dati personali trattati dipendono dal tipo di interazione che hai con il sito. Di seguito le categorie principali:</p>
+
+  <h3>3.1 Dati forniti volontariamente — modulo di contatto</h3>
+  <p>Quando compili il modulo nella pagina <a href="contatti.html">Contatti</a> o invii una richiesta via email/WhatsApp, mi fornisci:</p>
+  <ul>
+    <li><strong>Dati anagrafici:</strong> nome, cognome.</li>
+    <li><strong>Dati di contatto:</strong> indirizzo email, numero di telefono, eventualmente città di residenza.</li>
+    <li><strong>Contenuto della richiesta:</strong> messaggio libero, polizza di interesse, dati che decidi di condividere per descrivere la tua esigenza.</li>
+    <li><strong>Consensi forniti:</strong> registrazione del consenso al trattamento per finalità di ricontatto e, se prestato, del consenso facoltativo a comunicazioni informative.</li>
+  </ul>
+  <p>I campi contrassegnati come obbligatori (<em>nome, cognome, email, telefono, consenso privacy</em>) sono indispensabili per ricontattarti. Gli altri sono facoltativi e ne puoi sempre disporre liberamente.</p>
+
+  <h3>3.2 Dati raccolti nella fase precontrattuale e contrattuale</h3>
+  <p>Se decidiamo di procedere con una consulenza e/o con la sottoscrizione di una polizza, raccolgo (per conto del titolare) gli ulteriori dati richiesti dalla normativa assicurativa:</p>
+  <ul>
+    <li>Dati anagrafici completi, codice fiscale, documento d'identità (per identificazione antiriciclaggio).</li>
+    <li>Dati patrimoniali, professionali e di rischio necessari all'analisi delle esigenze (artt. 119-bis CAP, Reg. IVASS 40/2018, 45/2020).</li>
+    <li>Per i prodotti vita / IBIP: informazioni su obiettivi di investimento, orizzonte temporale, esperienza finanziaria, capacità di sostenere perdite (test di adeguatezza/appropriatezza).</li>
+    <li>Per le polizze salute: <strong>categorie particolari di dati</strong> ex art. 9 GDPR (dati relativi alla salute), trattate solo con il tuo consenso esplicito e per le finalità strettamente necessarie alla valutazione del rischio e alla gestione del contratto.</li>
+    <li>Dati relativi a sinistri eventualmente denunciati nel corso del rapporto.</li>
+  </ul>
+  <p style="font-size:.88rem;color:var(--text-muted);">Questi dati non vengono raccolti tramite il sito ma in sede di consulenza personale, con consegna o invio dell'informativa precontrattuale ai sensi del Reg. IVASS 40/2018.</p>
+
+  <h3>3.3 Dati di navigazione</h3>
+  <p>I sistemi informatici e le procedure software preposte al funzionamento del sito acquisiscono, nel corso del normale esercizio, alcuni <strong>dati di log</strong> la cui trasmissione è implicita nell'uso dei protocolli internet:</p>
+  <ul>
+    <li>Indirizzo IP del dispositivo che si connette.</li>
+    <li>Tipo di browser, sistema operativo, risoluzione e versione (user-agent).</li>
+    <li>URL richieste, data e ora della richiesta, codice di stato HTTP, dimensione della risposta.</li>
+    <li>URL di provenienza (referrer), se trasmesso dal browser.</li>
+  </ul>
+  <p>Questi dati sono trattati dal fornitore di hosting (vedi punto 7) per il tempo strettamente necessario al funzionamento del servizio, alla sicurezza e all'accertamento di eventuali abusi. Non vengono utilizzati per profilare i visitatori e non sono incrociati con altri dati riferiti a persone identificate.</p>
+
+  <h3>3.4 Cookie e strumenti analoghi</h3>
+  <p>Il sito attualmente utilizza esclusivamente <strong>cookie tecnici</strong> e tecnologie equivalenti (es. <code>sessionStorage</code>) necessari al funzionamento delle pagine. Non sono installati cookie di profilazione né cookie analitici di terze parti che richiedano consenso preventivo. Per il dettaglio dei singoli strumenti utilizzati, consulta la <a href="cookie.html">Cookie Policy</a>.</p>
+</section>
+
+<!-- ========= 4. FINALITÀ ========= -->
+<section id="finalita" class="trasp-section">
+  <h2>4. Finalità del trattamento</h2>
+  <p>I tuoi dati sono trattati esclusivamente per finalità specifiche, esplicite e legittime, che ti vengono comunicate al momento della raccolta. Di seguito una mappa di sintesi:</p>
+
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>Finalità</th><th>Dati coinvolti</th><th>Base giuridica</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>A. Risposta a richiesta di contatto</strong><br>Ricontattarti, fornire informazioni, fissare un appuntamento.</td>
+          <td>Dati anagrafici e di contatto, contenuto della richiesta.</td>
+          <td>Esecuzione di misure precontrattuali su richiesta dell'interessato (art. 6.1.b GDPR).</td>
+        </tr>
+        <tr>
+          <td><strong>B. Consulenza assicurativa e proposta di prodotti</strong><br>Analisi delle esigenze, ricerca della copertura più adeguata.</td>
+          <td>Dati anagrafici, patrimoniali, di rischio, eventuali dati sulla salute (con consenso).</td>
+          <td>Esecuzione di misure precontrattuali (art. 6.1.b); obblighi IVASS (art. 6.1.c); per dati salute: consenso esplicito (art. 9.2.a).</td>
+        </tr>
+        <tr>
+          <td><strong>C. Conclusione ed esecuzione del contratto di assicurazione</strong><br>Emissione polizza, gestione premi, gestione sinistri.</td>
+          <td>Tutti i dati raccolti per il prodotto sottoscritto.</td>
+          <td>Esecuzione del contratto (art. 6.1.b); obbligo legale (art. 6.1.c).</td>
+        </tr>
+        <tr>
+          <td><strong>D. Adempimenti normativi e fiscali</strong><br>Obblighi IVASS, antiriciclaggio (D.Lgs. 231/2007), fiscali, comunicazioni alle autorità.</td>
+          <td>Dati identificativi, documenti, dati di pagamento e contrattuali.</td>
+          <td>Obbligo di legge (art. 6.1.c GDPR).</td>
+        </tr>
+        <tr>
+          <td><strong>E. Gestione reclami e contenziosi</strong></td>
+          <td>Tutti i dati pertinenti al caso.</td>
+          <td>Obbligo di legge (art. 6.1.c); legittimo interesse alla tutela dei diritti del titolare (art. 6.1.f).</td>
+        </tr>
+        <tr>
+          <td><strong>F. Sicurezza del sito e prevenzione abusi</strong></td>
+          <td>Log di navigazione, IP, user-agent.</td>
+          <td>Legittimo interesse del titolare (art. 6.1.f).</td>
+        </tr>
+        <tr>
+          <td><strong>G. Comunicazioni informative e marketing</strong> (facoltativa)<br>Invio di novità di settore, scadenze normative, suggerimenti di prodotti coerenti col tuo profilo.</td>
+          <td>Nome, cognome, email.</td>
+          <td>Consenso facoltativo dell'interessato (art. 6.1.a); revocabile in qualsiasi momento.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:.88rem;color:var(--text-muted);">Il consenso al marketing (finalità G) è del tutto facoltativo: anche se non lo presti, riceverai comunque tutte le informazioni necessarie a rispondere alla tua richiesta e a eseguire eventuali contratti. La revoca del consenso non pregiudica la liceità del trattamento effettuato prima della revoca.</p>
+</section>
+
+<!-- ========= 5. BASI GIURIDICHE ========= -->
+<section id="base-giuridica" class="trasp-section">
+  <h2>5. Basi giuridiche del trattamento</h2>
+  <p>Ogni operazione di trattamento si fonda su una specifica base giuridica, individuata ai sensi del GDPR:</p>
+  <ul>
+    <li><strong>Esecuzione di un contratto o misure precontrattuali</strong> (art. 6, par. 1, lett. b GDPR) — per la gestione della tua richiesta e dei rapporti contrattuali successivi.</li>
+    <li><strong>Adempimento di un obbligo legale</strong> (art. 6, par. 1, lett. c GDPR) — per gli obblighi previsti dalla normativa IVASS, dal Codice delle Assicurazioni Private (D.Lgs. 209/2005), dalla normativa antiriciclaggio (D.Lgs. 231/2007) e dalla normativa fiscale.</li>
+    <li><strong>Legittimo interesse del titolare</strong> (art. 6, par. 1, lett. f GDPR) — per la sicurezza del sito, la prevenzione di abusi e la tutela dei diritti del titolare nei procedimenti giudiziali o stragiudiziali.</li>
+    <li><strong>Consenso esplicito</strong> (art. 6, par. 1, lett. a; art. 9, par. 2, lett. a) — per le finalità di marketing diretto e per il trattamento di categorie particolari di dati (es. dati relativi alla salute per le polizze sanitarie/infortuni/vita).</li>
+  </ul>
+</section>
+
+<!-- ========= 6. CONSERVAZIONE ========= -->
+<section id="conservazione" class="trasp-section">
+  <h2>6. Periodi di conservazione dei dati</h2>
+  <p>Conservo i dati per il tempo strettamente necessario alle finalità per cui sono raccolti e, comunque, per i termini prescritti dalla normativa applicabile:</p>
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>Tipo di dato</th><th>Tempo di conservazione</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Dati del form di contatto se non si arriva a una proposta contrattuale</td><td>24 mesi dall'ultimo contatto, salvo revoca del consenso da parte dell'interessato.</td></tr>
+        <tr><td>Dati relativi a contratti di assicurazione conclusi</td><td>10 anni dalla cessazione del rapporto contrattuale (termini di prescrizione e obblighi documentali IVASS/CAP).</td></tr>
+        <tr><td>Documentazione antiriciclaggio (KYC, copie documenti)</td><td>10 anni dalla cessazione del rapporto, ai sensi dell'art. 31 D.Lgs. 231/2007.</td></tr>
+        <tr><td>Documenti fiscali e contabili</td><td>10 anni ai sensi dell'art. 2220 c.c. e del DPR 600/1973.</td></tr>
+        <tr><td>Dati per finalità di marketing (consenso facoltativo)</td><td>Fino alla revoca del consenso, e comunque non oltre 24 mesi dall'ultima interazione.</td></tr>
+        <tr><td>Log di navigazione del server web</td><td>Massimo 12 mesi salvo accertamento di abusi, illeciti o richieste dell'autorità.</td></tr>
+        <tr><td>Registri dei consensi cookie</td><td>Conservati ai sensi del Provvedimento Garante del 10/06/2021 per dimostrare l'avvenuta acquisizione del consenso; tipicamente 12-24 mesi.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Trascorsi i termini indicati, i dati vengono cancellati o resi anonimi in via definitiva, salvo che la conservazione sia necessaria per la tutela di un diritto in sede giudiziaria.</p>
+</section>
+
+<!-- ========= 7. DESTINATARI ========= -->
+<section id="destinatari" class="trasp-section">
+  <h2>7. Destinatari e responsabili del trattamento</h2>
+  <p>I tuoi dati non vengono diffusi a soggetti indeterminati. Possono essere comunicati a soggetti specifici, individuati nelle seguenti categorie, sempre nei limiti di quanto necessario alle finalità del trattamento:</p>
+
+  <h3>7.1 Soggetti interni al titolare</h3>
+  <ul>
+    <li>Personale del broker autorizzato al trattamento (art. 29 GDPR), formato e vincolato a riservatezza.</li>
+    <li>Il sottoscritto, collaboratore RUI sez. E, in qualità di soggetto autorizzato.</li>
+  </ul>
+
+  <h3>7.2 Responsabili esterni del trattamento (art. 28 GDPR)</h3>
+  <p>Soggetti che trattano i dati per conto del titolare in base a un contratto di nomina a responsabile esterno:</p>
+  <ul>
+    <li><strong>Fornitore di hosting del sito:</strong> <span class="placeholder-tag">Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA</span> — server e CDN.</li>
+    <li><strong>Fornitore di posta elettronica e PEC:</strong> <span class="placeholder-tag">[INSERIRE: es. Google Workspace, Microsoft 365, Aruba, etc.]</span></li>
+    <li><strong>Gestionale broker / CRM:</strong> <span class="placeholder-tag">[INSERIRE: nome del software utilizzato dal broker]</span> per la gestione dei contatti e dei clienti.</li>
+    <li><strong>Consulente fiscale, contabile, legale del broker</strong>, per gli adempimenti di propria competenza.</li>
+    <li><strong>Software house e fornitori IT</strong> incaricati della manutenzione tecnica del sito e degli applicativi gestionali.</li>
+  </ul>
+
+  <h3>7.3 Terzi a cui i dati possono essere comunicati come autonomi titolari</h3>
+  <ul>
+    <li><strong>Compagnie di assicurazione</strong> presso le quali viene presentata la richiesta di copertura o si perfeziona la polizza. Ciascuna compagnia opera come autonomo titolare del trattamento e renderà la propria informativa al momento dell'emissione.</li>
+    <li><strong>IVASS, Garante Privacy, Autorità giudiziaria, UIF e altre autorità pubbliche</strong>, ove la comunicazione sia prevista da una norma di legge o richiesta dall'autorità competente.</li>
+    <li><strong>Organismi di mediazione, conciliazione e ADR</strong>, in caso di controversie.</li>
+  </ul>
+
+  <h3>7.4 Servizi terzi richiamati dal sito senza scambio diretto di dati personali</h3>
+  <p>Quando carichi una pagina del sito, il tuo browser effettua richieste verso:</p>
+  <ul>
+    <li><strong>Google Fonts</strong> (fonts.googleapis.com, fonts.gstatic.com) — per scaricare i file dei caratteri tipografici utilizzati per impaginare la pagina. Questi server di Google possono registrare l'indirizzo IP del browser nei propri log di accesso. Google è autonomo titolare di questo trattamento secondo la propria informativa (<a href="https://policies.google.com/privacy" target="_blank" rel="external noopener nofollow">policies.google.com/privacy</a>).</li>
+  </ul>
+  <p>Se in futuro saranno integrati strumenti analitici o di marketing (es. Google Analytics, Meta Pixel), comparirà un banner di consenso preventivo conforme alle Linee guida del Garante del 10/06/2021 e questa informativa verrà aggiornata di conseguenza.</p>
+</section>
+
+<!-- ========= 8. EXTRA-UE ========= -->
+<section id="extra-ue" class="trasp-section">
+  <h2>8. Trasferimenti di dati al di fuori dell'Unione Europea</h2>
+  <p>In via ordinaria, i dati personali raccolti tramite questo sito sono trattati all'interno dello Spazio Economico Europeo.</p>
+  <p>Alcuni fornitori utilizzati (in particolare il provider di hosting <span class="placeholder-tag">Vercel</span> e, indirettamente, il servizio di Google Fonts per la consegna dei caratteri) possono comportare un trasferimento di dati negli <strong>Stati Uniti</strong> o in altri Paesi terzi.</p>
+  <p>Tali trasferimenti avvengono su una delle seguenti basi previste dal Capo V GDPR:</p>
+  <ul>
+    <li><strong>Decisione di adeguatezza</strong> della Commissione UE del 10 luglio 2023 in materia di EU-US Data Privacy Framework, per i fornitori statunitensi certificati (<a href="https://www.dataprivacyframework.gov/" target="_blank" rel="external noopener nofollow">dataprivacyframework.gov</a>).</li>
+    <li><strong>Clausole contrattuali tipo (SCC)</strong> approvate dalla Commissione UE con Decisione di esecuzione (UE) 2021/914 del 4 giugno 2021, integrate da misure supplementari ove necessario.</li>
+  </ul>
+  <p>Su richiesta, puoi ricevere copia delle garanzie adottate per i trasferimenti scrivendo a <a href="mailto:info@sistoassicurazioni.net">info@sistoassicurazioni.net</a>.</p>
+</section>
+
+<!-- ========= 9. PROFILAZIONE ========= -->
+<section id="processi-automatizzati" class="trasp-section">
+  <h2>9. Processi decisionali automatizzati e profilazione</h2>
+  <p>Il sito <strong>non utilizza processi decisionali interamente automatizzati</strong>, inclusa la profilazione, che producano effetti giuridici sul tuo conto o incidano significativamente sulla tua persona (art. 22 GDPR).</p>
+  <p>Le valutazioni di adeguatezza e appropriatezza nella fase precontrattuale (per i prodotti IBIP, salute, ecc.) sono sempre <strong>supervisionate e validate da una persona fisica</strong> (il sottoscritto come collaboratore e i soggetti autorizzati del broker), che ne porta la responsabilità.</p>
+  <p>Le compagnie di assicurazione, in qualità di autonomi titolari, possono utilizzare modelli attuariali e di tariffazione automatizzati per il calcolo dei premi: per il dettaglio, fai riferimento all'informativa fornita dalla compagnia al momento della sottoscrizione del contratto.</p>
+</section>
+
+<!-- ========= 10. DIRITTI ========= -->
+<section id="diritti" class="trasp-section">
+  <h2>10. I tuoi diritti (artt. 15-22 GDPR)</h2>
+  <p>In qualunque momento puoi esercitare nei confronti del titolare i seguenti diritti:</p>
+  <ul>
+    <li><strong>Diritto di accesso</strong> (art. 15) — ottenere conferma del trattamento, ricevere copia dei dati e tutte le informazioni rilevanti (finalità, destinatari, conservazione, fonte, ecc.).</li>
+    <li><strong>Diritto di rettifica</strong> (art. 16) — chiedere la correzione di dati inesatti o l'integrazione di dati incompleti.</li>
+    <li><strong>Diritto alla cancellazione</strong> (art. 17, "diritto all'oblio") — chiedere la cancellazione dei dati quando ne ricorrano i presupposti, fermi restando gli obblighi di conservazione previsti dalla legge.</li>
+    <li><strong>Diritto di limitazione</strong> (art. 18) — chiedere che il trattamento sia limitato a determinate operazioni nei casi previsti.</li>
+    <li><strong>Diritto alla portabilità</strong> (art. 20) — ricevere in formato strutturato, di uso comune e leggibile da dispositivo automatico i dati che ti riguardano, e trasmetterli a un altro titolare.</li>
+    <li><strong>Diritto di opposizione</strong> (art. 21) — opporti in qualunque momento ai trattamenti basati sul legittimo interesse e ai trattamenti per finalità di marketing diretto (opposizione che ha effetto immediato e incondizionato).</li>
+    <li><strong>Diritto di non essere sottoposto a decisioni automatizzate</strong> che producano effetti giuridici o significativi (art. 22), salvo i casi previsti dalla norma.</li>
+    <li><strong>Diritto di revocare il consenso</strong> in qualsiasi momento (art. 7, par. 3), senza che ciò pregiudichi la liceità del trattamento svolto prima della revoca.</li>
+  </ul>
+</section>
+
+<!-- ========= 11. ESERCITARE ========= -->
+<section id="esercitare" class="trasp-section">
+  <h2>11. Come esercitare i tuoi diritti</h2>
+  <p>Per esercitare i diritti elencati al punto 10 è sufficiente scrivere a uno dei seguenti recapiti del titolare:</p>
+  <ul>
+    <li>Email: <a href="mailto:info@sistoassicurazioni.net">info@sistoassicurazioni.net</a></li>
+    <li>PEC: <a href="mailto:sistoassicurazioni@pec.esseweb.eu">sistoassicurazioni@pec.esseweb.eu</a></li>
+    <li>Posta ordinaria: <span class="placeholder-tag">Sisto Assicurazioni S.a.s.</span> — Ufficio Privacy — <span class="placeholder-tag">Via Torino 47</span>, <span class="placeholder-tag">13900 Biella (BI)</span></li>
+  </ul>
+  <p>Per agevolare l'identificazione, ti chiediamo di indicare nella richiesta nome, cognome e — se possibile — un riferimento del contatto avvenuto (data del form, oggetto della richiesta, eventuale numero di polizza). Il titolare risponderà <strong>senza ingiustificato ritardo e comunque entro 30 giorni</strong> dal ricevimento, salvo proroga motivata fino a un massimo di 3 mesi nei casi particolarmente complessi (art. 12, par. 3 GDPR).</p>
+  <p>L'esercizio dei diritti è gratuito, salvo richieste manifestamente infondate o eccessive (in particolare per il loro carattere ripetitivo), per le quali il titolare può addebitare un contributo o rifiutare la richiesta motivando la decisione.</p>
+</section>
+
+<!-- ========= 12. RECLAMO ========= -->
+<section id="reclamo" class="trasp-section">
+  <h2>12. Reclamo all'Autorità di controllo</h2>
+  <p>Se ritieni che il trattamento dei tuoi dati personali avvenga in violazione del GDPR, hai diritto di proporre <strong>reclamo all'Autorità Garante per la protezione dei dati personali</strong>, secondo le modalità indicate sul sito istituzionale:</p>
+  <ul>
+    <li><strong>Garante per la protezione dei dati personali</strong></li>
+    <li>Piazza Venezia, 11 — 00187 Roma</li>
+    <li>Centralino: +39 06.69677.1 — Fax: +39 06.69677.3785</li>
+    <li>Email: <a href="mailto:protocollo@gpdp.it">protocollo@gpdp.it</a> — PEC: <a href="mailto:protocollo@pec.gpdp.it">protocollo@pec.gpdp.it</a></li>
+    <li>Sito: <a href="https://www.garanteprivacy.it" target="_blank" rel="external noopener">www.garanteprivacy.it</a></li>
+  </ul>
+  <p>Hai inoltre diritto di ricorrere all'autorità giurisdizionale competente (artt. 78 e 79 GDPR).</p>
+</section>
+
+<!-- ========= 13. SICUREZZA ========= -->
+<section id="sicurezza" class="trasp-section">
+  <h2>13. Sicurezza dei dati</h2>
+  <p>Il titolare adotta misure tecniche e organizzative adeguate al rischio (art. 32 GDPR) per proteggere i dati personali da accessi non autorizzati, perdita, alterazione, distruzione o divulgazione. In particolare:</p>
+  <ul>
+    <li><strong>Trasmissione cifrata HTTPS</strong> (TLS 1.2 o superiore) per tutte le pagine del sito, con header <em>Strict-Transport-Security</em> attivo.</li>
+    <li><strong>Content Security Policy</strong> restrittiva che limita le origini ammesse per script, stili, immagini e form.</li>
+    <li><strong>X-Frame-Options DENY</strong> per impedire il framing del sito da terzi (protezione clickjacking).</li>
+    <li>Controllo degli accessi al gestionale del broker tramite autenticazione individuale e profili autorizzativi.</li>
+    <li>Conservazione dei dati cartacei in archivi a accesso ristretto.</li>
+    <li>Backup periodici e procedure di disaster recovery presso il fornitore di hosting.</li>
+    <li>Formazione periodica del personale autorizzato al trattamento.</li>
+  </ul>
+  <p>Pur applicando standard riconosciuti, nessuna trasmissione su internet o archiviazione elettronica è sicura al 100%. In caso di <strong>violazione dei dati personali</strong> (data breach) che presenti un rischio per i diritti e le libertà degli interessati, il titolare effettuerà tempestivamente le notifiche previste dagli artt. 33 e 34 GDPR (al Garante e, ove richiesto, agli interessati stessi).</p>
+</section>
+
+<!-- ========= 14. MINORI ========= -->
+<section id="minori" class="trasp-section">
+  <h2>14. Trattamento dei dati di minori</h2>
+  <p>Il sito non è destinato a minori di età inferiore a 14 anni e i servizi di intermediazione assicurativa qui descritti sono rivolti a soggetti maggiorenni. Non raccolgo consapevolmente dati personali di minori di 14 anni tramite il modulo di contatto.</p>
+  <p>Qualora dati di prodotti destinati a un minore (es. polizze infortuni per studenti, polizze sanitarie familiari) debbano essere comunicati nell'ambito di un rapporto di intermediazione, ciò avviene per il tramite del genitore o del tutore legale, sulla base del consenso prestato da quest'ultimo ai sensi dell'art. 8 GDPR.</p>
+</section>
+
+<!-- ========= 15. MODIFICHE ========= -->
+<section id="modifiche" class="trasp-section">
+  <h2>15. Modifiche all'informativa</h2>
+  <p>La presente informativa può essere aggiornata per riflettere modifiche normative, tecniche o organizzative. La data di ultimo aggiornamento è indicata in cima alla pagina. Le modifiche sostanziali ti verranno comunicate anche tramite avviso sul sito o, per gli utenti già in rapporto contrattuale, tramite i canali abituali (email, PEC, comunicazione cartacea).</p>
+  <p>Quando le modifiche comportino l'introduzione di nuove finalità o categorie di destinatari soggette al tuo consenso, ti verrà richiesto un nuovo consenso espresso prima del relativo trattamento.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. E000821549</span>
+      <p>📞 <a href="tel:+393922198185">+39 392 219 8185</a></p>
+      <p>✉️ <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a></p>
+
+      <div class="footer-social">
+        <a class="social-btn" href="https://wa.me/393922198185" aria-label="WhatsApp" target="_blank" rel="noopener">w</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze privati</h5>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Salute &amp; Vita</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="piano-pensione.html">Fondo Pensione</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze imprese</h5>
+      <ul>
+        <li><a href="rc.html">RC Professionale</a></li>
+        <li><a href="rc.html#catastrofale">Catastrofale PMI</a></li>
+        <li><a href="cyber.html">Cyber Business</a></li>
+        <li><a href="polizza-auto.html">Auto aziendali</a></li>
+        <li><a href="rc.html#do">D&amp;O</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Risorse</h5>
+      <ul>
+        <li><a href="contatti.html">Contatti</a></li>
+        <li><a href="contatti.html#form">Richiedi preventivo</a></li>
+        <li><a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="tel:+393922198185">Telefono</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Informative</h5>
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="cookie.html">Cookie policy</a></li>
+        <li><a href="trasparenza.html">Trasparenza intermediario</a></li>
+        <li><a href="trasparenza.html#reclami">Reclami</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-disclaimer" data-quootami="disclaimer"></p>
+
+  <div class="footer-bottom">
+    <p data-quootami="copyright"></p>
+  </div>
+</footer>
+
+<script src="assets/operatore.js?v=20260611a"></script>
+<script src="assets/schema-org.js?v=20260611a"></script>
+<script src="components.js?v=20260525a"></script>
 </body>
 </html>

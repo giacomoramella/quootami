@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://quootami.it/sinistri">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>Sinistri · Quootami — Come denunciare e gestire un sinistro assicurativo</title>
+<meta name="description" content="Guida pratica alla gestione di un sinistro assicurativo: denuncia, perizia, liquidazione. Quootami assiste il cliente in ogni fase del sinistro, dalla denuncia alla chiusura.">
+<meta property="og:title" content="Sinistri · Quootami — Assistenza completa">
+<meta property="og:description" content="Come denunciare un sinistro auto, casa, salute. Quootami affianca il cliente dalla denuncia alla liquidazione.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quootami.it/sinistri">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://quootami.it/assets/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sinistri Quootami — Assistenza dalla denuncia alla liquidazione">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Quootami">
+<meta name="twitter:image" content="https://quootami.it/assets/og-image.svg">
+<meta name="theme-color" content="#0B1220">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="alternate" hreflang="it-IT" href="https://quootami.it/sinistri">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260611a">
+<style>
+  .alert-emergency {
+    max-width: 800px; margin: 3rem auto 0;
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFEEC2 100%);
+    border: 1px solid var(--yellow); border-left: 5px solid var(--yellow-deep);
+    border-radius: var(--radius); padding: 2rem;
+  }
+  .alert-emergency h3 {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    color: var(--text); font-size: 1.15rem; margin: 0 0 .65rem;
+    display: flex; align-items: center; gap: .65rem;
+  }
+  .alert-emergency p { color: var(--text); font-size: .95rem; line-height: 1.7; margin: 0 0 .85rem; }
+  .alert-emergency a.btn-primary { margin-top: .5rem; }
+  .steps-list {
+    max-width: 880px; margin: 3rem auto 0;
+    counter-reset: step;
+  }
+  .step-block {
+    display: grid; grid-template-columns: 60px 1fr;
+    gap: 1.5rem; margin-bottom: 2rem;
+    padding-bottom: 2rem; border-bottom: 1px solid var(--border);
+  }
+  .step-block:last-child { border-bottom: none; }
+  .step-num {
+    counter-increment: step;
+    width: 48px; height: 48px;
+    background: var(--primary); color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem;
+  }
+  .step-num::before { content: counter(step); }
+  .step-content h3 {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 1.1rem; color: var(--text); margin: 0 0 .65rem;
+  }
+  .step-content p {
+    font-size: .92rem; color: var(--text-muted); line-height: 1.75; margin: 0 0 .5rem;
+  }
+  .step-content ul {
+    list-style: none; padding: 0; margin: .75rem 0 0;
+  }
+  .step-content ul li {
+    font-size: .9rem; color: var(--text-muted); line-height: 1.7;
+    padding-left: 1.5rem; position: relative;
+    margin-bottom: .35rem;
+  }
+  .step-content ul li::before {
+    content: '✓'; position: absolute; left: 0;
+    color: var(--yellow-deep); font-weight: 700;
+  }
+  @media (max-width: 600px) {
+    .step-block { grid-template-columns: 1fr; gap: .75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li class="has-mega"><a href="#">Per privati</a>
+      <div class="mega-panel"><div class="mega-grid">
+        <div class="mega-col"><h4><a href="polizza-auto.html">Auto</a></h4></div>
+        <div class="mega-col"><h4><a href="polizza-casa.html">Casa</a></h4></div>
+        <div class="mega-col"><h4><a href="salute.html">Salute</a></h4></div>
+        <div class="mega-col"><h4><a href="piano-pensione.html">Pensione</a></h4></div>
+      </div></div>
+    </li>
+    <li class="has-mega"><a href="#">Per imprese</a>
+      <div class="mega-panel"><div class="mega-grid">
+        <div class="mega-col"><h4><a href="rc.html#catastrofale">Catastrofale PMI</a></h4></div>
+        <div class="mega-col"><h4><a href="rc.html">RC Professionale</a></h4></div>
+        <div class="mega-col"><h4><a href="cyber.html">Cyber business</a></h4></div>
+      </div></div>
+    </li>
+    <li><a href="sinistri.html" class="active">Sinistri</a></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con Quootami →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="min-height:65vh">
+  <div class="hero-grid"></div>
+  <div class="blob blob-1"></div><div class="blob blob-2"></div>
+
+  <div class="hero-eyebrow"><span class="dot"></span>Gestione sinistri</div>
+  <h1>Sinistro? Quootami <span class="hero-accent">assiste.</span></h1>
+  <p class="hero-sub">Un referente unico segue la pratica dalla denuncia alla liquidazione.</p>
+
+  <div class="alert-emergency">
+    <h3>🚨 Hai appena avuto un sinistro?</h3>
+    <p>Contatta Quootami immediatamente. Più rapida è la denuncia, più efficace sarà la gestione.</p>
+    <a class="btn-primary" data-quootami="whatsapp-link" href="#" target="_blank" rel="noopener">Apri WhatsApp →</a>
+    &nbsp;
+    <a class="btn-secondary" data-quootami="telefono-link" href="#">Chiama subito</a>
+  </div>
+</section>
+
+<!-- COSA FARE SUBITO -->
+<section style="background:var(--bg-alt)">
+  <div class="centered">
+    <span class="section-label">Cosa fare subito</span>
+    <h2 class="section-title">I primi passi <span class="hl">dopo un sinistro.</span></h2>
+    <p class="section-sub">Una guida pratica per non commettere errori che potrebbero compromettere il rimborso.</p>
+  </div>
+
+  <div class="steps-list">
+    <div class="step-block">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h3>Mettere in sicurezza le persone</h3>
+        <p>Prima di tutto: incolumità delle persone coinvolte. Se necessario, chiamare il 118 (emergenza sanitaria) o il 112 (NUE — Numero Unico Emergenze).</p>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h3>Raccogliere le informazioni</h3>
+        <p>Documentare il sinistro nel modo più completo possibile.</p>
+        <ul>
+          <li>Foto dei danni (più angolazioni possibili)</li>
+          <li>Foto della scena del sinistro</li>
+          <li>Dati dei testimoni eventuali</li>
+          <li>In caso di sinistro auto: CAI (Constatazione Amichevole di Incidente) compilato e firmato</li>
+          <li>In caso di sinistro casa: copia eventuale denuncia ai Carabinieri o Vigili del Fuoco</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h3>Contattare Quootami</h3>
+        <p>Il prima possibile, anche prima di parlare con la compagnia. Quootami guida nella procedura corretta e prepara la denuncia formale.</p>
+        <ul>
+          <li>WhatsApp: risposta in tempo reale</li>
+          <li>Telefono: assistenza diretta</li>
+          <li>Email: per inviare la documentazione</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h3>Denuncia formale alla compagnia</h3>
+        <p>Quootami prepara e invia la denuncia formale alla compagnia entro i termini contrattuali (in genere 3 giorni dall'evento per la maggior parte delle polizze).</p>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h3>Perizia e liquidazione</h3>
+        <p>La compagnia invia il perito per la valutazione del danno. Quootami assiste durante la perizia, controlla la corretta applicazione delle condizioni di polizza e segue la liquidazione fino al pagamento.</p>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-num"></div>
+      <div class="step-content">
+        <h3>Chiusura e follow-up</h3>
+        <p>A pratica chiusa, Quootami verifica che la liquidazione sia conforme al contratto. In caso di contestazioni, supporta il cliente nella redazione di reclami formali (vedi <a href="trasparenza.html#reclami" style="color:var(--green-dark)">procedura reclami</a>).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPI DI SINISTRO -->
+<section style="background:var(--bg)">
+  <div class="centered">
+    <span class="section-label">Per ogni tipo di polizza</span>
+    <h2 class="section-title">Sinistri specifici <span class="hl">per prodotto.</span></h2>
+  </div>
+  <div class="cov-grid">
+    <div class="cov-item c-rc">
+      <h3>Sinistri RC Auto</h3>
+      <p>CAI, denuncia entro 3 giorni, gestione con compagnia controparte, risarcimento diretto.</p>
+    </div>
+    <div class="cov-item c-fire">
+      <h3>Sinistri casa</h3>
+      <p>Furto, incendio, allagamento, eventi atmosferici. Denuncia FFAA se necessario.</p>
+    </div>
+    <div class="cov-item c-injury">
+      <h3>Sinistri salute</h3>
+      <p>Ricoveri, interventi, rimborso visite. Dichiarazione del medico curante.</p>
+    </div>
+    <div class="cov-item c-legal">
+      <h3>Sinistri RC professionale</h3>
+      <p>Richieste di risarcimento da clienti, tutela legale, gestione contenzioso.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <h2>Sinistro in corso?<br>Contatta Quootami.</h2>
+  <p>Più veloce è la denuncia, migliore è la gestione.</p>
+  <a class="btn-primary" data-quootami="whatsapp-link" href="#" target="_blank" rel="noopener" style="font-size:1rem;padding:1.05rem 2.6rem">Apri WhatsApp →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. E000821549</span>
+      <p>📞 <a data-quootami="telefono-link" href="#">_TEL_</a></p>
+      <p>✉️ <a data-quootami="email-link" href="#">_EMAIL_</a></p>
+      <div class="footer-social">
+        <a class="social-btn" data-quootami="whatsapp-link" href="#" aria-label="WhatsApp" target="_blank" rel="noopener">w</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze privati</h5>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Salute &amp; Vita</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="piano-pensione.html">Fondo Pensione</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze imprese</h5>
+      <ul>
+        <li><a href="rc.html">RC Professionale</a></li>
+        <li><a href="rc.html#catastrofale">Catastrofale PMI</a></li>
+        <li><a href="cyber.html">Cyber Business</a></li>
+        <li><a href="polizza-auto.html">Auto aziendali</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Risorse</h5>
+      <ul>
+        <li><a href="chi-siamo.html">Chi siamo</a></li>
+        <li><a href="sinistri.html">Gestione sinistri</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
+        <li><a href="mappa-sito.html">Mappa del sito</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Informative</h5>
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="cookie.html">Cookie policy</a></li>
+        <li><a href="trasparenza.html">Trasparenza intermediario</a></li>
+        <li><a href="trasparenza.html#reclami">Reclami</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-disclaimer" data-quootami="disclaimer"></p>
+  <div class="footer-bottom">
+    <p data-quootami="copyright"></p>
+  </div>
+</footer>
+
+<script src="assets/lead-db.js?v=20260611a"></script>
+<script src="assets/operatore.js?v=20260611a"></script>
+<script src="assets/schema-org.js?v=20260611a"></script>
+<script src="components.js?v=20260611a"></script>
+</body>
+</html>

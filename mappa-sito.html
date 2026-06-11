@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://quootami.it/mappa-sito">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<title>Mappa del sito · Quootami</title>
+<meta name="description" content="Mappa completa delle pagine del sito Quootami: polizze, servizi, informative legali e contatti.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Mappa del sito · Quootami">
+<meta property="og:description" content="Tutte le pagine del sito Quootami in una vista d'insieme.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://quootami.it/mappa-sito">
+<meta property="og:image" content="https://quootami.it/assets/og-image.svg">
+<meta property="og:image:alt" content="Mappa sito Quootami">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Quootami">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260611a">
+<style>
+  .sitemap-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 3rem; max-width: 1100px; margin: 3rem auto 0;
+  }
+  .sitemap-col h3 {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 1rem; color: var(--text);
+    margin: 0 0 1rem; padding-bottom: .75rem;
+    border-bottom: 2px solid var(--yellow);
+  }
+  .sitemap-col ul { list-style: none; padding: 0; margin: 0; }
+  .sitemap-col ul li { margin-bottom: .65rem; }
+  .sitemap-col ul a {
+    color: var(--text); text-decoration: none;
+    font-size: .92rem; display: inline-block;
+    padding: .15rem 0;
+    transition: color .2s, padding-left .15s;
+  }
+  .sitemap-col ul a:hover { color: var(--green-dark); padding-left: .25rem; }
+  .sitemap-col ul li small { color: var(--text-muted); font-size: .78rem; display: block; margin-top: .15rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li><a href="chi-siamo.html">Chi siamo</a></li>
+    <li><a href="sinistri.html">Sinistri</a></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con Quootami →</a></li>
+  </ul>
+</nav>
+
+<section style="padding-top: 8rem">
+  <div class="centered">
+    <span class="section-label">Navigazione</span>
+    <h2 class="section-title">Mappa del <span class="hl">sito.</span></h2>
+    <p class="section-sub">Tutte le pagine del sito Quootami organizzate per area.</p>
+  </div>
+
+  <div class="sitemap-grid">
+
+    <div class="sitemap-col">
+      <h3>🏠 Home</h3>
+      <ul>
+        <li><a href="index.html">Quootami — Home</a><small>Confronto polizze e fondi pensione</small></li>
+      </ul>
+    </div>
+
+    <div class="sitemap-col">
+      <h3>🚗 Polizze privati</h3>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a><small>RC, Furto, Incendio, Kasko</small></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a><small>RC capofamiglia, furto, incendio</small></li>
+        <li><a href="salute.html">Salute &amp; Vita</a><small>Polizza sanitaria, vita, infortuni</small></li>
+        <li><a href="cyber.html">Polizza Cyber</a><small>Furto identità, frodi online</small></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a><small>Cani, gatti, RC e veterinario</small></li>
+        <li><a href="piano-pensione.html">Fondo Pensione</a><small>Previdenza complementare e deduzione fiscale</small></li>
+      </ul>
+    </div>
+
+    <div class="sitemap-col">
+      <h3>🏢 Polizze imprese</h3>
+      <ul>
+        <li><a href="rc.html">RC Professionale</a><small>Per liberi professionisti e aziende</small></li>
+        <li><a href="rc.html#catastrofale">Catastrofale PMI</a><small>Obbligatoria per le imprese (Legge 213/2023)</small></li>
+        <li><a href="cyber.html">Cyber Business</a><small>Protezione cyber per le imprese</small></li>
+        <li><a href="polizza-auto.html">Auto aziendali</a><small>Flotte e veicoli aziendali</small></li>
+      </ul>
+    </div>
+
+    <div class="sitemap-col">
+      <h3>ℹ️ Informazioni</h3>
+      <ul>
+        <li><a href="chi-siamo.html">Chi siamo</a><small>Quootami: missione, valori, numeri</small></li>
+        <li><a href="sinistri.html">Sinistri</a><small>Come denunciare e gestire un sinistro</small></li>
+        <li><a href="contatti.html">Contatti</a><small>Telefono, email, WhatsApp</small></li>
+        <li><a href="trasparenza.html">Trasparenza intermediario</a><small>IVASS, RUI, conflitti di interesse</small></li>
+      </ul>
+    </div>
+
+    <div class="sitemap-col">
+      <h3>📋 Informative legali</h3>
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a><small>Trattamento dei dati personali (GDPR)</small></li>
+        <li><a href="cookie.html">Cookie policy</a><small>Cookies e tracciamenti</small></li>
+        <li><a href="trasparenza.html#reclami">Procedura reclami</a><small>Come presentare un reclamo</small></li>
+      </ul>
+    </div>
+
+    <div class="sitemap-col">
+      <h3>📞 Risorse</h3>
+      <ul>
+        <li><a data-quootami="whatsapp-link" href="#">WhatsApp</a><small>Risposta in tempo reale</small></li>
+        <li><a data-quootami="telefono-link" href="#">Telefono</a><small>Assistenza diretta</small></li>
+        <li><a data-quootami="email-link" href="#">Email</a><small>Per documentazione</small></li>
+        <li><a href="sitemap.xml">Sitemap XML</a><small>Per motori di ricerca</small></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. E000821549</span>
+      <p>📞 <a data-quootami="telefono-link" href="#">_TEL_</a></p>
+      <p>✉️ <a data-quootami="email-link" href="#">_EMAIL_</a></p>
+    </div>
+    <div class="footer-col">
+      <h5>Risorse</h5>
+      <ul>
+        <li><a href="chi-siamo.html">Chi siamo</a></li>
+        <li><a href="sinistri.html">Gestione sinistri</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
+        <li><a href="mappa-sito.html">Mappa del sito</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Informative</h5>
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="cookie.html">Cookie policy</a></li>
+        <li><a href="trasparenza.html">Trasparenza intermediario</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-disclaimer" data-quootami="disclaimer"></p>
+  <div class="footer-bottom">
+    <p data-quootami="copyright"></p>
+  </div>
+</footer>
+
+<script src="assets/operatore.js?v=20260611a"></script>
+<script src="assets/schema-org.js?v=20260611a"></script>
+<script src="components.js?v=20260611a"></script>
+</body>
+</html>
