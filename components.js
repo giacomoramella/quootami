@@ -108,39 +108,6 @@
   }
 })();
 
-/* ── FAQ ACCORDION ──
-   Gestisce il toggle delle .faq-item: apre/chiude l'answer al click sulla question.
-   Solo una FAQ aperta alla volta. Riutilizzabile su tutte le pagine. */
-(function () {
-  function init() {
-    var items = document.querySelectorAll('.faq-item');
-    if (!items.length) return;
-    items.forEach(function (item) {
-      var btn = item.querySelector('.faq-question');
-      var ans = item.querySelector('.faq-answer');
-      if (!btn || !ans) return;
-      btn.addEventListener('click', function () {
-        var isOpen = item.classList.contains('open');
-        // Chiudi tutte le altre
-        items.forEach(function (other) {
-          if (other !== item) {
-            other.classList.remove('open');
-            var ob = other.querySelector('.faq-question');
-            if (ob) ob.setAttribute('aria-expanded', 'false');
-          }
-        });
-        item.classList.toggle('open', !isOpen);
-        btn.setAttribute('aria-expanded', String(!isOpen));
-      });
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-
 /* ── WHATSAPP BUTTON ── */
 (function () {
   const a = document.createElement('a');

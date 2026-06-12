@@ -98,7 +98,7 @@
     return SUPABASE_URL + '/storage/v1' + json.signedURL;
   }
 
-  // === SALVA LEAD SU TABELLA ===
+  // === SALVA LEAD SU TABELLA (via RPC SECURITY DEFINER, bypassa RLS) ===
   async function saveLead(lead) {
     if (!isConfigured) {
       console.log('[Quootami LeadDB] DB non configurato — salvataggio saltato');
@@ -118,25 +118,37 @@
       messaggio: lead.messaggio || null,
       fonte: lead.fonte || 'sito web',
       pagina: window.location.pathname,
-      user_agent: (navigator.userAgent || '').substring(0, 255),
-      stato: 'nuovo',
-      documenti: lead.documenti || null  // {ci_fronte: path, ci_retro: path, libretto: path}
+      user_agent: (navigator.userAgent || '').substring(0, 255)
     };
 
-    var res = await fetch(SUPABASE_URL + '/rest/v1/leads', {
+    // Chiama la funzione RPC insert_lead (SECURITY DEFINER, bypassa RLS)
+    var res = await fetch(SUPABASE_URL + '/rest/v1/rpc/insert_lead', {
       method: 'POST',
       headers: authHeaders({
-        'Content-Type': 'application/json',
-        'Prefer': 'return=representation'
+        'Content-Type': 'application/json'
       }),
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ payload: payload })
     });
     if (!res.ok) {
       var errText = await res.text().catch(function () { return res.statusText; });
-      throw new Error('Supabase HTTP ' + res.status + ': ' + errText);
+      throw new Error('Supabase RPC HTTP ' + res.status + ': ' + errText);
     }
-    var data = await res.json();
-    return Array.isArray(data) ? data[0] : data;
+    return await res.json();
+  }
+
+  // === AGGIORNA DOCUMENTI DEL LEAD (via RPC) ===
+  async function attachDocumenti(leadId, docs) {
+    if (!isConfigured) return null;
+    var res = await fetch(SUPABASE_URL + '/rest/v1/rpc/attach_documenti', {
+      method: 'POST',
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ lead_id: leadId, docs: docs })
+    });
+    if (!res.ok) {
+      var t = await res.text().catch(function () { return res.statusText; });
+      throw new Error('attach_documenti fallita (' + res.status + '): ' + t);
+    }
+    return true;
   }
 
   // === FLUSSO COMPLETO: SALVA LEAD + UPLOAD DOCUMENTI + RITORNA LINK FIRMATI ===
@@ -168,28 +180,29 @@
     });
     await Promise.all(uploadPromises);
 
-    // 3) Update lead con i path documenti
+    // 3) Update lead con i path documenti (via RPC SECURITY DEFINER)
     if (Object.keys(paths).length) {
-      await fetch(SUPABASE_URL + '/rest/v1/leads?id=eq.' + lead.id, {
-        method: 'PATCH',
-        headers: authHeaders({
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        }),
-        body: JSON.stringify({ documenti: paths })
-      });
+      try {
+        await attachDocumenti(lead.id, paths);
+      } catch (ex) {
+        console.warn('[Quootami LeadDB] attach_documenti fallita, non blocca:', ex.message);
+      }
     }
 
-    // 4) Genera signed URL per ciascun documento (in parallelo)
-    var signedUrls = {};
-    var signPromises = Object.keys(paths).map(function (key) {
-      return getSignedUrl(paths[key]).then(function (url) {
-        signedUrls[key] = url;
-      });
+    // 4) Genera link per accesso documenti tramite Dashboard Supabase
+    //    (i file sono su bucket privato, accessibili solo dall'admin loggato)
+    var dashboardUrls = {};
+    Object.keys(paths).forEach(function (key) {
+      dashboardUrls[key] = SUPABASE_URL.replace('.supabase.co', '') +
+        '.supabase.co/storage/v1/object/authenticated/documenti-lead/' + paths[key];
     });
-    await Promise.all(signPromises);
 
-    return { lead: lead, signedUrls: signedUrls };
+    return {
+      lead: lead,
+      paths: paths,
+      signedUrls: dashboardUrls,            // mantengo nome per compatibilita' con codice esistente
+      dashboardUrls: dashboardUrls
+    };
   }
 
   // === ESPORTA API ===
@@ -198,6 +211,7 @@
     saveLead: saveLead,
     uploadFile: uploadFile,
     getSignedUrl: getSignedUrl,
+    attachDocumenti: attachDocumenti,
     submitFullLead: submitFullLead
   };
 
