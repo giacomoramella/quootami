@@ -3,32 +3,485 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://quootami.it/polizza-casa">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<title>Sito in manutenzione</title>
-<meta name="robots" content="noindex, nofollow">
+<title>Polizza Casa – Quootami</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260608b">
 <style>
-  :root { --yellow: #FFD84D; --text: #0B1220; --bg: #FAFAF7; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 2rem 5vw;
+  /* ── CHART SECTION background ── */
+  .chart-section { background: var(--bg-alt); }
+  .bar-chart { max-width: 720px; margin: 3rem auto 0; }
+  .bar-row { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
+  .bar-company { width:130px; font-size:.875rem; font-weight:500; color:var(--text); text-align:right; flex-shrink:0; }
+  .bar-track { flex:1; background:var(--border); border-radius:50px; height:36px; overflow:hidden; }
+  .bar-fill {
+    height:100%; border-radius:50px; background:rgba(11,18,32,.12);
+    display:flex; align-items:center; padding:0 1rem;
+    transition:width 1.2s cubic-bezier(.22,.68,0,1.2);
   }
-  h1 {
-    font-family: 'Inter', sans-serif; font-weight: 700;
-    font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -.02em; line-height: 1.1;
-    text-align: center;
+  .bar-fill.best { background:linear-gradient(90deg,var(--green-dark),var(--green)); }
+  .bar-price { font-family:'Inter',sans-serif; font-size:.875rem; font-weight:700; color:var(--text); white-space:nowrap; }
+  .bar-fill.best .bar-price { color:var(--primary); }
+  .bar-best-label { margin-left:.75rem; background:var(--primary); color:#fff; font-size:.68rem; font-weight:700; padding:.2rem .6rem; border-radius:50px; white-space:nowrap; }
+  .chart-note { text-align:center; color:var(--text-muted); font-size:.8rem; margin-top:1.5rem; }
+
+  /* ── COVERAGE (text-only, centered grid, colored accents) ── */
+  .cov-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 3rem 2.5rem; max-width: 1080px;
+    margin: 3.5rem auto 0; padding: 0 5vw;
   }
-  h1 .accent { position: relative; display: inline-block; z-index: 1; }
-  h1 .accent::before {
-    content: ''; position: absolute; left: -4px; right: -4px;
-    top: 55%; bottom: 6%; background: var(--yellow); z-index: -1;
+  @media (max-width: 900px) { .cov-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 2rem; } }
+  @media (max-width: 560px) { .cov-grid { grid-template-columns: 1fr; gap: 2.25rem; max-width: 420px; } }
+  .cov-item {
+    text-align: center; padding: 1.75rem 1.25rem; border-radius: var(--radius);
+    background: var(--bg-card); border: 1px solid var(--border);
+    transition: transform .25s cubic-bezier(.22,.68,0,1.2), box-shadow .25s, border-color .25s;
+    position: relative; overflow: hidden;
+    --cov-c: var(--yellow-deep);
+  }
+  .cov-item::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--cov-c); border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .cov-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--cov-c); }
+  .cov-dot {
+    display: inline-grid; place-items: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: color-mix(in srgb, var(--cov-c) 14%, transparent);
+    color: var(--cov-c); font-size: 1.15rem; font-weight: 700;
+    margin: 0 auto 1rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .cov-badge { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .08em; padding: .25rem .75rem; border-radius: 50px; margin-bottom: .85rem; text-transform: uppercase; }
+  .cov-base     { background: rgba(11,18,32,.08); color: var(--primary); }
+  .cov-optional { background: rgba(255,216,77,.18); color: #1a7a4a; }
+  .cov-item h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; margin: 0 0 .5rem; color: var(--text); }
+  .cov-item h3::after { content: ''; display: block; width: 32px; height: 2px; background: var(--cov-c); margin: .55rem auto 0; border-radius: 2px; }
+  .cov-item p { font-size: .92rem; color: var(--text-muted); line-height: 1.65; margin: .9rem auto 0; max-width: 280px; }
+
+  /* palette per categoria */
+  .cov-item.c-fire    { --cov-c: #E76F51; }
+  .cov-item.c-theft   { --cov-c: #264653; }
+  .cov-item.c-family  { --cov-c: #2A9D8F; }
+  .cov-item.c-nature  { --cov-c: #8E5BB5; }
+  .cov-item.c-water   { --cov-c: #4A9EBA; }
+  .cov-item.c-legal   { --cov-c: #E9B440; }
+
+  /* ── FORM ── */
+  .form-section { background: var(--bg); }
+  .quote-box {
+    max-width:620px; margin:3rem auto 0;
+    background:var(--bg-card); border:1px solid var(--border);
+    border-radius:var(--radius-lg); padding:2.5rem; box-shadow:var(--shadow-md);
+  }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+  .form-row.single { grid-template-columns:1fr; }
+  .form-group { display:flex; flex-direction:column; gap:.4rem; }
+  .form-group label { font-size:.8rem; font-weight:600; color:var(--text); letter-spacing:.03em; }
+  .form-group input, .form-group select {
+    padding:.75rem 1rem; border-radius:12px; border:1px solid var(--border);
+    background:var(--bg); font-family:'Inter',sans-serif;
+    font-size:.95rem; color:var(--text); outline:none; transition:border-color .2s,box-shadow .2s;
+  }
+  .form-group input:focus, .form-group select:focus { border-color:var(--border-green); box-shadow:0 0 0 3px rgba(255,216,77,.1); }
+  .form-submit { width:100%; margin-top:1.5rem; font-size:1.05rem; padding:1rem; border-radius:14px; }
+  .form-note { text-align:center; font-size:.78rem; color:var(--text-muted); margin-top:1rem; }
+
+  /* ── VALIDATION + LOADING + RESULTS ── */
+  .field-err { display:none; color:#d43a2f; font-size:.75rem; margin-top:.2rem; }
+  .form-loading { display:none; align-items:center; justify-content:center; gap:1rem; padding:2rem; color:var(--text-muted); font-size:.9rem; margin-top:1.5rem; }
+  .spinner { width:28px; height:28px; border:3px solid var(--border); border-top-color:var(--green-dark); border-radius:50%; animation:spin .8s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .results-wrap { display:none; margin-top:1.5rem; animation:fadeUp .4s ease-out; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);} }
+  .res-header { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:.75rem; margin-bottom:1rem; }
+  .res-title { font-family:'Inter',sans-serif; font-size:1rem; font-weight:700; color:var(--text); display:block; }
+  .res-sub { font-size:.78rem; color:var(--text-muted); display:block; margin-top:.25rem; }
+  .res-table { width:100%; border-collapse:collapse; font-size:.875rem; }
+  .res-table thead th { padding:.6rem .75rem; text-align:left; font-size:.72rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--text-muted); border-bottom:2px solid var(--border); }
+  .res-table tbody td { padding:.75rem; vertical-align:middle; border-bottom:1px solid var(--border); color:var(--text-muted); }
+  .res-table tbody td:first-child { color:var(--text); }
+  .res-table tbody tr.best-row td { background:rgba(255,216,77,.06); }
+  .res-table tbody tr:last-child td { border-bottom:none; }
+  .best-badge { display:inline-block; background:var(--green-dark); color:#fff; font-size:.65rem; font-weight:700; padding:.15rem .5rem; border-radius:50px; margin-left:.5rem; vertical-align:middle; }
+  .res-price { font-family:'Inter',sans-serif; font-weight:700; color:var(--primary); white-space:nowrap; }
+  .btn-attiva { background:var(--primary); color:#fff; border:none; border-radius:8px; padding:.45rem .9rem; font-size:.8rem; font-weight:600; cursor:pointer; transition:background .2s,transform .15s; font-family:'Inter',sans-serif; }
+  .btn-attiva:hover { background:var(--green-dark); transform:translateY(-1px); }
+  .res-note { font-size:.72rem; color:var(--text-muted); margin-top:.75rem; }
+
+  /* ── BENEFITS ── */
+  .benefits-section { background:var(--bg-alt); }
+  .benefits-row { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3rem; }
+  .benefit-item { text-align:center; }
+  .benefit-num { font-family:'Inter',sans-serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:700; color:var(--primary); display:block; line-height:1; }
+  .benefit-label { font-size:.9rem; color:var(--text-muted); margin-top:.5rem; line-height:1.5; display:block; }
+
+  @media(max-width:600px){
+    .form-row { grid-template-columns:1fr; }
+    .benefits-row { grid-template-columns:1fr; }
   }
 </style>
 </head>
 <body>
-  <h1>Sito in <span class="accent">manutenzione.</span></h1>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li class="has-mega">
+      <a href="#">Per privati</a>
+      <div class="mega-panel">
+        <div class="mega-grid">
+          <div class="mega-col">
+            <h4><a href="polizza-auto.html">Auto e mobilità</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="polizza-casa.html">Casa</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="salute.html">Salute &amp; vita</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="piano-pensione.html">Pensione</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="cyber.html">Cyber</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="polizza-animali.html">Animali domestici</a></h4>
+          </div></div></div>
+    </li>
+    <li class="has-mega"><a href="#">Per imprese</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col">
+            <h4><a href="rc.html#catastrofale">Catastrofale PMI</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="rc.html">Responsabilità Civile</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="cyber.html">Cyber business</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="polizza-auto.html">Auto aziendali</a></h4>
+          </div></div></div></li>
+    <li><a href="contatti.html" class="nav-cta">Parla con Quootami →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div>
+
+  <div class="hero-eyebrow"><span class="dot"></span>Incendio · Furto · RC Capofamiglia · Catastrofi</div>
+
+  <h1>Quota la casa,<br><span class="hero-accent">alza le difese.</span></h1>
+
+  <p class="hero-sub">Confrontiamo le polizze casa sul mercato. Attivazione digitale in 24 ore.</p>
+
+  <div class="hero-actions">
+    <a href="#preventivo" class="btn-primary">Ottieni il preventivo →</a>
+    <a href="#coperture" class="btn-secondary">Vedi le coperture</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat">
+      <span class="hstat-num">Su misura</span>
+      <span class="hstat-label">Polizza disegnata<br>sui tuoi rischi reali</span>
+    </div>
+    <div class="hstat">
+      <span class="hstat-num">Sinistri inclusi</span>
+      <span class="hstat-label">Quootami assiste io<br>anche dopo la firma</span>
+    </div>
+    <div class="hstat">
+      <span class="hstat-num">24h</span>
+      <span class="hstat-label">Tempo medio<br>attivazione polizza</span>
+    </div>
+    <div class="hstat">
+      <span class="hstat-num">0 vincoli</span>
+      <span class="hstat-label">Niente mono-mandato,<br>scegli liberamente</span>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGES -->
+<section id="coperture" style="background:var(--bg)">
+  <div class="centered">
+    <span class="section-label">Le coperture</span>
+    <h2 class="section-title">Cosa copre la polizza casa</h2>
+    <p class="section-sub">Le coperture base, più quelle che davvero possono fare la differenza.</p>
+  </div>
+  <div class="cov-grid">
+    <div class="cov-item c-fire">
+      <span class="cov-badge cov-base">Base</span>
+      <h3>Incendio &amp; Scoppio</h3>
+      <p>Se brucia, ti rimborsiamo casa e contenuto.</p>
+    </div>
+    <div class="cov-item c-theft">
+      <span class="cov-badge cov-base">Base</span>
+      <h3>Furto &amp; Rapina</h3>
+      <p>Se ti svaligiano, recuperi il valore di quello che hai perso.</p>
+    </div>
+    <div class="cov-item c-family">
+      <span class="cov-badge cov-optional">Opzionale</span>
+      <h3>RC Capofamiglia</h3>
+      <p>Tu, i tuoi cari o il cane fate un danno? Paghiamo noi.</p>
+    </div>
+    <div class="cov-item c-nature">
+      <span class="cov-badge cov-optional">Opzionale</span>
+      <h3>Catastrofi Naturali</h3>
+      <p>Alluvione, terremoto, grandine. Imprevisti che da soli non reggi.</p>
+    </div>
+    <div class="cov-item c-water">
+      <span class="cov-badge cov-optional">Opzionale</span>
+      <h3>Danni da Acqua</h3>
+      <p>Tubo rotto o vicino allagato. Ti copriamo entrambe le cose.</p>
+    </div>
+    <div class="cov-item c-legal">
+      <span class="cov-badge cov-optional">Opzionale</span>
+      <h3>Tutela Legale</h3>
+      <p>Lite con condominio o vicini? Avvocato e spese coperti.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<section id="preventivo" class="form-section">
+  <div class="centered">
+    <span class="section-label">Preventivo gratuito</span>
+    <h2 class="section-title">Preventivo casa<br>in 60 secondi</h2>
+    <p class="section-sub">Tre dati, zero registrazione. Ricevi il preventivo personalizzato immediatamente.</p>
+  </div>
+
+  <div class="quote-box">
+    <form id="casa-form" novalidate>
+      <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
+      <input type="hidden" name="subject" value="Quootami • Richiesta preventivo Casa">
+      <input type="hidden" name="from_name" value="Quootami — sito web">
+      <input type="hidden" name="redirect" value="false">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="c-nome">Nome e cognome *</label>
+          <input type="text" id="c-nome" name="Nome e cognome" placeholder="Mario Rossi" required>
+        </div>
+        <div class="form-group">
+          <label for="c-tel">Telefono *</label>
+          <input type="tel" id="c-tel" name="Telefono" placeholder="+39 333 1234567" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="c-email">Email *</label>
+          <input type="email" id="c-email" name="Email" placeholder="mario@esempio.it" required>
+        </div>
+        <div class="form-group">
+          <label for="c-cap">CAP dell'abitazione *</label>
+          <input type="text" id="c-cap" name="CAP abitazione" placeholder="13900" maxlength="5" pattern="[0-9]{5}" inputmode="numeric" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="c-mq">Superficie (mq)</label>
+          <input type="number" id="c-mq" name="Superficie mq" placeholder="es. 80" min="20" max="500">
+        </div>
+        <div class="form-group">
+          <label for="c-contenuto">Valore del contenuto (€)</label>
+          <input type="number" id="c-contenuto" name="Valore contenuto" placeholder="es. 30000" min="1000" max="500000">
+        </div>
+      </div>
+
+      <label class="form-consent">
+        <input type="checkbox" name="Consenso privacy" value="Sì — accettato" required>
+        <span>Acconsento al trattamento dei miei dati personali per essere ricontattato (<a href="privacy.html" target="_blank">privacy policy</a>) *</span>
+      </label>
+
+      <button type="submit" class="btn-primary form-submit" id="c-btn">Richiedi preventivo →</button>
+      <p class="form-note">🔒 Dati protetti · Nessun costo · Nessun obbligo di acquisto</p>
+
+      <div class="form-feedback form-success" id="c-success" hidden>
+        <strong>Richiesta inviata! ✓</strong>
+        <p>Verrai ricontattato entro 24 ore lavorative. Per emergenze: <a href="https://wa.me/393922198185" target="_blank">WhatsApp</a>.</p>
+      </div>
+      <div class="form-feedback form-error" id="c-error" hidden>
+        <strong>Errore di invio</strong>
+        <p>Riprova o scrivi a a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a>.</p>
+        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">Dettaglio tecnico: <code id="c-error-msg" style="font-family:monospace;"></code></p>
+      </div>
+    </form>
+  </div>
+
+  <script>
+  (function(){
+    var form = document.getElementById('casa-form');
+    if (!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var btn = document.getElementById('c-btn');
+      var ok = document.getElementById('c-success');
+      var err = document.getElementById('c-error');
+      var errMsg = document.getElementById('c-error-msg');
+      ok.hidden = true; err.hidden = true;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      btn.disabled = true; var origLabel = btn.textContent; btn.textContent = 'Invio in corso…';
+      try {
+        var fd = new FormData(form);
+        var res = await fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Accept':'application/json'}, body: fd });
+        var json = await res.json().catch(function(){ return { success:false, message:'Risposta non valida' }; });
+        if (res.ok && json.success) { form.reset(); ok.hidden = false; ok.scrollIntoView({behavior:'smooth',block:'center'}); }
+        else { if (errMsg) errMsg.textContent = '[' + res.status + '] ' + (json.message || 'errore'); err.hidden = false; }
+      } catch(ex){ if (errMsg) errMsg.textContent = ex.message || String(ex); err.hidden = false; }
+      finally { btn.disabled = false; btn.textContent = origLabel; }
+    });
+  })();
+  </script>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. E000821549</span>
+      <p>📞 <a href="tel:+393922198185">+39 392 219 8185</a></p>
+      <p>✉️ <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a></p>
+
+      <div class="footer-social">
+        <a class="social-btn" href="https://wa.me/393922198185" aria-label="WhatsApp" target="_blank" rel="noopener">w</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze privati</h5>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Salute &amp; Vita</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="piano-pensione.html">Fondo Pensione</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze imprese</h5>
+      <ul>
+        <li><a href="rc.html">RC Professionale</a></li>
+        <li><a href="rc.html#catastrofale">Catastrofale PMI</a></li>
+        <li><a href="cyber.html">Cyber Business</a></li>
+        <li><a href="polizza-auto.html">Auto aziendali</a></li>
+        <li><a href="rc.html#do">D&amp;O</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Risorse</h5>
+      <ul>
+        <li><a href="contatti.html">Contatti</a></li>
+        <li><a href="contatti.html#form">Richiedi preventivo</a></li>
+        <li><a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="tel:+393922198185">Telefono</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Informative</h5>
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="cookie.html">Cookie policy</a></li>
+        <li><a href="trasparenza.html">Trasparenza intermediario</a></li>
+        <li><a href="trasparenza.html#reclami">Reclami</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-disclaimer" data-quootami="disclaimer"></p>
+
+  <div class="footer-bottom">
+    <p data-quootami="copyright"></p>
+  </div>
+</footer>
+
+<a class="floating-badge" href="#preventivo">🏠 Preventivo gratis</a>
+
+<script>
+/* reveal */
+const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* bar chart */
+const barObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar-fill[data-width]').forEach(bar=>{setTimeout(()=>{bar.style.width=bar.dataset.width;},200);});barObs.unobserve(e.target);}});},{threshold:.3});
+document.querySelector('.bar-chart')&&barObs.observe(document.querySelector('.bar-chart'));
+
+/* counters */
+function animateCounter(el){const target=parseFloat(el.dataset.target),prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'',isFloat=el.dataset.float!==undefined,dur=1800,start=performance.now();(function step(now){const p=Math.min((now-start)/dur,1),ease=1-Math.pow(1-p,3),val=target*ease;el.textContent=prefix+(isFloat?val.toFixed(1):Math.floor(val))+suffix;if(p<1)requestAnimationFrame(step);})(start);}
+const co=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animateCounter(e.target);co.unobserve(e.target);}});},{threshold:.5});
+document.querySelectorAll('.hstat-num[data-target]').forEach(el=>co.observe(el));
+
+/* helpers */
+function showFe(id,msg){const el=document.getElementById(id);if(el){el.textContent=msg;el.style.display='block';}}
+function hideFe(id){const el=document.getElementById(id);if(el){el.textContent='';el.style.display='none';}}
+function getGeoFactorCasa(cap){const d1=parseInt(cap[0]);if(d1<=2)return 0.90;if(d1<=4)return 0.95;if(d1<=6)return 1.0;return 1.05;}
+function getZoneName(cap){const d1=parseInt(cap[0]);if(d1<=2)return 'Nord-Ovest';if(d1<=4)return 'Nord-Est';if(d1<=6)return 'Centro';return 'Sud e Isole';}
+
+/* pre-fill from URL params */
+(function(){
+  const p=new URLSearchParams(location.search);
+  if(p.get('cap')) document.getElementById('c-cap').value=p.get('cap');
+  if(p.get('mq'))  document.getElementById('c-mq').value=p.get('mq');
+})();
+
+/* ── CASA FORM ── */
+function confrontaCasa() {
+  const cap=document.getElementById('c-cap').value.trim();
+  const mq=parseInt(document.getElementById('c-mq').value);
+  const contenuto=parseInt(document.getElementById('c-contenuto').value);
+  let valid=true;
+
+  if(!/^\d{5}$/.test(cap)){showFe('c-cap-err','Inserisci un CAP valido (5 cifre)');valid=false;}else hideFe('c-cap-err');
+  if(!mq||mq<20||mq>500){showFe('c-mq-err','Superficie tra 20 e 500 mq');valid=false;}else hideFe('c-mq-err');
+  if(!contenuto||contenuto<1000){showFe('c-contenuto-err','Valore minimo €1.000');valid=false;}else hideFe('c-contenuto-err');
+  if(!valid) return;
+
+  const btn=document.getElementById('c-btn'),loadEl=document.getElementById('c-loading'),resEl=document.getElementById('c-results');
+  btn.disabled=true;btn.textContent='Calcolo in corso…';loadEl.style.display='flex';resEl.style.display='none';
+
+  setTimeout(()=>{
+    const geo=getGeoFactorCasa(cap);
+    const base=(1.80*mq)+(0.003*contenuto);
+    const companies=[
+      {name:'Generali',    mult:1.453,feat:'Incendio + Furto + RC Famiglia',  logo:'🛡️'},
+      {name:'UnipolSai',   mult:1.261,feat:'Incendio + Furto + Danni Acqua',  logo:'🔵'},
+      {name:'Allianz',     mult:1.132,feat:'Incendio + Furto + Catastrofi',   logo:'🔷'},
+      {name:'AXA',         mult:1.047,feat:'Incendio + Furto + Tutela Legale',logo:'⚡'},
+      {name:'Cattolica',   mult:0.962,feat:'Incendio + Furto + RC + Danni',   logo:'🟡'},
+      {name:'Reale Mutua', mult:0.778,feat:'Copertura completa all-risk',     logo:'✅'},
+    ];
+    const results=companies.map(c=>({...c,price:Math.round(base*c.mult*geo)})).sort((a,b)=>a.price-b.price);
+
+    let html=`<div class="res-header">
+      <div><span class="res-title">🏠 Preventivi per la tua casa</span></div>
+      <span class="res-sub">Casa ${mq}mq · Contenuto €${contenuto.toLocaleString('it-IT')} · Zona ${getZoneName(cap)} · Prezzi annuali</span>
+    </div>
+    <table class="res-table"><thead><tr><th>Compagnia</th><th>Copertura</th><th>Prezzo/anno</th><th></th></tr></thead><tbody>`;
+    results.forEach((c,i)=>{const best=i===0;html+=`<tr${best?' class="best-row"':''}>
+      <td><strong>${c.logo} ${c.name}</strong>${best?'<span class="best-badge">Miglior prezzo</span>':''}</td>
+      <td>${c.feat}</td>
+      <td class="res-price">${best?'<strong>':''}€${c.price.toLocaleString('it-IT')}/anno${best?'</strong>':''}</td>
+      <td><button class="btn-attiva">Attiva →</button></td></tr>`;});
+    html+=`</tbody></table><p class="res-note">* Prezzi personalizzati per ${mq}mq, contenuto €${contenuto.toLocaleString('it-IT')}, zona ${getZoneName(cap)}.</p>`;
+
+    btn.disabled=false;btn.textContent='Ottieni preventivo →';
+    loadEl.style.display='none';resEl.innerHTML=html;resEl.style.display='block';
+    resEl.scrollIntoView({behavior:'smooth',block:'nearest'});
+  },1500);
+}
+</script>
+<script src="assets/operatore.js?v=20260611a"></script>
+<script src="assets/schema-org.js?v=20260611a"></script>
+<script src="components.js?v=20260525a"></script>
 </body>
 </html>

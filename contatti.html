@@ -3,32 +3,371 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://quootami.it/contatti">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<title>Sito in manutenzione</title>
-<meta name="robots" content="noindex, nofollow">
+<title>Contatti · Quootami — Parla con il team Quootami</title>
+<meta name="description" content="Contatti diretti: telefono, email, WhatsApp. Form di contatto con consensi GDPR separati. Sede di ricevimento e orari.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=20260608b">
 <style>
-  :root { --yellow: #FFD84D; --text: #0B1220; --bg: #FAFAF7; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 2rem 5vw;
+  .page-hero { padding: 8rem 5vw 1.5rem; background: var(--bg); position: relative; overflow: hidden; }
+  .page-hero .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+  .page-hero-blob-1 { width: 580px; height: 580px; background: #F3F0E8; opacity: .45; top: -220px; right: -150px; }
+  .page-hero-blob-2 { width: 360px; height: 360px; background: #EFE7D2; opacity: .35; bottom: -120px; left: -80px; }
+  .page-hero-inner { max-width: 880px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+  .page-hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(3rem, 6.5vw, 5.8rem); font-weight: 700;
+    line-height: 1.05; letter-spacing: -.025em;
+    color: var(--text); margin-bottom: 1.25rem;
   }
-  h1 {
-    font-family: 'Inter', sans-serif; font-weight: 700;
-    font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -.02em; line-height: 1.1;
-    text-align: center;
-  }
-  h1 .accent { position: relative; display: inline-block; z-index: 1; }
-  h1 .accent::before {
-    content: ''; position: absolute; left: -4px; right: -4px;
-    top: 55%; bottom: 6%; background: var(--yellow); z-index: -1;
-  }
+  .page-hero h1 .accent { position: relative; display: inline-block; z-index: 1; color: var(--text); }
+  .page-hero h1 .accent::before { content: ''; position: absolute; left: -4px; right: -4px; top: 55%; bottom: 6%; background: var(--yellow); z-index: -1; }
+  .page-hero p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; max-width: 700px; margin: 0 auto; }
+
+  .quick-contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; max-width: 1080px; margin: 4rem auto 0; padding: 0 5vw; }
+  .quick-contact-grid--tight { margin-top: 1.5rem; }
+  .qc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; text-align: center; box-shadow: var(--shadow-sm); transition: transform .3s, border-color .25s, box-shadow .3s; }
+  .qc-card:hover { transform: translateY(-6px); border-color: var(--border-green); box-shadow: var(--shadow-lg); }
+  .qc-icon { width: 56px; height: 56px; background: var(--green-soft); border-radius: 16px; display: grid; place-items: center; font-size: 1.5rem; margin: 0 auto 1.25rem; }
+  .qc-card h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: .5rem; }
+  .qc-card p { color: var(--text-muted); font-size: .87rem; line-height: 1.65; margin-bottom: 1.25rem; }
+  .qc-card a { display: inline-block; padding: .55rem 1.25rem; border-radius: 50px; background: var(--bg-alt); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 600; font-size: .82rem; text-decoration: none; border: 1px solid var(--border); transition: background .2s, border-color .2s; }
+  .qc-card a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+  .form-section { padding: 5rem 5vw; }
+  .form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 760px; margin: 2rem auto 0; box-shadow: var(--shadow-md); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .35rem; margin-bottom: 1rem; }
+  .form-group label { font-size: .82rem; font-weight: 600; color: var(--text); }
+  .form-group input, .form-group select, .form-group textarea { padding: .75rem 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg); font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text); outline: none; transition: border-color .15s, box-shadow .15s; width: 100%; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1); }
+  .form-group textarea { min-height: 120px; resize: vertical; }
+  .form-section h3.consents-h { font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 700; color: var(--green-dark); text-transform: uppercase; letter-spacing: .1em; margin: 1.5rem 0 .75rem; }
+  .form-check { display: flex; gap: .6rem; align-items: flex-start; font-size: .82rem; color: var(--text-muted); line-height: 1.55; margin-bottom: .75rem; padding: .85rem; background: var(--bg-alt); border-radius: 10px; border: 1px solid var(--border); }
+  .form-check input { margin-top: .15rem; flex-shrink: 0; }
+  .form-check a { color: var(--green-dark); text-decoration: underline; }
+  .form-check strong { color: var(--text); font-weight: 600; }
+  .form-submit { width: 100%; padding: 1rem; border-radius: 14px; background: var(--primary); color: #fff; border: none; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; transition: background .2s, transform .15s; margin-top: 1rem; }
+  .form-submit:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .form-success { background: rgba(255,216,77,.12); border: 1px solid var(--border-green); color: #1a7a4a; padding: 1rem 1.25rem; border-radius: 12px; margin-top: 1rem; font-size: .92rem; display: none; }
+  .form-success.show { display: block; }
+
+  .where-section { background: var(--bg-alt); padding: 5rem 5vw; }
+  .where-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .where-info p { color: var(--text-2); font-size: 1rem; line-height: 1.75; margin-bottom: 1rem; }
+  .where-info p strong { color: var(--text); }
+  .where-info h3 { font-family: 'Inter', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin: 2rem 0 .5rem; }
+  .map-wrap { display: flex; flex-direction: column; gap: .75rem; }
+  .map-iframe { width: 100%; aspect-ratio: 4/3; border: 1px solid var(--border); border-radius: var(--radius); display: block; filter: grayscale(.15); }
+  .map-link { display: inline-flex; align-items: center; gap: .4rem; align-self: flex-start; padding: .55rem 1.1rem; border-radius: 50px; background: var(--bg-alt); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 600; font-size: .85rem; text-decoration: none; border: 1px solid var(--border); transition: background .2s, border-color .2s, color .2s; }
+  .map-link:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+  @media (max-width: 800px) { .where-grid { grid-template-columns: 1fr; } .form-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-  <h1>Sito in <span class="accent">manutenzione.</span></h1>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+  <button class="nav-toggle" aria-label="Apri menu" aria-expanded="false" aria-controls="primary-nav"><span class="nav-toggle__bars"></span></button>
+  <ul>
+    <li class="has-mega"><a href="#">Per privati</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col">
+            <h4><a href="polizza-auto.html">Auto e mobilità</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="polizza-casa.html">Casa</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="salute.html">Salute &amp; vita</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="piano-pensione.html">Pensione</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="cyber.html">Cyber</a></h4>
+          </div>
+          <div class="mega-col">
+            <h4><a href="polizza-animali.html">Animali domestici</a></h4>
+          </div></div></div></li>
+    <li class="has-mega"><a href="#">Per imprese</a><div class="mega-panel"><div class="mega-grid">
+      <div class="mega-col">
+            <h4><a href="rc.html#catastrofale">Catastrofale PMI</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="rc.html">Responsabilità Civile</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="cyber.html">Cyber business</a></h4>
+          </div>
+      <div class="mega-col">
+            <h4><a href="polizza-auto.html">Auto aziendali</a></h4>
+          </div></div></div></li>
+    <li><a href="contatti.html" class="nav-cta active">Parla con Quootami →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="blob page-hero-blob-1"></div>
+  <div class="blob page-hero-blob-2"></div>
+  <div class="page-hero-inner">
+    <span class="hero-eyebrow"><span class="dot"></span>Contatti</span>
+    <h1>Parla <span class="accent">direttamente</span> con me.</h1>
+  </div>
+</section>
+
+<!-- QUICK CONTACT -->
+<section style="padding-bottom:2rem">
+  <div class="quick-contact-grid quick-contact-grid--tight">
+    <article class="qc-card">
+      <div class="qc-icon">📞</div>
+      <h3>Telefono</h3>
+      <p>Chiamami. Se non rispondo, sono in appuntamento. Ti richiamo io entro qualche ora.</p>
+      <a href="tel:+393922198185">+39 392 219 8185</a>
+    </article>
+    <article class="qc-card">
+      <div class="qc-icon">✉️</div>
+      <h3>Email</h3>
+      <p>Per richieste articolate, allegati di polizze esistenti, scambio di documenti.</p>
+      <a href="mailto:giacomo.rp@sistoassicurazioni.com">Contattaci una mail</a>
+    </article>
+    <article class="qc-card">
+      <div class="qc-icon">💬</div>
+      <h3>WhatsApp</h3>
+      <p>Per messaggi veloci, prime domande, condivisione di documenti.</p>
+      <a href="https://wa.me/393922198185" target="_blank" rel="noopener">Apri WhatsApp</a>
+    </article>
+  </div>
+</section>
+
+<!-- FORM -->
+<section id="form" class="form-section how-section">
+  <div class="centered">
+    <span class="section-label">Modulo di contatto</span>
+    <h2 class="section-title">Contattaci qui</h2>
+    <p class="section-sub">Tutti i campi con * sono obbligatori. Trovi i due consensi GDPR (necessario + facoltativo) in fondo al modulo.</p>
+  </div>
+
+  <div class="form-card">
+    <form id="ct-form" novalidate>
+      <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
+      <input type="hidden" name="subject" value="Quootami • Nuovo messaggio dal modulo di contatto">
+      <input type="hidden" name="from_name" value="Quootami — sito web">
+      <input type="hidden" name="redirect" value="false">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ct-type">Tipo cliente *</label>
+          <select id="ct-type" name="Tipo cliente" required>
+            <option value="">Seleziona…</option>
+            <option>Privato</option>
+            <option>Professionista</option>
+            <option>Azienda</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ct-line">Linea di interesse *</label>
+          <select id="ct-line" name="Linea di interesse" required>
+            <option value="">Seleziona…</option>
+            <option>Auto</option>
+            <option>Casa</option>
+            <option>Salute</option>
+            <option>Cyber</option>
+            <option>Pensione</option>
+            <option>RC</option>
+            <option>Polizza Catastrofale Obbligatoria PMI</option>
+            <option>Non lo so ancora</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label for="ct-name">Nome *</label><input type="text" id="ct-name" name="Nome" required></div>
+        <div class="form-group"><label for="ct-surname">Cognome *</label><input type="text" id="ct-surname" name="Cognome" required></div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label for="ct-tel">Telefono *</label><input type="tel" id="ct-tel" name="Telefono" required></div>
+        <div class="form-group"><label for="ct-email">Email *</label><input type="email" id="ct-email" name="Email" required></div>
+      </div>
+
+      <div class="form-group"><label for="ct-city">Città</label><input type="text" id="ct-city" name="Città"></div>
+
+      <div class="form-group">
+        <label for="ct-msg">Messaggio *</label>
+        <textarea id="ct-msg" name="Messaggio" required placeholder="Raccontami di cosa hai bisogno: scadenze, polizze già attive, situazione familiare o aziendale…"></textarea>
+      </div>
+
+      <h3 class="consents-h">Consensi privacy (GDPR)</h3>
+
+      <label class="form-check">
+        <input type="checkbox" name="Consenso privacy obbligatorio" value="Sì — accettato" required>
+        <span><strong>Necessario:</strong> ho letto l'informativa privacy ai sensi del Reg. UE 2016/679 e acconsento al trattamento dei miei dati personali per essere ricontattato in merito alla mia richiesta. *</span>
+      </label>
+
+      <label class="form-check">
+        <input type="checkbox" name="Consenso marketing facoltativo" value="Sì — accettato">
+        <span><strong>Facoltativo:</strong> acconsento, in via facoltativa, a ricevere comunicazioni informative su prodotti, scadenze normative e novità del settore. Posso revocare il consenso in qualsiasi momento scrivendo a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a>.</span>
+      </label>
+
+      <button type="submit" class="form-submit" id="ct-submit">Invia il messaggio →</button>
+
+      <div id="ct-success" class="form-success">✓ Grazie! Ho ricevuto il tuo messaggio. Quootami ti contatta personalmente entro la giornata lavorativa.</div>
+      <div id="ct-error" class="form-feedback form-error" hidden>
+        <strong>Errore di invio</strong>
+        <p>Qualcosa non ha funzionato. Riprova o contatta Quootami a <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a> o su <a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">Dettaglio tecnico: <code id="ct-error-msg" style="font-family:monospace;"></code></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- DOVE RICEVO — archiviato 25/05/2026, riattivare rimuovendo il commento qui sotto -->
+<!--
+<section class="where-section">
+  <div class="where-grid">
+    <div class="where-info">
+      <span class="section-label">Dove ricevo</span>
+      <h2 class="section-title">La sede del broker dove ricevo i clienti</h2>
+      <p>Ricevo su appuntamento presso la sede di <strong>Sisto Assicurazioni S.a.s. di Sisto Terlizzi Xavier & C.</strong> in <strong>Via Torino 47</strong>, 13900 Biella (BI). Posso anche venire presso la tua sede o casa, in particolare per i primi incontri con clienti aziendali e per le polizze che richiedono sopralluogo.</p>
+
+      <h3>Orari di disponibilità</h3>
+      <p>
+        <strong>Lunedì – Venerdì</strong> · 9.00 – 13.00 / 14.30 – 18.30<br>
+        <strong>Sabato</strong> · su appuntamento<br>
+        <strong>Domenica e festivi</strong> · solo per emergenze sinistri
+      </p>
+
+      <p style="font-size:.88rem;color:var(--text-muted)">Per emergenze sinistri fuori orario, il broker mette a disposizione un numero verde dedicato. Te lo comunico al momento della sottoscrizione.</p>
+    </div>
+
+    <div class="map-wrap">
+      <iframe
+        class="map-iframe"
+        src="https://www.google.com/maps?q=Sisto+Assicurazioni+Biella&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Sede broker — Sisto Assicurazioni, Biella"
+        allowfullscreen></iframe>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Sisto+Assicurazioni+Biella" target="_blank" rel="noopener">
+        <span aria-hidden="true">📍</span> Apri su Google Maps
+      </a>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand footer-col footer-col--collab">
+      <a class="logo" href="index.html">quootami<span class="logo-dot"></span></a>
+      <p>Iscritto RUI sez. E</p>
+      <span class="footer-rui-num">n. E000821549</span>
+      <p>📞 <a href="tel:+393922198185">+39 392 219 8185</a></p>
+      <p>✉️ <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a></p>
+
+      <div class="footer-social">
+        <a class="social-btn" href="https://wa.me/393922198185" aria-label="WhatsApp" target="_blank" rel="noopener">w</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze privati</h5>
+      <ul>
+        <li><a href="polizza-auto.html">Polizza Auto</a></li>
+        <li><a href="polizza-casa.html">Polizza Casa</a></li>
+        <li><a href="salute.html">Salute &amp; Vita</a></li>
+        <li><a href="cyber.html">Polizza Cyber</a></li>
+        <li><a href="polizza-animali.html">Polizza Animali</a></li>
+        <li><a href="piano-pensione.html">Fondo Pensione</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Polizze imprese</h5>
+      <ul>
+        <li><a href="rc.html">RC Professionale</a></li>
+        <li><a href="rc.html#catastrofale">Catastrofale PMI</a></li>
+        <li><a href="cyber.html">Cyber Business</a></li>
+        <li><a href="polizza-auto.html">Auto aziendali</a></li>
+        <li><a href="rc.html#do">D&amp;O</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Risorse</h5>
+      <ul>
+        <li><a href="contatti.html">Contatti</a></li>
+        <li><a href="contatti.html#form">Richiedi preventivo</a></li>
+        <li><a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="tel:+393922198185">Telefono</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Informative</h5>
+      <ul>
+        <li><a href="privacy.html">Privacy policy</a></li>
+        <li><a href="cookie.html">Cookie policy</a></li>
+        <li><a href="trasparenza.html">Trasparenza intermediario</a></li>
+        <li><a href="trasparenza.html#reclami">Reclami</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-disclaimer" data-quootami="disclaimer"></p>
+
+  <div class="footer-bottom">
+    <p data-quootami="copyright"></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('ct-form');
+  if (!form) return;
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var btn = document.getElementById('ct-submit');
+    var ok = document.getElementById('ct-success');
+    var err = document.getElementById('ct-error');
+    var errMsg = document.getElementById('ct-error-msg');
+    ok.classList.remove('show'); err.hidden = true;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    btn.disabled = true;
+    var originalLabel = btn.textContent;
+    btn.textContent = 'Invio in corso…';
+    try {
+      var fd = new FormData(form);
+      var res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: fd
+      });
+      var json = await res.json().catch(function(){ return { success:false, message:'Risposta non valida dal server' }; });
+      console.log('[Quootami contatti] response:', res.status, json);
+      if (res.ok && json.success) {
+        form.reset();
+        ok.classList.add('show');
+        ok.scrollIntoView({behavior:'smooth', block:'center'});
+      } else {
+        if (errMsg) errMsg.textContent = '[' + res.status + '] ' + (json.message || 'errore sconosciuto');
+        err.hidden = false;
+      }
+    } catch(ex){
+      console.error('[Quootami contatti] exception:', ex);
+      if (errMsg) errMsg.textContent = ex && ex.message ? ex.message : String(ex);
+      err.hidden = false;
+    } finally {
+      btn.disabled = false; btn.textContent = originalLabel;
+    }
+  });
+})();
+</script>
+<script src="assets/operatore.js?v=20260611a"></script>
+<script src="assets/schema-org.js?v=20260611a"></script>
+<script src="components.js?v=20260525a"></script>
 </body>
 </html>
