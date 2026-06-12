@@ -807,17 +807,49 @@
     var tel = document.getElementById('qf-tel').value.trim();
     var email = document.getElementById('qf-email').value.trim();
 
-    var ciFronte = document.getElementById('qf-ci-fronte').files[0];
-    var ciRetro = document.getElementById('qf-ci-retro').files[0];
-    var libretto = document.getElementById('qf-libretto').files[0];
+    var ciFronteRaw = document.getElementById('qf-ci-fronte').files[0];
+    var ciRetroRaw = document.getElementById('qf-ci-retro').files[0];
+    var librettoRaw = document.getElementById('qf-libretto').files[0];
 
-    var signedUrls = null;
+    // === [1] CONVERSIONE FILE IN PDF (lato client) ===
+    var ciFrontePdf, ciRetroPdf, librettoPdf;
+    if (!window.QuootamiPDFConverter) {
+      loading.style.display = 'none';
+      if (errMsg) errMsg.textContent = 'Convertitore PDF non caricato. Ricarica la pagina e riprova.';
+      err.hidden = false;
+      btn.disabled = false;
+      btn.textContent = 'Invia richiesta →';
+      return;
+    }
+    try {
+      loadingMsg.textContent = 'Preparazione documenti in formato PDF…';
+      var slug = (nome + '_' + cognome).toLowerCase().replace(/[^a-z0-9_]/g, '');
+      var conversions = await Promise.all([
+        window.QuootamiPDFConverter.convertToPdf(ciFronteRaw, slug + '_ci_fronte'),
+        window.QuootamiPDFConverter.convertToPdf(ciRetroRaw, slug + '_ci_retro'),
+        window.QuootamiPDFConverter.convertToPdf(librettoRaw, slug + '_libretto')
+      ]);
+      ciFrontePdf = conversions[0];
+      ciRetroPdf = conversions[1];
+      librettoPdf = conversions[2];
+      console.log('[Quootami form] PDF conversion done:',
+        ciFrontePdf.size, ciRetroPdf.size, librettoPdf.size);
+    } catch (cvEx) {
+      console.error('[Quootami form] conversione PDF fallita:', cvEx);
+      loading.style.display = 'none';
+      if (errMsg) errMsg.textContent = 'Conversione PDF: ' + (cvEx.message || cvEx);
+      err.hidden = false;
+      btn.disabled = false;
+      btn.textContent = 'Invia richiesta →';
+      return;
+    }
 
-    // === [1] UPLOAD DOCUMENTI SU SUPABASE STORAGE (sicuro) ===
+    // === [2] BACKUP DOCUMENTI PDF SU SUPABASE STORAGE ===
+    var storageBackupOk = false;
     if (window.QuootamiLeadDB && window.QuootamiLeadDB.isConfigured) {
       try {
-        loadingMsg.textContent = 'Caricamento sicuro dei documenti in corso…';
-        var result = await window.QuootamiLeadDB.submitFullLead(
+        loadingMsg.textContent = 'Salvataggio sicuro in corso…';
+        await window.QuootamiLeadDB.submitFullLead(
           {
             prodotto: 'rc-auto',
             nome_cognome: nome + ' ' + cognome,
@@ -827,50 +859,39 @@
             fonte: 'sito web'
           },
           {
-            ci_fronte: ciFronte,
-            ci_retro: ciRetro,
-            libretto: libretto
+            ci_fronte: ciFrontePdf,
+            ci_retro: ciRetroPdf,
+            libretto: librettoPdf
           }
         );
-        signedUrls = result.signedUrls;
-        console.log('[Quootami form] lead+documenti salvati, signed URLs generati');
+        storageBackupOk = true;
       } catch (dbEx) {
-        console.error('[Quootami form] errore upload documenti:', dbEx);
-        loading.style.display = 'none';
-        if (errMsg) errMsg.textContent = 'Upload documenti: ' + (dbEx.message || dbEx);
-        err.hidden = false;
-        btn.disabled = false;
-        btn.textContent = 'Invia richiesta →';
-        return;
+        // backup fallito non blocca l'invio email
+        console.warn('[Quootami form] backup Storage fallito, continuo con email:', dbEx);
       }
-    } else {
-      loading.style.display = 'none';
-      if (errMsg) errMsg.textContent = 'Sistema documenti non ancora configurato. Contatta Quootami direttamente.';
-      err.hidden = false;
-      btn.disabled = false;
-      btn.textContent = 'Invia richiesta →';
-      return;
     }
 
-    // === [2] INVIO EMAIL CON LINK FIRMATI a giacomo.rp@sistoassicurazioni.com ===
-    loadingMsg.textContent = 'Notifica al broker in corso…';
+    // === [3] INVIO EMAIL A giacomo.rp@sistoassicurazioni.com CON ALLEGATI PDF ===
+    loadingMsg.textContent = 'Invio della richiesta in corso…';
     try {
       var fd = new FormData();
       fd.append('access_key', '227eeb26-f8e1-4eba-8b60-5969ab33c2c7');
       fd.append('subject', 'Nuova richiesta preventivo auto — ' + nome + ' ' + cognome);
       fd.append('from_name', 'Quootami — sito web');
       fd.append('replyto', email);
+      // Campi dati anagrafici
       fd.append('Nome', nome);
       fd.append('Cognome', cognome);
       fd.append('Data di nascita', dob);
       fd.append('Telefono', tel);
       fd.append('Email cliente', email);
-      fd.append('— DOCUMENTI (link sicuri, validi 30 giorni) —', '');
-      fd.append('Carta identità FRONTE', signedUrls.ci_fronte || 'N/D');
-      fd.append('Carta identità RETRO', signedUrls.ci_retro || 'N/D');
-      fd.append('Libretto circolazione', signedUrls.libretto || 'N/D');
       fd.append('Pagina di provenienza', window.location.pathname);
       fd.append('Data invio', new Date().toLocaleString('it-IT'));
+      fd.append('Backup Storage', storageBackupOk ? 'sì' : 'no');
+      // ALLEGATI PDF (Web3Forms li mette come attachment nell'email)
+      fd.append('attachments', ciFrontePdf, ciFrontePdf.name);
+      fd.append('attachments', ciRetroPdf, ciRetroPdf.name);
+      fd.append('attachments', librettoPdf, librettoPdf.name);
 
       var emailRes = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -891,13 +912,13 @@
         ok.hidden = false;
         ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        if (errMsg) errMsg.textContent = 'Email: HTTP ' + emailRes.status + ' (documenti salvati)';
+        if (errMsg) errMsg.textContent = 'Email: HTTP ' + emailRes.status + ' — ' + (emailJson.message || 'errore sconosciuto');
         err.hidden = false;
       }
     } catch (ex) {
       console.error('[Quootami form] exception email:', ex);
       loading.style.display = 'none';
-      if (errMsg) errMsg.textContent = 'Email: ' + (ex.message || String(ex)) + ' (documenti già salvati su DB)';
+      if (errMsg) errMsg.textContent = 'Email: ' + (ex.message || String(ex));
       err.hidden = false;
     } finally {
       btn.disabled = false;
@@ -1123,9 +1144,13 @@ function confrontaAuto(){
   if(p.get('cap'))   document.getElementById('a-cap').value=p.get('cap');
 })();
 </script>
-<script src="assets/lead-db.js?v=20260610a"></script>
-<script src="assets/operatore.js?v=20260611a"></script>
-<script src="assets/schema-org.js?v=20260611a"></script>
-<script src="components.js?v=20260610b"></script>
+<!-- PDF conversion libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+<script src="assets/pdf-converter.js?v=20260612a"></script>
+<script src="assets/lead-db.js?v=20260612a"></script>
+<script src="assets/operatore.js?v=20260612a"></script>
+<script src="assets/schema-org.js?v=20260612a"></script>
+<script src="components.js?v=20260612a"></script>
 </body>
 </html>
