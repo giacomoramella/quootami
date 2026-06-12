@@ -24,8 +24,8 @@
   // ⚠️ SOSTITUISCI questi due valori con quelli del tuo progetto Supabase.
   // Finche' restano vuoti, il modulo e' disattivato e l'utente non puo'
   // caricare documenti (i form mostrano un avviso).
-  var SUPABASE_URL = '';
-  var SUPABASE_ANON_KEY = '';
+  var SUPABASE_URL = 'https://ivcdwizhkdubjxxrukbs.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml2Y2R3aXpoa2R1Ymp4eHJ1a2JzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyNDExNDgsImV4cCI6MjA5NjgxNzE0OH0.qC1_UPr51A5MgxL-cUUD2FnOnMWSdDNwu-jyne0dTq4';
 
   // Bucket privato per documenti d'identita' (creato da supabase-setup.sql)
   var BUCKET_DOCUMENTI = 'documenti-lead';
