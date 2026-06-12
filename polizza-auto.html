@@ -223,6 +223,33 @@
   }
   .form-upload-info.ok { color: #1a7a4a; font-weight: 500; }
   .form-upload-info.ko { color: #c2382f; font-weight: 500; }
+
+  /* Data di nascita — 3 dropdown affiancati */
+  .dob-grid {
+    display: grid; grid-template-columns: 1fr 1.5fr 1fr;
+    gap: .6rem;
+  }
+  .dob-grid select {
+    padding: .75rem 1rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg);
+    font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text);
+    outline: none; cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3e%3cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+  .dob-grid select:focus {
+    border-color: var(--border-green);
+    box-shadow: 0 0 0 3px rgba(255,216,77,.1);
+  }
+  @media (max-width: 480px) {
+    .dob-grid { grid-template-columns: 1fr 1.4fr 1fr; gap: .4rem; }
+    .dob-grid select { font-size: .88rem; padding: .65rem .75rem; padding-right: 2rem; }
+  }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
   .form-row.single { grid-template-columns: 1fr; }
   .form-group { display: flex; flex-direction: column; gap: .4rem; }
@@ -546,12 +573,37 @@
         </div>
       </div>
 
-      <div class="form-row">
+      <div class="form-row single">
         <div class="form-group">
-          <label for="qf-dob">Data di nascita *</label>
-          <input type="date" id="qf-dob" name="Data di nascita" autocomplete="bday" required>
+          <label>Data di nascita *</label>
+          <div class="dob-grid">
+            <select id="qf-dob-day" aria-label="Giorno di nascita" required>
+              <option value="">Giorno</option>
+            </select>
+            <select id="qf-dob-month" aria-label="Mese di nascita" required>
+              <option value="">Mese</option>
+              <option value="1">Gennaio</option>
+              <option value="2">Febbraio</option>
+              <option value="3">Marzo</option>
+              <option value="4">Aprile</option>
+              <option value="5">Maggio</option>
+              <option value="6">Giugno</option>
+              <option value="7">Luglio</option>
+              <option value="8">Agosto</option>
+              <option value="9">Settembre</option>
+              <option value="10">Ottobre</option>
+              <option value="11">Novembre</option>
+              <option value="12">Dicembre</option>
+            </select>
+            <select id="qf-dob-year" aria-label="Anno di nascita" required>
+              <option value="">Anno</option>
+            </select>
+          </div>
           <span class="field-err" id="qf-dob-err"></span>
         </div>
+      </div>
+
+      <div class="form-row single">
         <div class="form-group">
           <label for="qf-tel">Numero di telefono *</label>
           <input type="tel" id="qf-tel" name="Telefono" placeholder="+39 333 1234567" autocomplete="tel" inputmode="tel" required>
@@ -671,6 +723,53 @@
   var form = document.getElementById('quote-form-auto');
   if (!form) return;
 
+  // === POPOLA SELECT DATA NASCITA ===
+  var dobDay = document.getElementById('qf-dob-day');
+  var dobMonth = document.getElementById('qf-dob-month');
+  var dobYear = document.getElementById('qf-dob-year');
+  // Giorni 1-31
+  for (var d = 1; d <= 31; d++) {
+    var opt = document.createElement('option');
+    opt.value = String(d);
+    opt.textContent = d < 10 ? '0' + d : String(d);
+    dobDay.appendChild(opt);
+  }
+  // Anni: da 18 anni fa a 100 anni fa (range 18-100 anni)
+  var currentYear = new Date().getFullYear();
+  for (var y = currentYear - 18; y >= currentYear - 100; y--) {
+    var optY = document.createElement('option');
+    optY.value = String(y);
+    optY.textContent = String(y);
+    dobYear.appendChild(optY);
+  }
+
+  // Aggiorna max giorni quando cambia mese/anno (es. 30 vs 31, febbraio bisestile)
+  function updateDayLimits() {
+    var m = parseInt(dobMonth.value, 10);
+    var y = parseInt(dobYear.value, 10);
+    if (!m) return;
+    var daysInMonth = new Date(y || 2000, m, 0).getDate();
+    var currentDay = parseInt(dobDay.value, 10);
+    // Riabilita tutti
+    Array.prototype.forEach.call(dobDay.options, function (o) {
+      if (!o.value) return;
+      var dv = parseInt(o.value, 10);
+      o.disabled = dv > daysInMonth;
+    });
+    if (currentDay > daysInMonth) dobDay.value = '';
+  }
+  dobMonth.addEventListener('change', updateDayLimits);
+  dobYear.addEventListener('change', updateDayLimits);
+
+  function getDob() {
+    var d = parseInt(dobDay.value, 10);
+    var m = parseInt(dobMonth.value, 10);
+    var y = parseInt(dobYear.value, 10);
+    if (!d || !m || !y) return '';
+    // Formato YYYY-MM-DD per il backend (Postgres date)
+    return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d);
+  }
+
   // === UTILITIES ===
   function showErr(id, msg) {
     var el = document.getElementById(id);
@@ -732,7 +831,7 @@
     var ok = true;
     var nome = document.getElementById('qf-nome').value.trim();
     var cognome = document.getElementById('qf-cognome').value.trim();
-    var dob = document.getElementById('qf-dob').value;
+    var dob = getDob();
     var tel = document.getElementById('qf-tel').value.trim();
     var email = document.getElementById('qf-email').value.trim();
     var consent = document.getElementById('qf-consent').checked;
@@ -740,12 +839,19 @@
     if (nome.length < 2) { showErr('qf-nome-err', 'Inserisci un nome valido'); ok = false; } else clearErr('qf-nome-err');
     if (cognome.length < 2) { showErr('qf-cognome-err', 'Inserisci un cognome valido'); ok = false; } else clearErr('qf-cognome-err');
 
-    if (!dob) { showErr('qf-dob-err', 'Inserisci la data di nascita'); ok = false; }
+    if (!dob) { showErr('qf-dob-err', 'Seleziona giorno, mese e anno di nascita'); ok = false; }
     else {
-      var a = calcAge(dob);
-      if (a < 18) { showErr('qf-dob-err', 'Devi avere almeno 18 anni'); ok = false; }
-      else if (a > 100) { showErr('qf-dob-err', 'Data non valida'); ok = false; }
-      else clearErr('qf-dob-err');
+      // Verifica che la data sia valida (es. 31 febbraio non passa)
+      var parts = dob.split('-');
+      var testDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      if (testDate.getDate() !== parseInt(parts[2]) || testDate.getMonth() !== parseInt(parts[1]) - 1) {
+        showErr('qf-dob-err', 'Data non valida (es. 31 febbraio non esiste)'); ok = false;
+      } else {
+        var a = calcAge(dob);
+        if (a < 18) { showErr('qf-dob-err', 'Devi avere almeno 18 anni'); ok = false; }
+        else if (a > 100) { showErr('qf-dob-err', 'Data non valida'); ok = false; }
+        else clearErr('qf-dob-err');
+      }
     }
 
     if (!PHONE_REGEX.test(tel)) {
@@ -803,7 +909,7 @@
 
     var nome = document.getElementById('qf-nome').value.trim();
     var cognome = document.getElementById('qf-cognome').value.trim();
-    var dob = document.getElementById('qf-dob').value;
+    var dob = getDob();
     var tel = document.getElementById('qf-tel').value.trim();
     var email = document.getElementById('qf-email').value.trim();
 
