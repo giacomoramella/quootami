@@ -720,10 +720,20 @@
         <span class="field-err" id="lc-tel-err"></span>
       </div>
 
-      <h3 class="lead-section-title">Carta d'identità</h3>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label for="lc-targa">Targa veicolo *</label>
+        <input type="text" id="lc-targa" name="Targa"
+               placeholder="AB123CD"
+               maxlength="7" style="text-transform:uppercase"
+               required>
+        <span class="field-err" id="lc-targa-err"></span>
+      </div>
+
+      <h3 class="lead-section-title">Documenti</h3>
       <p class="lead-help">
         🔒 I documenti vengono caricati su archivio cifrato e privato.
-        Solo Quootami può accedervi. Massimo 10&nbsp;MB per file. Formati: JPG, PNG, HEIC, PDF.
+        Solo Quootami può accedervi. Massimo 10&nbsp;MB per file. Formati: JPG, PNG, HEIC, PDF.<br>
+        📱 Da smartphone puoi anche <strong>scattare direttamente la foto</strong> al documento.
       </p>
 
       <div class="form-group lead-upload" style="margin-bottom:1rem;">
@@ -748,6 +758,18 @@
                required>
         <span class="lead-upload-info" id="lc-ci-retro-info">Nessun file selezionato</span>
         <span class="field-err" id="lc-ci-retro-err"></span>
+      </div>
+
+      <div class="form-group lead-upload" style="margin-bottom:1rem;">
+        <label for="lc-libretto">Libretto di circolazione *</label>
+        <input type="file"
+               id="lc-libretto"
+               name="libretto"
+               accept="image/jpeg,image/jpg,image/png,image/heic,image/heif,application/pdf"
+               capture="environment"
+               required>
+        <span class="lead-upload-info" id="lc-libretto-info">Nessun file selezionato</span>
+        <span class="field-err" id="lc-libretto-err"></span>
       </div>
 
       <label class="form-consent">
@@ -901,8 +923,8 @@
     return (n / 1048576).toFixed(2) + ' MB';
   }
 
-  // === LIVE FILE INFO per CI fronte/retro ===
-  ['ci-fronte', 'ci-retro'].forEach(function (key) {
+  // === LIVE FILE INFO per CI fronte/retro + libretto ===
+  ['ci-fronte', 'ci-retro', 'libretto'].forEach(function (key) {
     var input = document.getElementById('lc-' + key);
     var info  = document.getElementById('lc-' + key + '-info');
     if (!input || !info) return;
@@ -996,8 +1018,10 @@
     var dob = getDob();
     var emailVal = document.getElementById('lc-email').value.trim();
     var telVal = document.getElementById('lc-tel').value.trim();
+    var targaVal = document.getElementById('lc-targa').value.trim().toUpperCase();
     var ciFronte = document.getElementById('lc-ci-fronte').files[0];
     var ciRetro = document.getElementById('lc-ci-retro').files[0];
+    var libretto = document.getElementById('lc-libretto').files[0];
     var consent = document.getElementById('lc-consent').checked;
 
     var valid = true;
@@ -1024,9 +1048,15 @@
       showErr('lc-tel-err', 'Numero non valido (es. +39 333 1234567)'); valid = false;
     } else clearErr('lc-tel-err');
 
-    // Validazione file CI
-    ['ci-fronte','ci-retro'].forEach(function (key) {
-      var f = key === 'ci-fronte' ? ciFronte : ciRetro;
+    // Validazione targa italiana: 5-7 caratteri alfanumerici
+    if (!/^[A-Z0-9]{5,7}$/.test(targaVal)) {
+      showErr('lc-targa-err', 'Targa non valida (es. AB123CD)'); valid = false;
+    } else clearErr('lc-targa-err');
+
+    // Validazione file CI + libretto
+    var filesToCheck = { 'ci-fronte': ciFronte, 'ci-retro': ciRetro, 'libretto': libretto };
+    Object.keys(filesToCheck).forEach(function (key) {
+      var f = filesToCheck[key];
       if (!f) {
         showErr('lc-' + key + '-err', 'Documento richiesto'); valid = false;
       } else if (f.size > MAX_FILE_BYTES) {
@@ -1053,11 +1083,13 @@
             data_nascita: dob,
             email: emailVal,
             telefono: telVal,
+            targa: targaVal,
             fonte: 'sito web · home'
           },
           {
             ci_fronte: ciFronte,
-            ci_retro: ciRetro
+            ci_retro: ciRetro,
+            libretto: libretto
           }
         );
         supaOk = true;
@@ -1079,9 +1111,10 @@
       fd.append('Data di nascita', dob);
       fd.append('Email cliente', emailVal);
       fd.append('Telefono', telVal);
+      fd.append('Targa veicolo', targaVal);
       fd.append('Pagina', window.location.pathname);
       fd.append('Data invio', new Date().toLocaleString('it-IT'));
-      fd.append('Documenti caricati', supaOk ? 'CI fronte + retro su Supabase Storage' : 'NO — verificare manualmente');
+      fd.append('Documenti caricati', supaOk ? 'CI fronte + retro + libretto su Supabase Storage' : 'NO — verificare manualmente');
       if (leadId) {
         fd.append('Lead ID Supabase', leadId);
         fd.append('Dashboard documenti', 'https://supabase.com/dashboard/project/ivcdwizhkdubjxxrukbs/storage/buckets/documenti-lead?path=leads/' + leadId);
@@ -1096,7 +1129,7 @@
 
       if (res.ok && json.success) {
         form.reset();
-        ['ci-fronte','ci-retro'].forEach(function (k) {
+        ['ci-fronte','ci-retro','libretto'].forEach(function (k) {
           var info = document.getElementById('lc-' + k + '-info');
           if (info) { info.textContent = 'Nessun file selezionato'; info.classList.remove('ok','ko'); }
         });
