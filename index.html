@@ -704,6 +704,14 @@
         <span class="field-err" id="lc-dob-err"></span>
       </div>
 
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label for="lc-email">Indirizzo email *</label>
+        <input type="email" id="lc-email" name="Email"
+               placeholder="mario.rossi@esempio.it"
+               autocomplete="email" inputmode="email" required>
+        <span class="field-err" id="lc-email-err"></span>
+      </div>
+
       <label class="form-consent">
         <input type="checkbox" id="lc-consent" required>
         <span>
@@ -749,13 +757,15 @@
   }
   .lead-form .form-group { display: flex; flex-direction: column; gap: .4rem; }
   .lead-form label { font-size: .8rem; font-weight: 600; color: var(--text); letter-spacing: .03em; }
-  .lead-form input[type="text"] {
+  .lead-form input[type="text"],
+  .lead-form input[type="email"] {
     padding: .75rem 1rem; border-radius: 12px;
     border: 1px solid var(--border); background: var(--bg);
     font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text);
     transition: border-color .2s, box-shadow .2s; outline: none;
   }
-  .lead-form input[type="text"]:focus {
+  .lead-form input[type="text"]:focus,
+  .lead-form input[type="email"]:focus {
     border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1);
   }
   .lead-submit { width: 100%; margin-top: 1.5rem; font-size: 1.05rem; padding: 1rem; border-radius: 14px; }
@@ -797,6 +807,7 @@
   var form = document.getElementById('lead-capture-form');
   if (!form) return;
   var EMAIL_BROKER_KEY = '227eeb26-f8e1-4eba-8b60-5969ab33c2c7';
+  var EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function showErr(id, msg) { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = 'block'; } }
   function clearErr(id) { var el = document.getElementById(id); if (el) { el.textContent = ''; el.style.display = 'none'; } }
@@ -861,6 +872,7 @@
     var nome = document.getElementById('lc-nome').value.trim();
     var cognome = document.getElementById('lc-cognome').value.trim();
     var dob = getDob();
+    var emailVal = document.getElementById('lc-email').value.trim();
     var consent = document.getElementById('lc-consent').checked;
 
     var valid = true;
@@ -880,6 +892,9 @@
         else clearErr('lc-dob-err');
       }
     }
+    if (!EMAIL_REGEX.test(emailVal)) {
+      showErr('lc-email-err', 'Indirizzo email non valido'); valid = false;
+    } else clearErr('lc-email-err');
     if (!consent) { alert('Per inviare devi accettare il trattamento dei dati personali.'); valid = false; }
     if (!valid) return;
 
@@ -893,6 +908,7 @@
           prodotto: 'lead-home',
           nome_cognome: nome + ' ' + cognome,
           data_nascita: dob,
+          email: emailVal,
           fonte: 'sito web · home'
         });
         supaOk = true;
@@ -907,9 +923,11 @@
       fd.append('access_key', EMAIL_BROKER_KEY);
       fd.append('subject', 'Nuovo lead Quootami — ' + nome + ' ' + cognome);
       fd.append('from_name', 'Quootami — sito web');
+      fd.append('replyto', emailVal);
       fd.append('Nome', nome);
       fd.append('Cognome', cognome);
       fd.append('Data di nascita', dob);
+      fd.append('Email cliente', emailVal);
       fd.append('Pagina', window.location.pathname);
       fd.append('Data invio', new Date().toLocaleString('it-IT'));
       fd.append('Salvato su DB', supaOk ? 'sì' : 'no');
