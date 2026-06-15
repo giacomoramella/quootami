@@ -643,7 +643,7 @@
     <article class="why-item reveal">
       <span class="why-num">02</span>
       <h4>Analisi prima di proporre</h4>
-      <p>Eseguo l'analisi di adeguatezza prevista da IVASS (art. 119-bis CAP). Prima capisci, poi firmi.</p>
+      <p>L'analisi di adeguatezza prevista da IVASS (art. 119-bis CAP) viene eseguita per ogni cliente. Prima capisci, poi firmi.</p>
     </article>
     <article class="why-item reveal">
       <span class="why-num">03</span>
@@ -653,8 +653,171 @@
   </div>
 </section>
 
+<!-- LEAD CAPTURE -->
+<section id="lead-capture" class="lead-capture-section">
+  <div class="centered">
+    <span class="section-label">Vuoi essere ricontattato?</span>
+    <h2 class="section-title">Lascia il tuo nome, <span class="hl">ci pensa Quootami.</span></h2>
+    <p class="section-sub">Inserisci nome e cognome: Quootami ti contatta entro 24 ore lavorative.</p>
+  </div>
 
+  <div class="lead-box">
+    <form id="lead-capture-form" class="lead-form" novalidate>
+      <div class="lead-row">
+        <div class="form-group">
+          <label for="lc-nome">Nome *</label>
+          <input type="text" id="lc-nome" name="Nome" placeholder="Mario" autocomplete="given-name" required>
+          <span class="field-err" id="lc-nome-err"></span>
+        </div>
+        <div class="form-group">
+          <label for="lc-cognome">Cognome *</label>
+          <input type="text" id="lc-cognome" name="Cognome" placeholder="Rossi" autocomplete="family-name" required>
+          <span class="field-err" id="lc-cognome-err"></span>
+        </div>
+      </div>
 
+      <label class="form-consent">
+        <input type="checkbox" id="lc-consent" required>
+        <span>
+          Acconsento al trattamento dei miei dati personali per essere ricontattato (Reg. UE 2016/679 — GDPR).
+          Ho letto la <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>. *
+        </span>
+      </label>
+
+      <button type="submit" class="btn-primary lead-submit" id="lc-submit">
+        Voglio essere ricontattato →
+      </button>
+      <p class="lead-note">🔒 Connessione cifrata · Nessun impegno · Nessun costo</p>
+
+      <div class="form-feedback form-success" id="lc-success" hidden>
+        <strong>Richiesta ricevuta ✓</strong>
+        <p>Grazie! Quootami ti contatterà entro 24 ore lavorative.
+        Per esigenze urgenti, scrivi su <a data-quootami="whatsapp-link" href="#" target="_blank" rel="noopener">WhatsApp</a>.</p>
+      </div>
+      <div class="form-feedback form-error" id="lc-error" hidden>
+        <strong>Errore di invio</strong>
+        <p>Qualcosa non ha funzionato. Riprova oppure scrivi a Quootami su <a data-quootami="whatsapp-link" href="#" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">Dettaglio: <code id="lc-error-msg" style="font-family:monospace;"></code></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .lead-capture-section { background: var(--bg-alt); }
+  .lead-box {
+    max-width: 540px; margin: 3rem auto 0;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+  }
+  .lead-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; margin-bottom: 1rem;
+  }
+  @media (max-width: 480px) {
+    .lead-row { grid-template-columns: 1fr; }
+    .lead-box { padding: 1.75rem; }
+  }
+  .lead-form .form-group { display: flex; flex-direction: column; gap: .4rem; }
+  .lead-form label { font-size: .8rem; font-weight: 600; color: var(--text); letter-spacing: .03em; }
+  .lead-form input[type="text"] {
+    padding: .75rem 1rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg);
+    font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text);
+    transition: border-color .2s, box-shadow .2s; outline: none;
+  }
+  .lead-form input[type="text"]:focus {
+    border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1);
+  }
+  .lead-submit { width: 100%; margin-top: 1.5rem; font-size: 1.05rem; padding: 1rem; border-radius: 14px; }
+  .lead-submit[disabled] { opacity: .65; cursor: wait; }
+  .lead-note { text-align: center; font-size: .78rem; color: var(--text-muted); margin-top: 1rem; }
+</style>
+
+<script>
+(function () {
+  'use strict';
+  var form = document.getElementById('lead-capture-form');
+  if (!form) return;
+  var EMAIL_BROKER_KEY = '227eeb26-f8e1-4eba-8b60-5969ab33c2c7';
+
+  function showErr(id, msg) { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = 'block'; } }
+  function clearErr(id) { var el = document.getElementById(id); if (el) { el.textContent = ''; el.style.display = 'none'; } }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var btn = document.getElementById('lc-submit');
+    var ok = document.getElementById('lc-success');
+    var err = document.getElementById('lc-error');
+    var errMsg = document.getElementById('lc-error-msg');
+    ok.hidden = true; err.hidden = true;
+
+    var nome = document.getElementById('lc-nome').value.trim();
+    var cognome = document.getElementById('lc-cognome').value.trim();
+    var consent = document.getElementById('lc-consent').checked;
+
+    var valid = true;
+    if (nome.length < 2) { showErr('lc-nome-err', 'Inserisci un nome valido'); valid = false; } else clearErr('lc-nome-err');
+    if (cognome.length < 2) { showErr('lc-cognome-err', 'Inserisci un cognome valido'); valid = false; } else clearErr('lc-cognome-err');
+    if (!consent) { alert('Per inviare devi accettare il trattamento dei dati personali.'); valid = false; }
+    if (!valid) return;
+
+    btn.disabled = true; btn.textContent = 'Invio in corso…';
+
+    // [1] Salva su Supabase (via RPC SECURITY DEFINER)
+    var supaOk = false;
+    if (window.QuootamiLeadDB && window.QuootamiLeadDB.isConfigured) {
+      try {
+        await window.QuootamiLeadDB.saveLead({
+          prodotto: 'lead-home',
+          nome_cognome: nome + ' ' + cognome,
+          fonte: 'sito web · home'
+        });
+        supaOk = true;
+      } catch (dbEx) {
+        console.warn('[Quootami lead-home] DB save fallito, continuo con email:', dbEx);
+      }
+    }
+
+    // [2] Notifica email a giacomo.rp@sistoassicurazioni.com
+    try {
+      var fd = new FormData();
+      fd.append('access_key', EMAIL_BROKER_KEY);
+      fd.append('subject', 'Nuovo lead Quootami — ' + nome + ' ' + cognome);
+      fd.append('from_name', 'Quootami — sito web');
+      fd.append('Nome', nome);
+      fd.append('Cognome', cognome);
+      fd.append('Pagina', window.location.pathname);
+      fd.append('Data invio', new Date().toLocaleString('it-IT'));
+      fd.append('Salvato su DB', supaOk ? 'sì' : 'no');
+
+      var res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: fd
+      });
+      var json = await res.json().catch(function () { return { success: false }; });
+
+      if (res.ok && json.success) {
+        form.reset();
+        ok.hidden = false;
+        ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        if (errMsg) errMsg.textContent = 'HTTP ' + res.status + ' — ' + (json.message || 'errore sconosciuto');
+        err.hidden = false;
+      }
+    } catch (ex) {
+      console.error('[Quootami lead-home] exception email:', ex);
+      if (errMsg) errMsg.textContent = ex.message || String(ex);
+      err.hidden = false;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Voglio essere ricontattato →';
+    }
+  });
+})();
+</script>
 
 <!-- FOOTER -->
 <footer>
@@ -795,8 +958,9 @@ document.querySelectorAll('.hstat-num[data-target]').forEach(el=>co.observe(el))
   if(p.get('cat')) selectCategory(p.get('cat'), document.querySelector('.hs-btn'));
 })();
 </script>
-<script src="assets/operatore.js?v=20260611a"></script>
-<script src="assets/schema-org.js?v=20260611a"></script>
-<script src="components.js?v=20260525a"></script>
+<script src="assets/lead-db.js?v=20260612a"></script>
+<script src="assets/operatore.js?v=20260612a"></script>
+<script src="assets/schema-org.js?v=20260612a"></script>
+<script src="components.js?v=20260612a"></script>
 </body>
 </html>
