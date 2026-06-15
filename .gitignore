@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Backup file modalità manutenzione (mai pushare)
+*-prod.bak.html
+*.bak
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node (se mai aggiungeremo build)
+node_modules/
+.env
+.env.local
+
+# Logs
+*.log
+
+# Secrets locali (mai committare)
+*.key
+*.pem
