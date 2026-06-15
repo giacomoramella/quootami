@@ -712,6 +712,14 @@
         <span class="field-err" id="lc-email-err"></span>
       </div>
 
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label for="lc-tel">Numero di telefono *</label>
+        <input type="tel" id="lc-tel" name="Telefono"
+               placeholder="+39 333 1234567"
+               autocomplete="tel" inputmode="tel" required>
+        <span class="field-err" id="lc-tel-err"></span>
+      </div>
+
       <label class="form-consent">
         <input type="checkbox" id="lc-consent" required>
         <span>
@@ -758,14 +766,16 @@
   .lead-form .form-group { display: flex; flex-direction: column; gap: .4rem; }
   .lead-form label { font-size: .8rem; font-weight: 600; color: var(--text); letter-spacing: .03em; }
   .lead-form input[type="text"],
-  .lead-form input[type="email"] {
+  .lead-form input[type="email"],
+  .lead-form input[type="tel"] {
     padding: .75rem 1rem; border-radius: 12px;
     border: 1px solid var(--border); background: var(--bg);
     font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text);
     transition: border-color .2s, box-shadow .2s; outline: none;
   }
   .lead-form input[type="text"]:focus,
-  .lead-form input[type="email"]:focus {
+  .lead-form input[type="email"]:focus,
+  .lead-form input[type="tel"]:focus {
     border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1);
   }
   .lead-submit { width: 100%; margin-top: 1.5rem; font-size: 1.05rem; padding: 1rem; border-radius: 14px; }
@@ -808,6 +818,7 @@
   if (!form) return;
   var EMAIL_BROKER_KEY = '227eeb26-f8e1-4eba-8b60-5969ab33c2c7';
   var EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var PHONE_REGEX = /^\+?[0-9 ()\-]{8,18}$/;
 
   function showErr(id, msg) { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = 'block'; } }
   function clearErr(id) { var el = document.getElementById(id); if (el) { el.textContent = ''; el.style.display = 'none'; } }
@@ -873,6 +884,7 @@
     var cognome = document.getElementById('lc-cognome').value.trim();
     var dob = getDob();
     var emailVal = document.getElementById('lc-email').value.trim();
+    var telVal = document.getElementById('lc-tel').value.trim();
     var consent = document.getElementById('lc-consent').checked;
 
     var valid = true;
@@ -895,6 +907,9 @@
     if (!EMAIL_REGEX.test(emailVal)) {
       showErr('lc-email-err', 'Indirizzo email non valido'); valid = false;
     } else clearErr('lc-email-err');
+    if (!PHONE_REGEX.test(telVal)) {
+      showErr('lc-tel-err', 'Numero non valido (es. +39 333 1234567)'); valid = false;
+    } else clearErr('lc-tel-err');
     if (!consent) { alert('Per inviare devi accettare il trattamento dei dati personali.'); valid = false; }
     if (!valid) return;
 
@@ -909,6 +924,7 @@
           nome_cognome: nome + ' ' + cognome,
           data_nascita: dob,
           email: emailVal,
+          telefono: telVal,
           fonte: 'sito web · home'
         });
         supaOk = true;
@@ -928,6 +944,7 @@
       fd.append('Cognome', cognome);
       fd.append('Data di nascita', dob);
       fd.append('Email cliente', emailVal);
+      fd.append('Telefono', telVal);
       fd.append('Pagina', window.location.pathname);
       fd.append('Data invio', new Date().toLocaleString('it-IT'));
       fd.append('Salvato su DB', supaOk ? 'sì' : 'no');
