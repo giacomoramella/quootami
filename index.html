@@ -74,29 +74,29 @@
   }
   .pension-banner {
     display: flex; align-items: center; gap: 1.5rem;
-    background: linear-gradient(135deg, rgba(255,216,77,0.18) 0%, rgba(233,180,64,0.10) 100%);
-    border: 2px solid var(--yellow);
+    background: linear-gradient(135deg, rgba(31,157,85,0.16) 0%, rgba(21,121,63,0.08) 100%);
+    border: 2px solid var(--accent-warm);
     border-radius: var(--radius-lg);
     padding: 2rem 2.25rem;
     text-decoration: none; color: var(--text);
     transition: transform .25s cubic-bezier(.22,.68,0,1.2), box-shadow .25s, background .25s;
     position: relative; overflow: hidden;
   }
-  .pension-banner:hover { transform: translateY(-3px); box-shadow: 0 18px 36px -10px rgba(233,180,64,.35); background: linear-gradient(135deg, rgba(255,216,77,0.28) 0%, rgba(233,180,64,0.15) 100%); }
+  .pension-banner:hover { transform: translateY(-3px); box-shadow: 0 18px 36px -10px rgba(31,157,85,.35); background: linear-gradient(135deg, rgba(31,157,85,0.24) 0%, rgba(21,121,63,0.14) 100%); }
   .pension-banner-icon {
     flex-shrink: 0;
     width: 64px; height: 64px;
-    background: var(--yellow);
+    background: var(--accent-warm);
     border-radius: 16px;
     display: flex; align-items: center; justify-content: center;
-    color: var(--text);
+    color: #fff;
   }
   .pension-banner-text { flex: 1; }
   .pension-banner-eyebrow {
     display: inline-block; font-family: 'Inter', sans-serif;
     font-size: .68rem; font-weight: 700; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--green-dark);
-    background: rgba(26,122,74,.1); padding: .22rem .7rem;
+    text-transform: uppercase; color: var(--accent-warm-dark);
+    background: rgba(31,157,85,.12); padding: .22rem .7rem;
     border-radius: 50px; margin-bottom: .5rem;
   }
   .pension-banner-text h3 {
@@ -110,7 +110,7 @@
   .pension-banner-arrow {
     flex-shrink: 0;
     font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.5rem;
-    color: var(--yellow-deep); transition: transform .25s;
+    color: var(--accent-warm); transition: transform .25s;
   }
   .pension-banner:hover .pension-banner-arrow { transform: translateX(6px); }
   @media (max-width: 700px) {
