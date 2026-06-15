@@ -720,10 +720,40 @@
         <span class="field-err" id="lc-tel-err"></span>
       </div>
 
+      <h3 class="lead-section-title">Carta d'identità</h3>
+      <p class="lead-help">
+        🔒 I documenti vengono caricati su archivio cifrato e privato.
+        Solo Quootami può accedervi. Massimo 10&nbsp;MB per file. Formati: JPG, PNG, HEIC, PDF.
+      </p>
+
+      <div class="form-group lead-upload" style="margin-bottom:1rem;">
+        <label for="lc-ci-fronte">Carta d'identità — FRONTE *</label>
+        <input type="file"
+               id="lc-ci-fronte"
+               name="ci_fronte"
+               accept="image/jpeg,image/jpg,image/png,image/heic,image/heif,application/pdf"
+               capture="environment"
+               required>
+        <span class="lead-upload-info" id="lc-ci-fronte-info">Nessun file selezionato</span>
+        <span class="field-err" id="lc-ci-fronte-err"></span>
+      </div>
+
+      <div class="form-group lead-upload" style="margin-bottom:1rem;">
+        <label for="lc-ci-retro">Carta d'identità — RETRO *</label>
+        <input type="file"
+               id="lc-ci-retro"
+               name="ci_retro"
+               accept="image/jpeg,image/jpg,image/png,image/heic,image/heif,application/pdf"
+               capture="environment"
+               required>
+        <span class="lead-upload-info" id="lc-ci-retro-info">Nessun file selezionato</span>
+        <span class="field-err" id="lc-ci-retro-err"></span>
+      </div>
+
       <label class="form-consent">
         <input type="checkbox" id="lc-consent" required>
         <span>
-          Acconsento al trattamento dei miei dati personali per essere ricontattato (Reg. UE 2016/679 — GDPR).
+          Acconsento al trattamento dei miei dati personali (compresi documenti d'identità) per essere ricontattato in merito alla richiesta, ai sensi del Reg. UE 2016/679 — GDPR.
           Ho letto la <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>. *
         </span>
       </label>
@@ -809,6 +839,45 @@
     .lead-form .dob-grid select { font-size: .88rem; padding: .65rem .75rem; padding-right: 2rem; }
   }
   .field-err { display: none; color: #d43a2f; font-size: .75rem; margin-top: .2rem; }
+
+  .lead-section-title {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 1rem; color: var(--text);
+    margin: 1.75rem 0 .75rem; padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    letter-spacing: -.01em;
+  }
+  .lead-help {
+    font-size: .82rem; color: var(--text-muted); line-height: 1.55;
+    margin-bottom: 1rem;
+    padding: .75rem .9rem; background: rgba(255,216,77,.08);
+    border-left: 3px solid var(--yellow);
+    border-radius: 8px;
+  }
+  .lead-upload input[type="file"] {
+    padding: .65rem .85rem;
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif; font-size: .9rem;
+    color: var(--text); cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .lead-upload input[type="file"]:hover { border-color: var(--yellow-deep); background: rgba(255,216,77,.04); }
+  .lead-upload input[type="file"]::file-selector-button {
+    background: var(--primary); color: #fff; border: none;
+    padding: .5rem .9rem; border-radius: 8px;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: .82rem;
+    margin-right: .85rem; cursor: pointer;
+    transition: background .2s;
+  }
+  .lead-upload input[type="file"]::file-selector-button:hover { background: var(--green-dark); color: var(--primary); }
+  .lead-upload-info {
+    display: inline-block; margin-top: .45rem;
+    font-size: .78rem; color: var(--text-muted);
+  }
+  .lead-upload-info.ok { color: #1a7a4a; font-weight: 500; }
+  .lead-upload-info.ko { color: #c2382f; font-weight: 500; }
 </style>
 
 <script>
@@ -819,6 +888,48 @@
   var EMAIL_BROKER_KEY = '227eeb26-f8e1-4eba-8b60-5969ab33c2c7';
   var EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var PHONE_REGEX = /^\+?[0-9 ()\-]{8,18}$/;
+  var MAX_FILE_BYTES = 10 * 1024 * 1024;          // 10 MB
+  var ALLOWED_MIME = [
+    'image/jpeg','image/jpg','image/png',
+    'image/heic','image/heif','image/webp',
+    'application/pdf'
+  ];
+
+  function fmtBytes(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1048576).toFixed(2) + ' MB';
+  }
+
+  // === LIVE FILE INFO per CI fronte/retro ===
+  ['ci-fronte', 'ci-retro'].forEach(function (key) {
+    var input = document.getElementById('lc-' + key);
+    var info  = document.getElementById('lc-' + key + '-info');
+    if (!input || !info) return;
+    input.addEventListener('change', function () {
+      var f = input.files && input.files[0];
+      clearErr('lc-' + key + '-err');
+      if (!f) {
+        info.textContent = 'Nessun file selezionato';
+        info.classList.remove('ok','ko');
+        return;
+      }
+      if (!ALLOWED_MIME.includes(f.type) && !/\.(jpe?g|png|heic|heif|pdf|webp)$/i.test(f.name)) {
+        info.textContent = '❌ Formato non supportato';
+        info.classList.remove('ok'); info.classList.add('ko');
+        showErr('lc-' + key + '-err', 'Formato non valido. Usa JPG, PNG, HEIC o PDF.');
+        return;
+      }
+      if (f.size > MAX_FILE_BYTES) {
+        info.textContent = '❌ File troppo grande: ' + fmtBytes(f.size) + ' (max 10 MB)';
+        info.classList.remove('ok'); info.classList.add('ko');
+        showErr('lc-' + key + '-err', 'File oltre i 10 MB.');
+        return;
+      }
+      info.textContent = '✓ ' + f.name + ' · ' + fmtBytes(f.size);
+      info.classList.remove('ko'); info.classList.add('ok');
+    });
+  });
 
   function showErr(id, msg) { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = 'block'; } }
   function clearErr(id) { var el = document.getElementById(id); if (el) { el.textContent = ''; el.style.display = 'none'; } }
@@ -885,6 +996,8 @@
     var dob = getDob();
     var emailVal = document.getElementById('lc-email').value.trim();
     var telVal = document.getElementById('lc-tel').value.trim();
+    var ciFronte = document.getElementById('lc-ci-fronte').files[0];
+    var ciRetro = document.getElementById('lc-ci-retro').files[0];
     var consent = document.getElementById('lc-consent').checked;
 
     var valid = true;
@@ -910,26 +1023,47 @@
     if (!PHONE_REGEX.test(telVal)) {
       showErr('lc-tel-err', 'Numero non valido (es. +39 333 1234567)'); valid = false;
     } else clearErr('lc-tel-err');
+
+    // Validazione file CI
+    ['ci-fronte','ci-retro'].forEach(function (key) {
+      var f = key === 'ci-fronte' ? ciFronte : ciRetro;
+      if (!f) {
+        showErr('lc-' + key + '-err', 'Documento richiesto'); valid = false;
+      } else if (f.size > MAX_FILE_BYTES) {
+        showErr('lc-' + key + '-err', 'File oltre i 10 MB'); valid = false;
+      } else if (!ALLOWED_MIME.includes(f.type) && !/\.(jpe?g|png|heic|heif|pdf|webp)$/i.test(f.name)) {
+        showErr('lc-' + key + '-err', 'Formato non valido'); valid = false;
+      }
+    });
+
     if (!consent) { alert('Per inviare devi accettare il trattamento dei dati personali.'); valid = false; }
     if (!valid) return;
 
     btn.disabled = true; btn.textContent = 'Invio in corso…';
 
-    // [1] Salva su Supabase (via RPC SECURITY DEFINER)
+    // [1] Salva su Supabase: lead + upload CI fronte/retro su Storage privato
     var supaOk = false;
+    var leadId = null;
     if (window.QuootamiLeadDB && window.QuootamiLeadDB.isConfigured) {
       try {
-        await window.QuootamiLeadDB.saveLead({
-          prodotto: 'lead-home',
-          nome_cognome: nome + ' ' + cognome,
-          data_nascita: dob,
-          email: emailVal,
-          telefono: telVal,
-          fonte: 'sito web · home'
-        });
+        var result = await window.QuootamiLeadDB.submitFullLead(
+          {
+            prodotto: 'lead-home',
+            nome_cognome: nome + ' ' + cognome,
+            data_nascita: dob,
+            email: emailVal,
+            telefono: telVal,
+            fonte: 'sito web · home'
+          },
+          {
+            ci_fronte: ciFronte,
+            ci_retro: ciRetro
+          }
+        );
         supaOk = true;
+        leadId = result && result.lead && result.lead.id;
       } catch (dbEx) {
-        console.warn('[Quootami lead-home] DB save fallito, continuo con email:', dbEx);
+        console.warn('[Quootami lead-home] DB+upload fallito, provo solo email:', dbEx);
       }
     }
 
@@ -947,7 +1081,11 @@
       fd.append('Telefono', telVal);
       fd.append('Pagina', window.location.pathname);
       fd.append('Data invio', new Date().toLocaleString('it-IT'));
-      fd.append('Salvato su DB', supaOk ? 'sì' : 'no');
+      fd.append('Documenti caricati', supaOk ? 'CI fronte + retro su Supabase Storage' : 'NO — verificare manualmente');
+      if (leadId) {
+        fd.append('Lead ID Supabase', leadId);
+        fd.append('Dashboard documenti', 'https://supabase.com/dashboard/project/ivcdwizhkdubjxxrukbs/storage/buckets/documenti-lead?path=leads/' + leadId);
+      }
 
       var res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -958,6 +1096,10 @@
 
       if (res.ok && json.success) {
         form.reset();
+        ['ci-fronte','ci-retro'].forEach(function (k) {
+          var info = document.getElementById('lc-' + k + '-info');
+          if (info) { info.textContent = 'Nessun file selezionato'; info.classList.remove('ok','ko'); }
+        });
         ok.hidden = false;
         ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
