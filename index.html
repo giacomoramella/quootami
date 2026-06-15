@@ -676,6 +676,34 @@
         </div>
       </div>
 
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label>Data di nascita *</label>
+        <div class="dob-grid">
+          <select id="lc-dob-day" aria-label="Giorno di nascita" required>
+            <option value="">Giorno</option>
+          </select>
+          <select id="lc-dob-month" aria-label="Mese di nascita" required>
+            <option value="">Mese</option>
+            <option value="1">Gennaio</option>
+            <option value="2">Febbraio</option>
+            <option value="3">Marzo</option>
+            <option value="4">Aprile</option>
+            <option value="5">Maggio</option>
+            <option value="6">Giugno</option>
+            <option value="7">Luglio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Settembre</option>
+            <option value="10">Ottobre</option>
+            <option value="11">Novembre</option>
+            <option value="12">Dicembre</option>
+          </select>
+          <select id="lc-dob-year" aria-label="Anno di nascita" required>
+            <option value="">Anno</option>
+          </select>
+        </div>
+        <span class="field-err" id="lc-dob-err"></span>
+      </div>
+
       <label class="form-consent">
         <input type="checkbox" id="lc-consent" required>
         <span>
@@ -733,6 +761,34 @@
   .lead-submit { width: 100%; margin-top: 1.5rem; font-size: 1.05rem; padding: 1rem; border-radius: 14px; }
   .lead-submit[disabled] { opacity: .65; cursor: wait; }
   .lead-note { text-align: center; font-size: .78rem; color: var(--text-muted); margin-top: 1rem; }
+
+  /* Data di nascita — 3 dropdown affiancati */
+  .lead-form .dob-grid {
+    display: grid; grid-template-columns: 1fr 1.5fr 1fr;
+    gap: .6rem;
+  }
+  .lead-form .dob-grid select {
+    padding: .75rem 1rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg);
+    font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text);
+    outline: none; cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3e%3cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+  .lead-form .dob-grid select:focus {
+    border-color: var(--border-green);
+    box-shadow: 0 0 0 3px rgba(255,216,77,.1);
+  }
+  @media (max-width: 480px) {
+    .lead-form .dob-grid { grid-template-columns: 1fr 1.4fr 1fr; gap: .4rem; }
+    .lead-form .dob-grid select { font-size: .88rem; padding: .65rem .75rem; padding-right: 2rem; }
+  }
+  .field-err { display: none; color: #d43a2f; font-size: .75rem; margin-top: .2rem; }
 </style>
 
 <script>
@@ -745,6 +801,55 @@
   function showErr(id, msg) { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = 'block'; } }
   function clearErr(id) { var el = document.getElementById(id); if (el) { el.textContent = ''; el.style.display = 'none'; } }
 
+  // === POPOLA SELECT DATA NASCITA ===
+  var dobDay = document.getElementById('lc-dob-day');
+  var dobMonth = document.getElementById('lc-dob-month');
+  var dobYear = document.getElementById('lc-dob-year');
+  for (var d = 1; d <= 31; d++) {
+    var opt = document.createElement('option');
+    opt.value = String(d);
+    opt.textContent = d < 10 ? '0' + d : String(d);
+    dobDay.appendChild(opt);
+  }
+  var currentYear = new Date().getFullYear();
+  for (var y = currentYear - 18; y >= currentYear - 100; y--) {
+    var optY = document.createElement('option');
+    optY.value = String(y);
+    optY.textContent = String(y);
+    dobYear.appendChild(optY);
+  }
+  function updateDayLimits() {
+    var m = parseInt(dobMonth.value, 10);
+    var y = parseInt(dobYear.value, 10);
+    if (!m) return;
+    var daysInMonth = new Date(y || 2000, m, 0).getDate();
+    var currentDay = parseInt(dobDay.value, 10);
+    Array.prototype.forEach.call(dobDay.options, function (o) {
+      if (!o.value) return;
+      var dv = parseInt(o.value, 10);
+      o.disabled = dv > daysInMonth;
+    });
+    if (currentDay > daysInMonth) dobDay.value = '';
+  }
+  dobMonth.addEventListener('change', updateDayLimits);
+  dobYear.addEventListener('change', updateDayLimits);
+
+  function getDob() {
+    var d = parseInt(dobDay.value, 10);
+    var m = parseInt(dobMonth.value, 10);
+    var y = parseInt(dobYear.value, 10);
+    if (!d || !m || !y) return '';
+    return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d);
+  }
+
+  function calcAge(dob) {
+    var t = new Date(), b = new Date(dob);
+    var a = t.getFullYear() - b.getFullYear();
+    var mDiff = t.getMonth() - b.getMonth();
+    if (mDiff < 0 || (mDiff === 0 && t.getDate() < b.getDate())) a--;
+    return a;
+  }
+
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     var btn = document.getElementById('lc-submit');
@@ -755,11 +860,26 @@
 
     var nome = document.getElementById('lc-nome').value.trim();
     var cognome = document.getElementById('lc-cognome').value.trim();
+    var dob = getDob();
     var consent = document.getElementById('lc-consent').checked;
 
     var valid = true;
     if (nome.length < 2) { showErr('lc-nome-err', 'Inserisci un nome valido'); valid = false; } else clearErr('lc-nome-err');
     if (cognome.length < 2) { showErr('lc-cognome-err', 'Inserisci un cognome valido'); valid = false; } else clearErr('lc-cognome-err');
+    if (!dob) {
+      showErr('lc-dob-err', 'Seleziona giorno, mese e anno di nascita'); valid = false;
+    } else {
+      var parts = dob.split('-');
+      var testDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      if (testDate.getDate() !== parseInt(parts[2]) || testDate.getMonth() !== parseInt(parts[1]) - 1) {
+        showErr('lc-dob-err', 'Data non valida'); valid = false;
+      } else {
+        var age = calcAge(dob);
+        if (age < 18) { showErr('lc-dob-err', 'Devi avere almeno 18 anni'); valid = false; }
+        else if (age > 100) { showErr('lc-dob-err', 'Data non valida'); valid = false; }
+        else clearErr('lc-dob-err');
+      }
+    }
     if (!consent) { alert('Per inviare devi accettare il trattamento dei dati personali.'); valid = false; }
     if (!valid) return;
 
@@ -772,6 +892,7 @@
         await window.QuootamiLeadDB.saveLead({
           prodotto: 'lead-home',
           nome_cognome: nome + ' ' + cognome,
+          data_nascita: dob,
           fonte: 'sito web · home'
         });
         supaOk = true;
@@ -788,6 +909,7 @@
       fd.append('from_name', 'Quootami — sito web');
       fd.append('Nome', nome);
       fd.append('Cognome', cognome);
+      fd.append('Data di nascita', dob);
       fd.append('Pagina', window.location.pathname);
       fd.append('Data invio', new Date().toLocaleString('it-IT'));
       fd.append('Salvato su DB', supaOk ? 'sì' : 'no');
