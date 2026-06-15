@@ -544,23 +544,17 @@
   </div>
 </section>
 
-<!-- QUOTE FORM -->
-<section id="preventivo" class="form-section">
+<!-- LEAD CAPTURE -->
+<section id="preventivo" class="quote-section-section">
   <div class="centered">
     <span class="section-label">Preventivo gratuito</span>
-    <h2 class="section-title">Richiedi il tuo<br>preventivo personalizzato</h2>
-    <p class="section-sub">Compila i tuoi dati: Quootami ti contatta entro 24h con le migliori offerte delle compagnie partner.</p>
+    <h2 class="section-title">Richiedi il tuo<br><span class="hl">preventivo personalizzato.</span></h2>
+    <p class="section-sub">Compila i dati: Quootami ti contatta entro 24 ore con le migliori offerte delle compagnie partner.</p>
   </div>
 
-  <div class="quote-box">
-    <form id="quote-form-auto" class="quote-form" novalidate>
-      <input type="hidden" name="access_key" value="227eeb26-f8e1-4eba-8b60-5969ab33c2c7">
-      <input type="hidden" name="from_name" value="Quootami — sito web">
-      <input type="hidden" name="redirect" value="false">
-
-      <h3 class="form-section-title">Dati personali</h3>
-
-      <div class="form-row">
+  <div class="quote-box-v2">
+    <form id="quote-form-auto" class="quote-form-v2" novalidate>
+      <div class="quote-row-v2">
         <div class="form-group">
           <label for="qf-nome">Nome *</label>
           <input type="text" id="qf-nome" name="Nome" placeholder="Mario" autocomplete="given-name" required>
@@ -573,168 +567,296 @@
         </div>
       </div>
 
-      <div class="form-row single">
-        <div class="form-group">
-          <label>Data di nascita *</label>
-          <div class="dob-grid">
-            <select id="qf-dob-day" aria-label="Giorno di nascita" required>
-              <option value="">Giorno</option>
-            </select>
-            <select id="qf-dob-month" aria-label="Mese di nascita" required>
-              <option value="">Mese</option>
-              <option value="1">Gennaio</option>
-              <option value="2">Febbraio</option>
-              <option value="3">Marzo</option>
-              <option value="4">Aprile</option>
-              <option value="5">Maggio</option>
-              <option value="6">Giugno</option>
-              <option value="7">Luglio</option>
-              <option value="8">Agosto</option>
-              <option value="9">Settembre</option>
-              <option value="10">Ottobre</option>
-              <option value="11">Novembre</option>
-              <option value="12">Dicembre</option>
-            </select>
-            <select id="qf-dob-year" aria-label="Anno di nascita" required>
-              <option value="">Anno</option>
-            </select>
-          </div>
-          <span class="field-err" id="qf-dob-err"></span>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label>Data di nascita *</label>
+        <div class="dob-grid">
+          <select id="qf-dob-day" aria-label="Giorno di nascita" required>
+            <option value="">Giorno</option>
+          </select>
+          <select id="qf-dob-month" aria-label="Mese di nascita" required>
+            <option value="">Mese</option>
+            <option value="1">Gennaio</option>
+            <option value="2">Febbraio</option>
+            <option value="3">Marzo</option>
+            <option value="4">Aprile</option>
+            <option value="5">Maggio</option>
+            <option value="6">Giugno</option>
+            <option value="7">Luglio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Settembre</option>
+            <option value="10">Ottobre</option>
+            <option value="11">Novembre</option>
+            <option value="12">Dicembre</option>
+          </select>
+          <select id="qf-dob-year" aria-label="Anno di nascita" required>
+            <option value="">Anno</option>
+          </select>
         </div>
+        <span class="field-err" id="qf-dob-err"></span>
       </div>
 
-      <div class="form-row single">
-        <div class="form-group">
-          <label for="qf-tel">Numero di telefono *</label>
-          <input type="tel" id="qf-tel" name="Telefono" placeholder="+39 333 1234567" autocomplete="tel" inputmode="tel" required>
-          <span class="field-err" id="qf-tel-err"></span>
-        </div>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label for="qf-email">Indirizzo email *</label>
+        <input type="email" id="qf-email" name="Email"
+               placeholder="mario.rossi@esempio.it"
+               autocomplete="email" inputmode="email" required>
+        <span class="field-err" id="qf-email-err"></span>
       </div>
 
-      <div class="form-row single">
-        <div class="form-group">
-          <label for="qf-email">Indirizzo email *</label>
-          <input type="email" id="qf-email" name="Email" placeholder="mario.rossi@esempio.it" autocomplete="email" inputmode="email" required>
-          <span class="field-err" id="qf-email-err"></span>
-        </div>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label for="qf-tel">Numero di telefono *</label>
+        <input type="tel" id="qf-tel" name="Telefono"
+               placeholder="+39 333 1234567"
+               autocomplete="tel" inputmode="tel" required>
+        <span class="field-err" id="qf-tel-err"></span>
       </div>
 
-      <h3 class="form-section-title">Documenti</h3>
-      <p class="form-help">
-        🔒 I documenti vengono caricati su archivio cifrato e protetto.
-        Solo Quootami puo' accedervi tramite link temporanei sicuri (validi 30 giorni, poi scadono automaticamente).
-        Massimo 10&nbsp;MB per file. Formati: JPG, PNG, HEIC, PDF.
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label for="qf-targa">Targa veicolo *</label>
+        <input type="text" id="qf-targa" name="Targa"
+               placeholder="AB123CD"
+               maxlength="7" style="text-transform:uppercase"
+               required>
+        <span class="field-err" id="qf-targa-err"></span>
+      </div>
+
+      <h3 class="quote-section-title-v2">Documenti</h3>
+      <p class="quote-help-v2">
+        🔒 I documenti vengono caricati su archivio cifrato e privato.
+        Solo Quootami può accedervi. Massimo 10&nbsp;MB per file. Formati: JPG, PNG, HEIC, PDF.<br>
+        📱 Da smartphone puoi anche <strong>scattare direttamente la foto</strong> al documento.
       </p>
 
-      <div class="form-row single">
-        <div class="form-group form-upload">
-          <label for="qf-ci-fronte">Carta d'identita' — FRONTE *</label>
-          <input type="file"
-                 id="qf-ci-fronte"
-                 name="ci_fronte"
-                 accept="image/jpeg,image/jpg,image/png,image/heic,image/heif,application/pdf"
-                 capture="environment"
-                 required>
-          <span class="form-upload-info" id="qf-ci-fronte-info">Nessun file selezionato</span>
-          <span class="field-err" id="qf-ci-fronte-err"></span>
-        </div>
+      <div class="form-group quote-upload-v2" style="margin-bottom:1rem;">
+        <label for="qf-ci-fronte">Carta d'identità — FRONTE *</label>
+        <input type="file"
+               id="qf-ci-fronte"
+               name="ci_fronte"
+               accept="image/jpeg,image/jpg,image/png,image/heic,image/heif,application/pdf"
+               capture="environment"
+               required>
+        <span class="quote-upload-v2-info" id="qf-ci-fronte-info">Nessun file selezionato</span>
+        <span class="field-err" id="qf-ci-fronte-err"></span>
       </div>
 
-      <div class="form-row single">
-        <div class="form-group form-upload">
-          <label for="qf-ci-retro">Carta d'identita' — RETRO *</label>
-          <input type="file"
-                 id="qf-ci-retro"
-                 name="ci_retro"
-                 accept="image/jpeg,image/jpg,image/png,image/heic,image/heif,application/pdf"
-                 capture="environment"
-                 required>
-          <span class="form-upload-info" id="qf-ci-retro-info">Nessun file selezionato</span>
-          <span class="field-err" id="qf-ci-retro-err"></span>
-        </div>
+      <div class="form-group quote-upload-v2" style="margin-bottom:1rem;">
+        <label for="qf-ci-retro">Carta d'identità — RETRO *</label>
+        <input type="file"
+               id="qf-ci-retro"
+               name="ci_retro"
+               accept="image/jpeg,image/jpg,image/png,image/heic,image/heif,application/pdf"
+               capture="environment"
+               required>
+        <span class="quote-upload-v2-info" id="qf-ci-retro-info">Nessun file selezionato</span>
+        <span class="field-err" id="qf-ci-retro-err"></span>
       </div>
 
-      <div class="form-row single">
-        <div class="form-group form-upload">
-          <label for="qf-libretto">Libretto di circolazione *</label>
-          <input type="file"
-                 id="qf-libretto"
-                 name="libretto"
-                 accept="image/jpeg,image/jpg,image/png,image/heic,image/heif,application/pdf"
-                 capture="environment"
-                 required>
-          <span class="form-upload-info" id="qf-libretto-info">Nessun file selezionato</span>
-          <span class="field-err" id="qf-libretto-err"></span>
-        </div>
+      <div class="form-group quote-upload-v2" style="margin-bottom:1rem;">
+        <label for="qf-libretto">Libretto di circolazione *</label>
+        <input type="file"
+               id="qf-libretto"
+               name="libretto"
+               accept="image/jpeg,image/jpg,image/png,image/heic,image/heif,application/pdf"
+               capture="environment"
+               required>
+        <span class="quote-upload-v2-info" id="qf-libretto-info">Nessun file selezionato</span>
+        <span class="field-err" id="qf-libretto-err"></span>
       </div>
 
       <label class="form-consent">
         <input type="checkbox" id="qf-consent" required>
         <span>
-          Acconsento al trattamento dei miei dati personali (compresi documenti d'identita') per la richiesta di preventivo RC Auto,
-          ai sensi del Reg. UE 2016/679 (GDPR). Ho letto la
-          <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>
-          e la <a href="cookie.html" target="_blank" rel="noopener">cookie policy</a>. *
+          Acconsento al trattamento dei miei dati personali (compresi documenti d'identità) per essere ricontattato in merito alla richiesta, ai sensi del Reg. UE 2016/679 — GDPR.
+          Ho letto la <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>. *
         </span>
       </label>
 
-      <button type="submit" class="btn-primary form-submit" id="qf-submit">
-        Invia richiesta →
+      <button type="submit" class="btn-primary quote-submit-v2" id="qf-submit">
+        Richiedi il preventivo →
       </button>
-      <p class="form-note">🔒 Connessione cifrata HTTPS · Documenti su storage privato · Nessun obbligo di acquisto</p>
-
-      <div class="form-loading" id="qf-loading">
-        <div class="spinner"></div>
-        <span id="qf-loading-msg">Caricamento documenti in corso…</span>
-      </div>
+      <p class="quote-note-v2">🔒 Connessione cifrata · Nessun impegno · Nessun costo</p>
 
       <div class="form-feedback form-success" id="qf-success" hidden>
-        <strong>Richiesta inviata con successo ✓</strong>
-        <p>Quootami ti ricontatteremo a breve all'email o al numero indicato.
-        Nel frattempo è possibile scrivere a Quootami su
-        <a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <strong>Richiesta ricevuta ✓</strong>
+        <p>Grazie! Quootami ti contatterà entro 24 ore con il miglior preventivo.
+        Per esigenze urgenti, scrivi su <a data-quootami="whatsapp-link" href="#" target="_blank" rel="noopener">WhatsApp</a>.</p>
       </div>
       <div class="form-feedback form-error" id="qf-error" hidden>
         <strong>Errore di invio</strong>
-        <p>Qualcosa non ha funzionato. Riprova oppure contatta Quootami all'email
-        <a href="mailto:giacomo.rp@sistoassicurazioni.com">giacomo.rp@sistoassicurazioni.com</a>
-        o su <a href="https://wa.me/393922198185" target="_blank" rel="noopener">WhatsApp</a>.</p>
-        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">
-          Dettaglio tecnico: <code id="qf-error-msg" style="font-family:monospace;"></code>
-        </p>
+        <p>Qualcosa non ha funzionato. Riprova oppure scrivi a Quootami su <a data-quootami="whatsapp-link" href="#" target="_blank" rel="noopener">WhatsApp</a>.</p>
+        <p style="margin-top:.6rem; font-size:.85em; opacity:.7;">Dettaglio: <code id="qf-error-msg" style="font-family:monospace;"></code></p>
       </div>
     </form>
   </div>
 </section>
 
+<style>
+  .quote-section-section { background: var(--bg-alt); }
+  .quote-box-v2 {
+    max-width: 540px; margin: 3rem auto 0;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+  }
+  .quote-row-v2 {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; margin-bottom: 1rem;
+  }
+  @media (max-width: 480px) {
+    .quote-row-v2 { grid-template-columns: 1fr; }
+    .quote-box-v2 { padding: 1.75rem; }
+  }
+  .quote-form-v2 .form-group { display: flex; flex-direction: column; gap: .4rem; }
+  .quote-form-v2 label { font-size: .8rem; font-weight: 600; color: var(--text); letter-spacing: .03em; }
+  .quote-form-v2 input[type="text"],
+  .quote-form-v2 input[type="email"],
+  .quote-form-v2 input[type="tel"] {
+    padding: .75rem 1rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg);
+    font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text);
+    transition: border-color .2s, box-shadow .2s; outline: none;
+  }
+  .quote-form-v2 input[type="text"]:focus,
+  .quote-form-v2 input[type="email"]:focus,
+  .quote-form-v2 input[type="tel"]:focus {
+    border-color: var(--border-green); box-shadow: 0 0 0 3px rgba(255,216,77,.1);
+  }
+  .quote-submit-v2 { width: 100%; margin-top: 1.5rem; font-size: 1.05rem; padding: 1rem; border-radius: 14px; }
+  .quote-submit-v2[disabled] { opacity: .65; cursor: wait; }
+  .quote-note-v2 { text-align: center; font-size: .78rem; color: var(--text-muted); margin-top: 1rem; }
+
+  /* Data di nascita — 3 dropdown affiancati */
+  .quote-form-v2 .dob-grid {
+    display: grid; grid-template-columns: 1fr 1.5fr 1fr;
+    gap: .6rem;
+  }
+  .quote-form-v2 .dob-grid select {
+    padding: .75rem 1rem; border-radius: 12px;
+    border: 1px solid var(--border); background: var(--bg);
+    font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--text);
+    outline: none; cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3e%3cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+  .quote-form-v2 .dob-grid select:focus {
+    border-color: var(--border-green);
+    box-shadow: 0 0 0 3px rgba(255,216,77,.1);
+  }
+  @media (max-width: 480px) {
+    .quote-form-v2 .dob-grid { grid-template-columns: 1fr 1.4fr 1fr; gap: .4rem; }
+    .quote-form-v2 .dob-grid select { font-size: .88rem; padding: .65rem .75rem; padding-right: 2rem; }
+  }
+  .field-err { display: none; color: #d43a2f; font-size: .75rem; margin-top: .2rem; }
+
+  .quote-section-title-v2 {
+    font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 1rem; color: var(--text);
+    margin: 1.75rem 0 .75rem; padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    letter-spacing: -.01em;
+  }
+  .quote-help-v2 {
+    font-size: .82rem; color: var(--text-muted); line-height: 1.55;
+    margin-bottom: 1rem;
+    padding: .75rem .9rem; background: rgba(255,216,77,.08);
+    border-left: 3px solid var(--yellow);
+    border-radius: 8px;
+  }
+  .quote-upload-v2 input[type="file"] {
+    padding: .65rem .85rem;
+    background: var(--bg);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif; font-size: .9rem;
+    color: var(--text); cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .quote-upload-v2 input[type="file"]:hover { border-color: var(--yellow-deep); background: rgba(255,216,77,.04); }
+  .quote-upload-v2 input[type="file"]::file-selector-button {
+    background: var(--primary); color: #fff; border: none;
+    padding: .5rem .9rem; border-radius: 8px;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: .82rem;
+    margin-right: .85rem; cursor: pointer;
+    transition: background .2s;
+  }
+  .quote-upload-v2 input[type="file"]::file-selector-button:hover { background: var(--green-dark); color: var(--primary); }
+  .quote-upload-v2-info {
+    display: inline-block; margin-top: .45rem;
+    font-size: .78rem; color: var(--text-muted);
+  }
+  .quote-upload-v2-info.ok { color: #1a7a4a; font-weight: 500; }
+  .quote-upload-v2-info.ko { color: #c2382f; font-weight: 500; }
+</style>
+
 <script>
 (function () {
   'use strict';
-
-  var MAX_FILE_BYTES = 10 * 1024 * 1024;          // 10 MB per file
-  var ALLOWED_MIME = [
-    'image/jpeg', 'image/jpg', 'image/png',
-    'image/heic', 'image/heif', 'image/webp',
-    'application/pdf'
-  ];
-  var PHONE_REGEX = /^\+?[0-9 ()\-]{8,18}$/;
-  var EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   var form = document.getElementById('quote-form-auto');
   if (!form) return;
+  var EMAIL_BROKER_KEY = '227eeb26-f8e1-4eba-8b60-5969ab33c2c7';
+  var EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var PHONE_REGEX = /^\+?[0-9 ()\-]{8,18}$/;
+  var MAX_FILE_BYTES = 10 * 1024 * 1024;          // 10 MB
+  var ALLOWED_MIME = [
+    'image/jpeg','image/jpg','image/png',
+    'image/heic','image/heif','image/webp',
+    'application/pdf'
+  ];
+
+  function fmtBytes(n) {
+    if (n < 1024) return n + ' B';
+    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
+    return (n / 1048576).toFixed(2) + ' MB';
+  }
+
+  // === LIVE FILE INFO per CI fronte/retro + libretto ===
+  ['ci-fronte', 'ci-retro', 'libretto'].forEach(function (key) {
+    var input = document.getElementById('qf-' + key);
+    var info  = document.getElementById('qf-' + key + '-info');
+    if (!input || !info) return;
+    input.addEventListener('change', function () {
+      var f = input.files && input.files[0];
+      clearErr('qf-' + key + '-err');
+      if (!f) {
+        info.textContent = 'Nessun file selezionato';
+        info.classList.remove('ok','ko');
+        return;
+      }
+      if (!ALLOWED_MIME.includes(f.type) && !/\.(jpe?g|png|heic|heif|pdf|webp)$/i.test(f.name)) {
+        info.textContent = '❌ Formato non supportato';
+        info.classList.remove('ok'); info.classList.add('ko');
+        showErr('qf-' + key + '-err', 'Formato non valido. Usa JPG, PNG, HEIC o PDF.');
+        return;
+      }
+      if (f.size > MAX_FILE_BYTES) {
+        info.textContent = '❌ File troppo grande: ' + fmtBytes(f.size) + ' (max 10 MB)';
+        info.classList.remove('ok'); info.classList.add('ko');
+        showErr('qf-' + key + '-err', 'File oltre i 10 MB.');
+        return;
+      }
+      info.textContent = '✓ ' + f.name + ' · ' + fmtBytes(f.size);
+      info.classList.remove('ko'); info.classList.add('ok');
+    });
+  });
+
+  function showErr(id, msg) { var el = document.getElementById(id); if (el) { el.textContent = msg; el.style.display = 'block'; } }
+  function clearErr(id) { var el = document.getElementById(id); if (el) { el.textContent = ''; el.style.display = 'none'; } }
 
   // === POPOLA SELECT DATA NASCITA ===
   var dobDay = document.getElementById('qf-dob-day');
   var dobMonth = document.getElementById('qf-dob-month');
   var dobYear = document.getElementById('qf-dob-year');
-  // Giorni 1-31
   for (var d = 1; d <= 31; d++) {
     var opt = document.createElement('option');
     opt.value = String(d);
     opt.textContent = d < 10 ? '0' + d : String(d);
     dobDay.appendChild(opt);
   }
-  // Anni: da 18 anni fa a 100 anni fa (range 18-100 anni)
   var currentYear = new Date().getFullYear();
   for (var y = currentYear - 18; y >= currentYear - 100; y--) {
     var optY = document.createElement('option');
@@ -742,15 +864,12 @@
     optY.textContent = String(y);
     dobYear.appendChild(optY);
   }
-
-  // Aggiorna max giorni quando cambia mese/anno (es. 30 vs 31, febbraio bisestile)
   function updateDayLimits() {
     var m = parseInt(dobMonth.value, 10);
     var y = parseInt(dobYear.value, 10);
     if (!m) return;
     var daysInMonth = new Date(y || 2000, m, 0).getDate();
     var currentDay = parseInt(dobDay.value, 10);
-    // Riabilita tutti
     Array.prototype.forEach.call(dobDay.options, function (o) {
       if (!o.value) return;
       var dv = parseInt(o.value, 10);
@@ -766,250 +885,140 @@
     var m = parseInt(dobMonth.value, 10);
     var y = parseInt(dobYear.value, 10);
     if (!d || !m || !y) return '';
-    // Formato YYYY-MM-DD per il backend (Postgres date)
     return y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d);
   }
 
-  // === UTILITIES ===
-  function showErr(id, msg) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = msg;
-    el.style.display = 'block';
-  }
-  function clearErr(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = '';
-    el.style.display = 'none';
-  }
-  function fmtBytes(n) {
-    if (n < 1024) return n + ' B';
-    if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
-    return (n / 1048576).toFixed(2) + ' MB';
-  }
   function calcAge(dob) {
     var t = new Date(), b = new Date(dob);
     var a = t.getFullYear() - b.getFullYear();
-    var m = t.getMonth() - b.getMonth();
-    if (m < 0 || (m === 0 && t.getDate() < b.getDate())) a--;
+    var mDiff = t.getMonth() - b.getMonth();
+    if (mDiff < 0 || (mDiff === 0 && t.getDate() < b.getDate())) a--;
     return a;
   }
 
-  // === LIVE FILE INFO ===
-  ['ci-fronte', 'ci-retro', 'libretto'].forEach(function (key) {
-    var input = document.getElementById('qf-' + key);
-    var info  = document.getElementById('qf-' + key + '-info');
-    if (!input || !info) return;
-    input.addEventListener('change', function () {
-      var f = input.files && input.files[0];
-      clearErr('qf-' + key + '-err');
-      if (!f) {
-        info.textContent = 'Nessun file selezionato';
-        info.classList.remove('ok','ko');
-        return;
-      }
-      if (!ALLOWED_MIME.includes(f.type) && !/\.(jpg|jpeg|png|heic|heif|pdf|webp)$/i.test(f.name)) {
-        info.textContent = '❌ Formato non supportato (' + (f.type || f.name) + ')';
-        info.classList.remove('ok'); info.classList.add('ko');
-        showErr('qf-' + key + '-err', 'Formato non valido. Usa JPG, PNG, HEIC o PDF.');
-        return;
-      }
-      if (f.size > MAX_FILE_BYTES) {
-        info.textContent = '❌ File troppo grande: ' + fmtBytes(f.size) + ' (massimo 10 MB)';
-        info.classList.remove('ok'); info.classList.add('ko');
-        showErr('qf-' + key + '-err', 'File oltre i 10 MB. Comprimi o usa una foto di qualità inferiore.');
-        return;
-      }
-      info.textContent = '✓ ' + f.name + ' · ' + fmtBytes(f.size);
-      info.classList.remove('ko'); info.classList.add('ok');
-    });
-  });
-
-  // === VALIDAZIONE COMPLETA ===
-  function validateForm() {
-    var ok = true;
-    var nome = document.getElementById('qf-nome').value.trim();
-    var cognome = document.getElementById('qf-cognome').value.trim();
-    var dob = getDob();
-    var tel = document.getElementById('qf-tel').value.trim();
-    var email = document.getElementById('qf-email').value.trim();
-    var consent = document.getElementById('qf-consent').checked;
-
-    if (nome.length < 2) { showErr('qf-nome-err', 'Inserisci un nome valido'); ok = false; } else clearErr('qf-nome-err');
-    if (cognome.length < 2) { showErr('qf-cognome-err', 'Inserisci un cognome valido'); ok = false; } else clearErr('qf-cognome-err');
-
-    if (!dob) { showErr('qf-dob-err', 'Seleziona giorno, mese e anno di nascita'); ok = false; }
-    else {
-      // Verifica che la data sia valida (es. 31 febbraio non passa)
-      var parts = dob.split('-');
-      var testDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-      if (testDate.getDate() !== parseInt(parts[2]) || testDate.getMonth() !== parseInt(parts[1]) - 1) {
-        showErr('qf-dob-err', 'Data non valida (es. 31 febbraio non esiste)'); ok = false;
-      } else {
-        var a = calcAge(dob);
-        if (a < 18) { showErr('qf-dob-err', 'Devi avere almeno 18 anni'); ok = false; }
-        else if (a > 100) { showErr('qf-dob-err', 'Data non valida'); ok = false; }
-        else clearErr('qf-dob-err');
-      }
-    }
-
-    if (!PHONE_REGEX.test(tel)) {
-      showErr('qf-tel-err', 'Numero non valido (es. +39 333 1234567)'); ok = false;
-    } else clearErr('qf-tel-err');
-
-    if (!EMAIL_REGEX.test(email)) {
-      showErr('qf-email-err', 'Indirizzo email non valido'); ok = false;
-    } else clearErr('qf-email-err');
-
-    // File obbligatori
-    ['ci-fronte','ci-retro','libretto'].forEach(function (key) {
-      var input = document.getElementById('qf-' + key);
-      var f = input.files && input.files[0];
-      if (!f) {
-        showErr('qf-' + key + '-err', 'Documento richiesto');
-        ok = false;
-      } else if (f.size > MAX_FILE_BYTES) {
-        showErr('qf-' + key + '-err', 'File oltre i 10 MB');
-        ok = false;
-      } else if (!ALLOWED_MIME.includes(f.type) && !/\.(jpg|jpeg|png|heic|heif|pdf|webp)$/i.test(f.name)) {
-        showErr('qf-' + key + '-err', 'Formato non valido');
-        ok = false;
-      }
-    });
-
-    if (!consent) {
-      alert('Per inviare la richiesta è necessario accettare il trattamento dei dati personali.');
-      ok = false;
-    }
-    return ok;
-  }
-
-  // === SUBMIT ===
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     var btn = document.getElementById('qf-submit');
     var ok = document.getElementById('qf-success');
     var err = document.getElementById('qf-error');
     var errMsg = document.getElementById('qf-error-msg');
-    var loading = document.getElementById('qf-loading');
-    var loadingMsg = document.getElementById('qf-loading-msg');
-
     ok.hidden = true; err.hidden = true;
-
-    if (!validateForm()) {
-      var firstErr = form.querySelector('.field-err[style*="block"]');
-      if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = 'Invio in corso…';
-    loading.style.display = 'flex';
 
     var nome = document.getElementById('qf-nome').value.trim();
     var cognome = document.getElementById('qf-cognome').value.trim();
     var dob = getDob();
-    var tel = document.getElementById('qf-tel').value.trim();
-    var email = document.getElementById('qf-email').value.trim();
+    var emailVal = document.getElementById('qf-email').value.trim();
+    var telVal = document.getElementById('qf-tel').value.trim();
+    var targaVal = document.getElementById('qf-targa').value.trim().toUpperCase();
+    var ciFronte = document.getElementById('qf-ci-fronte').files[0];
+    var ciRetro = document.getElementById('qf-ci-retro').files[0];
+    var libretto = document.getElementById('qf-libretto').files[0];
+    var consent = document.getElementById('qf-consent').checked;
 
-    var ciFronteRaw = document.getElementById('qf-ci-fronte').files[0];
-    var ciRetroRaw = document.getElementById('qf-ci-retro').files[0];
-    var librettoRaw = document.getElementById('qf-libretto').files[0];
-
-    // === [1] CONVERSIONE FILE IN PDF (lato client) ===
-    var ciFrontePdf, ciRetroPdf, librettoPdf;
-    if (!window.QuootamiPDFConverter) {
-      loading.style.display = 'none';
-      if (errMsg) errMsg.textContent = 'Convertitore PDF non caricato. Ricarica la pagina e riprova.';
-      err.hidden = false;
-      btn.disabled = false;
-      btn.textContent = 'Invia richiesta →';
-      return;
+    var valid = true;
+    if (nome.length < 2) { showErr('qf-nome-err', 'Inserisci un nome valido'); valid = false; } else clearErr('qf-nome-err');
+    if (cognome.length < 2) { showErr('qf-cognome-err', 'Inserisci un cognome valido'); valid = false; } else clearErr('qf-cognome-err');
+    if (!dob) {
+      showErr('qf-dob-err', 'Seleziona giorno, mese e anno di nascita'); valid = false;
+    } else {
+      var parts = dob.split('-');
+      var testDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      if (testDate.getDate() !== parseInt(parts[2]) || testDate.getMonth() !== parseInt(parts[1]) - 1) {
+        showErr('qf-dob-err', 'Data non valida'); valid = false;
+      } else {
+        var age = calcAge(dob);
+        if (age < 18) { showErr('qf-dob-err', 'Devi avere almeno 18 anni'); valid = false; }
+        else if (age > 100) { showErr('qf-dob-err', 'Data non valida'); valid = false; }
+        else clearErr('qf-dob-err');
+      }
     }
-    try {
-      loadingMsg.textContent = 'Preparazione documenti in formato PDF…';
-      var slug = (nome + '_' + cognome).toLowerCase().replace(/[^a-z0-9_]/g, '');
-      var conversions = await Promise.all([
-        window.QuootamiPDFConverter.convertToPdf(ciFronteRaw, slug + '_ci_fronte'),
-        window.QuootamiPDFConverter.convertToPdf(ciRetroRaw, slug + '_ci_retro'),
-        window.QuootamiPDFConverter.convertToPdf(librettoRaw, slug + '_libretto')
-      ]);
-      ciFrontePdf = conversions[0];
-      ciRetroPdf = conversions[1];
-      librettoPdf = conversions[2];
-      console.log('[Quootami form] PDF conversion done:',
-        ciFrontePdf.size, ciRetroPdf.size, librettoPdf.size);
-    } catch (cvEx) {
-      console.error('[Quootami form] conversione PDF fallita:', cvEx);
-      loading.style.display = 'none';
-      if (errMsg) errMsg.textContent = 'Conversione PDF: ' + (cvEx.message || cvEx);
-      err.hidden = false;
-      btn.disabled = false;
-      btn.textContent = 'Invia richiesta →';
-      return;
-    }
+    if (!EMAIL_REGEX.test(emailVal)) {
+      showErr('qf-email-err', 'Indirizzo email non valido'); valid = false;
+    } else clearErr('qf-email-err');
+    if (!PHONE_REGEX.test(telVal)) {
+      showErr('qf-tel-err', 'Numero non valido (es. +39 333 1234567)'); valid = false;
+    } else clearErr('qf-tel-err');
 
-    // === [2] BACKUP DOCUMENTI PDF SU SUPABASE STORAGE ===
-    var storageBackupOk = false;
+    // Validazione targa italiana: 5-7 caratteri alfanumerici
+    if (!/^[A-Z0-9]{5,7}$/.test(targaVal)) {
+      showErr('qf-targa-err', 'Targa non valida (es. AB123CD)'); valid = false;
+    } else clearErr('qf-targa-err');
+
+    // Validazione file CI + libretto
+    var filesToCheck = { 'ci-fronte': ciFronte, 'ci-retro': ciRetro, 'libretto': libretto };
+    Object.keys(filesToCheck).forEach(function (key) {
+      var f = filesToCheck[key];
+      if (!f) {
+        showErr('qf-' + key + '-err', 'Documento richiesto'); valid = false;
+      } else if (f.size > MAX_FILE_BYTES) {
+        showErr('qf-' + key + '-err', 'File oltre i 10 MB'); valid = false;
+      } else if (!ALLOWED_MIME.includes(f.type) && !/\.(jpe?g|png|heic|heif|pdf|webp)$/i.test(f.name)) {
+        showErr('qf-' + key + '-err', 'Formato non valido'); valid = false;
+      }
+    });
+
+    if (!consent) { alert('Per inviare devi accettare il trattamento dei dati personali.'); valid = false; }
+    if (!valid) return;
+
+    btn.disabled = true; btn.textContent = 'Invio in corso…';
+
+    // [1] Salva su Supabase: lead + upload CI fronte/retro su Storage privato
+    var supaOk = false;
+    var leadId = null;
     if (window.QuootamiLeadDB && window.QuootamiLeadDB.isConfigured) {
       try {
-        loadingMsg.textContent = 'Salvataggio sicuro in corso…';
-        await window.QuootamiLeadDB.submitFullLead(
+        var result = await window.QuootamiLeadDB.submitFullLead(
           {
             prodotto: 'rc-auto',
             nome_cognome: nome + ' ' + cognome,
             data_nascita: dob,
-            email: email,
-            telefono: tel,
-            fonte: 'sito web'
+            email: emailVal,
+            telefono: telVal,
+            targa: targaVal,
+            fonte: 'sito web · polizza-auto'
           },
           {
-            ci_fronte: ciFrontePdf,
-            ci_retro: ciRetroPdf,
-            libretto: librettoPdf
+            ci_fronte: ciFronte,
+            ci_retro: ciRetro,
+            libretto: libretto
           }
         );
-        storageBackupOk = true;
+        supaOk = true;
+        leadId = result && result.lead && result.lead.id;
       } catch (dbEx) {
-        // backup fallito non blocca l'invio email
-        console.warn('[Quootami form] backup Storage fallito, continuo con email:', dbEx);
+        console.warn('[Quootami rc-auto] DB+upload fallito, provo solo email:', dbEx);
       }
     }
 
-    // === [3] INVIO EMAIL A giacomo.rp@sistoassicurazioni.com CON ALLEGATI PDF ===
-    loadingMsg.textContent = 'Invio della richiesta in corso…';
+    // [2] Notifica email a giacomo.rp@sistoassicurazioni.com
     try {
       var fd = new FormData();
-      fd.append('access_key', '227eeb26-f8e1-4eba-8b60-5969ab33c2c7');
-      fd.append('subject', 'Nuova richiesta preventivo auto — ' + nome + ' ' + cognome);
+      fd.append('access_key', EMAIL_BROKER_KEY);
+      fd.append('subject', 'Nuova richiesta preventivo RC Auto — ' + nome + ' ' + cognome);
       fd.append('from_name', 'Quootami — sito web');
-      fd.append('replyto', email);
-      // Campi dati anagrafici
+      fd.append('replyto', emailVal);
       fd.append('Nome', nome);
       fd.append('Cognome', cognome);
       fd.append('Data di nascita', dob);
-      fd.append('Telefono', tel);
-      fd.append('Email cliente', email);
-      fd.append('Pagina di provenienza', window.location.pathname);
+      fd.append('Email cliente', emailVal);
+      fd.append('Telefono', telVal);
+      fd.append('Targa veicolo', targaVal);
+      fd.append('Pagina', window.location.pathname);
       fd.append('Data invio', new Date().toLocaleString('it-IT'));
-      fd.append('Backup Storage', storageBackupOk ? 'sì' : 'no');
-      // ALLEGATI PDF (Web3Forms li mette come attachment nell'email)
-      fd.append('attachments', ciFrontePdf, ciFrontePdf.name);
-      fd.append('attachments', ciRetroPdf, ciRetroPdf.name);
-      fd.append('attachments', librettoPdf, librettoPdf.name);
+      fd.append('Documenti caricati', supaOk ? 'CI fronte + retro + libretto su Supabase Storage' : 'NO — verificare manualmente');
+      if (leadId) {
+        fd.append('Lead ID Supabase', leadId);
+        fd.append('Dashboard documenti', 'https://supabase.com/dashboard/project/ivcdwizhkdubjxxrukbs/storage/buckets/documenti-lead?path=leads/' + leadId);
+      }
 
-      var emailRes = await fetch('https://api.web3forms.com/submit', {
+      var res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: fd
       });
-      var emailJson = await emailRes.json().catch(function () { return { success: false }; });
-      console.log('[Quootami form] email response:', emailRes.status, emailJson);
+      var json = await res.json().catch(function () { return { success: false }; });
 
-      loading.style.display = 'none';
-
-      if (emailRes.ok && emailJson.success) {
+      if (res.ok && json.success) {
         form.reset();
         ['ci-fronte','ci-retro','libretto'].forEach(function (k) {
           var info = document.getElementById('qf-' + k + '-info');
@@ -1018,21 +1027,21 @@
         ok.hidden = false;
         ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        if (errMsg) errMsg.textContent = 'Email: HTTP ' + emailRes.status + ' — ' + (emailJson.message || 'errore sconosciuto');
+        if (errMsg) errMsg.textContent = 'HTTP ' + res.status + ' — ' + (json.message || 'errore sconosciuto');
         err.hidden = false;
       }
     } catch (ex) {
-      console.error('[Quootami form] exception email:', ex);
-      loading.style.display = 'none';
-      if (errMsg) errMsg.textContent = 'Email: ' + (ex.message || String(ex));
+      console.error('[Quootami rc-auto] exception email:', ex);
+      if (errMsg) errMsg.textContent = ex.message || String(ex);
       err.hidden = false;
     } finally {
       btn.disabled = false;
-      btn.textContent = 'Invia richiesta →';
+      btn.textContent = 'Richiedi il preventivo →';
     }
   });
 })();
 </script>
+
 
 <!-- FAQ -->
 <section id="faq">
@@ -1250,10 +1259,6 @@ function confrontaAuto(){
   if(p.get('cap'))   document.getElementById('a-cap').value=p.get('cap');
 })();
 </script>
-<!-- PDF conversion libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
-<script src="assets/pdf-converter.js?v=20260612a"></script>
 <script src="assets/lead-db.js?v=20260612a"></script>
 <script src="assets/operatore.js?v=20260612a"></script>
 <script src="assets/schema-org.js?v=20260612a"></script>
