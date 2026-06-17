@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS custom properties: brand tokens disponibili in tutta l'app ── */
+:root {
+  --color-brand-yellow: 255 216 77;
+  --color-brand-navy: 11 18 32;
+  --color-brand-green: 31 157 85;
+  --color-bg: 250 250 247;
+  --color-bg-alt: 243 240 232;
+
+  /* Easing custom per smooth transitions */
+  --ease-soft: cubic-bezier(0.22, 0.68, 0, 1.2);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-bg text-ink;
+    font-feature-settings: 'ss01' on, 'cv11' on;
+  }
+
+  /* Focus visibile ma elegante */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-yellow ring-offset-2 ring-offset-bg;
+  }
+
+  /* Disable zoom su input mobile iOS (prevenzione zoom-in input) */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
+@layer components {
+  /* ── Highlight giallo per parole chiave nei titoli ── */
+  .hl {
+    @apply relative inline-block z-[1];
+  }
+  .hl::before {
+    content: '';
+    @apply absolute -left-1 -right-1 top-[55%] bottom-[6%] bg-brand-yellow -z-[1];
+  }
+
+  /* ── Glassmorphism reusable ── */
+  .glass {
+    @apply bg-white/60 backdrop-blur-glass border border-white/30 shadow-glass;
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .glass-dark {
+    @apply bg-brand-navy/70 backdrop-blur-glass border border-white/10 shadow-glass text-white;
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* ── CTA primaria ── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5
+           rounded-full bg-brand-navy text-white font-semibold text-base
+           shadow-brand-md hover:bg-brand-green hover:text-brand-navy
+           transition-all duration-200 ease-soft
+           hover:-translate-y-0.5 hover:shadow-brand-lg
+           focus-visible:ring-2 focus-visible:ring-brand-yellow;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5
+           rounded-full bg-white text-ink border border-black/10 font-medium text-base
+           shadow-brand-sm hover:border-brand-yellow hover:shadow-brand-md
+           transition-all duration-200 ease-soft;
+  }
+
+  /* ── Section padding ampio mobile-first ── */
+  .section {
+    @apply px-5 sm:px-8 md:px-12 lg:px-16 py-16 sm:py-20 md:py-24;
+  }
+
+  .container-content {
+    @apply mx-auto max-w-content;
+  }
+
+  /* ── Eyebrow label ── */
+  .eyebrow {
+    @apply inline-block text-xs font-semibold tracking-[0.1em] uppercase
+           text-brand-green-dark mb-3;
+  }
+
+  /* ── Titoli section ── */
+  .section-title {
+    @apply font-sans font-bold text-3xl sm:text-4xl md:text-5xl
+           leading-tight tracking-tight text-ink;
+  }
+
+  .section-sub {
+    @apply text-ink-muted text-base sm:text-lg leading-relaxed mt-3 max-w-prose-wide;
+  }
+}
+
+@layer utilities {
+  /* Reduce motion per accessibilità */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
