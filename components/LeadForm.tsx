@@ -2,10 +2,30 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
+import { createClient } from '@supabase/supabase-js';
+import { SUPABASE, WEB3FORMS } from '@/config/credentials';
+
+/**
+ * Quootami — LeadForm universale (client-side, no env vars)
+ * ============================================================
+ * Flusso identico al vecchio sito statico che funzionava:
+ *
+ * 1. Salva lead su Supabase via RPC `insert_lead` (anon key + RLS)
+ * 2. Carica i 3 file su Supabase Storage privato (anon key)
+ * 3. Notifica via Web3Forms (access_key pubblica) con link al
+ *    dashboard Supabase per scaricare i documenti
+ *
+ * Niente Resend, niente env vars, niente service_role.
+ * ============================================================
+ */
+
+const supabase = createClient(SUPABASE.url, SUPABASE.anonKey, {
+  auth: { persistSession: false },
+});
 
 type Props = {
-  prodotto: string;        // es. 'polizza-auto' (salvato come prodotto su DB)
-  requiresVehicle?: boolean; // se true mostra Targa + Libretto
+  prodotto: string;
+  requiresVehicle?: boolean;
 };
 
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
@@ -35,10 +55,10 @@ function calcAge(dob: string) {
 
 export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
   const [loading, setLoading] = useState(false);
+  const [loadingMsg, setLoadingMsg] = useState('Invio in corso…');
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Stato form
   const [nome, setNome] = useState('');
   const [cognome, setCognome] = useState('');
   const [dobDay, setDobDay] = useState('');
@@ -114,34 +134,95 @@ export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
     setError(null);
     if (!validate()) return;
     setLoading(true);
+    setLoadingMsg('Salvataggio dati in corso…');
+
+    const dob = `${dobYear}-${dobMonth.padStart(2, '0')}-${dobDay.padStart(2, '0')}`;
+    const nomeCognome = `${nome} ${cognome}`;
+    let leadId: string | null = null;
+    const documenti: Record<string, string> = {};
 
     try {
-      const fd = new FormData();
-      fd.append('prodotto', prodotto);
-      fd.append('nome', nome);
-      fd.append('cognome', cognome);
-      fd.append('data_nascita', `${dobYear}-${dobMonth.padStart(2, '0')}-${dobDay.padStart(2, '0')}`);
-      fd.append('email', email);
-      fd.append('telefono', telefono);
-      if (requiresVehicle) fd.append('targa', targa.toUpperCase());
-      fd.append('consenso', 'true');
-      if (ciFronte) fd.append('ci_fronte', ciFronte);
-      if (ciRetro) fd.append('ci_retro', ciRetro);
-      if (libretto) fd.append('libretto', libretto);
+      // === [1] Insert lead via RPC SECURITY DEFINER ===
+      const { data: lead, error: rpcErr } = await supabase.rpc('insert_lead', {
+        payload: {
+          prodotto,
+          nome_cognome: nomeCognome,
+          data_nascita: dob,
+          email,
+          telefono,
+          targa: requiresVehicle ? targa.toUpperCase() : null,
+          fonte: 'sito web · next',
+          pagina: typeof window !== 'undefined' ? window.location.pathname : '',
+          user_agent: typeof navigator !== 'undefined' ? navigator.userAgent.substring(0, 255) : '',
+        },
+      });
+      if (rpcErr) throw new Error(`DB: ${rpcErr.message}`);
+      leadId = (lead as { id?: string })?.id ?? null;
 
-      const res = await fetch('/api/lead', { method: 'POST', body: fd });
-      const json = await res.json();
-      if (!res.ok || !json.ok) throw new Error(json.error || 'Errore di invio');
+      // === [2] Upload documenti su Storage privato ===
+      setLoadingMsg('Caricamento sicuro dei documenti…');
+      const filesToUpload: Array<[string, File | null]> = [
+        ['ci_fronte', ciFronte],
+        ['ci_retro', ciRetro],
+        ...(requiresVehicle ? [['libretto', libretto] as [string, File | null]] : []),
+      ];
+
+      const uploads = filesToUpload
+        .filter(([, f]) => !!f)
+        .map(async ([key, file]) => {
+          const ext = (file!.name.split('.').pop() ?? 'bin').toLowerCase().replace(/[^a-z0-9]/g, '');
+          const path = `leads/${leadId ?? 'noid'}/${key}-${Date.now()}.${ext || 'bin'}`;
+          const { error: upErr } = await supabase.storage
+            .from(SUPABASE.bucket)
+            .upload(path, file!, { contentType: file!.type || 'application/octet-stream' });
+          if (!upErr) documenti[key] = path;
+        });
+      await Promise.all(uploads);
+
+      // === [3] Email a Giacomo via Web3Forms (con link al dashboard) ===
+      setLoadingMsg('Notifica al broker in corso…');
+      const dashboardLink = leadId
+        ? `https://supabase.com/dashboard/project/ivcdwizhkdubjxxrukbs/storage/buckets/${SUPABASE.bucket}?path=leads/${leadId}`
+        : 'n/d';
+
+      const fd = new FormData();
+      fd.append('access_key', WEB3FORMS.accessKey);
+      fd.append('subject', `Nuova richiesta preventivo ${prodotto} — ${nomeCognome}`);
+      fd.append('from_name', 'Quootami — sito web');
+      fd.append('replyto', email);
+      fd.append('Prodotto', prodotto);
+      fd.append('Nome', nome);
+      fd.append('Cognome', cognome);
+      fd.append('Data di nascita', dob);
+      fd.append('Email cliente', email);
+      fd.append('Telefono', telefono);
+      if (requiresVehicle) fd.append('Targa veicolo', targa.toUpperCase());
+      fd.append('Lead ID Supabase', leadId ?? 'n/d');
+      fd.append('Link dashboard documenti', dashboardLink);
+      fd.append('Documenti caricati', Object.keys(documenti).join(', ') || 'nessuno');
+      fd.append('Data invio', new Date().toLocaleString('it-IT'));
+      fd.append('Pagina di provenienza', typeof window !== 'undefined' ? window.location.pathname : '');
+
+      const w3res = await fetch(WEB3FORMS.submitUrl, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: fd,
+      });
+      const w3json = await w3res.json().catch(() => ({ success: false }));
+      if (!w3res.ok || !w3json.success) {
+        // Non blocchiamo: il lead è già salvato su Supabase
+        console.warn('[Web3Forms] non success:', w3json);
+      }
 
       setSuccess(true);
     } catch (err) {
-      setError((err as Error).message);
+      const msg = (err as Error).message || 'Errore di invio';
+      setError(msg);
     } finally {
       setLoading(false);
     }
   }
 
-  // ── Success state ──
   if (success) {
     return (
       <div className="max-w-prose-wide mx-auto p-8 bg-bg-card border border-brand-green/30 rounded-3xl shadow-brand-md text-center">
@@ -232,6 +313,13 @@ export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
       {error && (
         <div className="mt-5 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
           <strong>Errore:</strong> {error}
+        </div>
+      )}
+
+      {loading && (
+        <div className="mt-5 p-4 bg-bg-alt border border-black/10 rounded-xl text-sm text-ink flex items-center gap-3 justify-center">
+          <span className="inline-block w-4 h-4 border-2 border-brand-yellow border-t-transparent rounded-full animate-spin" />
+          {loadingMsg}
         </div>
       )}
 
