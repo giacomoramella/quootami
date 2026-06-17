@@ -101,6 +101,33 @@
   .section-sub {
     @apply text-ink-muted text-base sm:text-lg leading-relaxed mt-3 max-w-prose-wide;
   }
+
+  /* ── Prose per pagine legali ── */
+  .prose-quootami h2 {
+    @apply font-sans font-bold text-2xl sm:text-3xl text-ink mt-12 mb-4 leading-tight;
+  }
+  .prose-quootami h3 {
+    @apply font-sans font-semibold text-base sm:text-lg text-ink mt-8 mb-2;
+  }
+  .prose-quootami p,
+  .prose-quootami li {
+    @apply text-base text-ink-soft leading-relaxed mb-4;
+  }
+  .prose-quootami ul {
+    @apply pl-6 list-disc mb-6;
+  }
+  .prose-quootami ul li {
+    @apply mb-2;
+  }
+  .prose-quootami a {
+    @apply text-brand-green-dark underline underline-offset-2 hover:text-brand-navy transition-colors;
+  }
+  .prose-quootami strong {
+    @apply text-ink font-semibold;
+  }
+  .prose-quootami code {
+    @apply bg-bg-alt px-1.5 py-0.5 rounded text-sm font-mono;
+  }
 }
 
 @layer utilities {
