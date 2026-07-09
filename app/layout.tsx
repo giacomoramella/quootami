@@ -19,6 +19,10 @@ const jetbrains = JetBrains_Mono({
   preload: false,
 });
 
+// Rendering dinamico obbligatorio: la CSP a nonce (middleware.ts) richiede
+// un nonce diverso a ogni richiesta, impossibile con pagine prerenderizzate.
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = defaultMetadata;
 
 export const viewport: Viewport = {

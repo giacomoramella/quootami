@@ -1,10 +1,14 @@
 /**
  * Quootami — Middleware con CSP + security banking-grade
  *
- * CSP strategia:
- * - `script-src 'self' 'strict-dynamic' https:` permette script Next.js
- *   bundlati e ne trust la propagazione (strict-dynamic).
- * - Niente `unsafe-eval`, niente `unsafe-inline` per script di terze parti.
+ * CSP strategia (pattern ufficiale Next.js):
+ * - Nonce per-request + `strict-dynamic`: solo gli script con il nonce
+ *   (iniettato da Next.js nei propri tag <script>) vengono eseguiti, e la
+ *   fiducia si propaga agli script che questi caricano dinamicamente.
+ * - Il nonce viene passato a Next.js tramite l'header CSP sulla *request*:
+ *   Next lo applica automaticamente ai propri script durante il rendering
+ *   dinamico (per questo `app/layout.tsx` ha `dynamic = 'force-dynamic'`).
+ * - Niente `unsafe-eval`, niente `unsafe-inline` per gli script.
  * - Style inline permessi (Tailwind hash) per consentire Next.js styled-jsx
  *   e Tailwind generato a build time. Mitigato da CSP rigorosa sugli script.
  *
@@ -18,9 +22,10 @@ const isProd = process.env.NODE_ENV === 'production';
 
 export function middleware(request: NextRequest) {
   // ── CSP banking-grade ──
-  // In dev permettiamo 'unsafe-eval' per HMR di Next.js. In prod nessuna pietà.
+  // In dev permettiamo 'unsafe-eval'/'unsafe-inline' per HMR di Next.js.
+  const nonce = btoa(crypto.randomUUID());
   const scriptSrc = isProd
-    ? "'self' 'strict-dynamic' https: 'sha256-quootami'"
+    ? `'self' 'nonce-${nonce}' 'strict-dynamic'`
     : "'self' 'unsafe-eval' 'unsafe-inline' https:";
 
   const cspHeader = `
@@ -41,7 +46,15 @@ export function middleware(request: NextRequest) {
     .replace(/\s{2,}/g, ' ')
     .trim();
 
-  const response = NextResponse.next();
+  // Il nonce deve viaggiare anche sulla request: Next.js lo legge
+  // dall'header CSP e lo applica ai propri <script> in rendering dinamico.
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-nonce', nonce);
+  requestHeaders.set('Content-Security-Policy', cspHeader);
+
+  const response = NextResponse.next({
+    request: { headers: requestHeaders },
+  });
   response.headers.set('Content-Security-Policy', cspHeader);
 
   // ── Cookie banking-grade ──

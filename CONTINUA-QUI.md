@@ -48,7 +48,7 @@ Branch `main` = vecchio sito statico in maintenance (in attesa di domain switch)
 quootami/
 ├── app/                          # Next App Router
 │   ├── page.tsx                  # Home
-│   ├── layout.tsx                # Root layout (no headers dinamici)
+│   ├── layout.tsx                # Root layout (force-dynamic: richiesto dalla CSP a nonce)
 │   ├── error.tsx, not-found.tsx  # Error boundaries
 │   ├── globals.css               # Tailwind + design tokens
 │   ├── robots.ts, sitemap.ts     # SEO dinamici
@@ -131,6 +131,21 @@ Su richiesta utente, il form è sospeso: `ProductPage.tsx` mostra 3 CTA
 ### UI polish
 - Rimossa eyebrow "Broker iscritto IVASS · Confronto multi-compagnia" dalla home
 - Rimosse icone "Video call" da home e pagina contatti
+
+### M4.1 — Fix CSP produzione (2026-07-09)
+La CSP in produzione usava `script-src 'strict-dynamic'` con un hash
+placeholder (`'sha256-quootami'`): **bloccava TUTTI gli script del sito**
+(menu mobile, FAQ accordion, error boundaries morti). Fix:
+- `middleware.ts` genera un **nonce per-request** e lo passa a Next.js via
+  header CSP sulla request (pattern ufficiale Next.js)
+- `app/layout.tsx` ha `export const dynamic = 'force-dynamic'` — necessario
+  perché il nonce cambia a ogni richiesta (le pagine non sono più statiche,
+  sono server-rendered on demand)
+- Verificato in locale con `next build && next start`: 15/15 script con
+  nonce, hydration OK, menu e API mock funzionanti
+- Nota: `/firma-allianz.html` è escluso dal matcher del middleware
+  (`.*\..*`), quindi non riceve CSP — per questo pdf-lib da cdnjs carica
+  senza whitelist. Gli header globali di next.config.js restano attivi.
 
 ---
 
@@ -345,6 +360,7 @@ git push                                        # branch next → Vercel auto-de
 | `ERR_SSL_PROTOCOL_ERROR` su https://localhost | dev server è HTTP | usa `http://localhost:3000` |
 | Vercel "No Output Directory 'public'" | framework preset era "Other" | Settings → Framework Preset → **Next.js** |
 | `Cannot find module 'critters'` | `experimental.optimizeCss: true` | rimosso da `next.config.js` |
+| `next build` fallisce con `PageNotFoundError` / `ENOENT` random | iCloud sincronizza `~/Desktop` (incluso `.next/`) durante il build | riprovare `rm -rf .next && npx next build`; non tocca Vercel (builda nel cloud) |
 
 ---
 
