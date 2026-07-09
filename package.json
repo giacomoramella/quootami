@@ -2,35 +2,37 @@
   "name": "quootami",
   "version": "2.0.0",
   "private": true,
-  "description": "Quootami — Confronto polizze assicurative e previdenza complementare. Next.js 14 + TypeScript + Tailwind, banking-grade security.",
+  "description": "Quootami — Confronto polizze assicurative e previdenza complementare. Next.js 16 + TypeScript + Tailwind, banking-grade security.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
-    "next": "^14.2.35",
+    "next": "^16.2.10",
     "pdf-lib": "^1.17.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "resend": "^4.0.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20.16.10",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "14.2.15",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.9.0"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "^8.5.10"
+    }
   }
 }

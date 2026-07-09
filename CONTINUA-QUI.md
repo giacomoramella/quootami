@@ -27,11 +27,11 @@ Il progetto è **pensato per essere vendibile**: un futuro acquirente cambia sol
 
 | Layer | Tecnologia | Note |
 |---|---|---|
-| Framework | **Next.js 14.2.15** App Router | TypeScript strict |
+| Framework | **Next.js 16.2.10** App Router (Turbopack) | TypeScript strict, React 19 |
 | UI | **React 18.3.1** + **Tailwind CSS 3.4** | Design tokens custom, glassmorphism |
 | Font | `next/font` (Inter) | preload, no FOIT |
 | Sicurezza | CSP + HSTS + COOP/COEP + Permissions-Policy | Middleware nonce + `next.config.js` headers |
-| Cookie | `Secure` + `HttpOnly` + `SameSite=Strict` | forzati in `middleware.ts` |
+| Cookie | `Secure` + `HttpOnly` + `SameSite=Strict` | forzati in `proxy.ts` |
 | DB + Storage | **Supabase** EU (Frankfurt) | `ivcdwizhkdubjxxrukbs.supabase.co` |
 | Email | **Resend** | 100 email/g free |
 | Firma FEA | **OTP Service** (app.otpservice.io) | Fractalgarden Srl, eIDAS |
@@ -91,7 +91,7 @@ quootami/
 │   ├── M3-SETUP.md
 │   ├── M4-FIRMA-FEA.md           # ⭐ guida switch mock → live OTP Service
 │   └── sql/M4-firma-fea.sql      # schema tabella pratiche
-├── middleware.ts                 # CSP + cookie flags
+├── proxy.ts                      # CSP a nonce + cookie flags (ex middleware.ts, conv. Next 16)
 ├── next.config.js                # security headers globali
 ├── package.json, tsconfig.json, tailwind.config.js
 └── CONTINUA-QUI.md               # (questo file)
@@ -132,18 +132,36 @@ Su richiesta utente, il form è sospeso: `ProductPage.tsx` mostra 3 CTA
 - Rimossa eyebrow "Broker iscritto IVASS · Confronto multi-compagnia" dalla home
 - Rimosse icone "Video call" da home e pagina contatti
 
+### M4.2 — Audit sicurezza banking-grade + Next 16 (2026-07-09)
+Audit completo confrontato con siti bancari reali (Intesa, N26, Revolut):
+gli header Quootami risultano più severi dei loro. Interventi:
+- **Next.js 14.2.15 → 16.2.10 + React 19** (14 era EOL con advisory non
+  backportati, inclusa una XSS sulle app che usano CSP nonce).
+  `middleware.ts` → `proxy.ts` (nuova convenzione). Build con Turbopack.
+- `npm audit`: **0 vulnerabilità** (override postcss>=8.5.10 dentro next)
+- Email al broker: escape HTML di tutti i valori utente (era HTML injection)
+- `/api/firma/start`: magic bytes PDF, regex CF (omocodia), regex cellulare,
+  limiti lunghezza, whitelist prodotto, **rate limit** 5 req/10min/IP
+- `/api/firma/callback`: validazione formato praticaId + rate limit
+- pdf-lib **self-hosted** in `/public/vendor/` (era su cdnjs senza SRI;
+  hash sha256 verificato identico tra npm e cdnjs)
+- CSP dedicata per `/firma-allianz.html` con hash SHA-256 dello script
+  inline (vedi commento in `next.config.js` per ricalcolarlo dopo modifiche)
+- `lib/rate-limit.ts`: limiter in-memory per-IP (difesa in profondità;
+  per un limite globale usare Vercel WAF)
+
 ### M4.1 — Fix CSP produzione (2026-07-09)
 La CSP in produzione usava `script-src 'strict-dynamic'` con un hash
 placeholder (`'sha256-quootami'`): **bloccava TUTTI gli script del sito**
 (menu mobile, FAQ accordion, error boundaries morti). Fix:
-- `middleware.ts` genera un **nonce per-request** e lo passa a Next.js via
+- `proxy.ts` (ex `middleware.ts`) genera un **nonce per-request** e lo passa a Next.js via
   header CSP sulla request (pattern ufficiale Next.js)
 - `app/layout.tsx` ha `export const dynamic = 'force-dynamic'` — necessario
   perché il nonce cambia a ogni richiesta (le pagine non sono più statiche,
   sono server-rendered on demand)
 - Verificato in locale con `next build && next start`: 15/15 script con
   nonce, hydration OK, menu e API mock funzionanti
-- Nota: `/firma-allianz.html` è escluso dal matcher del middleware
+- Nota: `/firma-allianz.html` è escluso dal matcher del proxy
   (`.*\..*`), quindi non riceve CSP — per questo pdf-lib da cdnjs carica
   senza whitelist. Gli header globali di next.config.js restano attivi.
 

@@ -1,5 +1,6 @@
 /**
- * Quootami — Middleware con CSP + security banking-grade
+ * Quootami — Proxy (ex middleware, convenzione Next.js 16) con CSP
+ * + security banking-grade
  *
  * CSP strategia (pattern ufficiale Next.js):
  * - Nonce per-request + `strict-dynamic`: solo gli script con il nonce
@@ -20,7 +21,7 @@ import type { NextRequest } from 'next/server';
 
 const isProd = process.env.NODE_ENV === 'production';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // ── CSP banking-grade ──
   // In dev permettiamo 'unsafe-eval'/'unsafe-inline' per HMR di Next.js.
   const nonce = btoa(crypto.randomUUID());
