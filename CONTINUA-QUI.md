@@ -304,7 +304,7 @@ Seguire procedura in sezione 6 "Per passare a live".
 ### Nice-to-have (Round 2/3)
 - Schema.org JSON-LD structured data (Organization, Product, FAQPage)
 - Glossario assicurativo (era nel vecchio sito statico, migrare)
-- Calcolatore convenienza fondo pensione (come latuapensione.it)
+- ~~Calcolatore convenienza fondo pensione~~ ✅ fatto (2026-07-09): `components/CalcolatoreFondoPensione.tsx` su /piano-pensione, ispirato a pensionefacile.vercel.app; FAQ ampliata a 7 domande
 - AI chatbot (richiede API key OpenAI/Anthropic)
 - Brandizzare `public/firma-allianz.html` (attualmente colori Allianz stock — sostituire con brand Quootami)
 

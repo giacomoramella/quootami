@@ -13,11 +13,19 @@ import type { Polizza } from '@/config/polizze';
  *       sezione contatti. Per riattivarlo, importa LeadForm e
  *       sostituisci il blocco <PreventivoContatti />.
  */
-export function ProductPage({ polizza }: { polizza: Polizza }) {
+export function ProductPage({
+  polizza,
+  extra,
+}: {
+  polizza: Polizza;
+  /** Sezione opzionale specifica del prodotto (es. calcolatore pensione). */
+  extra?: React.ReactNode;
+}) {
   return (
     <>
       <ProductHero polizza={polizza} />
       <CoverageGrid polizza={polizza} />
+      {extra}
       <ProcessSteps polizza={polizza} />
       <PreventivoContatti polizza={polizza} />
       <FaqAccordion polizza={polizza} />

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ProductPage } from '@/components/ProductPage';
+import { CalcolatoreFondoPensione } from '@/components/CalcolatoreFondoPensione';
 import { getPolizza } from '@/config/polizze';
 
 const polizza = getPolizza('piano-pensione')!;
@@ -15,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function PianoPensionePage() {
-  return <ProductPage polizza={polizza} />;
+  return <ProductPage polizza={polizza} extra={<CalcolatoreFondoPensione />} />;
 }
