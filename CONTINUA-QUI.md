@@ -378,7 +378,7 @@ git push                                        # branch next → Vercel auto-de
 | `ERR_SSL_PROTOCOL_ERROR` su https://localhost | dev server è HTTP | usa `http://localhost:3000` |
 | Vercel "No Output Directory 'public'" | framework preset era "Other" | Settings → Framework Preset → **Next.js** |
 | `Cannot find module 'critters'` | `experimental.optimizeCss: true` | rimosso da `next.config.js` |
-| `next build` fallisce con `PageNotFoundError` / `ENOENT` random | iCloud sincronizza `~/Desktop` (incluso `.next/`) durante il build | riprovare `rm -rf .next && npx next build`; non tocca Vercel (builda nel cloud) |
+| `next build`/`next start` falliscono con `ENOENT`/`PageNotFoundError` random | iCloud sincronizza `~/Desktop` ed evince i file di build | **risolto**: `distDir: '.next.nosync'` in next.config.js (iCloud ignora le cartelle `.nosync`) |
 
 ---
 

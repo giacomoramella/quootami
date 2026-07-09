@@ -12,6 +12,7 @@
 # Node / Next.js
 node_modules/
 .next/
+.next.nosync/
 .swc/
 out/
 build/
