@@ -6,11 +6,11 @@ export function ProductHero({ polizza }: { polizza: Polizza }) {
     <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28 px-5 sm:px-8">
       <div
         aria-hidden
-        className="absolute top-[-260px] left-[-200px] w-[700px] h-[700px] rounded-full bg-bg-alt opacity-55 blur-[100px] animate-drift pointer-events-none"
+        className="blob-yellow top-[-260px] left-[-200px] w-[700px] h-[700px]"
       />
       <div
         aria-hidden
-        className="absolute bottom-[-80px] right-[-120px] w-[500px] h-[500px] rounded-full bg-bg-alt opacity-45 blur-[100px] animate-drift pointer-events-none"
+        className="blob-green bottom-[-120px] right-[-140px] w-[520px] h-[520px]"
         style={{ animationDelay: '-4s' }}
       />
 
@@ -37,6 +37,10 @@ export function ProductHero({ polizza }: { polizza: Polizza }) {
             Scopri le coperture
           </Link>
         </div>
+
+        <p className="mt-8 text-xs sm:text-sm text-ink-muted animate-fade-up" style={{ animationDelay: '0.4s' }}>
+          Nessun costo &middot; Risposta entro 24h lavorative &middot; Broker iscritto IVASS
+        </p>
       </div>
     </section>
   );

@@ -43,6 +43,9 @@ const config: Config = {
         'brand-sm': '0 2px 12px rgba(11,18,32,.07)',
         'brand-md': '0 8px 32px rgba(11,18,32,.1)',
         'brand-lg': '0 20px 60px rgba(11,18,32,.13)',
+        // Glow colorati (CTA e card in evidenza)
+        'glow-yellow': '0 8px 30px rgba(255,216,77,.45)',
+        'glow-green': '0 8px 30px rgba(31,157,85,.25)',
         // Glassmorphism
         glass: '0 8px 32px 0 rgba(31,38,135,0.18)',
       },

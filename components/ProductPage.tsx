@@ -48,20 +48,22 @@ function PreventivoContatti({ polizza }: { polizza: Polizza }) {
         </p>
 
         {polizza.adesioneUrl && (
-          <div className="mt-10 mx-auto max-w-lg p-6 rounded-2xl border-2 border-accent/60 bg-accent/5">
-            <p className="text-sm font-semibold uppercase tracking-wide text-accent-ink mb-2">
-              ⚡ Compila l'adesione online in 5 minuti
-            </p>
-            <p className="text-sm text-ink-muted mb-4">
-              Modulo digitale + firma elettronica a norma eIDAS.
-              Nessuna stampa, nessuna scansione.
-            </p>
-            <a
-              href={polizza.adesioneUrl}
-              className="btn-primary inline-block"
-            >
-              Compila adesione e firma online →
-            </a>
+          <div className="mt-10 mx-auto max-w-lg p-[2px] rounded-3xl bg-gradient-to-br from-brand-yellow via-brand-yellow to-brand-green shadow-glow-yellow">
+            <div className="rounded-[calc(1.5rem-2px)] bg-bg-card p-6">
+              <p className="text-sm font-bold uppercase tracking-wide text-ink mb-2">
+                ⚡ Compila l&apos;adesione online in 5 minuti
+              </p>
+              <p className="text-sm text-ink-muted mb-4">
+                Modulo digitale + firma elettronica a norma eIDAS.
+                Nessuna stampa, nessuna scansione.
+              </p>
+              <a
+                href={polizza.adesioneUrl}
+                className="btn-primary inline-block"
+              >
+                Compila adesione e firma online →
+              </a>
+            </div>
           </div>
         )}
 

@@ -9,11 +9,11 @@ export function Nav() {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-40 glass"
+      className="fixed top-3 sm:top-4 left-0 right-0 z-40 px-3 sm:px-6"
       role="navigation"
       aria-label="Navigazione principale"
     >
-      <div className="container-content flex items-center justify-between px-5 sm:px-8 py-4">
+      <div className="container-content glass rounded-full flex items-center justify-between px-5 sm:px-7 py-3">
         {/* Logo */}
         <Link
           href="/"
@@ -54,7 +54,7 @@ export function Nav() {
           <li>
             <Link
               href="/contatti"
-              className="text-sm font-semibold text-white bg-brand-navy px-5 py-2 rounded-full hover:bg-brand-green hover:text-brand-navy transition-all"
+              className="text-sm font-bold text-ink bg-brand-yellow px-5 py-2 rounded-full shadow-glow-yellow hover:bg-brand-navy hover:text-white transition-all duration-200"
             >
               Parla con Quootami →
             </Link>
@@ -79,7 +79,7 @@ export function Nav() {
       {open && (
         <div
           id="mobile-menu"
-          className="md:hidden glass border-t border-white/30 px-5 py-6 flex flex-col gap-4"
+          className="md:hidden container-content bg-white border border-black/5 shadow-brand-lg rounded-3xl mt-2 px-6 py-6 flex flex-col gap-4"
         >
           <Link href="/polizza-auto" onClick={() => setOpen(false)} className="text-base text-ink py-2">Polizza Auto</Link>
           <Link href="/polizza-casa" onClick={() => setOpen(false)} className="text-base text-ink py-2">Polizza Casa</Link>

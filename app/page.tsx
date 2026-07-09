@@ -6,14 +6,14 @@ export default function HomePage() {
     <>
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28 px-5 sm:px-8">
-        {/* Glass blobs (decorative, GPU-optimized) */}
+        {/* Blob decorativi brand (GPU-optimized) */}
         <div
           aria-hidden
-          className="absolute top-[-260px] left-[-200px] w-[700px] h-[700px] rounded-full bg-bg-alt opacity-55 blur-[100px] animate-drift pointer-events-none"
+          className="blob-yellow top-[-260px] left-[-200px] w-[700px] h-[700px]"
         />
         <div
           aria-hidden
-          className="absolute bottom-[-80px] right-[-120px] w-[500px] h-[500px] rounded-full bg-bg-alt opacity-45 blur-[100px] animate-drift pointer-events-none"
+          className="blob-green bottom-[-120px] right-[-140px] w-[520px] h-[520px]"
           style={{ animationDelay: '-4s' }}
         />
 
@@ -142,14 +142,18 @@ function CategoryCard({ href, title, desc, emoji }: { href: string; title: strin
   return (
     <Link
       href={href}
-      className="group relative block p-7 rounded-3xl bg-bg-card border border-black/5 hover:border-brand-yellow hover:shadow-brand-md transition-all duration-300 ease-soft hover:-translate-y-1"
+      className="group relative block p-7 rounded-3xl bg-bg-card border border-black/5 hover:border-brand-yellow hover:shadow-brand-md transition-all duration-300 ease-soft hover:-translate-y-1.5"
     >
-      <div className="text-3xl mb-3" aria-hidden>
+      <div
+        className="w-14 h-14 rounded-2xl bg-bg-alt flex items-center justify-center text-2xl mb-4
+                   group-hover:bg-brand-yellow/20 group-hover:scale-110 transition-all duration-300 ease-soft"
+        aria-hidden
+      >
         {emoji}
       </div>
       <h3 className="font-sans font-bold text-base text-ink">{title}</h3>
       <p className="text-sm text-ink-muted mt-1.5 leading-relaxed">{desc}</p>
-      <span className="absolute top-7 right-6 text-ink-muted font-semibold group-hover:text-brand-yellow-deep group-hover:translate-x-1 transition-all">
+      <span className="absolute top-7 right-6 w-8 h-8 rounded-full bg-bg-alt flex items-center justify-center text-ink-muted font-semibold group-hover:bg-brand-yellow group-hover:text-ink group-hover:translate-x-1 transition-all duration-300">
         →
       </span>
     </Link>
