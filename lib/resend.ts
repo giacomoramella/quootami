@@ -60,14 +60,14 @@ export async function sendLeadEmail(payload: LeadEmailPayload) {
         Nuova richiesta preventivo via sito Quootami
       </h2>
       <table style="border-collapse: collapse; width: 100%; margin: 16px 0;">
-        ${row('Prodotto', payload.prodotto)}
-        ${row('Nome', payload.nome)}
-        ${row('Cognome', payload.cognome)}
-        ${payload.dataNascita ? row('Data di nascita', payload.dataNascita) : ''}
-        ${row('Email cliente', `<a href="mailto:${payload.email}">${payload.email}</a>`)}
-        ${row('Telefono', `<a href="tel:${payload.telefono}">${payload.telefono}</a>`)}
-        ${payload.targa ? row('Targa veicolo', payload.targa) : ''}
-        ${row('Lead ID', payload.leadId ?? 'n/d')}
+        ${row('Prodotto', esc(payload.prodotto))}
+        ${row('Nome', esc(payload.nome))}
+        ${row('Cognome', esc(payload.cognome))}
+        ${payload.dataNascita ? row('Data di nascita', esc(payload.dataNascita)) : ''}
+        ${row('Email cliente', `<a href="mailto:${esc(payload.email)}">${esc(payload.email)}</a>`)}
+        ${row('Telefono', `<a href="tel:${esc(payload.telefono)}">${esc(payload.telefono)}</a>`)}
+        ${payload.targa ? row('Targa veicolo', esc(payload.targa)) : ''}
+        ${row('Lead ID', esc(payload.leadId ?? 'n/d'))}
         ${row('Data invio', new Date().toLocaleString('it-IT'))}
       </table>
       <p style="color: #6B7280; font-size: 13px; margin-top: 24px;">
@@ -124,14 +124,14 @@ export async function sendAdesioneFirmataEmail(p: AdesioneFirmataPayload) {
       <p>Il cliente ha completato la firma elettronica avanzata.
       Il modulo firmato è in allegato.</p>
       <table style="border-collapse: collapse; width: 100%; margin: 16px 0;">
-        ${row('Prodotto', p.prodotto)}
-        ${row('Cliente', `${p.nome} ${p.cognome}`)}
-        ${row('Codice fiscale', p.cf)}
-        ${row('Email', `<a href="mailto:${p.email}">${p.email}</a>`)}
-        ${row('Cellulare', `<a href="tel:${p.cellulare}">${p.cellulare}</a>`)}
-        ${row('Pratica ID (OTP Service)', p.praticaId)}
-        ${p.codiceVerifica ? row('Codice verifica firma', `<code>${p.codiceVerifica}</code>`) : ''}
-        ${row('Firmato il', p.firmatoIl ?? new Date().toLocaleString('it-IT'))}
+        ${row('Prodotto', esc(p.prodotto))}
+        ${row('Cliente', esc(`${p.nome} ${p.cognome}`))}
+        ${row('Codice fiscale', esc(p.cf))}
+        ${row('Email', `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>`)}
+        ${row('Cellulare', `<a href="tel:${esc(p.cellulare)}">${esc(p.cellulare)}</a>`)}
+        ${row('Pratica ID (OTP Service)', esc(p.praticaId))}
+        ${p.codiceVerifica ? row('Codice verifica firma', `<code>${esc(p.codiceVerifica)}</code>`) : ''}
+        ${row('Firmato il', esc(p.firmatoIl ?? new Date().toLocaleString('it-IT')))}
       </table>
       <p style="color: #6B7280; font-size: 13px; margin-top: 24px;">
         Il PDF firmato è archiviato anche su Supabase Storage (bucket <code>adesioni-firmate</code>).
@@ -161,4 +161,18 @@ function row(label: string, value: string) {
       <td style="padding: 8px 12px; border-bottom: 1px solid #E5E5E0; color: #1F2937;">${value}</td>
     </tr>
   `;
+}
+
+/**
+ * Escape HTML per valori forniti dall'utente interpolati nelle email.
+ * Senza questo, chiunque invii il form può iniettare HTML/link arbitrari
+ * nell'inbox del broker (vettore di phishing).
+ */
+function esc(v: string): string {
+  return v
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }

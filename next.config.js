@@ -80,10 +80,35 @@ const nextConfig = {
       { key: 'X-Robots-Tag', value: 'index, follow' },
     ];
 
+    // ── CSP per il form di adesione statico (public/firma-allianz.html) ──
+    // Il middleware lo esclude (il matcher salta i path con estensione),
+    // quindi la CSP va applicata qui. Lo script inline del form è
+    // autorizzato tramite hash SHA-256: se modifichi lo script inline
+    // del file, ricalcola l'hash con:
+    //   python3 -c "import re,hashlib,base64;s=open('public/firma-allianz.html').read();sc=re.findall(r'<script(?![^>]*src=)[^>]*>(.*?)</script>',s,re.S)[0];print('sha256-'+base64.b64encode(hashlib.sha256(sc.encode()).digest()).decode())"
+    const firmaCsp = [
+      "default-src 'self'",
+      "script-src 'self' 'sha256-44xrcPreeWyLNXbZee7xh445QgTxiJLHPayzRIka1BQ='",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob:",
+      "font-src 'self' data:",
+      "connect-src 'self'",
+      "frame-src 'none'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'none'",
+      'upgrade-insecure-requests',
+    ].join('; ');
+
     return [
       {
         source: '/(.*)',
         headers: securityHeaders,
+      },
+      {
+        source: '/firma-allianz.html',
+        headers: [{ key: 'Content-Security-Policy', value: firmaCsp }],
       },
       // ── Cache-control aggressivo per asset statici ──
       {

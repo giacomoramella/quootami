@@ -29,11 +29,22 @@ import {
   STORAGE_BUCKET_ADESIONI_FIRMATE,
 } from '@/lib/supabase';
 import { sendAdesioneFirmataEmail } from '@/lib/resend';
+import { rateLimit, clientIp } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
+// Il praticaId arriva dal payload del webhook e finisce in path di
+// storage e URL API: ammettiamo solo un formato identificatore stretto.
+const PRATICA_ID_RE = /^[A-Za-z0-9_-]{1,64}$/;
+
 export async function POST(req: NextRequest) {
+  // Rate limit per-IP generoso (i webhook legittimi sono pochi; in live
+  // la vera protezione è l'HMAC qui sotto).
+  if (!rateLimit(`firma-callback:${clientIp(req)}`, 60, 10 * 60 * 1000)) {
+    return NextResponse.json({ ok: false, error: 'rate limited' }, { status: 429 });
+  }
+
   const rawBody = await req.text();
 
   // 1. HMAC verify
@@ -54,8 +65,8 @@ export async function POST(req: NextRequest) {
   const codiceVerifica: string | undefined = payload.codiceVerifica || payload.code;
   const firmatoIl: string | undefined = payload.firmatoIl || payload.signed_at;
 
-  if (!praticaId) {
-    return NextResponse.json({ ok: false, error: 'praticaId mancante' }, { status: 400 });
+  if (!praticaId || !PRATICA_ID_RE.test(praticaId)) {
+    return NextResponse.json({ ok: false, error: 'praticaId mancante o non valido' }, { status: 400 });
   }
 
   console.log(`[firma/callback] pratica=${praticaId} stato=${stato} mode=${getOtpMode()}`);

@@ -33,17 +33,31 @@ import {
   getSupabaseAdmin,
   STORAGE_BUCKET_ADESIONI_BOZZE,
 } from '@/lib/supabase';
+import { rateLimit, clientIp } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Codice fiscale persona fisica, omocodia inclusa (le cifre possono
+// diventare lettere LMNPQRSTUV nelle posizioni numeriche).
+const CF_RE =
+  /^[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$/;
+const CELLULARE_RE = /^\+?[0-9]{8,15}$/;
+// Solo i prodotti per cui esiste un flusso di adesione online.
+const PRODOTTI_AMMESSI = new Set(['Allianz Previdenza']);
 
 function bad(msg: string, status = 400) {
   return NextResponse.json({ ok: false, error: msg }, { status });
 }
 
 export async function POST(req: NextRequest) {
+  // Rate limit per-IP: 5 avvii di pratica ogni 10 minuti bastano a
+  // qualsiasi uso legittimo e frenano spam/scan automatici.
+  if (!rateLimit(`firma-start:${clientIp(req)}`, 5, 10 * 60 * 1000)) {
+    return bad('Troppe richieste. Riprova tra qualche minuto.', 429);
+  }
+
   let form: FormData;
   try {
     form = await req.formData();
@@ -56,21 +70,27 @@ export async function POST(req: NextRequest) {
   const cognome = String(form.get('cognome') ?? '').trim();
   const cf = String(form.get('cf') ?? '').trim().toUpperCase();
   const email = String(form.get('email') ?? '').trim().toLowerCase();
-  const cellulare = String(form.get('cellulare') ?? '').trim();
+  const cellulare = String(form.get('cellulare') ?? '').trim().replace(/[\s./-]/g, '');
   const prodotto = String(form.get('prodotto') ?? 'Allianz Previdenza').trim();
 
   // Validazione
   if (!(pdf instanceof Blob)) return bad('PDF mancante');
-  if (pdf.type !== 'application/pdf') return bad('Il file deve essere PDF');
   if (pdf.size === 0) return bad('PDF vuoto');
   if (pdf.size > 15 * 1024 * 1024) return bad('PDF troppo grande (>15 MB)');
-  if (!nome) return bad('Nome mancante');
-  if (!cognome) return bad('Cognome mancante');
-  if (!cf || cf.length !== 16) return bad('Codice fiscale non valido');
-  if (!EMAIL_RE.test(email)) return bad('Email non valida');
-  if (cellulare.length < 8) return bad('Cellulare non valido');
+  if (!nome || nome.length > 80) return bad('Nome mancante o troppo lungo');
+  if (!cognome || cognome.length > 80) return bad('Cognome mancante o troppo lungo');
+  if (!CF_RE.test(cf)) return bad('Codice fiscale non valido');
+  if (!EMAIL_RE.test(email) || email.length > 254) return bad('Email non valida');
+  if (!CELLULARE_RE.test(cellulare)) return bad('Cellulare non valido');
+  if (!PRODOTTI_AMMESSI.has(prodotto)) return bad('Prodotto non riconosciuto');
 
   const pdfBytes = Buffer.from(await pdf.arrayBuffer());
+
+  // Il MIME type dichiarato dal client non fa fede: controlliamo i
+  // magic bytes. Ogni PDF valido inizia con "%PDF-".
+  if (pdfBytes.subarray(0, 5).toString('latin1') !== '%PDF-') {
+    return bad('Il file deve essere un PDF');
+  }
 
   // ── 1. Archivio bozza su Supabase (best-effort) ──
   let bozzaPath: string | null = null;

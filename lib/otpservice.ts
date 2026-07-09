@@ -207,9 +207,13 @@ export async function downloadSignedDoc(praticaId: string): Promise<Buffer> {
     return dummyPdf;
   }
   const token = await authenticate();
-  const r = await fetch(`${OTP_BASE_URL}/pratiche/${praticaId}/firmato`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  // encodeURIComponent: il praticaId non deve poter alterare il path API.
+  const r = await fetch(
+    `${OTP_BASE_URL}/pratiche/${encodeURIComponent(praticaId)}/firmato`,
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   if (!r.ok) throw new Error(`OTP download firmato failed: ${r.status}`);
   const ab = await r.arrayBuffer();
   return Buffer.from(ab);
