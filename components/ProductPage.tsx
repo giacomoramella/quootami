@@ -39,12 +39,30 @@ function PreventivoContatti({ polizza }: { polizza: Polizza }) {
           le migliori offerte delle compagnie partner per <strong>{polizza.title.toLowerCase()}</strong>.
         </p>
 
+        {polizza.adesioneUrl && (
+          <div className="mt-10 mx-auto max-w-lg p-6 rounded-2xl border-2 border-accent/60 bg-accent/5">
+            <p className="text-sm font-semibold uppercase tracking-wide text-accent-ink mb-2">
+              ⚡ Compila l'adesione online in 5 minuti
+            </p>
+            <p className="text-sm text-ink-muted mb-4">
+              Modulo digitale + firma elettronica a norma eIDAS.
+              Nessuna stampa, nessuna scansione.
+            </p>
+            <a
+              href={polizza.adesioneUrl}
+              className="btn-primary inline-block"
+            >
+              Compila adesione e firma online →
+            </a>
+          </div>
+        )}
+
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href={OPERATORE.social.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary"
+            className={polizza.adesioneUrl ? 'btn-secondary' : 'btn-primary'}
           >
             Scrivi su WhatsApp →
           </a>

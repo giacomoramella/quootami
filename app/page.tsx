@@ -18,12 +18,6 @@ export default function HomePage() {
         />
 
         <div className="container-content text-center relative">
-          {/* Eyebrow */}
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-yellow/15 border border-brand-yellow/30 text-xs font-semibold tracking-wider uppercase text-brand-green-dark animate-fade-in">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-green-dark" />
-            Broker iscritto IVASS · Confronto multi-compagnia
-          </span>
-
           {/* H1 */}
           <h1 className="mt-8 font-sans font-bold text-5xl sm:text-7xl md:text-8xl tracking-tight leading-[1.05] text-ink animate-fade-up">
             <span className="lowercase">quootami</span>
@@ -124,9 +118,6 @@ export default function HomePage() {
             <OmniIcon href={`tel:${OPERATORE.contatti.telefono_tel}`} label="Telefono" color="navy">
               <PhoneIcon />
             </OmniIcon>
-            <OmniIcon href={OPERATORE.social.whatsapp} label="Video call" color="violet" external>
-              <VideoIcon />
-            </OmniIcon>
           </div>
         </div>
       </section>
@@ -168,7 +159,7 @@ function CategoryCard({ href, title, desc, emoji }: { href: string; title: strin
 function OmniIcon({ href, label, color, external, children }: {
   href: string;
   label: string;
-  color: 'green' | 'yellow' | 'navy' | 'violet';
+  color: 'green' | 'yellow' | 'navy';
   external?: boolean;
   children: React.ReactNode;
 }) {
@@ -176,7 +167,6 @@ function OmniIcon({ href, label, color, external, children }: {
     green: 'bg-green-100 text-green-600',
     yellow: 'bg-yellow-100 text-yellow-700',
     navy: 'bg-gray-100 text-brand-navy',
-    violet: 'bg-violet-100 text-violet-700',
   } as const;
   return (
     <a
@@ -213,14 +203,6 @@ function PhoneIcon() {
   return (
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
-function VideoIcon() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <polygon points="23 7 16 12 23 17 23 7" />
-      <rect x="1" y="5" width="15" height="14" rx="2" />
     </svg>
   );
 }

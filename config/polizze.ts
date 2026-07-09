@@ -45,6 +45,13 @@ export type Polizza = {
     title: string;
     items: FaqItem[];
   };
+  /**
+   * URL opzionale del modulo di adesione online compilabile direttamente
+   * dal cliente. Se presente, ProductPage mostra un CTA dedicato
+   * "Compila online + firma".
+   * Per ora usato solo da Allianz Previdenza (`/firma-allianz.html`).
+   */
+  adesioneUrl?: string;
 };
 
 export const POLIZZE: Record<string, Polizza> = {
@@ -197,6 +204,7 @@ export const POLIZZE: Record<string, Polizza> = {
     metaTitle: 'Fondo Pensione · Deduzione fiscale fino a €5.300',
     metaDesc: 'Fondo pensione complementare con deducibilità fiscale fino a €5.300/anno. Confronto Quootami delle migliori soluzioni.',
     ogImageAlt: 'Fondo Pensione Quootami — Previdenza complementare e deduzione fiscale',
+    adesioneUrl: '/firma-allianz.html',
     coverages: {
       title: 'Vantaggi del fondo pensione',
       sub: 'Tre benefici fiscali che lo Stato riserva alla previdenza complementare.',

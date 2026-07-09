@@ -51,3 +51,7 @@ export function getSupabaseAdmin() {
 
 // Nome bucket Storage per i documenti dei lead
 export const STORAGE_BUCKET = 'documenti-lead';
+
+// Bucket Storage per il flusso FEA (M4 — adesione Allianz Previdenza)
+export const STORAGE_BUCKET_ADESIONI_BOZZE = 'adesioni-bozze';   // PDF compilati pre-firma
+export const STORAGE_BUCKET_ADESIONI_FIRMATE = 'adesioni-firmate'; // PDF firmati dal cliente

@@ -3,7 +3,7 @@ import { OPERATORE } from '@/config/operatore';
 
 export const metadata: Metadata = {
   title: 'Contatti · Quootami',
-  description: 'Contatti Quootami: WhatsApp, email, telefono, video call. Risposta entro 24 ore lavorative.',
+  description: 'Contatti Quootami: WhatsApp, email, telefono. Risposta entro 24 ore lavorative.',
 };
 
 export default function ContattiPage() {
@@ -26,11 +26,10 @@ export default function ContattiPage() {
 
       <section className="section bg-bg">
         <div className="container-content">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-content mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-content mx-auto">
             <ContactCard href={OPERATORE.social.whatsapp} external icon="💬" title="WhatsApp" desc="Risposta in tempo reale durante l'orario lavorativo." />
             <ContactCard href={`mailto:${OPERATORE.contatti.email}`} icon="✉️" title="Email" desc={OPERATORE.contatti.email} />
             <ContactCard href={`tel:${OPERATORE.contatti.telefono_tel}`} icon="📞" title="Telefono" desc={`${OPERATORE.contatti.telefono_display} · ${OPERATORE.contatti.orari}`} />
-            <ContactCard href={OPERATORE.social.whatsapp} external icon="📹" title="Video call" desc="Su appuntamento via Google Meet. Scrivi su WhatsApp per fissare." />
           </div>
         </div>
       </section>

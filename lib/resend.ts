@@ -95,6 +95,65 @@ export async function sendLeadEmail(payload: LeadEmailPayload) {
   });
 }
 
+// ────────────────── Adesione FEA firmata (M4) ──────────────────
+
+export type AdesioneFirmataPayload = {
+  prodotto: string;             // es. "Allianz Previdenza"
+  praticaId: string;
+  nome: string;
+  cognome: string;
+  cf: string;
+  email: string;
+  cellulare: string;
+  codiceVerifica?: string;
+  firmatoIl?: string;
+  pdfFirmato: Buffer;
+};
+
+/**
+ * Email al broker con allegato il PDF firmato del cliente (post-FEA).
+ */
+export async function sendAdesioneFirmataEmail(p: AdesioneFirmataPayload) {
+  const resend = getResend();
+  const subject = `✅ Adesione ${p.prodotto} firmata — ${p.nome} ${p.cognome}`;
+  const html = `
+    <div style="font-family: Inter, sans-serif; max-width: 600px; color: #0B1220;">
+      <h2 style="color: #1d7a4d; border-bottom: 3px solid #1d7a4d; padding-bottom: 8px;">
+        Adesione firmata via FEA ✓
+      </h2>
+      <p>Il cliente ha completato la firma elettronica avanzata.
+      Il modulo firmato è in allegato.</p>
+      <table style="border-collapse: collapse; width: 100%; margin: 16px 0;">
+        ${row('Prodotto', p.prodotto)}
+        ${row('Cliente', `${p.nome} ${p.cognome}`)}
+        ${row('Codice fiscale', p.cf)}
+        ${row('Email', `<a href="mailto:${p.email}">${p.email}</a>`)}
+        ${row('Cellulare', `<a href="tel:${p.cellulare}">${p.cellulare}</a>`)}
+        ${row('Pratica ID (OTP Service)', p.praticaId)}
+        ${p.codiceVerifica ? row('Codice verifica firma', `<code>${p.codiceVerifica}</code>`) : ''}
+        ${row('Firmato il', p.firmatoIl ?? new Date().toLocaleString('it-IT'))}
+      </table>
+      <p style="color: #6B7280; font-size: 13px; margin-top: 24px;">
+        Il PDF firmato è archiviato anche su Supabase Storage (bucket <code>adesioni-firmate</code>).
+        Documento conforme eIDAS / CAD / AgID.
+      </p>
+    </div>
+  `;
+  return resend.emails.send({
+    from: SENDER_EMAIL,
+    to: [INTERMEDIARIO_EMAIL],
+    replyTo: p.email,
+    subject,
+    html,
+    attachments: [
+      {
+        filename: `Adesione_${p.prodotto.replace(/\s+/g, '_')}_${p.cognome}_FIRMATO.pdf`,
+        content: p.pdfFirmato,
+      },
+    ],
+  });
+}
+
 function row(label: string, value: string) {
   return `
     <tr>
