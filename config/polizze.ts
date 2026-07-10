@@ -72,10 +72,10 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Cosa copre la polizza auto',
       sub: 'Dalla RC obbligatoria alle garanzie accessorie: scegli il livello di protezione adatto.',
       items: [
-        { title: 'RC Auto', desc: 'Copre i danni che provochi a terzi alla guida.', required: true, color: 'navy' },
+        { title: 'RC Auto', desc: 'Copre i danni che provochi a terzi alla guida. È l\'unica copertura obbligatoria per legge.', required: true, color: 'navy' },
         { title: 'Furto e Incendio', desc: 'Rimborso in caso di furto, tentato furto, incendio o esplosione.', color: 'red' },
         { title: 'Kasko', desc: 'Copre i danni al tuo veicolo anche se la colpa è tua.', color: 'amber' },
-        { title: 'Eventi naturali', desc: 'Grandine, alluvioni, trombe d\'aria, atti vandalici.', color: 'violet' },
+        { title: 'Eventi naturali e vandalismo', desc: 'Grandine, alluvioni, trombe d\'aria, atti vandalici.', color: 'violet' },
         { title: 'Cristalli', desc: 'Rottura e sostituzione di parabrezza, lunotto e finestrini.', color: 'blue' },
         { title: 'Infortuni del Conducente', desc: 'Indennizzo per morte o invalidità del conducente.', color: 'teal' },
         { title: 'Tutela Legale', desc: 'Spese legali per controversie nate dalla circolazione.', color: 'amber' },
@@ -95,8 +95,8 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Le risposte che cerchi.',
       items: [
         { q: 'Quanto costa richiedere un preventivo?', a: 'Il preventivo è completamente gratuito e senza impegno. Si paga solo se si decide di attivare la polizza.' },
-        { q: 'Con quali compagnie lavora Quootami?', a: 'Quootami collabora con le principali compagnie italiane (Generali, UnipolSai, Allianz, AXA, Zurich e altre).' },
-        { q: 'Posso disdire la mia polizza attuale?', a: 'Sì. La RC Auto si rinnova ogni 12 mesi e non c\'è tacito rinnovo. Quootami gestisce tutto il passaggio senza interruzioni.' },
+        { q: 'Con quali compagnie lavora Quootami?', a: 'Quootami collabora con le principali compagnie italiane (Generali, Unipol, Allianz, AXA, Zurich e altre).' },
+        { q: 'Posso disdire la mia polizza attuale?', a: 'Sì, ed è più semplice di quanto pensi: per legge la RC Auto non ha tacito rinnovo, quindi alla scadenza annuale sei libero di cambiare compagnia senza inviare alcuna disdetta. Quootami gestisce il passaggio senza interruzioni di copertura.' },
       ],
     },
   },
@@ -118,11 +118,11 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Cosa copre la polizza casa',
       sub: 'Una protezione modulare per casa e famiglia.',
       items: [
-        { title: 'Incendio e scoppio', desc: 'Danni da incendio, fulmine, esplosione, fumo.', required: true, color: 'red' },
+        { title: 'Incendio e scoppio', desc: 'Danni da incendio, fulmine, esplosione, fumo. Richiesta dalla banca se hai un mutuo.', color: 'red' },
         { title: 'Furto', desc: 'Furto, rapina, scippo, danni da effrazione.', color: 'navy' },
         { title: 'RC capofamiglia', desc: 'Danni causati a terzi da te, dai tuoi familiari, dai tuoi animali domestici.', color: 'teal' },
         { title: 'Eventi atmosferici', desc: 'Grandine, alluvione, vento, neve.', color: 'blue' },
-        { title: 'Catastrofali', desc: 'Terremoto, alluvione, frana — copertura crescente per legge.', color: 'violet' },
+        { title: 'Catastrofali', desc: 'Terremoto, alluvione, frana. Per le abitazioni il premio è detraibile al 19%.', color: 'violet' },
         { title: 'Cristalli', desc: 'Rottura accidentale di vetri, specchi, lastre.', color: 'amber' },
         { title: 'Tutela legale', desc: 'Spese legali per controversie sulla casa.', color: 'green' },
         { title: 'Assistenza domestica', desc: 'Idraulico, fabbro, elettricista 24/7.', color: 'navy' },
@@ -141,7 +141,7 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Le risposte che cerchi.',
       items: [
         { q: 'Posso assicurare solo il furto?', a: 'Sì, è possibile selezionare solo le coperture di interesse. Spesso però la formula completa costa molto meno della somma delle singole.' },
-        { q: 'La polizza casa copre anche se ho un mutuo?', a: 'Sì. Anzi, le banche spesso richiedono polizza incendio obbligatoria per concedere il mutuo. Quootami può aiutarti a sostituire quella della banca con una più conveniente.' },
+        { q: 'La banca mi obbliga a prendere la sua polizza per il mutuo?', a: 'No. Per concedere il mutuo la banca richiede quasi sempre una polizza incendio sull\'immobile, ma per legge sei libero di sceglierla sul mercato: la banca deve accettare qualsiasi polizza con le coperture equivalenti. Quootami può trovartene una più conveniente di quella proposta in filiale.' },
         { q: 'Sono coperto se faccio danni nel condominio?', a: 'Sì con la RC capofamiglia: copre i danni che provochi tu o i tuoi familiari a terzi, vicini, parti comuni.' },
       ],
     },
@@ -164,7 +164,7 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Cosa copre la polizza salute',
       sub: 'Diverse formule per esigenze diverse.',
       items: [
-        { title: 'Ricoveri e interventi', desc: 'Spese di ricovero, intervento chirurgico, day hospital.', required: true, color: 'red' },
+        { title: 'Ricoveri e interventi', desc: 'Spese di ricovero, intervento chirurgico, day hospital.', color: 'red' },
         { title: 'Visite specialistiche', desc: 'Rimborso visite, esami diagnostici, accertamenti.', color: 'navy' },
         { title: 'Cure odontoiatriche', desc: 'Igiene, otturazioni, protesi, ortodonzia.', color: 'amber' },
         { title: 'Vita', desc: 'Capitale ai beneficiari in caso di decesso dell\'assicurato.', color: 'violet' },
@@ -187,6 +187,7 @@ export const POLIZZE: Record<string, Polizza> = {
         { q: 'Posso essere rifiutato per patologie pregresse?', a: 'Dipende dalla compagnia. Alcune escludono le patologie preesistenti, altre le coprono ma con sovrapremio. Quootami ti aiuta a scegliere la formula adeguata al tuo profilo.' },
         { q: 'Le spese mediche le pago io e poi mi vengono rimborsate?', a: 'Dipende dalla formula. Alcune polizze prevedono pagamento diretto (con strutture convenzionate), altre rimborso a posteriori. Quootami spiega le differenze.' },
         { q: 'Posso assicurare anche la mia famiglia?', a: 'Sì, con la formula "Nucleo familiare" copri te, coniuge e figli con un\'unica polizza.' },
+        { q: 'I premi sono detraibili dalle tasse?', a: 'In parte. I premi delle polizze vita e infortuni (per morte o invalidità permanente superiore al 5%) danno diritto alla detrazione IRPEF del 19% fino a €530/anno di premio. Le polizze sanitarie di rimborso spese invece non sono detraibili.' },
       ],
     },
   },
@@ -209,7 +210,7 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Vantaggi del fondo pensione',
       sub: 'I benefici fiscali che lo Stato riserva alla previdenza complementare.',
       items: [
-        { title: 'Deduzione fiscale', desc: 'Deduci fino a €5.300/anno dal reddito IRPEF — risparmio immediato in tasse.', required: true, color: 'green' },
+        { title: 'Deduzione fiscale', desc: 'Deduci fino a €5.300/anno dal reddito IRPEF (nuovo limite 2026) — risparmio immediato in tasse.', color: 'green' },
         { title: 'Tassazione agevolata', desc: 'Rendimenti tassati al 20% (vs 26% degli altri investimenti), 12,5% sulla parte in titoli di Stato.', color: 'navy' },
         { title: 'Tassazione finale ridotta', desc: 'Al momento della pensione paghi dal 15% al 9% (dopo 35 anni), contro il 23–43% IRPEF.', color: 'teal' },
         { title: 'Patrimonio protetto', desc: 'Impignorabile, fuori dall\'asse ereditario ed esente dall\'imposta di bollo.', color: 'violet' },
@@ -230,7 +231,7 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Le risposte che cerchi.',
       items: [
         { q: 'Conviene sempre il fondo pensione?', a: 'Non sempre: dipende dalla tua aliquota IRPEF marginale, dal costo del fondo (ISC) e dall\'orizzonte temporale. Più alta è l\'aliquota e più lungo è l\'orizzonte, più conviene. Quootami fa un calcolo personalizzato per dirti in euro quanto guadagni.' },
-        { q: 'Quanto si risparmia con la deduzione?', a: 'I versamenti riducono il reddito imponibile fino a €5.300/anno. Con reddito di €35.000 e versamento di €5.000, il risparmio IRPEF è di circa €1.750/anno (aliquota marginale 35%). Usa il calcolatore in questa pagina per la stima sul tuo reddito.' },
+        { q: 'Quanto si risparmia con la deduzione?', a: 'I versamenti riducono il reddito imponibile fino a €5.300/anno (limite alzato dalla Legge di Bilancio 2026, prima era €5.164,57). Con reddito di €35.000 e versamento di €5.000, il risparmio IRPEF è di circa €1.750/anno (aliquota marginale 35%). Usa il calcolatore in questa pagina per la stima sul tuo reddito.' },
         { q: 'Come sono tassati i rendimenti?', a: 'Al 20% invece del 26% degli altri strumenti finanziari; la parte investita in titoli di Stato è tassata al 12,5%. Il fondo pensione è inoltre esente dall\'imposta di bollo dello 0,2%.' },
         { q: 'Quanto costa un fondo pensione?', a: 'Il costo si misura con l\'ISC (Indicatore Sintetico dei Costi): indicativamente 0,2–0,8% per i fondi negoziali di categoria, 0,8–1,5% per i fondi aperti, 1,5–3,5% per i PIP assicurativi. A parità di vantaggio fiscale, il costo è il fattore che pesa di più sul risultato finale: per questo Quootami lo confronta per primo.' },
         { q: 'Quando posso prelevare i soldi?', a: 'Al momento della pensione (con almeno 5 anni di partecipazione). Prima sono possibili anticipi per spese sanitarie (75%, in qualsiasi momento), acquisto/ristrutturazione prima casa (75%, dopo 8 anni) e altre esigenze (30%, dopo 8 anni).' },
@@ -259,7 +260,7 @@ export const POLIZZE: Record<string, Polizza> = {
       items: [
         { title: 'Furto identità', desc: 'Tutela in caso di clonazione dati anagrafici, account social.', color: 'red' },
         { title: 'Frodi online', desc: 'Rimborso per phishing, frode su pagamenti elettronici, e-commerce.', color: 'navy' },
-        { title: 'Ransomware (PMI)', desc: 'Spese di ripristino, eventuale riscatto, consulenza forense.', color: 'amber' },
+        { title: 'Ransomware (PMI)', desc: 'Spese di ripristino di dati e sistemi, consulenza forense, danni da fermo attività.', color: 'amber' },
         { title: 'Tutela legale', desc: 'Spese legali per controversie digitali, denunce, recupero crediti.', color: 'green' },
         { title: 'Reputazione', desc: 'Spese per rimozione contenuti diffamatori, gestione crisi reputazionale.', color: 'violet' },
         { title: 'Assistenza tecnica', desc: 'Supporto IT 24/7 per incidenti, recupero dati, ripristino sistemi.', color: 'blue' },
@@ -277,9 +278,9 @@ export const POLIZZE: Record<string, Polizza> = {
     faq: {
       title: 'Le risposte che cerchi.',
       items: [
-        { q: 'Mi serve anche se non faccio acquisti online?', a: 'Sì. L\'esposizione cyber include anche social media, email, identità digitale (SPID/CIE), conti bancari. La maggior parte degli attacchi avviene su persone che usano poco internet.' },
-        { q: 'Per la mia PMI è obbligatoria?', a: 'Non obbligatoria, ma vivamente consigliata. Un attacco ransomware può fermare l\'azienda per giorni; la polizza copre i costi di ripristino.' },
-        { q: 'Cosa NON copre?', a: 'In genere sono escluse le perdite finanziarie derivanti da investimenti speculativi (es. cripto su exchange non sicuri).' },
+        { q: 'Mi serve anche se non faccio acquisti online?', a: 'Sì. Bastano SPID, email e un conto online per essere esposti: phishing, furto d\'identità e frodi sui pagamenti colpiscono anche chi usa poco internet.' },
+        { q: 'Per la mia PMI è obbligatoria?', a: 'No, non è obbligatoria per legge (a differenza della catastrofale). È però molto consigliata: un attacco ransomware può fermare l\'azienda per giorni e la polizza copre i costi di ripristino.' },
+        { q: 'Cosa NON copre?', a: 'Dipende dalla compagnia, ma in genere sono escluse le perdite da investimenti (es. criptovalute), le violazioni commesse volontariamente e gli incidenti avvenuti prima della sottoscrizione. Quootami ti evidenzia le esclusioni prima della firma.' },
       ],
     },
   },
@@ -302,7 +303,7 @@ export const POLIZZE: Record<string, Polizza> = {
       sub: 'Una protezione per chi vive in famiglia con un animale.',
       items: [
         { title: 'Spese veterinarie', desc: 'Visite, esami, interventi chirurgici, ricoveri, terapie.', color: 'red' },
-        { title: 'RC danni a terzi', desc: 'Copre i danni che il tuo animale provoca a persone o cose.', required: true, color: 'navy' },
+        { title: 'RC danni a terzi', desc: 'Copre i danni che il tuo animale provoca a persone o cose. Dei danni risponde sempre il proprietario (art. 2052 c.c.).', color: 'navy' },
         { title: 'Smarrimento', desc: 'Spese di ricerca, premio per chi lo ritrova.', color: 'amber' },
         { title: 'Decesso accidentale', desc: 'Indennizzo in caso di decesso da infortunio.', color: 'violet' },
         { title: 'Assistenza viaggio', desc: 'Spese veterinarie all\'estero, rimpatrio sanitario.', color: 'teal' },
@@ -322,7 +323,7 @@ export const POLIZZE: Record<string, Polizza> = {
       items: [
         { q: 'Anche se ha già una patologia?', a: 'Dipende dalla compagnia. Alcune escludono le patologie preesistenti dichiarate, altre le coprono con sovrapremio. Importante dichiararle al momento della sottoscrizione.' },
         { q: 'Cosa copre la RC?', a: 'I danni che il tuo animale provoca a terzi: morsi, danni alle cose, incidenti causati da lui (es. cane che attraversa la strada e fa cadere un ciclista).' },
-        { q: 'C\'è un\'età massima?', a: 'Varia per compagnia, in genere si sottoscrive entro 8-10 anni di età. Una volta sottoscritta, la polizza dura per tutta la vita dell\'animale.' },
+        { q: 'C\'è un\'età massima?', a: 'Varia per compagnia: in genere la prima sottoscrizione è possibile entro gli 8-10 anni di età. Molte compagnie poi rinnovano senza limiti di età, ma le condizioni cambiano da polizza a polizza: Quootami le verifica prima di proporti la soluzione.' },
       ],
     },
   },
@@ -344,8 +345,8 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Coperture per la tua attività',
       sub: 'Da libero professionista a PMI strutturata.',
       items: [
-        { title: 'RC Professionale', desc: 'Copre i danni a terzi causati nell\'esercizio della professione.', required: true, color: 'navy' },
-        { title: 'Catastrofale PMI', desc: 'Obbligatoria per legge: terremoto, alluvione, frana sui beni aziendali.', required: true, color: 'red' },
+        { title: 'RC Professionale', desc: 'Copre i danni a terzi causati nell\'esercizio della professione. Obbligatoria per le professioni ordinistiche.', required: true, color: 'navy' },
+        { title: 'Catastrofale PMI', desc: 'Obbligatoria per legge: terremoto, alluvione, esondazione, frana su fabbricati, impianti e attrezzature.', required: true, color: 'red' },
         { title: 'Cyber business', desc: 'Attacchi informatici, ransomware, perdita dati clienti.', color: 'amber' },
         { title: 'Tutela legale', desc: 'Spese legali per controversie professionali e contrattuali.', color: 'green' },
         { title: 'D&O (Amministratori)', desc: 'Responsabilità civile di amministratori e dirigenti.', color: 'violet' },
@@ -364,7 +365,7 @@ export const POLIZZE: Record<string, Polizza> = {
     faq: {
       title: 'Le risposte che cerchi.',
       items: [
-        { q: 'La Catastrofale PMI è davvero obbligatoria?', a: 'Sì. La Legge di Bilancio 2024 (213/2023) ha introdotto l\'obbligo per tutte le imprese iscritte al Registro delle Imprese di stipulare una polizza catastrofale entro il 31/03/2025 (termini estesi). Quootami ti aiuta a essere in regola.' },
+        { q: 'La Catastrofale PMI è davvero obbligatoria?', a: 'Sì. L\'obbligo, introdotto dalla Legge di Bilancio 2024 (L. 213/2023), è ormai in vigore per le imprese di ogni dimensione: le scadenze scaglionate (grandi 31/3/2025, medie 1/10/2025, micro e piccole 1/1/2026) sono tutte passate. Sono escluse le imprese agricole, coperte dal fondo pubblico AgriCat. Chi non è in regola perde l\'accesso a contributi e agevolazioni pubbliche. Quootami ti aiuta a metterti in regola rapidamente.' },
         { q: 'Per la mia professione mi serve la RC?', a: 'È obbligatoria per molte professioni regolamentate (avvocati, commercialisti, ingegneri, medici, architetti, ecc.). Per i forfettari e ditte individuali è altamente raccomandata.' },
         { q: 'Posso unire più coperture?', a: 'Sì. Quootami spesso propone soluzioni "all-in-one" che includono RC + Cyber + Catastrofale a costo inferiore della somma delle singole.' },
       ],
