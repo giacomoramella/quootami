@@ -20,7 +20,8 @@ export default function CookiePage() {
       <p>I cookie sono piccole stringhe di testo che i siti web inviano al terminale dell&apos;utente, dove vengono memorizzate per essere ritrasmesse alla visita successiva. Possono essere di prima parte (impostati dal sito visitato) o di terze parti (impostati da domini diversi).</p>
 
       <h2>2. Titolare del trattamento</h2>
-      <p>Il titolare è <strong>{OPERATORE.broker.ragione_sociale}</strong>, P.IVA {OPERATORE.broker.partita_iva}, iscritta al RUI sez. {OPERATORE.broker.rui_sezione} n. {OPERATORE.broker.rui_numero}, vigilata IVASS. Per richieste in materia di cookie: <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a>. Maggiori dettagli nella <a href="/privacy">Privacy Policy</a>.</p>
+      <p>Il titolare del trattamento dei cookie e degli strumenti di tracciamento di questo sito è <strong>{OPERATORE.collaboratore.nome_completo}</strong>, gestore del sito, intermediario iscritto al RUI sez. {OPERATORE.collaboratore.rui_sezione} n. {OPERATORE.collaboratore.rui_numero}, vigilato IVASS. Per richieste in materia di cookie: <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a>.</p>
+      <p>Per i dati personali conferiti tramite i form del sito (richieste di preventivo, adesioni), il titolare è il broker indicato nella <a href="/privacy">Privacy Policy</a>.</p>
 
       <h2>3. Categorie di cookie</h2>
       <ul>
