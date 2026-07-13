@@ -33,8 +33,10 @@ export default function CookiePage() {
       <p>Questo sito utilizza esclusivamente <strong>cookie tecnici di prima parte</strong>. <strong>Non sono installati cookie analitici, di profilazione o di marketing</strong>: per questo motivo non è presente un banner di consenso cookie.</p>
 
       <h3>4.1 Cookie tecnici</h3>
+      <p>Allo stato attuale il sito <strong>non imposta alcun cookie proprio</strong>, né utilizza
+      <code>localStorage</code> o <code>sessionStorage</code>. L&apos;interfaccia funziona interamente
+      in memoria di pagina, senza persistenza sul dispositivo.</p>
       <ul>
-        <li><strong>Preferenze UI</strong> — stato apertura/chiusura di componenti, conservato in <code>sessionStorage</code>.</li>
         <li><strong>Cookie di sessione/sicurezza</strong> — possono essere impostati dal fornitore di hosting (Vercel) per finalità di sicurezza (mitigazione DDoS, bot detection).</li>
       </ul>
 
