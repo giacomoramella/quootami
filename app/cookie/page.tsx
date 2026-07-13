@@ -30,15 +30,30 @@ export default function CookiePage() {
       </ul>
 
       <h2>4. Cookie utilizzati su questo sito</h2>
-      <p>Questo sito utilizza esclusivamente <strong>cookie tecnici di prima parte</strong>. <strong>Non sono installati cookie analitici, di profilazione o di marketing</strong>: per questo motivo non è presente un banner di consenso cookie.</p>
+      <p>Il sito utilizza <strong>cookie tecnici di prima parte</strong> (sempre attivi, non
+      richiedono consenso) e, <strong>solo previo consenso espresso tramite il banner</strong>,
+      cookie di misurazione statistica ed eventualmente di marketing. Nessun cookie non
+      tecnico viene installato prima della scelta dell&apos;utente. La scelta è modificabile o
+      revocabile in ogni momento dal link <strong>&ldquo;Preferenze cookie&rdquo;</strong> nel
+      footer del sito.</p>
 
-      <h3>4.1 Cookie tecnici</h3>
-      <p>Allo stato attuale il sito <strong>non imposta alcun cookie proprio</strong>, né utilizza
-      <code>localStorage</code> o <code>sessionStorage</code>. L&apos;interfaccia funziona interamente
-      in memoria di pagina, senza persistenza sul dispositivo.</p>
+      <h3>4.1 Cookie tecnici (sempre attivi)</h3>
       <ul>
+        <li><strong><code>qtm_consent</code></strong> — prima parte, memorizza le preferenze di consenso espresse nel banner. Durata: 180 giorni.</li>
         <li><strong>Cookie di sessione/sicurezza</strong> — possono essere impostati dal fornitore di hosting (Vercel) per finalità di sicurezza (mitigazione DDoS, bot detection).</li>
       </ul>
+
+      <h3>4.2 Cookie statistici (solo previo consenso)</h3>
+      <ul>
+        <li><strong>Google Analytics 4</strong> (Google Ireland Ltd.) — cookie <code>_ga</code>, <code>_ga_*</code>, con IP anonimizzato. Misurano visite e utilizzo del sito in forma aggregata. Durata: fino a 24 mesi. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Google</a>.</li>
+      </ul>
+
+      <h3>4.3 Cookie di marketing (solo previo consenso, se attivi)</h3>
+      <ul>
+        <li><strong>Meta Pixel</strong> (Meta Platforms Ireland Ltd.) — cookie <code>_fbp</code>, misura l&apos;efficacia delle campagne pubblicitarie. Durata: 90 giorni. <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer">Privacy Meta</a>.</li>
+      </ul>
+      <p>Se una categoria non è mostrata nel banner, il relativo strumento non è attivo sul sito
+      e nessun cookie di quella categoria viene installato.</p>
 
       <h3>4.2 Risorse di terze parti</h3>
       <ul>

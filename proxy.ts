@@ -35,7 +35,7 @@ export function proxy(request: NextRequest) {
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' blob: data: https:;
     font-src 'self' https://fonts.gstatic.com data:;
-    connect-src 'self' https://*.supabase.co https://api.resend.com https://api.web3forms.com;
+    connect-src 'self' https://*.supabase.co https://api.resend.com https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://connect.facebook.net https://www.facebook.com;
     frame-src 'self';
     object-src 'none';
     base-uri 'self';

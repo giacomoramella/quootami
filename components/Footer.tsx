@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { OPERATORE, getDisclaimerHTML, getCopyrightText } from '@/config/operatore';
+import { CookiePrefsButton } from '@/components/CookieConsent';
 
 export function Footer() {
   const { contatti, collaboratore } = OPERATORE;
@@ -63,6 +64,7 @@ export function Footer() {
             <ul className="space-y-2.5 list-none">
               <li><Link href="/privacy" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Privacy Policy</Link></li>
               <li><Link href="/cookie" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Cookie Policy</Link></li>
+              <li><CookiePrefsButton /></li>
               <li><Link href="/trasparenza" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Trasparenza</Link></li>
               <li><Link href="/chi-siamo" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Chi siamo</Link></li>
               <li><Link href="/contatti" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Contatti</Link></li>
