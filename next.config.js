@@ -20,8 +20,9 @@ const nextConfig = {
   // Il progetto vive in ~/Desktop, che iCloud sincronizza: i file di build
   // in .next venivano evitti a caso a metà build/serve (ENOENT random).
   // Il suffisso .nosync esclude la cartella dalla sincronizzazione iCloud.
-  // Vercel rispetta distDir, quindi non cambia nulla in deploy.
-  distDir: '.next.nosync',
+  // Solo in locale: su Vercel (env VERCEL=1) si usa il default .next,
+  // che è quello che il builder Vercel si aspetta.
+  distDir: process.env.VERCEL ? '.next' : '.next.nosync',
 
   // Forza HTTPS in produzione (Vercel lo fa già a livello edge; HSTS via headers)
   async headers() {
