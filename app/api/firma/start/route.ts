@@ -70,8 +70,9 @@ export async function POST(req: NextRequest) {
   const cognome = String(form.get('cognome') ?? '').trim();
   const cf = String(form.get('cf') ?? '').trim().toUpperCase();
   const email = String(form.get('email') ?? '').trim().toLowerCase();
-  const cellulare = String(form.get('cellulare') ?? '').trim().replace(/[\s./-]/g, '');
+  const cellulare = String(form.get('cellulare') ?? '').trim().replace(/[()\s./-]/g, '');
   const prodotto = String(form.get('prodotto') ?? 'Allianz Previdenza').trim();
+  const consenso = String(form.get('consenso') ?? '') === 'true';
 
   // Validazione
   if (!(pdf instanceof Blob)) return bad('PDF mancante');
@@ -83,6 +84,8 @@ export async function POST(req: NextRequest) {
   if (!EMAIL_RE.test(email) || email.length > 254) return bad('Email non valida');
   if (!CELLULARE_RE.test(cellulare)) return bad('Cellulare non valido');
   if (!PRODOTTI_AMMESSI.has(prodotto)) return bad('Prodotto non riconosciuto');
+  // Consenso GDPR: il form lo impone lato client, il server non si fida.
+  if (!consenso) return bad('Consenso al trattamento dei dati mancante');
 
   const pdfBytes = Buffer.from(await pdf.arrayBuffer());
 

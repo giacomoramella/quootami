@@ -546,6 +546,12 @@
     <section class="card" id="s9">
       <div class="head"><span class="n">09</span><div><h2>Consensi privacy &amp; intermediario</h2><p>Marketing e dati del soggetto incaricato della raccolta</p></div></div>
       <div class="body">
+        <div class="sub">Consenso al trattamento dei dati (obbligatorio)</div>
+        <label style="display:flex;gap:10px;align-items:flex-start;margin:10px 0 4px;font-size:.92rem;line-height:1.45;cursor:pointer">
+          <input type="checkbox" id="consensoPrivacy" style="margin-top:3px;width:16px;height:16px;flex:none">
+          <span>Ho letto l'<a href="/privacy" target="_blank" rel="noopener">informativa privacy</a> e acconsento al trattamento dei miei dati personali per l'invio del modulo in firma elettronica. I dati sono trasmessi al gestore del sito, al broker per la gestione della pratica e al fornitore del servizio di firma. *</span>
+        </label>
+        <div class="divider"></div>
         <div class="sub">Consensi promozionali (facoltativi)</div>
         <div class="grid g2" style="margin-top:8px">
           <div class="field"><label class="lab">Comunicazioni commerciali Allianz S.p.A.</label>
@@ -931,8 +937,13 @@ async function inviaPerFirma(){
     if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
       throw new Error('Inserisci una e-mail valida nella sezione Contatti');
     }
-    if(!cell||cell.length<8){
-      throw new Error('Inserisci un cellulare valido nella sezione Contatti');
+    const cellNorm=cell.replace(/[()\s.\/-]/g,'');
+    if(!/^\+?[0-9]{8,15}$/.test(cellNorm)){
+      throw new Error('Inserisci un cellulare valido (solo cifre, minimo 8) nella sezione Contatti');
+    }
+    const consenso=document.getElementById('consensoPrivacy');
+    if(!consenso||!consenso.checked){
+      throw new Error('Per inviare in firma serve il consenso al trattamento dei dati — sezione 09 Privacy');
     }
     // Compongo FormData
     const fd=new FormData();
@@ -941,7 +952,8 @@ async function inviaPerFirma(){
     fd.append('cognome', d.cognome||'');
     fd.append('cf', d.cf||'');
     fd.append('email', email);
-    fd.append('cellulare', cell);
+    fd.append('cellulare', cellNorm);
+    fd.append('consenso', 'true');
     fd.append('prodotto', 'Allianz Previdenza');
     const r=await fetch('/api/firma/start',{method:'POST',body:fd});
     const j=await r.json();

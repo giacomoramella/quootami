@@ -184,14 +184,24 @@ export function verifyWebhook(
   }
   const getH = (k: string) =>
     headers instanceof Headers ? headers.get(k) : headers[k] || headers[k.toLowerCase()];
-  const received = getH('x-otp-signature') || getH('x-signature');
-  if (!received) return false;
-  const computed = createHmac('sha256', secret).update(rawBody).digest('hex');
-  try {
-    return timingSafeEqual(Buffer.from(received), Buffer.from(computed));
-  } catch {
-    return false;
-  }
+  const raw = getH('x-otp-signature') || getH('x-signature');
+  if (!raw) return false;
+
+  // Il formato esatto dell'header non è documentato dal provider: si
+  // accettano le forme comuni — hex puro, prefisso "sha256=", base64 —
+  // sempre con confronto a tempo costante. Un formato sbagliato qui
+  // significherebbe rifiutare TUTTI i webhook di produzione con 401.
+  const received = raw.replace(/^sha256=/i, '').trim();
+  const digest = createHmac('sha256', secret).update(rawBody).digest();
+  const cmp = (enc: BufferEncoding) => {
+    try {
+      const b = Buffer.from(received, enc);
+      return b.length === digest.length && timingSafeEqual(b, digest);
+    } catch {
+      return false;
+    }
+  };
+  return cmp('hex') || cmp('base64');
 }
 
 // ───────────────── 4. downloadSignedDoc ─────────────────

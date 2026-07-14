@@ -49,6 +49,22 @@ export type LeadEmailPayload = {
 /**
  * Invia email di notifica nuovo lead al broker con allegati PDF.
  */
+/**
+ * L'SDK Resend NON lancia eccezioni sugli errori API: risolve con
+ * { data: null, error }. Senza questo controllo un invio fallito
+ * (dominio non verificato, 4xx, rate limit) passerebbe per riuscito.
+ */
+async function sendOrThrow(
+  resend: Resend,
+  payload: Parameters<Resend['emails']['send']>[0]
+) {
+  const result = await resend.emails.send(payload);
+  if (result.error) {
+    throw new Error(`Resend: ${result.error.name ?? ''} ${result.error.message}`.trim());
+  }
+  return result;
+}
+
 export async function sendLeadEmail(payload: LeadEmailPayload) {
   const resend = getResend();
 
@@ -82,7 +98,7 @@ export async function sendLeadEmail(payload: LeadEmailPayload) {
     </div>
   `;
 
-  return resend.emails.send({
+  return sendOrThrow(resend, {
     from: SENDER_EMAIL,
     to: [INTERMEDIARIO_EMAIL],
     replyTo: payload.email,
@@ -139,7 +155,7 @@ export async function sendAdesioneFirmataEmail(p: AdesioneFirmataPayload) {
       </p>
     </div>
   `;
-  return resend.emails.send({
+  return sendOrThrow(resend, {
     from: SENDER_EMAIL,
     to: [INTERMEDIARIO_EMAIL],
     replyTo: p.email,

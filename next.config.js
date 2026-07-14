@@ -95,7 +95,7 @@ const nextConfig = {
     //   python3 -c "import re,hashlib,base64;s=open('public/firma-allianz.html').read();sc=re.findall(r'<script(?![^>]*src=)[^>]*>(.*?)</script>',s,re.S)[0];print('sha256-'+base64.b64encode(hashlib.sha256(sc.encode()).digest()).decode())"
     const firmaCsp = [
       "default-src 'self'",
-      "script-src 'self' 'sha256-44xrcPreeWyLNXbZee7xh445QgTxiJLHPayzRIka1BQ='",
+      "script-src 'self' 'sha256-5D1OdvfFOums4z1OAwJ3zmaooQCx8VkDDyZf02VfZIE='",
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "font-src 'self' data:",

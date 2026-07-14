@@ -28,7 +28,7 @@ import {
   getSupabaseAdmin,
   STORAGE_BUCKET_ADESIONI_FIRMATE,
 } from '@/lib/supabase';
-import { sendAdesioneFirmataEmail } from '@/lib/resend';
+import { sendAdesioneFirmataEmail, INTERMEDIARIO_EMAIL } from '@/lib/resend';
 import { rateLimit, clientIp } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
@@ -91,6 +91,14 @@ export async function POST(req: NextRequest) {
     console.warn('[firma/callback] DB non disponibile:', e?.message);
   }
 
+  // 2b. Idempotenza: i provider webhook ritentano e possono inviare sia
+  // 'firmata' sia 'completata' per la stessa pratica. Se è già chiusa,
+  // ack senza rielaborare (niente email duplicate al broker).
+  if (praticaRow?.stato === 'completata') {
+    console.log(`[firma/callback] pratica=${praticaId} già completata — skip`);
+    return NextResponse.json({ ok: true, duplicate: true });
+  }
+
   // 3. Scarica PDF firmato
   let pdfBuffer: Buffer;
   try {
@@ -100,7 +108,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: 'download failed' }, { status: 502 });
   }
 
-  // 4. Archivio su Supabase (best-effort)
+  // 4. Archivio su Supabase Storage (best-effort, upsert = idempotente)
   let firmatoPath: string | null = null;
   try {
     const supa = getSupabaseAdmin();
@@ -116,21 +124,14 @@ export async function POST(req: NextRequest) {
       console.warn('[firma/callback] upload firmato fallito:', up.error.message);
       firmatoPath = null;
     }
-    // aggiorna stato pratica
-    await supa
-      .from('pratiche')
-      .update({
-        stato: 'completata',
-        codice_verifica: codiceVerifica ?? null,
-        file_firmato_path: firmatoPath,
-        completed_at: firmatoIl ?? new Date().toISOString(),
-      })
-      .eq('otp_pratica_id', praticaId);
   } catch (e: any) {
-    console.warn('[firma/callback] DB/Storage update fallito:', e?.message);
+    console.warn('[firma/callback] Storage non disponibile:', e?.message);
   }
 
-  // 5. Email al broker
+  // 5. Email al broker — PRIMA di marcare la pratica completata: se
+  // l'invio fallisce rispondiamo 502 e il provider ritenta il webhook
+  // (la firma non deve mai andare persa in silenzio). Senza riga DB si
+  // invia comunque un'email di fallback con il PDF e l'ID pratica.
   try {
     if (praticaRow) {
       await sendAdesioneFirmataEmail({
@@ -146,11 +147,44 @@ export async function POST(req: NextRequest) {
         pdfFirmato: pdfBuffer,
       });
     } else {
-      console.warn('[firma/callback] niente pratica in DB → email non inviata');
+      console.warn(`[firma/callback] pratica=${praticaId} senza riga DB → email di fallback`);
+      await sendAdesioneFirmataEmail({
+        prodotto: 'Allianz Previdenza',
+        praticaId,
+        nome: '(dati firmatario non disponibili',
+        cognome: `— pratica ${praticaId})`,
+        cf: 'n/d',
+        email: INTERMEDIARIO_EMAIL,
+        cellulare: 'n/d',
+        codiceVerifica,
+        firmatoIl,
+        pdfFirmato: pdfBuffer,
+      });
     }
   } catch (e: any) {
-    console.error('[firma/callback] email fallita:', e?.message);
-    // non blocchiamo l'ack al webhook
+    if (getOtpMode() === 'mock') {
+      // In mock Resend può non essere configurato: best-effort come il resto.
+      console.warn('[firma/callback] email fallita (mock, best-effort):', e?.message);
+    } else {
+      console.error('[firma/callback] email fallita, chiedo retry al provider:', e?.message);
+      return NextResponse.json({ ok: false, error: 'email delivery failed' }, { status: 502 });
+    }
+  }
+
+  // 6. Chiusura pratica (best-effort: l'email è già partita)
+  try {
+    const supa = getSupabaseAdmin();
+    await supa
+      .from('pratiche')
+      .update({
+        stato: 'completata',
+        codice_verifica: codiceVerifica ?? null,
+        file_firmato_path: firmatoPath,
+        completed_at: firmatoIl ?? new Date().toISOString(),
+      })
+      .eq('otp_pratica_id', praticaId);
+  } catch (e: any) {
+    console.warn('[firma/callback] update pratica fallito:', e?.message);
   }
 
   return NextResponse.json({ ok: true });
