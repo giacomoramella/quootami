@@ -39,6 +39,7 @@
   "exclude": [
     "node_modules",
     "*.html",
-    "*-prod.bak.html"
+    "*-prod.bak.html",
+    "supabase/functions"
   ]
 }

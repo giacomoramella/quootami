@@ -108,6 +108,27 @@ const nextConfig = {
       'upgrade-insecure-requests',
     ].join('; ');
 
+    // ── CSP per il comparatore luce/gas (public/luce.html) ──
+    // Stessa strategia del form firma: hash SHA-256 dello script inline,
+    // libreria supabase-js self-hostata (niente CDN). Il connect-src
+    // include Supabase perché la pagina chiama RPC ed Edge Functions.
+    // Se modifichi lo script inline, ricalcola l'hash (stesso comando del
+    // commento sopra, con public/luce.html).
+    const luceCsp = [
+      "default-src 'self'",
+      "script-src 'self' 'sha256-eAEPqTF/zMs7LsLLi4LyHnybhj+d3RLPqJiWOtAceO4='",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob:",
+      "font-src 'self' data:",
+      "connect-src 'self' https://*.supabase.co",
+      "frame-src 'none'",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'none'",
+      'upgrade-insecure-requests',
+    ].join('; ');
+
     return [
       {
         source: '/(.*)',
@@ -116,6 +137,10 @@ const nextConfig = {
       {
         source: '/firma-allianz.html',
         headers: [{ key: 'Content-Security-Policy', value: firmaCsp }],
+      },
+      {
+        source: '/luce.html',
+        headers: [{ key: 'Content-Security-Policy', value: luceCsp }],
       },
       // ── Cache-control aggressivo per asset statici ──
       {

@@ -48,9 +48,18 @@ export default function PrivacyPage() {
       ogni momento dal link &ldquo;Preferenze cookie&rdquo; nel footer. Elenco completo, durate
       e titolare del trattamento cookie nella <a href="/cookie">Cookie Policy</a>.</p>
 
+      <h3>2.5 Comparatore luce e gas</h3>
+      <p>La pagina di confronto tariffe energia tratta, su iniziativa dell&apos;utente: i dati di
+      consumo inseriti, l&apos;eventuale <strong>immagine della bolletta</strong> caricata (letta in
+      modo automatizzato per estrarne i soli dati di fornitura tramite Anthropic, aderente
+      all&apos;EU-U.S. Data Privacy Framework) e l&apos;indirizzo email, con conferma tramite doppio
+      opt-in prima dello sblocco dei risultati. Le offerte mostrate provengono dai dati pubblici
+      ufficiali del Portale Offerte ARERA.</p>
+
       <h2>3. Finalità del trattamento</h2>
       <ul>
         <li>Ricontatto e gestione della richiesta di preventivo (su richiesta dell&apos;interessato).</li>
+        <li>Confronto tariffe luce/gas e invio della proposta di risparmio richiesta (previo consenso e verifica email).</li>
         <li>Identificazione e verifica documentale (adempimenti antiriciclaggio e di conformità).</li>
         <li>Analisi delle esigenze assicurative (artt. 119-bis CAP, Reg. IVASS 40/2018).</li>
         <li>Esecuzione del contratto e gestione dei sinistri.</li>
@@ -79,7 +88,7 @@ export default function PrivacyPage() {
       <ul>
         <li>Personale autorizzato del titolare (art. 29 GDPR).</li>
         <li>Compagnie assicurative partner — quali autonomi titolari.</li>
-        <li>Responsabili esterni (art. 28 GDPR): <strong>Supabase</strong> (DB + Storage, regione Francoforte UE), <strong>Vercel</strong> (hosting, funzioni server in regione UE — Francoforte), <strong>Resend</strong> (email transazionali).</li>
+        <li>Responsabili esterni (art. 28 GDPR): <strong>Supabase</strong> (DB + Storage, regione Francoforte UE), <strong>Vercel</strong> (hosting, funzioni server in regione UE — Francoforte), <strong>Resend</strong> (email transazionali), <strong>Anthropic</strong> (lettura automatizzata delle bollette nel comparatore energia, EU-U.S. Data Privacy Framework).</li>
         <li>Autorità competenti (IVASS, UIF, autorità giudiziaria) nei casi previsti dalla legge.</li>
       </ul>
 
