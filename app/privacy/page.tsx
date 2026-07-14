@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       title="Privacy"
       titleAccent="Policy."
       intro="Quali dati raccogliamo, perché, e cosa puoi farne tu. Resa ai sensi degli artt. 13 e 14 del Reg. UE 2016/679 (GDPR)."
-      lastUpdate="17 giugno 2026"
+      lastUpdate="14 luglio 2026"
     >
       <h2>1. Titolare del trattamento</h2>
       <p>Il titolare del trattamento dei dati personali raccolti tramite questo sito è il broker assicurativo per il quale Quootami opera:</p>
@@ -42,8 +42,11 @@ export default function PrivacyPage() {
       <h3>2.3 Dati di navigazione</h3>
       <p>Log tecnici trasmessi dal browser (indirizzo IP, user-agent, pagine richieste, codice di stato). Trattati dal fornitore di hosting per il tempo strettamente necessario al funzionamento del servizio, senza profilazione.</p>
 
-      <h3>2.4 Cookie</h3>
-      <p>Il sito utilizza esclusivamente cookie tecnici. Dettagli nella <a href="/cookie">Cookie Policy</a>.</p>
+      <h3>2.4 Cookie e strumenti di misurazione</h3>
+      <p>Il sito utilizza cookie tecnici e, solo previo consenso espresso tramite il banner,
+      eventuali cookie statistici e di marketing. Il consenso è modificabile o revocabile in
+      ogni momento dal link &ldquo;Preferenze cookie&rdquo; nel footer. Elenco completo, durate
+      e titolare del trattamento cookie nella <a href="/cookie">Cookie Policy</a>.</p>
 
       <h2>3. Finalità del trattamento</h2>
       <ul>
@@ -76,12 +79,20 @@ export default function PrivacyPage() {
       <ul>
         <li>Personale autorizzato del titolare (art. 29 GDPR).</li>
         <li>Compagnie assicurative partner — quali autonomi titolari.</li>
-        <li>Responsabili esterni (art. 28 GDPR): <strong>Supabase</strong> (DB + Storage, Frankfurt UE), <strong>Resend</strong> (email transazionali), <strong>Vercel</strong> (hosting).</li>
+        <li>Responsabili esterni (art. 28 GDPR): <strong>Supabase</strong> (DB + Storage, regione Francoforte UE), <strong>Vercel</strong> (hosting, funzioni server in regione UE — Francoforte), <strong>Resend</strong> (email transazionali).</li>
         <li>Autorità competenti (IVASS, UIF, autorità giudiziaria) nei casi previsti dalla legge.</li>
       </ul>
 
       <h2>7. Trasferimenti extra-UE e processi automatizzati</h2>
-      <p>Alcuni fornitori (Resend, Vercel) possono trattare dati in territori extra-UE sulla base delle <strong>Standard Contractual Clauses</strong> approvate dalla Commissione Europea (decisione 2021/914). Non sono effettuati processi decisionali automatizzati né profilazione ex art. 22 GDPR.</p>
+      <p>Il trattamento avviene in via prioritaria <strong>all&apos;interno dell&apos;Unione Europea</strong>:
+      database e archivio documenti su Supabase in regione Francoforte, funzioni server del sito
+      eseguite da Vercel in regione UE (Francoforte).</p>
+      <p>Trasferimenti extra-UE residui possono avvenire per: <strong>Resend</strong> (invio email,
+      Standard Contractual Clauses — decisione 2021/914); <strong>Google</strong> e <strong>Meta</strong>
+      (solo se attivati gli strumenti di misurazione e solo previo consenso cookie), sulla base
+      dell&apos;<strong>EU-U.S. Data Privacy Framework</strong> (decisione di adeguatezza del 10/07/2023),
+      cui entrambe le società aderiscono.</p>
+      <p>Non sono effettuati processi decisionali automatizzati né profilazione ex art. 22 GDPR.</p>
 
       <h2>8. Diritti dell&apos;interessato</h2>
       <p>L&apos;interessato può esercitare in qualsiasi momento i diritti di accesso (art. 15), rettifica (art. 16), cancellazione (art. 17), limitazione (art. 18), portabilità (art. 20), opposizione (art. 21) e revoca del consenso.</p>

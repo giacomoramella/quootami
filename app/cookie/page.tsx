@@ -14,7 +14,7 @@ export default function CookiePage() {
       title="Cookie"
       titleAccent="Policy."
       intro="Informativa sull'uso dei cookie. Resa ai sensi dell'art. 13 GDPR, art. 122 D.Lgs. 196/2003 e Linee guida Garante del 10 giugno 2021."
-      lastUpdate="17 giugno 2026"
+      lastUpdate="14 luglio 2026"
     >
       <h2>1. Cosa sono i cookie</h2>
       <p>I cookie sono piccole stringhe di testo che i siti web inviano al terminale dell&apos;utente, dove vengono memorizzate per essere ritrasmesse alla visita successiva. Possono essere di prima parte (impostati dal sito visitato) o di terze parti (impostati da domini diversi).</p>
@@ -46,22 +46,22 @@ export default function CookiePage() {
 
       <h3>4.2 Cookie statistici (solo previo consenso)</h3>
       <ul>
-        <li><strong>Google Analytics 4</strong> (Google Ireland Ltd.) — cookie <code>_ga</code>, <code>_ga_*</code>, con IP anonimizzato. Misurano visite e utilizzo del sito in forma aggregata. Durata: fino a 24 mesi. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Google</a>.</li>
+        <li><strong>Google Analytics 4</strong> — fornito da <strong>Google Ireland Ltd. (UE)</strong>; cookie <code>_ga</code>, <code>_ga_*</code>, con IP anonimizzato. Misurano visite e utilizzo del sito in forma aggregata. Durata: fino a 24 mesi. Eventuali trasferimenti extra-UE avvengono sulla base dell&apos;<strong>EU-U.S. Data Privacy Framework</strong> (decisione di adeguatezza della Commissione Europea del 10/07/2023). <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Google</a>.</li>
       </ul>
 
       <h3>4.3 Cookie di marketing (solo previo consenso, se attivi)</h3>
       <ul>
-        <li><strong>Meta Pixel</strong> (Meta Platforms Ireland Ltd.) — cookie <code>_fbp</code>, misura l&apos;efficacia delle campagne pubblicitarie. Durata: 90 giorni. <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer">Privacy Meta</a>.</li>
+        <li><strong>Meta Pixel</strong> — fornito da <strong>Meta Platforms Ireland Ltd. (UE)</strong>; cookie <code>_fbp</code>, misura l&apos;efficacia delle campagne pubblicitarie. Durata: 90 giorni. Eventuali trasferimenti extra-UE avvengono sulla base dell&apos;<strong>EU-U.S. Data Privacy Framework</strong>. <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer">Privacy Meta</a>.</li>
       </ul>
       <p>Se una categoria non è mostrata nel banner, il relativo strumento non è attivo sul sito
       e nessun cookie di quella categoria viene installato.</p>
 
-      <h3>4.2 Risorse di terze parti</h3>
+      <h3>4.4 Altre risorse di terze parti (non installano cookie)</h3>
       <ul>
-        <li><strong>Google Fonts</strong> — caricamento font tipografici (servito da next/font per garantire privacy: i font sono auto-hostati al build).</li>
-        <li><strong>Supabase</strong> (Frankfurt, UE) — archivio dati dei moduli, attivato solo all&apos;invio del form. <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Supabase</a>.</li>
-        <li><strong>Resend</strong> (USA, SCC) — invio email transazionali, attivato solo all&apos;invio del form. <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Resend</a>.</li>
-        <li><strong>Vercel</strong> (USA, SCC) — hosting del sito. <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Vercel</a>.</li>
+        <li><strong>Font tipografici</strong> — auto-hostati al build tramite next/font: nessuna richiesta verso Google Fonts durante la navigazione.</li>
+        <li><strong>Supabase</strong> (regione <strong>Francoforte, UE</strong>) — archivio dati dei moduli, attivato solo all&apos;invio del form. <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Supabase</a>.</li>
+        <li><strong>Vercel</strong> — hosting; le funzioni server del sito sono eseguite in <strong>regione UE (Francoforte)</strong>. <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Vercel</a>.</li>
+        <li><strong>Resend</strong> — invio email transazionali, attivato solo all&apos;invio del form; eventuali trasferimenti extra-UE sulla base di <strong>Standard Contractual Clauses</strong>. <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Resend</a>.</li>
         <li><strong>WhatsApp (wa.me)</strong> — i link non scambiano dati finché l&apos;utente non clicca, attivando conversazione con Meta.</li>
       </ul>
 

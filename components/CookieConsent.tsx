@@ -141,7 +141,20 @@ export function CookieConsent() {
       className="fixed bottom-3 left-3 right-3 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md z-50
                  bg-white border border-black/10 rounded-3xl shadow-brand-lg p-6 animate-fade-up"
     >
-      <p className="font-sans font-bold text-base text-ink">Cookie su Quootami</p>
+      {/* X = chiudi senza consenso: equivale a "Rifiuta" (Linee guida Garante) */}
+      <button
+        onClick={() => decide({ s: false, m: false })}
+        aria-label="Chiudi il banner senza acconsentire ai cookie non necessari"
+        className="absolute top-4 right-4 w-8 h-8 rounded-full bg-bg-alt text-ink-muted
+                   flex items-center justify-center hover:bg-brand-navy hover:text-white
+                   transition-colors"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden>
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+
+      <p className="font-sans font-bold text-base text-ink pr-10">Cookie su Quootami</p>
       <p className="mt-2 text-sm text-ink-muted leading-relaxed">
         Questo sito usa cookie tecnici e, solo con il tuo consenso, cookie di
         misurazione{META_PIXEL_ID ? ' e marketing' : ''}. Puoi cambiare idea
