@@ -53,8 +53,9 @@ export default function CookiePage() {
       <ul>
         <li><strong>Meta Pixel</strong> — fornito da <strong>Meta Platforms Ireland Ltd. (UE)</strong>; cookie <code>_fbp</code>, misura l&apos;efficacia delle campagne pubblicitarie. Durata: 90 giorni. Eventuali trasferimenti extra-UE avvengono sulla base dell&apos;<strong>EU-U.S. Data Privacy Framework</strong>. <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer">Privacy Meta</a>.</li>
       </ul>
-      <p>Se una categoria non è mostrata nel banner, il relativo strumento non è attivo sul sito
-      e nessun cookie di quella categoria viene installato.</p>
+      <p>Il banner richiede il consenso per categoria; se uno degli strumenti sopra indicati non è
+      attivo sul sito, nessun cookie della relativa categoria viene installato a prescindere dal
+      consenso espresso, che varrà dall&apos;eventuale attivazione.</p>
 
       <h3>4.4 Altre risorse di terze parti (non installano cookie)</h3>
       <ul>

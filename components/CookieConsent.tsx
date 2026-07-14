@@ -13,11 +13,12 @@ import Link from 'next/link';
  *   emette l'evento `qtm-open-cookie-prefs`);
  * - scelta memorizzata 180 giorni nel cookie tecnico `qtm_consent`.
  *
- * Gli strumenti si attivano SOLO se configurati via env var:
+ * Il banner appare sempre alla prima visita e registra il consenso per
+ * categoria. Gli strumenti però si attivano SOLO se configurati via env:
  * - NEXT_PUBLIC_GA4_ID        → Google Analytics 4  (categoria: statistiche)
  * - NEXT_PUBLIC_META_PIXEL_ID → Meta Pixel          (categoria: marketing)
- * Senza ID configurati il banner non viene mostrato e il sito resta
- * completamente privo di cookie.
+ * Senza ID configurati il consenso viene comunque memorizzato (varrà
+ * all'attivazione) ma nessuno script di terze parti viene caricato.
  */
 
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
@@ -96,14 +97,12 @@ function applyConsent(c: Consent) {
 }
 
 export function CookieConsent() {
-  const trackersConfigured = Boolean(GA4_ID || META_PIXEL_ID);
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [stats, setStats] = useState(true);
   const [marketing, setMarketing] = useState(true);
 
   useEffect(() => {
-    if (!trackersConfigured) return;
     const saved = readConsent();
     if (saved) {
       applyConsent(saved);
@@ -122,9 +121,9 @@ export function CookieConsent() {
     };
     window.addEventListener('qtm-open-cookie-prefs', open);
     return () => window.removeEventListener('qtm-open-cookie-prefs', open);
-  }, [trackersConfigured]);
+  }, []);
 
-  if (!trackersConfigured || !visible) return null;
+  if (!visible) return null;
 
   const decide = (c: Consent) => {
     writeConsent(c);
@@ -157,8 +156,8 @@ export function CookieConsent() {
       <p className="font-sans font-bold text-base text-ink pr-10">Cookie su Quootami</p>
       <p className="mt-2 text-sm text-ink-muted leading-relaxed">
         Questo sito usa cookie tecnici e, solo con il tuo consenso, cookie di
-        misurazione{META_PIXEL_ID ? ' e marketing' : ''}. Puoi cambiare idea
-        quando vuoi da &ldquo;Preferenze cookie&rdquo; nel footer.{' '}
+        misurazione e marketing. Puoi cambiare idea quando vuoi da
+        &ldquo;Preferenze cookie&rdquo; nel footer.{' '}
         <Link href="/cookie" className="underline underline-offset-2 hover:text-ink">
           Cookie Policy
         </Link>
@@ -167,28 +166,24 @@ export function CookieConsent() {
       {expanded && (
         <div className="mt-4 space-y-3 border-t border-black/5 pt-4">
           <ConsentRow label="Necessari" desc="Memorizzano solo questa scelta." checked disabled />
-          {GA4_ID && (
-            <ConsentRow
-              label="Statistiche"
-              desc="Google Analytics 4 con IP anonimizzato."
-              checked={stats}
-              onChange={setStats}
-            />
-          )}
-          {META_PIXEL_ID && (
-            <ConsentRow
-              label="Marketing"
-              desc="Meta Pixel per misurare le campagne."
-              checked={marketing}
-              onChange={setMarketing}
-            />
-          )}
+          <ConsentRow
+            label="Statistiche"
+            desc="Misurazione visite in forma aggregata (Google Analytics 4, IP anonimizzato)."
+            checked={stats}
+            onChange={setStats}
+          />
+          <ConsentRow
+            label="Marketing"
+            desc="Misurazione dell'efficacia delle campagne (Meta Pixel)."
+            checked={marketing}
+            onChange={setMarketing}
+          />
         </div>
       )}
 
       <div className="mt-5 flex flex-wrap gap-2">
         <button
-          onClick={() => decide({ s: !!GA4_ID, m: !!META_PIXEL_ID })}
+          onClick={() => decide({ s: true, m: true })}
           className="flex-1 px-4 py-2.5 rounded-full bg-brand-yellow text-ink text-sm font-bold hover:bg-brand-navy hover:text-white transition-colors"
         >
           Accetta tutti
@@ -201,7 +196,7 @@ export function CookieConsent() {
         </button>
         {expanded ? (
           <button
-            onClick={() => decide({ s: stats && !!GA4_ID, m: marketing && !!META_PIXEL_ID })}
+            onClick={() => decide({ s: stats, m: marketing })}
             className="w-full px-4 py-2.5 rounded-full bg-bg-alt text-ink text-sm font-semibold hover:bg-brand-yellow/30 transition-colors"
           >
             Salva le preferenze selezionate
@@ -251,8 +246,6 @@ function ConsentRow({
 
 /** Link footer: riapre il banner per modificare/revocare il consenso. */
 export function CookiePrefsButton() {
-  const trackersConfigured = Boolean(GA4_ID || META_PIXEL_ID);
-  if (!trackersConfigured) return null;
   return (
     <button
       onClick={() => window.dispatchEvent(new Event('qtm-open-cookie-prefs'))}
