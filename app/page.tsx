@@ -71,7 +71,7 @@ export default function HomePage() {
             <CategoryCard href="/cyber" title="Cyber" desc="Furto identità, frodi online." emoji="🔐" />
             <CategoryCard href="/polizza-animali" title="Animali domestici" desc="RC e veterinario." emoji="🐾" />
             <CategoryCard href="/rc" title="Imprese e PMI" desc="RC professionale, Catastrofale, Cyber business." emoji="🏢" />
-            <CategoryCard href="/luce.html" title="Luce e Gas" desc="Confronta le tariffe energia con i dati ufficiali ARERA." emoji="💡" />
+            <CategoryCard href="/luce" title="Luce e Gas" desc="Confronta le tariffe energia con i dati ufficiali ARERA." emoji="💡" />
           </div>
         </div>
       </section>

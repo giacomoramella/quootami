@@ -8,7 +8,7 @@
 // verify_jwt disattivato: endpoint pubblico. Le RPC usate sono eseguibili solo dalla service role.
 // Env richiesti: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, FROM_EMAIL?, LANDING_URL?
 //
-// Valori Quootami definitivi: landing /luce.html su quootami.it, mittente
+// Valori Quootami definitivi: landing /luce su quootami.it, mittente
 // noreply@quootami.it (richiede dominio verificato su Resend — fino ad
 // allora impostare FROM_EMAIL con il mittente onboarding di Resend).
 
@@ -21,7 +21,7 @@ function json(obj: unknown, status = 200) {
   return new Response(JSON.stringify(obj), { status, headers: { ...cors, 'content-type': 'application/json' } });
 }
 
-const LANDING = Deno.env.get('LANDING_URL') || 'https://quootami.it/luce.html';
+const LANDING = Deno.env.get('LANDING_URL') || 'https://quootami.it/luce';
 const FROM = Deno.env.get('FROM_EMAIL') || 'Quootami Energia <noreply@quootami.it>';
 const SITE = 'quootami.it';
 
