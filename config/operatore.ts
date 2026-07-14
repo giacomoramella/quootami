@@ -67,6 +67,6 @@ export function getDisclaimerHTML() {
 }
 
 export function getCopyrightText() {
-  const { brand, broker } = OPERATORE;
-  return `© ${new Date().getFullYear()} ${brand.name} · gestito da ${broker.ragione_sociale_breve} · P.IVA ${broker.partita_iva} · RUI sez. ${broker.rui_sezione} n. ${broker.rui_numero}`;
+  const { brand, collaboratore } = OPERATORE;
+  return `© ${new Date().getFullYear()} ${brand.name} · sito gestito da ${collaboratore.nome_completo} · RUI sez. ${collaboratore.rui_sezione} n. ${collaboratore.rui_numero}`;
 }
