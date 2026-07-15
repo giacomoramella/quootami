@@ -1,67 +1,50 @@
-# Attivazione comparatore Luce e Gas — checklist operativa
+# Attivazione comparatore Luce e Gas — stato
 
-> Il frontend è già integrato nel sito (branch `next`, pagina `/luce` (React, stile Quootami),
-> collegata al progetto Supabase attivo `ivcdwizhkdubjxxrukbs`, Francoforte).
-> Perché funzioni end-to-end vanno completati questi passi, in ordine.
+> Backend sul progetto Supabase attivo `ivcdwizhkdubjxxrukbs` (Francoforte).
+> Pagina: `/luce` (React) + `components/ComparatoreLuce.tsx`.
 
-## 0. ⚠️ PRIMA DI TUTTO: il progetto Supabase (bloccante)
+## ✅ Già fatto (15/07/2026, via dashboard + Management API)
 
-Al 14/07/2026 **nessuno dei due progetti Supabase noti risolve il DNS**:
-`ivcdwizhkdubjxxrukbs` (nelle credenziali del sito) e `iulktthjkzvmevzoqhww`
-(citato in EN-MIGRATION). Probabilmente in pausa prolungata o eliminati.
-Da dashboard supabase.com: riattivare il progetto esistente (Resume) o
-crearne uno nuovo in **regione Francoforte**. Se il ref cambia, aggiornare
-`config/credentials.ts` (url + anonKey) — il comparatore e il resto del
-sito leggono da lì.
+- **Progetto Supabase** riattivato (era in pausa)
+- **Schema `en`**: 7 tabelle + vista + funzioni RPC + RLS
+- **Schema firma M4**: tabella `public.pratiche` + RLS
+- **Dati**: 92 fornitori, 170 offerte, 2 indici di mercato (fonte ARERA)
+- **Bucket Storage privati** per la firma: `adesioni-bozze`, `adesioni-firmate` (solo PDF, 15 MB)
+- **Edge Functions** deployate e ACTIVE: `en-lead`, `en-bill-extract` (verify_jwt off)
+- **Secret** `LANDING_URL=https://quootami.it/luce` impostato
+- **Verificato end-to-end**: `en_quote_public` calcola (spesa €432 → risparmio €129), `en-lead?submit` salva il lead e calcola le offerte (dati di test poi ripuliti)
 
-## 1. Database (Dashboard Supabase → SQL Editor) — ~10 min
+## 🔧 Da completare (chiavi/servizi tuoi)
 
-Eseguire nell'ordine, un file alla volta:
-
-1. `supabase/en-schema.sql` (schema `en.*`, tabelle, funzioni, RLS)
-2. `supabase/seed/en-seed-suppliers.sql` (92 fornitori)
-3. `supabase/seed/en-seed-offers-1.sql` → `-2` → `-3` → `-4`
-4. `supabase/seed/en-seed-market-indices.sql`
-
-Verifica rapida: `select count(*) from en.offers;` deve restituire le offerte caricate.
-
-## 2. Edge Functions (CLI Supabase) — ~10 min
-
-```bash
-supabase link --project-ref ivcdwizhkdubjxxrukbs
-supabase functions deploy en-lead --no-verify-jwt
-supabase functions deploy en-bill-extract --no-verify-jwt
+### 1. Secret Edge Functions mancanti (Dashboard → Edge Functions → Secrets, o CLI)
 ```
-
-## 3. Secret delle funzioni (Dashboard → Edge Functions → Secrets)
-
+RESEND_API_KEY=re_...        # invio email di verifica (comparatore) e broker (firma)
+ANTHROPIC_API_KEY=sk-ant-... # lettura OCR delle bollette (en-bill-extract)
 ```
-RESEND_API_KEY=re_...          # stessa chiave del sito
-ANTHROPIC_API_KEY=sk-ant-...   # per la lettura OCR delle bollette
-FROM_EMAIL=Quootami Energia <noreply@quootami.it>   # richiede dominio verificato su Resend
-LANDING_URL=https://quootami.it/luce           # (o l'URL del preview finché non c'è il domain switch)
+Senza `RESEND_API_KEY` il confronto funziona ma l'email di verifica non parte
+(risposta: `email_sent:false`). Senza `ANTHROPIC_API_KEY` l'upload bolletta
+non compila i campi (si usa l'inserimento manuale).
+
+### 2. Resend — verifica dominio quootami.it
+Serve per una buona deliverability e per il mittente `noreply@quootami.it`
+(vale sia per il comparatore sia per la firma FEA).
+
+### 3. Env vars su Vercel (per il sito, non Supabase)
 ```
-
-`SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` sono iniettati automaticamente.
-
-## 4. Test end-to-end
-
-1. Aprire `/luce` → inserire consumi → "Confronta": devono comparire le offerte
-2. Lasciare l'email con consenso → arriva l'email di verifica → click → risultati sbloccati
-3. Caricare una foto di bolletta → i campi si compilano da soli (OCR)
-4. Verificare su Supabase: riga creata in `en.bills`, proposte in `en.proposals`
+SUPABASE_SERVICE_ROLE_KEY=...   # firma: upload bozze/firmati, tabella pratiche
+RESEND_API_KEY=...              # firma: email al broker
+INTERMEDIARIO_EMAIL=giacomo.rp@sistoassicurazioni.com
+```
+(La anon key pubblica è già in `config/credentials.ts` e funziona.)
 
 ## Note di sicurezza (già applicate lato sito)
 
-- pagina React nativa del sito: gira sotto la CSP a nonce globale,
-  nessuna libreria esterna (chiamate Supabase via fetch), nessun CDN;
-  `connect-src` limitato a `self` + `*.supabase.co`
-- Consenso GDPR obbligatorio sul form lead con link all'informativa
-- Privacy policy aggiornata (dati bolletta, Anthropic come responsabile, DPF)
-- Nessun segreto nel codice: le chiavi vivono solo nei secret Supabase/Vercel
+- pagina React nativa sotto la CSP a nonce globale, nessuna libreria esterna
+- RLS su tutte le tabelle `en.*`; accesso solo via funzioni RPC (SECURITY
+  DEFINER) o service_role; il frontend usa la anon key protetta da RLS
+- consenso GDPR obbligatorio sui form (comparatore e firma)
 
 ## Coordinamento
 
-Da ora la versione canonica del comparatore è su **branch `next`**
-(`app/luce/page.tsx` + `components/ComparatoreLuce.tsx`): le modifiche
-future vanno fatte qui, non su `main`.
+Versione canonica su branch `next`: `app/luce/page.tsx` +
+`components/ComparatoreLuce.tsx` + `supabase/`. Non modificare la copia su `main`.
