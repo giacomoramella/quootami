@@ -19,7 +19,7 @@ export const OPERATORE = {
     name: 'Quootami',
     domain: 'quootami.it',
     url: 'https://quootami.it',
-    tagline: 'Assicurazioni e previdenza',
+    tagline: 'Confronta. Cambia. Risparmia.',
     description:
       'Confronto polizze assicurative e previdenza complementare in tutta Italia.',
     claim: 'Il tuo phygital partner.',
