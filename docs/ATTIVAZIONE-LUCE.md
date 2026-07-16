@@ -14,22 +14,20 @@
 - **Secret** `LANDING_URL=https://quootami.it/luce` impostato
 - **Verificato end-to-end**: `en_quote_public` calcola (spesa €432 → risparmio €129), `en-lead?submit` salva il lead e calcola le offerte (dati di test poi ripuliti)
 
-## 🔧 Da completare (chiavi/servizi tuoi)
+## ✅ COMPARATORE OPERATIVO IN PRODUZIONE (15/07/2026 sera)
 
-### 1. Secret Edge Functions mancanti (Dashboard → Edge Functions → Secrets, o CLI)
-```
-RESEND_API_KEY=re_...        # invio email di verifica (comparatore) e broker (firma)
-ANTHROPIC_API_KEY=sk-ant-... # lettura OCR delle bollette (en-bill-extract)
-```
-Senza `RESEND_API_KEY` il confronto funziona ma l'email di verifica non parte
-(risposta: `email_sent:false`). Senza `ANTHROPIC_API_KEY` l'upload bolletta
-non compila i campi (si usa l'inserimento manuale).
+- Secret `RESEND_API_KEY` e `ANTHROPIC_API_KEY` impostati sulle Edge Functions
+- Dominio quootami.it **verificato su Resend** (DKIM + MX/SPF su `send.` via Aruba)
+- **Domain switch fatto**: quootami.it serve il branch `next` (sito Next 16)
+- **Funnel validato end-to-end dal vivo** dall'utente: confronto (90 offerte,
+  risparmio €184/anno) → lead con consenso → email di verifica ricevuta →
+  clic sul link → fornitori sbloccati. OCR bolletta testato e funzionante.
+  Rate limiting anti-spam verificato in produzione.
+- Database ripulito dai lead di test (92 fornitori e 170 offerte intatti)
 
-### 2. Resend — verifica dominio quootami.it
-Serve per una buona deliverability e per il mittente `noreply@quootami.it`
-(vale sia per il comparatore sia per la firma FEA).
+## 🔧 Unica cosa rimasta (serve solo per la FIRMA, non per il comparatore)
 
-### 3. Env vars su Vercel (per il sito, non Supabase)
+### Env vars su Vercel
 ```
 SUPABASE_SERVICE_ROLE_KEY=...   # firma: upload bozze/firmati, tabella pratiche
 RESEND_API_KEY=...              # firma: email al broker
