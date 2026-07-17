@@ -23,6 +23,8 @@ export type Polizza = {
   slug: string;
   category: 'privati' | 'imprese' | 'previdenza';
   title: string;
+  /** Riga breve usata nelle card degli hub (home e /polizze). */
+  shortDesc: string;
   hero: {
     eyebrow: string;
     h1Lead: string;        // es. "Quootami l'RC"
@@ -59,6 +61,7 @@ export const POLIZZE: Record<string, Polizza> = {
     slug: 'polizza-auto',
     category: 'privati',
     title: 'Polizza Auto',
+    shortDesc: 'RC obbligatoria, Furto, Incendio, Kasko.',
     hero: {
       eyebrow: 'RC Auto obbligatoria · Furto, Incendio & Kasko',
       h1Lead: "Quootami l'RC",
@@ -105,6 +108,7 @@ export const POLIZZE: Record<string, Polizza> = {
     slug: 'polizza-casa',
     category: 'privati',
     title: 'Polizza Casa',
+    shortDesc: 'RC capofamiglia, furto, incendio, eventi naturali.',
     hero: {
       eyebrow: 'Casa e famiglia',
       h1Lead: 'Proteggi la tua',
@@ -151,6 +155,7 @@ export const POLIZZE: Record<string, Polizza> = {
     slug: 'salute',
     category: 'privati',
     title: 'Salute & Vita',
+    shortDesc: 'Sanitaria, vita, infortuni.',
     hero: {
       eyebrow: 'Salute, vita, infortuni',
       h1Lead: 'La tua salute,',
@@ -196,6 +201,7 @@ export const POLIZZE: Record<string, Polizza> = {
     slug: 'piano-pensione',
     category: 'previdenza',
     title: 'Fondo Pensione',
+    shortDesc: 'Deduci fino a €5.300/anno dal reddito IRPEF.',
     hero: {
       eyebrow: 'Previdenza complementare',
       h1Lead: 'Il tuo futuro,',
@@ -245,6 +251,7 @@ export const POLIZZE: Record<string, Polizza> = {
     slug: 'cyber',
     category: 'privati',
     title: 'Cyber',
+    shortDesc: 'Furto identità, frodi online.',
     hero: {
       eyebrow: 'Protezione digitale',
       h1Lead: 'Vita digitale,',
@@ -289,6 +296,7 @@ export const POLIZZE: Record<string, Polizza> = {
     slug: 'polizza-animali',
     category: 'privati',
     title: 'Polizza Animali',
+    shortDesc: 'RC e veterinario.',
     hero: {
       eyebrow: 'Cani e gatti',
       h1Lead: 'Il tuo amico a 4 zampe,',
@@ -332,6 +340,7 @@ export const POLIZZE: Record<string, Polizza> = {
     slug: 'rc',
     category: 'imprese',
     title: 'RC Professionale & PMI',
+    shortDesc: 'RC professionale, Catastrofale, Cyber business.',
     hero: {
       eyebrow: 'Imprese e professionisti',
       h1Lead: 'La tua attività,',

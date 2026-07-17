@@ -27,18 +27,8 @@ export function Nav() {
         {/* Menu desktop */}
         <ul className="hidden md:flex items-center gap-7 list-none">
           <li>
-            <Link href="/polizza-auto" className="text-sm text-ink-muted hover:text-ink transition-colors">
-              Auto
-            </Link>
-          </li>
-          <li>
-            <Link href="/polizza-casa" className="text-sm text-ink-muted hover:text-ink transition-colors">
-              Casa
-            </Link>
-          </li>
-          <li>
-            <Link href="/salute" className="text-sm text-ink-muted hover:text-ink transition-colors">
-              Salute
+            <Link href="/polizze" className="text-sm text-ink-muted hover:text-ink transition-colors">
+              Polizze
             </Link>
           </li>
           <li>
@@ -86,13 +76,8 @@ export function Nav() {
           id="mobile-menu"
           className="md:hidden container-content bg-white border border-black/5 shadow-brand-lg rounded-3xl mt-2 px-6 py-6 flex flex-col gap-4"
         >
-          <Link href="/polizza-auto" onClick={() => setOpen(false)} className="text-base text-ink py-2">Polizza Auto</Link>
-          <Link href="/polizza-casa" onClick={() => setOpen(false)} className="text-base text-ink py-2">Polizza Casa</Link>
-          <Link href="/salute" onClick={() => setOpen(false)} className="text-base text-ink py-2">Salute &amp; Vita</Link>
+          <Link href="/polizze" onClick={() => setOpen(false)} className="text-base text-ink py-2">Polizze</Link>
           <Link href="/piano-pensione" onClick={() => setOpen(false)} className="text-base text-ink py-2">Fondo Pensione</Link>
-          <Link href="/cyber" onClick={() => setOpen(false)} className="text-base text-ink py-2">Cyber</Link>
-          <Link href="/polizza-animali" onClick={() => setOpen(false)} className="text-base text-ink py-2">Animali</Link>
-          <Link href="/rc" onClick={() => setOpen(false)} className="text-base text-ink py-2">RC Imprese</Link>
           <Link href="/luce" onClick={() => setOpen(false)} className="text-base text-ink py-2">Luce e Gas</Link>
           <Link href="/chi-siamo" onClick={() => setOpen(false)} className="text-base text-ink py-2">Chi siamo</Link>
           <Link

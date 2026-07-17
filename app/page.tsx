@@ -1,5 +1,10 @@
 import Link from 'next/link';
 import { OPERATORE } from '@/config/operatore';
+import { getPolizzeByCategory } from '@/config/polizze';
+
+/** Aree di copertura raccolte sotto /polizze (previdenza ha un blocco suo). */
+const NUM_POLIZZE =
+  getPolizzeByCategory('privati').length + getPolizzeByCategory('imprese').length;
 
 export default function HomePage() {
   return (
@@ -54,49 +59,49 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── CATEGORIE PRODOTTI ─── */}
+      {/* ─── 3 AREE PRINCIPALI ─── */}
       <section className="section bg-bg">
         <div className="container-content">
           <div className="text-center mb-16">
             <span className="eyebrow">Cosa cerchi</span>
             <h2 className="section-title">
-              Polizze per <span className="hl">privati e imprese.</span>
+              Tre modi per <span className="hl">risparmiare.</span>
             </h2>
+            <p className="section-sub mx-auto">
+              Scegli l&apos;area che ti interessa: Quootami confronta e ti segue fino alla firma.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <CategoryCard href="/polizza-auto" title="Auto e mobilità" desc="RC obbligatoria, Furto, Incendio, Kasko." emoji="🚗" />
-            <CategoryCard href="/polizza-casa" title="Casa" desc="RC capofamiglia, furto, incendio, eventi naturali." emoji="🏠" />
-            <CategoryCard href="/salute" title="Salute & Vita" desc="Sanitaria, vita, infortuni." emoji="🩺" />
-            <CategoryCard href="/cyber" title="Cyber" desc="Furto identità, frodi online." emoji="🔐" />
-            <CategoryCard href="/polizza-animali" title="Animali domestici" desc="RC e veterinario." emoji="🐾" />
-            <CategoryCard href="/rc" title="Imprese e PMI" desc="RC professionale, Catastrofale, Cyber business." emoji="🏢" />
-            <CategoryCard href="/luce" title="Luce e Gas" desc="Confronta le tariffe energia con i dati ufficiali ARERA." emoji="💡" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <AreaCard
+              href="/polizze"
+              accent="yellow"
+              title="Polizze assicurative"
+              desc="Auto, casa, salute, cyber, animali e imprese. Confronto multi-compagnia per trovare la copertura adatta."
+              items={['Auto e mobilità', 'Casa e famiglia', 'Salute & Vita', 'Cyber e animali', 'Imprese e PMI']}
+              cta={`${NUM_POLIZZE} aree di copertura`}
+              icon={<ShieldIcon />}
+            />
+            <AreaCard
+              href="/piano-pensione"
+              accent="green"
+              badge="Novità 2026"
+              title="Fondo pensione"
+              desc="Deduci fino a €5.300 all'anno dal reddito IRPEF e costruisci la pensione integrativa."
+              items={['Deduzione fino a €5.300', 'Rendimenti tassati al 20%', 'Calcolatore del risparmio']}
+              cta="Calcola il vantaggio fiscale"
+              icon={<GrowthIcon />}
+            />
+            <AreaCard
+              href="/luce"
+              accent="navy"
+              title="Luce e Gas"
+              desc="Confronta le tariffe di energia elettrica e gas sui dati ufficiali ARERA. Gratuito e senza impegno."
+              items={['Dati ufficiali ARERA', 'Confronto in 2 minuti', 'Lettura automatica bolletta']}
+              cta="Confronta le tariffe"
+              icon={<BoltIcon />}
+            />
           </div>
-        </div>
-      </section>
-
-      {/* ─── PENSION BANNER (verde) ─── */}
-      <section className="section bg-bg">
-        <div className="container-content">
-          <Link
-            href="/piano-pensione"
-            className="group flex items-center gap-6 p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-brand-green/15 to-brand-green-dark/10 border-2 border-brand-green hover:shadow-brand-lg transition-all duration-300 ease-soft"
-          >
-            <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-brand-green text-white flex items-center justify-center text-3xl">
-              💎
-            </div>
-            <div className="flex-1">
-              <span className="inline-block px-3 py-0.5 mb-2 rounded-full bg-brand-green/10 text-brand-green-dark text-xs font-bold tracking-wider uppercase">
-                Novità 2026
-              </span>
-              <h3 className="font-sans font-bold text-lg sm:text-xl text-ink">Deduci fino a €5.300 all&apos;anno</h3>
-              <p className="text-sm sm:text-base text-ink-soft mt-1">
-                Con il fondo pensione complementare risparmi sulle tasse e costruisci il tuo futuro. <strong>In vigore dal 2026</strong>.
-              </p>
-            </div>
-            <span className="hidden sm:inline-block text-brand-green text-2xl font-bold group-hover:translate-x-1 transition-transform">→</span>
-          </Link>
         </div>
       </section>
 
@@ -139,23 +144,80 @@ function Stat({ num, label }: { num: string; label: React.ReactNode }) {
   );
 }
 
-function CategoryCard({ href, title, desc, emoji }: { href: string; title: string; desc: string; emoji: string }) {
+/**
+ * Blocco grande di una delle 3 aree della home. L'accento colorato
+ * riprende la palette già in uso: giallo = brand, verde = previdenza,
+ * navy = energia.
+ */
+function AreaCard({ href, accent, badge, title, desc, items, cta, icon }: {
+  href: string;
+  accent: 'yellow' | 'green' | 'navy';
+  badge?: string;
+  title: string;
+  desc: string;
+  items: string[];
+  cta: string;
+  icon: React.ReactNode;
+}) {
+  const styles = {
+    yellow: {
+      border: 'hover:border-brand-yellow',
+      iconBox: 'bg-brand-yellow/15 text-brand-yellow-deep group-hover:bg-brand-yellow group-hover:text-ink',
+      dot: 'bg-brand-yellow',
+      cta: 'text-brand-yellow-deep',
+      badge: 'bg-brand-yellow/15 text-brand-yellow-deep',
+    },
+    green: {
+      border: 'hover:border-brand-green',
+      iconBox: 'bg-brand-green/15 text-brand-green group-hover:bg-brand-green group-hover:text-white',
+      dot: 'bg-brand-green',
+      cta: 'text-brand-green-dark',
+      badge: 'bg-brand-green/10 text-brand-green-dark',
+    },
+    navy: {
+      border: 'hover:border-brand-navy',
+      iconBox: 'bg-brand-navy/10 text-brand-navy group-hover:bg-brand-navy group-hover:text-white',
+      dot: 'bg-brand-navy',
+      cta: 'text-brand-navy',
+      badge: 'bg-brand-navy/10 text-brand-navy',
+    },
+  } as const;
+  const s = styles[accent];
+
   return (
     <Link
       href={href}
-      className="group relative block p-7 rounded-3xl bg-bg-card border border-black/5 hover:border-brand-yellow hover:shadow-brand-md transition-all duration-300 ease-soft hover:-translate-y-1.5"
+      className={`group flex flex-col h-full p-8 rounded-3xl bg-bg-card border border-black/5 ${s.border}
+                  hover:shadow-brand-lg transition-all duration-300 ease-soft hover:-translate-y-1.5`}
     >
       <div
-        className="w-14 h-14 rounded-2xl bg-bg-alt flex items-center justify-center text-2xl mb-4
-                   group-hover:bg-brand-yellow/20 group-hover:scale-110 transition-all duration-300 ease-soft"
+        className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 ease-soft group-hover:scale-110 ${s.iconBox}`}
         aria-hidden
       >
-        {emoji}
+        {icon}
       </div>
-      <h3 className="font-sans font-bold text-base text-ink">{title}</h3>
-      <p className="text-sm text-ink-muted mt-1.5 leading-relaxed">{desc}</p>
-      <span className="absolute top-7 right-6 w-8 h-8 rounded-full bg-bg-alt flex items-center justify-center text-ink-muted font-semibold group-hover:bg-brand-yellow group-hover:text-ink group-hover:translate-x-1 transition-all duration-300">
-        →
+
+      {badge && (
+        <span className={`inline-block self-start px-3 py-0.5 mb-2 rounded-full text-xs font-bold tracking-wider uppercase ${s.badge}`}>
+          {badge}
+        </span>
+      )}
+
+      <h3 className="font-sans font-bold text-xl text-ink">{title}</h3>
+      <p className="text-sm text-ink-muted mt-2 leading-relaxed">{desc}</p>
+
+      <ul className="mt-5 space-y-2 list-none">
+        {items.map(item => (
+          <li key={item} className="flex items-center gap-2.5 text-sm text-ink-soft">
+            <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${s.dot}`} aria-hidden />
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <span className={`mt-auto pt-6 inline-flex items-center gap-2 text-sm font-bold ${s.cta}`}>
+        {cta}
+        <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>→</span>
       </span>
     </Link>
   );
@@ -189,6 +251,30 @@ function OmniIcon({ href, label, color, external, children }: {
 }
 
 /* ── Icons SVG inline (no extra HTTP) ── */
+function ShieldIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <path d="M9 12l2 2 4-4" />
+    </svg>
+  );
+}
+function GrowthIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M3 3v18h18" />
+      <path d="M7 15l4-4 3 3 5-6" />
+      <path d="M15 8h4v4" />
+    </svg>
+  );
+}
+function BoltIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M13 2L4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5z" />
+    </svg>
+  );
+}
 function WhatsAppIcon() {
   return (
     <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden>

@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 const SECTIONS = [
   {
     title: '🏠 Home',
-    links: [{ href: '/', label: 'Quootami — Home' }],
+    links: [
+      { href: '/', label: 'Quootami — Home' },
+      { href: '/polizze', label: 'Polizze assicurative — tutte le aree' },
+    ],
   },
   {
     title: '🚗 Polizze privati',
