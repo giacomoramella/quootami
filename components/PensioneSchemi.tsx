@@ -366,9 +366,13 @@ function FaseCard({ lettera, fase, momento, desc, cifra, cifraLabel }: {
         </div>
       </div>
       <p className="mt-4 text-sm text-ink-soft leading-relaxed">{desc}</p>
+      {/* Il blocco cifra è ancorato in basso: senza un'altezza minima sulla
+          didascalia, quella più lunga spingerebbe il numero più in alto e le
+          tre cifre non risulterebbero allineate fra loro. Vincolo solo da md
+          in su, dove le card stanno affiancate. */}
       <div className="mt-auto pt-5">
         <p className="font-sans font-bold text-2xl text-ink tabular-nums">{cifra}</p>
-        <p className="mt-1 text-xs text-ink-muted leading-relaxed">{cifraLabel}</p>
+        <p className="mt-1 text-xs text-ink-muted leading-relaxed md:min-h-[3.7rem]">{cifraLabel}</p>
       </div>
     </div>
   );
