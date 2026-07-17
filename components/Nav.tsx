@@ -20,7 +20,7 @@ export function Nav() {
           className="font-sans font-bold text-xl text-ink tracking-tight inline-flex items-baseline"
           aria-label={`${OPERATORE.brand.name} home`}
         >
-          <span className="lowercase">quootami</span>
+          <span>{OPERATORE.brand.name}</span>
           <span className="ml-1 w-2 h-2 rounded-full bg-brand-yellow translate-y-[-0.05em]" />
         </Link>
 

@@ -25,7 +25,7 @@ export default function HomePage() {
         <div className="container-content text-center relative">
           {/* H1 */}
           <h1 className="mt-8 font-sans font-bold text-5xl sm:text-7xl md:text-8xl tracking-tight leading-[1.05] text-ink animate-fade-up">
-            <span className="lowercase">quootami</span>
+            <span>{OPERATORE.brand.name}</span>
             <span className="text-brand-yellow-deep">.</span>
           </h1>
 

@@ -20,7 +20,7 @@ export function Footer() {
               href="/"
               className="font-sans font-bold text-xl text-white tracking-tight inline-flex items-baseline"
             >
-              <span className="lowercase">quootami</span>
+              <span>{OPERATORE.brand.name}</span>
               <span className="ml-1 w-2 h-2 rounded-full bg-brand-yellow translate-y-[-0.05em]" />
             </Link>
             <p className="mt-4 text-sm text-white/50">Iscritto RUI sez. {collaboratore.rui_sezione}</p>
