@@ -248,9 +248,9 @@ export function PensioneSchemi() {
                 anche oltre il limite annuo di deducibilità.
               </p>
               <p className="mt-3 text-sm text-ink-soft leading-relaxed">
-                Sulla parte che eccede il limite spetta un <strong>credito d&apos;imposta</strong> pari
-                all&apos;imposta già pagata sull&apos;anticipazione: in pratica si recupera il prelievo subito,
-                e la posizione previdenziale torna intera.
+                Sulla parte che eccede il limite spetta un <strong>credito d&apos;imposta</strong>{' '}
+                pari all&apos;imposta già pagata sull&apos;anticipazione: in pratica si recupera il prelievo
+                subito, e la posizione previdenziale torna intera.
               </p>
             </div>
           </div>
