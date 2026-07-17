@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ProductPage } from '@/components/ProductPage';
 import { CalcolatoreFondoPensione } from '@/components/CalcolatoreFondoPensione';
 import { PensioneDati } from '@/components/PensioneDati';
+import { PensioneSchemi } from '@/components/PensioneSchemi';
 import { getPolizza } from '@/config/polizze';
 
 const polizza = getPolizza('piano-pensione')!;
@@ -24,6 +25,7 @@ export default function PianoPensionePage() {
         <>
           <CalcolatoreFondoPensione />
           <PensioneDati />
+          <PensioneSchemi />
         </>
       }
     />
