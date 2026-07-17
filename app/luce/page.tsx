@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ComparatoreLuce } from '@/components/ComparatoreLuce';
+import { LuceGuida } from '@/components/LuceGuida';
 import { OPERATORE } from '@/config/operatore';
 
 export const metadata: Metadata = {
@@ -78,6 +79,9 @@ export default function LucePage() {
           </ol>
         </div>
       </section>
+
+      {/* ─── GUIDA A MODULI ─── */}
+      <LuceGuida />
 
       {/* ─── PERCHÉ QUOOTAMI ─── */}
       <section className="section bg-bg-alt">

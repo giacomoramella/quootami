@@ -2,10 +2,7 @@
 
 /**
  * Guida alla previdenza complementare — pagina Fondo Pensione.
- *
- * Cinque moduli selezionabili: si clicca la scheda e il contenuto si apre
- * sotto, senza cambiare pagina. Pattern tablist/tab/tabpanel accessibile
- * (frecce, Home/End, aria-selected).
+ * Struttura e mattoncini condivisi: vedi GuidaModuli.
  *
  * Fonti e verifiche (luglio 2026):
  * - Deduzione €5.300/anno: limite alzato dalla Legge di Bilancio 2026
@@ -33,21 +30,12 @@
  * a ogni rinnovo: vanno sempre verificate sull'accordo applicato.
  */
 
-import { useRef, useState } from 'react';
+import {
+  GuidaModuli, Blocco, Nota, Tabella, RigaDato, SogliaTile, PassoCard, NovitaCard, ElencoCard,
+  TEAL, type ModuloGuida,
+} from '@/components/GuidaModuli';
 
-const TEAL = '#2A9D8F';
-const CORAL = '#E76F51';
-
-type Modulo = {
-  id: string;
-  titolo: string;
-  sottotitolo: string;
-  desc: string;
-  lettura: string;
-  contenuto: React.ReactNode;
-};
-
-const MODULI: Modulo[] = [
+const MODULI: ModuloGuida[] = [
   {
     id: 'vantaggi-fiscali',
     titolo: 'Vantaggi fiscali',
@@ -91,147 +79,15 @@ const MODULI: Modulo[] = [
 ];
 
 export function PensioneSchemi() {
-  const [attivo, setAttivo] = useState(0);
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  /** Frecce, Home e End sulla lista dei moduli (pattern ARIA tablist). */
-  function onKeyDown(e: React.KeyboardEvent) {
-    const ultimo = MODULI.length - 1;
-    let next: number | null = null;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next = attivo === ultimo ? 0 : attivo + 1;
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') next = attivo === 0 ? ultimo : attivo - 1;
-    else if (e.key === 'Home') next = 0;
-    else if (e.key === 'End') next = ultimo;
-    if (next === null) return;
-    e.preventDefault();
-    setAttivo(next);
-    tabRefs.current[next]?.focus();
-  }
-
-  const m = MODULI[attivo];
-
   return (
-    <section id="guida" className="section bg-bg-alt">
-      <div className="container-content">
-        <div className="text-center mb-12">
-          <span className="eyebrow">La guida</span>
-          <h2 className="section-title">
-            Tutto sulla <span className="hl">previdenza.</span>
-          </h2>
-          <p className="section-sub mx-auto">
-            Cinque moduli, dalle basi alla pianificazione. Scegli l&apos;argomento: si apre qui sotto.
-          </p>
-        </div>
-
-        {/* ── Selettore moduli ── */}
-        <div
-          role="tablist"
-          aria-label="Moduli della guida alla previdenza complementare"
-          onKeyDown={onKeyDown}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3"
-        >
-          {MODULI.map((mod, i) => {
-            const on = i === attivo;
-            return (
-              <button
-                key={mod.id}
-                ref={el => { tabRefs.current[i] = el; }}
-                role="tab"
-                id={`tab-${mod.id}`}
-                aria-selected={on}
-                aria-controls={`pannello-${mod.id}`}
-                tabIndex={on ? 0 : -1}
-                onClick={() => setAttivo(i)}
-                className={`group text-left rounded-2xl p-5 border transition-all duration-300 ease-soft
-                            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2
-                            ${on
-                              ? 'bg-bg-card border-transparent shadow-brand-md -translate-y-1'
-                              : 'bg-bg-card/50 border-black/5 hover:bg-bg-card hover:-translate-y-0.5'}`}
-                style={on ? { borderColor: TEAL } : undefined}
-              >
-                <span
-                  className="inline-flex items-center justify-center w-8 h-8 rounded-lg font-sans font-bold text-xs tabular-nums transition-colors duration-300"
-                  style={on
-                    ? { backgroundColor: TEAL, color: '#fff' }
-                    : { backgroundColor: `${TEAL}1A`, color: TEAL }}
-                  aria-hidden
-                >
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span className="block mt-3 font-sans font-bold text-sm text-ink leading-snug">
-                  {mod.titolo}
-                </span>
-                <span className="block mt-0.5 text-xs text-ink-muted">{mod.sottotitolo}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* ── Pannello del modulo ── */}
-        <div
-          key={m.id}
-          role="tabpanel"
-          id={`pannello-${m.id}`}
-          aria-labelledby={`tab-${m.id}`}
-          tabIndex={0}
-          className="mt-5 rounded-3xl bg-bg-card border border-black/5 p-7 sm:p-10 animate-fade-up focus-visible:outline-none"
-        >
-          {/* Intestazione del modulo */}
-          <div className="flex flex-wrap items-center gap-3 pb-6 border-b border-black/5">
-            <span className="text-xs font-bold tracking-wider uppercase" style={{ color: TEAL }}>
-              Modulo {attivo + 1} di {MODULI.length}
-            </span>
-            <span className="w-1 h-1 rounded-full bg-ink/20" aria-hidden />
-            <span className="text-xs text-ink-muted">Lettura: {m.lettura}</span>
-          </div>
-
-          <h3 className="mt-6 font-sans font-bold text-2xl sm:text-3xl text-ink tracking-tight">
-            {m.titolo}
-          </h3>
-          <p className="mt-2 text-sm sm:text-base text-ink-muted leading-relaxed max-w-prose-wide">
-            {m.desc}
-          </p>
-
-          <div className="mt-8">{m.contenuto}</div>
-
-          {/* Navigazione fra moduli */}
-          <div className="mt-10 pt-6 border-t border-black/5 flex items-center justify-between gap-4">
-            <NavModulo
-              verso="prec"
-              modulo={attivo > 0 ? MODULI[attivo - 1] : null}
-              onClick={() => setAttivo(attivo - 1)}
-            />
-            <NavModulo
-              verso="succ"
-              modulo={attivo < MODULI.length - 1 ? MODULI[attivo + 1] : null}
-              onClick={() => setAttivo(attivo + 1)}
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function NavModulo({ verso, modulo, onClick }: {
-  verso: 'prec' | 'succ'; modulo: Modulo | null; onClick: () => void;
-}) {
-  if (!modulo) return <span aria-hidden />;
-  const succ = verso === 'succ';
-  return (
-    <button
-      onClick={onClick}
-      className={`group flex flex-col ${succ ? 'items-end text-right ml-auto' : 'items-start text-left'}
-                  rounded-xl px-3 py-2 -mx-3 hover:bg-bg-alt transition-colors
-                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow`}
-    >
-      <span className="text-xs text-ink-muted">{succ ? 'Modulo successivo' : 'Modulo precedente'}</span>
-      <span className="mt-0.5 font-sans font-bold text-sm text-ink inline-flex items-center gap-1.5">
-        {!succ && <span className="transition-transform group-hover:-translate-x-1" aria-hidden>←</span>}
-        {modulo.titolo}
-        {succ && <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>}
-      </span>
-    </button>
+    <GuidaModuli
+      id="guida"
+      eyebrow="La guida"
+      titolo="Tutto sulla"
+      accent="previdenza."
+      sottotitolo="Cinque moduli, dalle basi alla pianificazione. Scegli l'argomento: si apre qui sotto."
+      moduli={MODULI}
+    />
   );
 }
 
@@ -418,18 +274,18 @@ function ModuloAnticipazioni() {
           mancano alla pensione pubblica. Due situazioni la rendono accessibile.
         </p>
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <RitaCard
+          <ElencoCard
             titolo="Fino a 5 anni prima"
-            requisiti={[
+            voci={[
               'Attività lavorativa cessata',
               'Requisiti per la pensione entro 5 anni',
               'Almeno 5 anni nel fondo pensione',
               'Almeno 20 anni di contributi obbligatori',
             ]}
           />
-          <RitaCard
+          <ElencoCard
             titolo="Fino a 10 anni prima"
-            requisiti={[
+            voci={[
               'Attività lavorativa cessata',
               'Inoccupato da almeno 24 mesi',
               'Requisiti per la pensione entro 10 anni',
@@ -485,20 +341,7 @@ function ModuloPremorienza() {
   );
 }
 
-/* ══════════ Sottocomponenti ══════════ */
-
-function Blocco({ titolo, children }: { titolo: string; children: React.ReactNode }) {
-  return (
-    <div className="mt-6 rounded-2xl bg-bg-alt p-6 sm:p-7">
-      <h4 className="font-sans font-bold text-base text-ink">{titolo}</h4>
-      <div className="mt-3">{children}</div>
-    </div>
-  );
-}
-
-function Nota({ children }: { children: React.ReactNode }) {
-  return <p className="mt-5 text-xs text-ink-muted leading-relaxed">{children}</p>;
-}
+/* ══════════ Sottocomponenti specifici della previdenza ══════════ */
 
 function FaseCard({ lettera, fase, momento, desc, cifra, cifraLabel }: {
   lettera: string; fase: string; momento: string; desc: string; cifra: string; cifraLabel: string;
@@ -531,55 +374,6 @@ function FaseCard({ lettera, fase, momento, desc, cifra, cifraLabel }: {
   );
 }
 
-/**
- * Tabella responsive. `highlight` è l'indice della colonna da evidenziare
- * (quella del fondo pensione); -1 per nessuna.
- */
-function Tabella({ title, note, head, rows, highlight, primo }: {
-  title: string; note: string; head: string[]; rows: string[][]; highlight: number; primo?: boolean;
-}) {
-  return (
-    <div className={`${primo ? '' : 'mt-6'} rounded-2xl bg-bg-alt p-6 sm:p-7`}>
-      <h4 className="font-sans font-bold text-base text-ink">{title}</h4>
-      <div className="mt-5 overflow-x-auto">
-        <table className="w-full border-collapse text-sm min-w-[520px]">
-          <thead>
-            <tr>
-              {head.map((h, i) => (
-                <th
-                  key={h || i}
-                  scope="col"
-                  className={`text-left font-sans font-bold text-xs uppercase tracking-wider pb-3 px-3 border-b-2 border-black/10
-                              ${i === highlight ? 'text-ink' : 'text-ink-muted'}`}
-                >
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map(row => (
-              <tr key={row[0]}>
-                {row.map((cell, i) => (
-                  <td
-                    key={i}
-                    className={`py-3.5 px-3 border-b border-black/5 align-top leading-relaxed
-                                ${i === 0 ? 'font-semibold text-ink' : ''}
-                                ${i === highlight ? 'font-semibold text-ink bg-brand-yellow/15' : 'text-ink-soft'}`}
-                  >
-                    {cell}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <Nota>{note}</Nota>
-    </div>
-  );
-}
-
 function CcnlCard({ ccnl, fondo, righe }: { ccnl: string; fondo: string; righe: string[][] }) {
   return (
     <div className="rounded-2xl bg-bg-card p-5">
@@ -594,86 +388,5 @@ function CcnlCard({ ccnl, fondo, righe }: { ccnl: string; fondo: string; righe: 
         ))}
       </ul>
     </div>
-  );
-}
-
-function NovitaCard({ stato, statoLabel, title, desc }: {
-  stato: 'in-vigore' | 'in-arrivo'; statoLabel: string; title: string; desc: string;
-}) {
-  const attiva = stato === 'in-vigore';
-  return (
-    <div className="rounded-2xl bg-bg-alt p-6">
-      <span
-        className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase"
-        style={{
-          backgroundColor: attiva ? `${TEAL}1A` : `${CORAL}1A`,
-          color: attiva ? TEAL : CORAL,
-        }}
-      >
-        <span
-          className="w-1.5 h-1.5 rounded-full"
-          style={{ backgroundColor: attiva ? TEAL : CORAL }}
-          aria-hidden
-        />
-        {statoLabel}
-      </span>
-      <h4 className="mt-4 font-sans font-bold text-base text-ink">{title}</h4>
-      <p className="mt-2 text-sm text-ink-soft leading-relaxed">{desc}</p>
-    </div>
-  );
-}
-
-function RigaDato({ label, valore }: { label: string; valore: string }) {
-  return (
-    <li className="flex items-baseline justify-between gap-3 pb-3 border-b border-black/5 last:border-0">
-      <span className="text-sm text-ink-soft">{label}</span>
-      <span className="text-sm font-bold text-ink whitespace-nowrap">{valore}</span>
-    </li>
-  );
-}
-
-function RitaCard({ titolo, requisiti }: { titolo: string; requisiti: string[] }) {
-  return (
-    <div className="rounded-2xl bg-bg-card p-5">
-      <p className="font-sans font-bold text-sm text-ink">{titolo}</p>
-      <ul className="mt-3 space-y-2 list-none">
-        {requisiti.map(r => (
-          <li key={r} className="flex items-start gap-2.5 text-sm text-ink-soft leading-relaxed">
-            <span
-              className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5"
-              style={{ backgroundColor: TEAL }}
-              aria-hidden
-            />
-            {r}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function SogliaTile({ valore, label }: { valore: string; label: string }) {
-  return (
-    <div className="rounded-2xl bg-bg-alt p-5 text-center">
-      <p className="font-sans font-bold text-2xl text-ink tabular-nums">{valore}</p>
-      <p className="mt-2 text-xs text-ink-muted leading-relaxed">{label}</p>
-    </div>
-  );
-}
-
-function PassoCard({ n, title, desc, tono }: { n: number; title: string; desc: string; tono?: 'alert' }) {
-  const colore = tono === 'alert' ? CORAL : TEAL;
-  return (
-    <li className="rounded-2xl bg-bg-alt p-5">
-      <span
-        className="w-8 h-8 rounded-full flex items-center justify-center font-sans font-bold text-sm text-white"
-        style={{ backgroundColor: colore }}
-        aria-hidden
-      >
-        {n}
-      </span>
-      <p className="mt-3 font-sans font-bold text-sm text-ink">{title}</p>
-      <p className="mt-1.5 text-sm text-ink-muted leading-relaxed">{desc}</p>
-    </li>
   );
 }
