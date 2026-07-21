@@ -32,10 +32,11 @@ export function PensioneDati() {
         </div>
 
         {/* ── Stat tiles ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 max-w-4xl mx-auto">
           <StatTile value="€5.300" label="deducibili ogni anno dal reddito IRPEF" />
           <StatTile value="20%" label="tassazione dei rendimenti, contro il 26% degli altri investimenti" />
           <StatTile value="9–15%" label="tassazione finale all'uscita, contro il 23–43% IRPEF" />
+          <StatTile value="Protetto" label="capitale impignorabile, fuori dall'asse ereditario ed esente da bollo" />
         </div>
 
         {/* ── Grafico 1: costi ISC per tipologia ── */}

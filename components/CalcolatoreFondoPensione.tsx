@@ -50,6 +50,7 @@ export function CalcolatoreFondoPensione() {
   const [eta, setEta] = useState(35);
   const [reddito, setReddito] = useState(32_000);
   const [contributo, setContributo] = useState(3_000);
+  const [modo, setModo] = useState<'annuale' | 'singolo'>('annuale');
 
   const anni = Math.max(1, ETA_PENSIONE - eta);
   const versamento = Math.min(contributo, DEDUZIONE_MAX);
@@ -65,6 +66,35 @@ export function CalcolatoreFondoPensione() {
   const aliqUscita = aliquotaFinale(anni);
   const imposteUscita = contributiTotali * (aliqUscita / 100);
   const montanteNetto = montante - imposteUscita;
+
+  /* ── Confronto a 3 scenari (patrimonio netto finale) ──
+     Modello trasparente, tutte le ipotesi dichiarate sotto il grafico:
+     rendimento lordo 4%; nel fondo i rendimenti scontano il 20% annuo,
+     la prestazione il 9–15% sui contributi dedotti, e il risparmio IRPEF
+     resta all'iscritto; nel fai-da-te in ETF nessuna deduzione, costo
+     0,3% e plusvalenze al 26% all'uscita. */
+  const versato = modo === 'annuale' ? versamento * anni : versamento;
+  const risparmioIrpef = modo === 'annuale' ? risparmioAnnuo * anni : risparmioAnnuo;
+  const capitalizza = (rNet: number) =>
+    modo === 'annuale'
+      ? versamento * ((Math.pow(1 + rNet, anni) - 1) / rNet)
+      : versamento * Math.pow(1 + rNet, anni);
+  const nettoFondo = (isc: number) => {
+    const m = capitalizza(Math.max(0.0005, RENDIMENTO_NETTO - isc));
+    return m - versato * (aliqUscita / 100) + risparmioIrpef;
+  };
+  const mEtf = capitalizza(0.04 - 0.003); // 4% lordo − 0,3% di costo
+  const nettoEtf = mEtf - Math.max(0, mEtf - versato) * 0.26; // plusvalenze 26%
+  const scenari = [
+    { label: 'Fai-da-te in ETF', valore: nettoEtf, tono: 'neutro' as const },
+    { label: 'Fondo pensione (ISC 1%)', valore: nettoFondo(0.01), tono: 'buono' as const },
+    {
+      label: 'Fondo pensione (ISC 2%)',
+      valore: nettoFondo(0.02),
+      tono: (nettoFondo(0.02) >= nettoEtf ? 'buono' : 'alert') as 'buono' | 'alert',
+    },
+  ];
+  const maxScenario = Math.max(...scenari.map((s) => s.valore), 1);
 
   return (
     <section id="calcolatore" className="section bg-bg-alt">
@@ -145,6 +175,47 @@ export function CalcolatoreFondoPensione() {
           </div>
         </div>
 
+        {/* ── Confronto netto finale a 3 scenari ── */}
+        <div className="mt-6 max-w-4xl mx-auto rounded-2xl bg-bg-card border border-ink/10 p-6 sm:p-7">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="font-sans font-bold text-lg text-ink">Confronto netto finale</h3>
+              <p className="mt-1 text-sm text-ink-muted">
+                Patrimonio stimato a {ETA_PENSIONE} anni, al netto di costi e tasse.
+              </p>
+            </div>
+            <div className="inline-flex rounded-full bg-bg-alt p-1 self-start" role="group" aria-label="Tipo di versamento">
+              {([['annuale', 'Ogni anno'], ['singolo', 'Una volta']] as const).map(([val, label]) => (
+                <button
+                  key={val}
+                  onClick={() => setModo(val)}
+                  aria-pressed={modo === val}
+                  className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
+                    modo === val ? 'bg-brand-yellow text-ink shadow-sm' : 'text-ink-muted hover:text-ink'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6 space-y-4">
+            {scenari.map((s) => (
+              <ScenarioBar key={s.label} label={s.label} valore={s.valore} max={maxScenario} tono={s.tono} />
+            ))}
+          </div>
+
+          <p className="mt-5 text-xs text-ink-muted leading-relaxed">
+            {modo === 'annuale'
+              ? `Ipotesi: ${eur(versamento)} € versati ogni anno per ${anni} anni.`
+              : `Ipotesi: ${eur(versamento)} € versati una volta sola, oggi.`}{' '}
+            Rendimento lordo 4%/anno. Nel fondo i rendimenti scontano il 20% annuo, la prestazione dal
+            15% al 9% sui contributi dedotti, e il risparmio IRPEF resta all&apos;iscritto. Nel
+            fai-da-te in ETF nessuna deduzione, costo 0,3% e plusvalenze al 26% all&apos;uscita.
+          </p>
+        </div>
+
         <p className="mt-6 max-w-4xl mx-auto text-xs text-ink-muted text-center leading-relaxed">
           Stima indicativa, non costituisce consulenza finanziaria o fiscale.
           Ipotesi: scaglioni IRPEF 2025 (escluse addizionali regionali e comunali:
@@ -195,6 +266,28 @@ function Slider({
         className="w-full accent-brand-green cursor-pointer"
         aria-label={label}
       />
+    </div>
+  );
+}
+
+/** Barra orizzontale di uno scenario di confronto. Colore per tono. */
+function ScenarioBar({ label, valore, max, tono }: {
+  label: string; valore: number; max: number; tono: 'neutro' | 'buono' | 'alert';
+}) {
+  const colore = tono === 'buono' ? '#1F9D55' : tono === 'alert' ? '#E76F51' : '#9CA3AF';
+  const pct = Math.max(3, (valore / max) * 100);
+  return (
+    <div>
+      <div className="flex items-baseline justify-between gap-3 mb-1.5">
+        <span className="text-sm font-semibold text-ink">{label}</span>
+        <span className="text-sm font-bold text-ink tabular-nums whitespace-nowrap">€ {eur(valore)}</span>
+      </div>
+      <div className="h-3.5 rounded-full bg-bg-alt overflow-hidden">
+        <div
+          className="h-full rounded-full transition-[width] duration-500 ease-soft"
+          style={{ width: `${pct}%`, backgroundColor: colore }}
+        />
+      </div>
     </div>
   );
 }

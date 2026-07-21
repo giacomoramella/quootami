@@ -9,7 +9,9 @@
  * Accento grafico teal come il resto della sezione previdenza.
  */
 
-const TEAL = '#2A9D8F';
+const TEAL = '#2A9D8F';   // fondo negoziale
+const AMBER = '#E9B440';  // fondo aperto
+const CORAL = '#E76F51';  // piano individuale (PIP)
 
 const STAT = [
   { valore: '291', unita: 'forme pensionistiche', delta: null },
@@ -55,6 +57,37 @@ export function PensioneCovip() {
               <p className="mt-2 text-xs text-ink-muted leading-relaxed">{s.unita}</p>
             </div>
           ))}
+        </div>
+
+        {/* ── Grafico: ISC medio per comparto e tipo di fondo ── */}
+        <div className="mt-8 max-w-4xl mx-auto rounded-3xl bg-bg-card border border-black/5 p-6 sm:p-8">
+          <h3 className="font-sans font-bold text-lg text-ink">ISC medio a confronto</h3>
+          <p className="mt-1 text-sm text-ink-muted leading-relaxed">
+            Costo medio annuo per comparto: il fondo negoziale costa sempre meno, il PIP di più.
+          </p>
+
+          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+            {[['Negoziale', TEAL], ['Aperto', AMBER], ['PIP', CORAL]].map(([nome, colore]) => (
+              <span key={nome} className="inline-flex items-center gap-2 text-xs text-ink-soft">
+                <span className="w-3 h-3 rounded-sm" style={{ backgroundColor: colore }} aria-hidden />
+                {nome}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-6 space-y-6">
+            {ISC.map((r) => (
+              <div key={r.comparto}>
+                <p className="text-sm font-semibold text-ink mb-2">{r.comparto}</p>
+                <div className="space-y-1.5">
+                  <MediaBar valore={r.fpn[1]} colore={TEAL} />
+                  <MediaBar valore={r.fpa[1]} colore={AMBER} />
+                  <MediaBar valore={r.pip[1]} colore={CORAL} />
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-ink-muted">Scala 0–3%. Valori medi ISC · elaborazione su dati COVIP.</p>
         </div>
 
         {/* ── Tabella ISC per comparto e tipo di fondo ── */}
@@ -125,5 +158,19 @@ export function PensioneCovip() {
         </div>
       </div>
     </section>
+  );
+}
+
+/** Barra dell'ISC medio, scala fissa 0–3%. `valore` è formattato it-IT ("0,678"). */
+function MediaBar({ valore, colore }: { valore: string; colore: string }) {
+  const n = parseFloat(valore.replace(',', '.'));
+  const pct = Math.max(2, (n / 3) * 100);
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex-1 h-3 rounded-full bg-bg-alt overflow-hidden">
+        <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: colore }} />
+      </div>
+      <span className="w-12 text-right text-xs font-bold text-ink tabular-nums">{valore}%</span>
+    </div>
   );
 }
