@@ -6,6 +6,7 @@ import { PensioneEsigenze } from '@/components/PensioneEsigenze';
 import { PensioneServizi } from '@/components/PensioneServizi';
 import { CalcolatoreFondoPensione } from '@/components/CalcolatoreFondoPensione';
 import { PensioneDati } from '@/components/PensioneDati';
+import { PensioneCovip } from '@/components/PensioneCovip';
 import { PensioneConfronto } from '@/components/PensioneConfronto';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { OPERATORE } from '@/config/operatore';
@@ -38,6 +39,7 @@ export default function PianoPensionePage() {
       <PensioneServizi />
       <CalcolatoreFondoPensione />
       <PensioneDati />
+      <PensioneCovip />
       <PensioneConfronto />
       <FaqAccordion polizza={polizza} />
       <CtaFinale adesioneUrl={polizza.adesioneUrl} />
