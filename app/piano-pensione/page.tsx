@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { PensioneHero } from '@/components/PensioneHero';
 import { PensionePercorso } from '@/components/PensionePercorso';
 import { PensioneEsigenze } from '@/components/PensioneEsigenze';
@@ -8,6 +7,7 @@ import { CalcolatoreFondoPensione } from '@/components/CalcolatoreFondoPensione'
 import { PensioneDati } from '@/components/PensioneDati';
 import { PensioneCovip } from '@/components/PensioneCovip';
 import { PensioneConfronto } from '@/components/PensioneConfronto';
+import { PensioneRichiestaForm } from '@/components/PensioneRichiestaForm';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { OPERATORE } from '@/config/operatore';
 import { getPolizza } from '@/config/polizze';
@@ -34,7 +34,7 @@ export default function PianoPensionePage() {
   return (
     <>
       <PensioneHero />
-      <PensionePercorso adesioneUrl={polizza.adesioneUrl} />
+      <PensionePercorso />
       <PensioneEsigenze />
       <PensioneServizi />
       <CalcolatoreFondoPensione />
@@ -42,63 +42,46 @@ export default function PianoPensionePage() {
       <PensioneCovip />
       <PensioneConfronto />
       <FaqAccordion polizza={polizza} />
-      <CtaFinale adesioneUrl={polizza.adesioneUrl} />
+      <CtaFinale />
     </>
   );
 }
 
-/* ── CTA finale: calcolo + persona vera + firma online ── */
-function CtaFinale({ adesioneUrl }: { adesioneUrl?: string }) {
+/* ── CTA finale: form di richiesta stima previdenziale ── */
+function CtaFinale() {
   return (
-    <section id="contatti" className="section bg-bg-alt">
-      <div className="container-content text-center">
-        <span className="eyebrow">Inizia ora</span>
-        <h2 className="section-title">
-          Scopri se ti <span className="hl">conviene.</span>
-        </h2>
-        <p className="section-sub mx-auto">
-          Calcola il vantaggio in un minuto, poi ne parli con una persona vera. Nessun costo,
-          nessun impegno.
-        </p>
+    <section id="richiesta" className="section bg-bg-alt">
+      <div className="container-content">
+        <div className="text-center mb-10">
+          <span className="eyebrow">Richiedi una stima</span>
+          <h2 className="section-title">
+            La tua pensione, <span className="hl">sul tuo profilo.</span>
+          </h2>
+          <p className="section-sub mx-auto">
+            Lascia i tuoi dati: Quootami elabora una stima previdenziale personalizzata e ti
+            ricontatta una persona vera. Nessun costo, nessun impegno.
+          </p>
+        </div>
 
-        {adesioneUrl && (
-          <div className="mt-10 mx-auto max-w-lg p-[2px] rounded-3xl bg-gradient-to-br from-brand-yellow via-brand-yellow to-brand-green shadow-glow-yellow">
-            <div className="rounded-[calc(1.5rem-2px)] bg-bg-card p-6">
-              <p className="text-sm font-bold uppercase tracking-wide text-ink mb-2">
-                Adesione online in 5 minuti
-              </p>
-              <p className="text-sm text-ink-muted mb-4">
-                Modulo digitale e firma elettronica a norma eIDAS. Nessuna stampa, nessuna scansione.
-              </p>
-              <a href={adesioneUrl} className="btn-primary inline-block">
-                Compila adesione e firma online →
-              </a>
-            </div>
-          </div>
-        )}
+        <PensioneRichiestaForm />
 
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="#calcolatore" className={adesioneUrl ? 'btn-secondary' : 'btn-primary'}>
-            Calcola il tuo risparmio →
-          </Link>
+        <p className="mt-8 text-center text-sm text-ink-muted">
+          Preferisci parlarne subito?{' '}
           <a
             href={OPERATORE.social.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-secondary"
+            className="font-semibold text-brand-green-dark underline underline-offset-2 hover:text-ink"
           >
             Scrivi su WhatsApp
-          </a>
+          </a>{' '}
+          oppure{' '}
           <a
             href={`mailto:${OPERATORE.contatti.email}?subject=${encodeURIComponent('Richiesta informazioni Fondo Pensione')}`}
-            className="btn-secondary"
+            className="font-semibold text-brand-green-dark underline underline-offset-2 hover:text-ink"
           >
-            Invia email
-          </a>
-        </div>
-
-        <p className="mt-8 text-xs text-ink-muted">
-          Connessione cifrata &middot; Nessun costo &middot; Broker iscritto IVASS
+            invia una email
+          </a>.
         </p>
       </div>
     </section>
