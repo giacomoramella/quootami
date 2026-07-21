@@ -26,7 +26,7 @@ export type ModuloGuida = {
   contenuto: React.ReactNode;
 };
 
-export function GuidaModuli({ id, eyebrow, titolo, accent, sottotitolo, moduli, sfondo = 'alt' }: {
+export function GuidaModuli({ id, eyebrow, titolo, accent, sottotitolo, moduli, sfondo = 'alt', mostraTestata = true }: {
   id: string;
   eyebrow: string;
   titolo: string;
@@ -34,6 +34,8 @@ export function GuidaModuli({ id, eyebrow, titolo, accent, sottotitolo, moduli, 
   sottotitolo: string;
   moduli: ModuloGuida[];
   sfondo?: 'alt' | 'base';
+  /** false quando la pagina fornisce già il proprio header (sottopagina dedicata). */
+  mostraTestata?: boolean;
 }) {
   const [attivo, setAttivo] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -58,13 +60,15 @@ export function GuidaModuli({ id, eyebrow, titolo, accent, sottotitolo, moduli, 
   return (
     <section id={id} className={`section ${sfondo === 'alt' ? 'bg-bg-alt' : 'bg-bg'}`}>
       <div className="container-content">
-        <div className="text-center mb-12">
-          <span className="eyebrow">{eyebrow}</span>
-          <h2 className="section-title">
-            {titolo} <span className="hl">{accent}</span>
-          </h2>
-          <p className="section-sub mx-auto">{sottotitolo}</p>
-        </div>
+        {mostraTestata && (
+          <div className="text-center mb-12">
+            <span className="eyebrow">{eyebrow}</span>
+            <h2 className="section-title">
+              {titolo} <span className="hl">{accent}</span>
+            </h2>
+            <p className="section-sub mx-auto">{sottotitolo}</p>
+          </div>
+        )}
 
         {/* ── Selettore moduli ── */}
         <div

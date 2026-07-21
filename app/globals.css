@@ -153,6 +153,15 @@
 }
 
 @layer utilities {
+  /* Nasconde la scrollbar mantenendo lo scroll (sub-nav a pillole su mobile) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Reduce motion per accessibilità */
   @media (prefers-reduced-motion: reduce) {
     *,

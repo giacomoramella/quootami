@@ -21,7 +21,12 @@ const SECTIONS = [
   },
   {
     title: '💎 Previdenza',
-    links: getPolizzeByCategory('previdenza').map(p => ({ href: `/${p.slug}`, label: p.title })),
+    links: [
+      ...getPolizzeByCategory('previdenza').map(p => ({ href: `/${p.slug}`, label: p.title })),
+      { href: '/piano-pensione/guida', label: 'Guida ai fondi pensione' },
+      { href: '/piano-pensione/schema', label: 'Schema della previdenza' },
+      { href: '/piano-pensione/glossario', label: 'Glossario della previdenza' },
+    ],
   },
   {
     title: '🏢 Polizze imprese',

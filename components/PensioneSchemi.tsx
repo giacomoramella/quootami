@@ -78,7 +78,7 @@ const MODULI: ModuloGuida[] = [
   },
 ];
 
-export function PensioneSchemi() {
+export function PensioneSchemi({ mostraTestata = true }: { mostraTestata?: boolean }) {
   return (
     <GuidaModuli
       id="guida"
@@ -87,6 +87,7 @@ export function PensioneSchemi() {
       accent="previdenza."
       sottotitolo="Cinque moduli, dalle basi alla pianificazione. Scegli l'argomento: si apre qui sotto."
       moduli={MODULI}
+      mostraTestata={mostraTestata}
     />
   );
 }
