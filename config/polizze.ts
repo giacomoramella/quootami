@@ -98,7 +98,7 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Le risposte che cerchi.',
       items: [
         { q: 'Quanto costa richiedere un preventivo?', a: 'Il preventivo è completamente gratuito e senza impegno. Si paga solo se si decide di attivare la polizza.' },
-        { q: 'Con quali compagnie lavora Quootami?', a: 'Quootami collabora con le principali compagnie italiane (Generali, Unipol, Allianz, AXA, Zurich e altre).' },
+        { q: 'Con quali compagnie lavora Quootami?', a: 'Quootami confronta le offerte delle principali compagnie del mercato, secondo i mandati del broker. Il confronto è indipendente: non siamo legati a un\'unica compagnia, così la proposta è quella più adatta al tuo profilo.' },
         { q: 'Posso disdire la mia polizza attuale?', a: 'Sì, ed è più semplice di quanto pensi: per legge la RC Auto non ha tacito rinnovo, quindi alla scadenza annuale sei libero di cambiare compagnia senza inviare alcuna disdetta. Quootami gestisce il passaggio senza interruzioni di copertura.' },
       ],
     },
