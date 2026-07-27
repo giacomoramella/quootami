@@ -106,9 +106,9 @@ export function PensioneRichiestaForm() {
         <input type="checkbox" name="consenso" required className="mt-1 w-4 h-4 accent-brand-green flex-shrink-0" />
         <span>
           Acconsento al trattamento dei miei dati per ricevere una stima previdenziale ed essere
-          ricontattato da Quootami. I dati sono inviati al broker{' '}
-          <span className="text-ink">Sisto Assicurazioni</span> e non vengono ceduti a terzi.{' '}
-          <Link href="/privacy" className="underline underline-offset-2 hover:text-ink">Informativa privacy</Link>.
+          ricontattato da Quootami. Il titolare del trattamento è indicato nell&apos;{' '}
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-ink">Informativa privacy</Link>;
+          i dati non vengono ceduti a terzi.
         </span>
       </label>
 

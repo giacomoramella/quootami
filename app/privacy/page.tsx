@@ -17,11 +17,10 @@ export default function PrivacyPage() {
       lastUpdate="14 luglio 2026"
     >
       <h2>1. Titolare del trattamento</h2>
-      <p>Il titolare del trattamento dei dati personali raccolti tramite questo sito è il broker assicurativo per il quale Quootami opera:</p>
+      <p>Il titolare del trattamento dei dati personali raccolti tramite questo sito è:</p>
       <ul>
-        <li><strong>Denominazione:</strong> {OPERATORE.broker.ragione_sociale}</li>
-        <li><strong>P.IVA / C.F.:</strong> {OPERATORE.broker.partita_iva}</li>
-        <li><strong>Iscrizione RUI sez. {OPERATORE.broker.rui_sezione} n.</strong> {OPERATORE.broker.rui_numero} — vigilato IVASS</li>
+        <li><strong>Titolare:</strong> {OPERATORE.collaboratore.nome_completo}, gestore del sito</li>
+        <li><strong>Iscrizione RUI sez. {OPERATORE.collaboratore.rui_sezione} n.</strong> {OPERATORE.collaboratore.rui_numero} — vigilato IVASS</li>
         <li><strong>Email privacy:</strong> <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a></li>
         <li><strong>Telefono:</strong> <a href={`tel:${OPERATORE.contatti.telefono_tel}`}>{OPERATORE.contatti.telefono_display}</a></li>
       </ul>

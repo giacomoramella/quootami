@@ -21,7 +21,7 @@ export default function CookiePage() {
 
       <h2>2. Titolare del trattamento</h2>
       <p>Il titolare del trattamento dei cookie e degli strumenti di tracciamento di questo sito è <strong>{OPERATORE.collaboratore.nome_completo}</strong>, gestore del sito, intermediario iscritto al RUI sez. {OPERATORE.collaboratore.rui_sezione} n. {OPERATORE.collaboratore.rui_numero}, vigilato IVASS. Per richieste in materia di cookie: <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a>.</p>
-      <p>Per i dati personali conferiti tramite i form del sito (richieste di preventivo, adesioni), il titolare è il broker indicato nella <a href="/privacy">Privacy Policy</a>.</p>
+      <p>Il medesimo titolare tratta anche i dati personali conferiti tramite i form del sito (richieste di preventivo, adesioni), come indicato nella <a href="/privacy">Privacy Policy</a>.</p>
 
       <h2>3. Categorie di cookie</h2>
       <ul>
