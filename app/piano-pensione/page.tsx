@@ -7,7 +7,6 @@ import { CalcolatoreFondoPensione } from '@/components/CalcolatoreFondoPensione'
 import { PensioneDati } from '@/components/PensioneDati';
 import { PensioneCovip } from '@/components/PensioneCovip';
 import { PensioneConfronto } from '@/components/PensioneConfronto';
-import { PensioneRichiestaForm } from '@/components/PensioneRichiestaForm';
 import { FaqAccordion } from '@/components/FaqAccordion';
 import { OPERATORE } from '@/config/operatore';
 import { getPolizza } from '@/config/polizze';
@@ -47,42 +46,39 @@ export default function PianoPensionePage() {
   );
 }
 
-/* ── CTA finale: form di richiesta stima previdenziale ── */
+/* ── CTA finale: richiesta stima previdenziale via contatto diretto ── */
 function CtaFinale() {
   return (
     <section id="richiesta" className="section bg-bg-alt">
-      <div className="container-content">
-        <div className="text-center mb-10">
-          <span className="eyebrow">Richiedi una stima</span>
-          <h2 className="section-title">
-            La tua pensione, <span className="hl">sul tuo profilo.</span>
-          </h2>
-          <p className="section-sub mx-auto">
-            Lascia i tuoi dati: Quootami elabora una stima previdenziale personalizzata e ti
-            ricontatta una persona vera. Nessun costo, nessun impegno.
-          </p>
-        </div>
+      <div className="container-content text-center">
+        <span className="eyebrow">Richiedi una stima</span>
+        <h2 className="section-title">
+          La tua pensione, <span className="hl">sul tuo profilo.</span>
+        </h2>
+        <p className="section-sub mx-auto">
+          Scrivi su WhatsApp, manda una email o chiama: Quootami elabora una stima previdenziale
+          personalizzata e ti ricontatta una persona vera. Nessun costo, nessun impegno.
+        </p>
 
-        <PensioneRichiestaForm />
-
-        <p className="mt-8 text-center text-sm text-ink-muted">
-          Preferisci parlarne subito?{' '}
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href={OPERATORE.social.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-brand-green-dark underline underline-offset-2 hover:text-ink"
+            className="btn-primary"
           >
-            Scrivi su WhatsApp
-          </a>{' '}
-          oppure{' '}
+            Scrivi su WhatsApp →
+          </a>
           <a
-            href={`mailto:${OPERATORE.contatti.email}?subject=${encodeURIComponent('Richiesta informazioni Fondo Pensione')}`}
-            className="font-semibold text-brand-green-dark underline underline-offset-2 hover:text-ink"
+            href={`mailto:${OPERATORE.contatti.email}?subject=${encodeURIComponent('Richiesta stima Fondo Pensione')}`}
+            className="btn-secondary"
           >
-            invia una email
-          </a>.
-        </p>
+            Invia una email
+          </a>
+          <a href={`tel:${OPERATORE.contatti.telefono_tel}`} className="btn-secondary">
+            Chiama Quootami
+          </a>
+        </div>
       </div>
     </section>
   );

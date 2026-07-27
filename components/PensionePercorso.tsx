@@ -63,7 +63,7 @@ export function PensionePercorso() {
           <TappaCard n={1} tempo="5 min" titolo="Capisci le basi" desc="La guida ai fondi pensione, con i vantaggi fiscali spiegati semplice." cta="Leggi" href="/piano-pensione/guida" />
           <TappaCard n={2} tempo="1 min" titolo="Calcola il vantaggio" desc="Età, reddito e versamento: il risultato in euro sul tuo caso, subito." cta="Calcola" href="#calcolatore" />
           <TappaCard n={3} tempo="una persona" titolo="Parla con Quootami" desc="Nessun call center: una persona vera riceve il tuo caso e ti risponde." cta="Scrivi" href={OPERATORE.social.whatsapp} esterno />
-          <TappaCard n={4} tempo="2 min" titolo="Richiedi la stima" desc="Lasci i tuoi dati e Quootami elabora una stima previdenziale sul tuo profilo." cta="Richiedi" href="#richiesta" />
+          <TappaCard n={4} tempo="diretto" titolo="Richiedi la stima" desc="Scrivi o chiama: Quootami elabora una stima previdenziale sul tuo profilo." cta="Richiedi" href="#richiesta" />
         </ol>
 
         <p className="mt-6 text-center text-xs text-ink-muted">
