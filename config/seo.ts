@@ -35,7 +35,9 @@ export const defaultMetadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'it_IT',
-    url: baseUrl,
+    // Nessun og:url fisso: ogni pagina resta identificata dalla propria URL,
+    // così le anteprime social (WhatsApp/Facebook) non vengono "ricollassate"
+    // tutte sulla home. La canonicalizzazione SEO resta gestita da alternates.canonical.
     siteName: OPERATORE.brand.name,
     title: `${OPERATORE.brand.name} · Comparatore digitale, consulenza personale`,
     description: OPERATORE.brand.description,
