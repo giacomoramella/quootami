@@ -44,6 +44,7 @@ export const defaultMetadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
+        type: 'image/png',
         alt: `${OPERATORE.brand.name} — ${OPERATORE.brand.tagline}`,
       },
     ],
