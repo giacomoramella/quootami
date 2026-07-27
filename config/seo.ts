@@ -57,7 +57,12 @@ export const defaultMetadata: Metadata = {
     images: ['/og-image.png'],
   },
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon-32.png', type: 'image/png', sizes: '32x32' },
+    ],
+    shortcut: '/favicon.ico',
     apple: '/apple-icon.png',
   },
   manifest: '/site.webmanifest',
