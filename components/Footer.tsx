@@ -53,7 +53,7 @@ export function Footer() {
             <h5 className="text-xs font-semibold uppercase tracking-wider text-white mb-4">Imprese</h5>
             <ul className="space-y-2.5 list-none">
               <li><Link href="/rc" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">RC Professionale</Link></li>
-              <li><Link href="/rc#catastrofale" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Catastrofale PMI</Link></li>
+              <li><Link href="/rc#coperture" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Catastrofale PMI</Link></li>
               <li><Link href="/cyber" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Cyber Business</Link></li>
             </ul>
           </div>

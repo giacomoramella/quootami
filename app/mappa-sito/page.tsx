@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { getAllPolizze, getPolizzeByCategory } from '@/config/polizze';
 
 export const metadata: Metadata = {
-  title: 'Mappa del sito · Quootami',
+  title: 'Mappa del sito',
   description: 'Tutte le pagine del sito Quootami organizzate per area.',
 };
 

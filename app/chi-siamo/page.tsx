@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { OPERATORE } from '@/config/operatore';
 
 export const metadata: Metadata = {
-  title: 'Chi siamo · Quootami',
+  title: 'Chi siamo',
   description: 'Quootami è il broker assicurativo digitale: confronto multi-compagnia indipendente, vigilato IVASS.',
 };
 

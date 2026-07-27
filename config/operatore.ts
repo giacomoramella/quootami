@@ -21,7 +21,7 @@ export const OPERATORE = {
     url: 'https://quootami.it',
     tagline: 'Confronta. Cambia. Risparmia.',
     description:
-      'Confronto polizze assicurative e previdenza complementare in tutta Italia.',
+      'Comparatore digitale e consulenza personale: polizze assicurative e previdenza complementare in tutta Italia.',
     claim: 'Il tuo phygital partner.',
   },
 

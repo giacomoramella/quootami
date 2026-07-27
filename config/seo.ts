@@ -11,7 +11,7 @@ const baseUrl = OPERATORE.brand.url;
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${OPERATORE.brand.name} · Confronto Polizze Assicurative`,
+    default: `${OPERATORE.brand.name} · Comparatore digitale, consulenza personale`,
     template: `%s · ${OPERATORE.brand.name}`,
   },
   description: OPERATORE.brand.description,
@@ -37,7 +37,7 @@ export const defaultMetadata: Metadata = {
     locale: 'it_IT',
     url: baseUrl,
     siteName: OPERATORE.brand.name,
-    title: `${OPERATORE.brand.name} · ${OPERATORE.brand.tagline}`,
+    title: `${OPERATORE.brand.name} · Comparatore digitale, consulenza personale`,
     description: OPERATORE.brand.description,
     images: [
       {
@@ -51,7 +51,7 @@ export const defaultMetadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@quootami',
-    title: `${OPERATORE.brand.name} · ${OPERATORE.brand.tagline}`,
+    title: `${OPERATORE.brand.name} · Comparatore digitale, consulenza personale`,
     description: OPERATORE.brand.description,
     images: ['/og-image.png'],
   },

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { OPERATORE } from '@/config/operatore';
 
 export const metadata: Metadata = {
-  title: 'Contatti · Quootami',
+  title: 'Contatti',
   description: 'Contatti Quootami: WhatsApp, email, telefono. Risposta entro 24 ore lavorative.',
 };
 

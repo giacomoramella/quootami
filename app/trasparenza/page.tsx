@@ -3,7 +3,7 @@ import { LegalPage } from '@/components/LegalPage';
 import { OPERATORE } from '@/config/operatore';
 
 export const metadata: Metadata = {
-  title: 'Trasparenza intermediario · Quootami',
+  title: 'Trasparenza intermediario',
   description: 'Trasparenza dell\'intermediario assicurativo ai sensi del Reg. IVASS 40/2018, IDD e art. 119-bis CAP.',
 };
 
