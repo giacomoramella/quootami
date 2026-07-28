@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
+import { JsonLdSito } from '@/components/JsonLd';
 import { defaultMetadata } from '@/config/seo';
 import './globals.css';
 
@@ -42,6 +43,7 @@ export default function RootLayout({
   return (
     <html lang="it" className={`${inter.variable} ${jetbrains.variable}`}>
       <body className="font-sans antialiased bg-bg text-ink min-h-screen flex flex-col">
+        <JsonLdSito />
         <Nav />
         <main id="main" className="flex-1">
           {children}

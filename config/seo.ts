@@ -29,8 +29,10 @@ export const defaultMetadata: Metadata = {
   referrer: 'strict-origin-when-cross-origin',
   robots: { index: true, follow: true, 'max-image-preview': 'large' },
   alternates: {
-    canonical: baseUrl,
-    languages: { 'it-IT': baseUrl },
+    // './' = canonical relativo: si risolve contro metadataBase + path della
+    // pagina corrente, così OGNI pagina è canonica di se stessa (prima tutte
+    // puntavano alla home → Google le trattava come duplicati).
+    canonical: './',
   },
   openGraph: {
     type: 'website',

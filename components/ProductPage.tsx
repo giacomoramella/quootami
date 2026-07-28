@@ -3,6 +3,7 @@ import { CoverageGrid } from './CoverageGrid';
 import { ProcessSteps } from './ProcessSteps';
 import { FaqAccordion } from './FaqAccordion';
 import { PreventivoForm } from './PreventivoForm';
+import { JsonLdFaq } from './JsonLd';
 import type { Polizza } from '@/config/polizze';
 
 /**
@@ -20,6 +21,7 @@ export function ProductPage({
 }) {
   return (
     <>
+      <JsonLdFaq polizza={polizza} />
       <ProductHero polizza={polizza} />
       <CoverageGrid polizza={polizza} />
       {extra}
