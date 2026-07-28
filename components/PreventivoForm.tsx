@@ -21,6 +21,7 @@ import { createClient } from '@supabase/supabase-js';
 import { SUPABASE, WEB3FORMS } from '@/config/credentials';
 import { OPERATORE } from '@/config/operatore';
 import { getPreventivoFields, type PreventivoField } from '@/config/preventivo';
+import { trackLead } from '@/lib/tracking';
 import type { Polizza } from '@/config/polizze';
 
 const supabase = createClient(SUPABASE.url, SUPABASE.anonKey, {
@@ -132,6 +133,7 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
       }
 
       setSuccess(true);
+      trackLead(polizza.title); // conversione: GA4 generate_lead + Meta Pixel Lead (solo con consenso)
     } catch (err) {
       setError((err as Error).message || 'Errore di invio.');
     } finally {
