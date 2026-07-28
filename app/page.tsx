@@ -1,6 +1,14 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { OPERATORE } from '@/config/operatore';
 import { getPolizzeByCategory } from '@/config/polizze';
+
+// Description dedicata (keyword-mirata) — il title resta quello di default
+// del sito, così la card di condivisione social non cambia.
+export const metadata: Metadata = {
+  description:
+    'Confronta polizze auto, casa, salute, cyber e fondo pensione con Quootami: comparatore digitale e consulenza personale di un intermediario indipendente. Preventivo gratuito.',
+};
 
 /** Aree di copertura raccolte sotto /polizze (previdenza ha un blocco suo). */
 const NUM_POLIZZE =

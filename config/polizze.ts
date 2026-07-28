@@ -64,7 +64,7 @@ export const POLIZZE: Record<string, Polizza> = {
     shortDesc: 'RC obbligatoria, Furto, Incendio, Kasko.',
     hero: {
       eyebrow: 'RC Auto obbligatoria · Furto, Incendio & Kasko',
-      h1Lead: "Quootami l'RC",
+      h1Lead: "L'assicurazione auto",
       h1Accent: 'giusta.',
       sub: 'Confronto multi-compagnia per trovare la polizza migliore per il tuo veicolo.',
     },
@@ -111,8 +111,8 @@ export const POLIZZE: Record<string, Polizza> = {
     shortDesc: 'RC capofamiglia, furto, incendio, eventi naturali.',
     hero: {
       eyebrow: 'Casa e famiglia',
-      h1Lead: 'Proteggi la tua',
-      h1Accent: 'casa.',
+      h1Lead: 'La polizza casa',
+      h1Accent: 'su misura.',
       sub: 'Una sola polizza per furto, incendio, eventi naturali e RC capofamiglia.',
     },
     metaTitle: 'Polizza Casa · Furto, Incendio, RC capofamiglia',
@@ -158,8 +158,8 @@ export const POLIZZE: Record<string, Polizza> = {
     shortDesc: 'Sanitaria, vita, infortuni.',
     hero: {
       eyebrow: 'Salute, vita, infortuni',
-      h1Lead: 'La tua salute,',
-      h1Accent: 'tutelata.',
+      h1Lead: 'Polizza salute e vita,',
+      h1Accent: 'senza pensieri.',
       sub: 'Polizze sanitarie, vita e infortuni per ridurre le spese mediche e proteggere chi ami.',
     },
     metaTitle: 'Polizza Salute, Vita e Infortuni',
@@ -209,7 +209,7 @@ export const POLIZZE: Record<string, Polizza> = {
       sub: 'Deduci fino a €5.300/anno dal reddito IRPEF e costruisci la pensione integrativa. Calcola subito quanto risparmi.',
     },
     metaTitle: 'Fondo Pensione · Calcola il risparmio fiscale (fino a €5.300/anno)',
-    metaDesc: 'Fondo pensione complementare: calcolatore del risparmio IRPEF, deducibilità fino a €5.300/anno, rendimenti tassati al 20%. Confronto Quootami delle migliori soluzioni.',
+    metaDesc: 'Fondo pensione: calcolatore del risparmio IRPEF, deducibilità fino a €5.300/anno, rendimenti tassati al 20%. Confronto Quootami.',
     ogImageAlt: 'Fondo Pensione Quootami — Previdenza complementare e deduzione fiscale',
     adesioneUrl: '/firma-allianz.html',
     coverages: {
@@ -258,7 +258,7 @@ export const POLIZZE: Record<string, Polizza> = {
     shortDesc: 'Furto identità, frodi online.',
     hero: {
       eyebrow: 'Protezione digitale',
-      h1Lead: 'Vita digitale,',
+      h1Lead: 'Polizza cyber: vita digitale',
       h1Accent: 'protetta.',
       sub: 'Copertura per furto identità, frodi online, attacchi cyber, danni reputazionali.',
     },
@@ -303,8 +303,8 @@ export const POLIZZE: Record<string, Polizza> = {
     shortDesc: 'RC e veterinario.',
     hero: {
       eyebrow: 'Cani e gatti',
-      h1Lead: 'Il tuo amico a 4 zampe,',
-      h1Accent: 'tutelato.',
+      h1Lead: 'Polizza cane e gatto,',
+      h1Accent: 'senza sorprese.',
       sub: 'Spese veterinarie, RC danni a terzi, smarrimento, decesso. Pensa a lui come a un membro della famiglia.',
     },
     metaTitle: 'Polizza Animali · Veterinario e RC',
@@ -347,7 +347,7 @@ export const POLIZZE: Record<string, Polizza> = {
     shortDesc: 'RC professionale, Catastrofale, Cyber business.',
     hero: {
       eyebrow: 'Imprese e professionisti',
-      h1Lead: 'La tua attività,',
+      h1Lead: 'RC professionale e PMI,',
       h1Accent: 'al sicuro.',
       sub: 'RC professionale, Catastrofale PMI obbligatoria, Cyber business: tutta la protezione per la tua impresa.',
     },

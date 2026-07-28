@@ -6,7 +6,7 @@ import { PensioneSchemi } from '@/components/PensioneSchemi';
 export const metadata: Metadata = {
   title: 'Guida ai fondi pensione · Vantaggi fiscali, TFR, anticipazioni',
   description:
-    'Guida completa alla previdenza complementare: vantaggi fiscali (E-T-T), dove destinare il TFR, novità 2026, anticipazioni, RITA e premorienza. Fonti di legge verificate.',
+    'Guida ai fondi pensione: vantaggi fiscali, dove destinare il TFR, novità 2026, anticipazioni, RITA e premorienza. Fonti di legge.',
 };
 
 export default function GuidaPensionePage() {

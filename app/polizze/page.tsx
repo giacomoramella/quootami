@@ -5,7 +5,7 @@ import { getPolizzeByCategory, type Polizza } from '@/config/polizze';
 export const metadata: Metadata = {
   title: 'Polizze assicurative · Privati e imprese',
   description:
-    'Tutte le polizze Quootami: auto, casa, salute e vita, cyber, animali domestici, RC professionale e Catastrofale PMI. Confronto multi-compagnia e preventivo gratuito.',
+    'Tutte le polizze Quootami: auto, casa, salute e vita, cyber, animali, RC professionale e Catastrofale PMI. Preventivo gratuito.',
 };
 
 /**

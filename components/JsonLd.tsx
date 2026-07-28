@@ -66,6 +66,24 @@ export function JsonLdSito() {
   );
 }
 
+/** BreadcrumbList per le pagine prodotto: Home → Polizze → prodotto. */
+export function JsonLdBreadcrumb({ polizza }: { polizza: Polizza }) {
+  const base = OPERATORE.brand.url;
+  return (
+    <Script
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: base },
+          { '@type': 'ListItem', position: 2, name: 'Polizze', item: `${base}/polizze` },
+          { '@type': 'ListItem', position: 3, name: polizza.title, item: `${base}/${polizza.slug}` },
+        ],
+      }}
+    />
+  );
+}
+
 /** FAQPage per le pagine prodotto (usa le FAQ già presenti in config/polizze). */
 export function JsonLdFaq({ polizza }: { polizza: Polizza }) {
   if (!polizza.faq?.items?.length) return null;
