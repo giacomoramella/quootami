@@ -36,7 +36,7 @@ export default function HomePage() {
 
           {/* CTA */}
           <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.3s' }}>
-            <Link href="/polizza-auto" className="btn-primary">
+            <Link href="/polizze" className="btn-primary">
               Richiedi un preventivo →
             </Link>
             <Link href="/chi-siamo" className="btn-secondary">
