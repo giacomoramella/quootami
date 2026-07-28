@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { OPERATORE, getDisclaimerHTML, getCopyrightText } from '@/config/operatore';
+import { OPERATORE, getCopyrightText } from '@/config/operatore';
 import { CookiePrefsButton } from '@/components/CookieConsent';
 
 export function Footer() {
-  const { contatti, collaboratore } = OPERATORE;
+  const { contatti, collaboratore, broker } = OPERATORE;
 
   return (
     <footer className="bg-brand-navy text-white/80 rounded-t-[2.5rem] mt-8 relative overflow-hidden">
@@ -72,11 +72,25 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Disclaimer legale IVASS */}
-        <div
-          className="pt-6 pb-4 text-xs text-white/40 leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: getDisclaimerHTML() }}
-        />
+        {/* Disclaimer legale IVASS (art. 35 Reg. 40/2018) — testo obbligatorio */}
+        <p className="pt-6 pb-4 text-xs text-white/40 leading-relaxed">
+          Questo sito è gestito da <strong>{collaboratore.nome_completo}</strong>, collaboratore
+          iscritto al RUI sezione {collaboratore.rui_sezione} n.{' '}
+          <strong>{collaboratore.rui_numero}</strong>, operante per conto di{' '}
+          <strong>{broker.ragione_sociale}</strong>, broker iscritto al RUI sezione{' '}
+          {broker.rui_sezione} n. <strong>{broker.rui_numero}</strong>. Messaggio pubblicitario con
+          finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile
+          presso la sede del broker. La vigilanza è esercitata dall&apos;IVASS —{' '}
+          <a
+            href="https://www.ivass.it"
+            rel="external noopener noreferrer"
+            target="_blank"
+            className="underline underline-offset-2 hover:text-brand-yellow"
+          >
+            www.ivass.it
+          </a>
+          .
+        </p>
 
         {/* Copyright */}
         <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">

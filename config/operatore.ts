@@ -61,11 +61,6 @@ export const OPERATORE = {
 } as const;
 
 // Helpers per template
-export function getDisclaimerHTML() {
-  const { collaboratore: c, broker: b } = OPERATORE;
-  return `Questo sito è gestito da <strong>${c.nome_completo}</strong>, collaboratore iscritto al RUI sezione ${c.rui_sezione} n. <strong>${c.rui_numero}</strong>, operante per conto di <strong>${b.ragione_sociale}</strong>, broker iscritto al RUI sezione ${b.rui_sezione} n. <strong>${b.rui_numero}</strong>. Messaggio pubblicitario con finalità promozionale. Prima della sottoscrizione leggere il set informativo disponibile presso la sede del broker. La vigilanza è esercitata dall'IVASS — <a href="https://www.ivass.it" rel="external noopener" target="_blank">www.ivass.it</a>.`;
-}
-
 export function getCopyrightText() {
   const { brand, collaboratore } = OPERATORE;
   return `© ${new Date().getFullYear()} ${brand.name} · sito gestito da ${collaboratore.nome_completo} · RUI sez. ${collaboratore.rui_sezione} n. ${collaboratore.rui_numero}`;
