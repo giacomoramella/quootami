@@ -9,12 +9,18 @@ import { JsonLdArticle, JsonLdBreadcrumb } from '@/components/JsonLd';
 import { CatastrofaleObbligo } from '@/components/guide/CatastrofaleObbligo';
 import { CatastrofaleCosaCopre } from '@/components/guide/CatastrofaleCosaCopre';
 import { DetrazioneCalamitosi } from '@/components/guide/DetrazioneCalamitosi';
+import { AutoFermaAssicurazione } from '@/components/guide/AutoFermaAssicurazione';
+import { AdesioneAutomaticaFondoPensione } from '@/components/guide/AdesioneAutomaticaFondoPensione';
+import { Nis2Pmi } from '@/components/guide/Nis2Pmi';
 
 /** Mappa slug → corpo dell'articolo (componenti server). */
 const CORPI: Record<string, () => ReactNode> = {
   'polizza-catastrofale-imprese-chi-e-obbligato': CatastrofaleObbligo,
   'polizza-catastrofale-cosa-copre': CatastrofaleCosaCopre,
   'detrazione-polizza-eventi-calamitosi-casa': DetrazioneCalamitosi,
+  'auto-ferma-in-garage-va-assicurata': AutoFermaAssicurazione,
+  'adesione-automatica-fondo-pensione-2026': AdesioneAutomaticaFondoPensione,
+  'nis2-pmi-obblighi-cybersicurezza': Nis2Pmi,
 };
 
 export function generateStaticParams() {

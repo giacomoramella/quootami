@@ -82,6 +82,51 @@ export const ARTICOLI: Articolo[] = [
     prodotto: 'polizza-casa',
     categoria: 'privati',
   },
+  {
+    slug: 'auto-ferma-in-garage-va-assicurata',
+    titolo: 'Auto ferma in garage: va assicurata lo stesso?',
+    metaTitle: 'Auto ferma in garage: l’assicurazione è obbligatoria?',
+    metaDesc:
+      'Se il veicolo è immatricolato e funzionante l’RC auto è obbligatoria anche da fermo. I casi di esenzione, la sospensione della polizza e le formule stagionali.',
+    eyebrow: 'Guida privati',
+    accent: 'lo stesso',
+    sommario:
+      'Non conta se circoli: conta se il mezzo è idoneo al trasporto. Ecco quando l’obbligo resta, quando cade davvero e come sospendere la polizza senza perdere la classe di merito.',
+    pubblicato: '2026-08-04',
+    lettura: 5,
+    prodotto: 'polizza-auto',
+    categoria: 'privati',
+  },
+  {
+    slug: 'adesione-automatica-fondo-pensione-2026',
+    titolo: 'Adesione automatica al fondo pensione dal 1° luglio 2026',
+    metaTitle: 'Adesione automatica fondo pensione 2026: come funziona',
+    metaDesc:
+      'Dal 1° luglio 2026 i nuovi assunti aderiscono automaticamente alla previdenza complementare. Hai 60 giorni per scegliere diversamente: cosa valutare prima.',
+    eyebrow: 'Guida previdenza',
+    accent: '1° luglio 2026',
+    sommario:
+      'Il TFR dei nuovi assunti va alla previdenza complementare salvo scelta contraria. I 60 giorni per decidere, chi resta escluso e perché uscire non è sempre conveniente.',
+    pubblicato: '2026-08-04',
+    lettura: 5,
+    prodotto: 'piano-pensione',
+    categoria: 'previdenza',
+  },
+  {
+    slug: 'nis2-pmi-obblighi-cybersicurezza',
+    titolo: 'NIS2: la mia PMI è obbligata?',
+    metaTitle: 'NIS2 PMI: chi è obbligato e cosa comporta',
+    metaDesc:
+      'NIS2 e D.Lgs. 138/2024: settori e soglie dimensionali, l’effetto catena sui fornitori, sanzioni e dove entra davvero la polizza cyber.',
+    eyebrow: 'Guida imprese',
+    accent: 'obbligata',
+    sommario:
+      'Anche restando sotto le soglie molte PMI subiscono la NIS2 di riflesso, perché i clienti più grandi la ribaltano sui fornitori. Come capire dove ti trovi e cosa fare.',
+    pubblicato: '2026-08-04',
+    lettura: 6,
+    prodotto: 'cyber',
+    categoria: 'imprese',
+  },
 ];
 
 export function getArticolo(slug: string): Articolo | undefined {
