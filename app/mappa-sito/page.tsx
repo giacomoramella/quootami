@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllPolizze, getPolizzeByCategory } from '@/config/polizze';
+import { getAllArticoli } from '@/config/guide';
 
 export const metadata: Metadata = {
   title: 'Mappa del sito',
@@ -31,6 +32,13 @@ const SECTIONS = [
   {
     title: '🏢 Polizze imprese',
     links: getPolizzeByCategory('imprese').map(p => ({ href: `/${p.slug}`, label: p.title })),
+  },
+  {
+    title: '📖 Guide e approfondimenti',
+    links: [
+      { href: '/guide', label: 'Tutte le guide' },
+      ...getAllArticoli().map(a => ({ href: `/guide/${a.slug}`, label: a.titolo })),
+    ],
   },
   {
     title: 'ℹ️ Informazioni',

@@ -66,8 +66,11 @@ export function JsonLdSito() {
   );
 }
 
-/** BreadcrumbList per le pagine prodotto: Home → Polizze → prodotto. */
-export function JsonLdBreadcrumb({ polizza }: { polizza: Polizza }) {
+/**
+ * BreadcrumbList generico. `voci` sono i passi DOPO la Home (aggiunta in automatico),
+ * con `href` relativo alla root (es. '/polizze').
+ */
+export function JsonLdBreadcrumb({ voci }: { voci: { nome: string; href: string }[] }) {
   const base = OPERATORE.brand.url;
   return (
     <Script
@@ -76,9 +79,73 @@ export function JsonLdBreadcrumb({ polizza }: { polizza: Polizza }) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: base },
-          { '@type': 'ListItem', position: 2, name: 'Polizze', item: `${base}/polizze` },
-          { '@type': 'ListItem', position: 3, name: polizza.title, item: `${base}/${polizza.slug}` },
+          ...voci.map((v, i) => ({
+            '@type': 'ListItem',
+            position: i + 2,
+            name: v.nome,
+            item: `${base}${v.href}`,
+          })),
         ],
+      }}
+    />
+  );
+}
+
+/** Breadcrumb delle pagine prodotto: Home → Polizze → prodotto. */
+export function JsonLdBreadcrumbProdotto({ polizza }: { polizza: Polizza }) {
+  return (
+    <JsonLdBreadcrumb
+      voci={[
+        { nome: 'Polizze', href: '/polizze' },
+        { nome: polizza.title, href: `/${polizza.slug}` },
+      ]}
+    />
+  );
+}
+
+/**
+ * Article per le guide/approfondimenti. Le date vanno in formato ISO (YYYY-MM-DD).
+ * L'autore è l'intermediario (persona fisica), l'editore il brand.
+ */
+export function JsonLdArticle({
+  titolo,
+  descrizione,
+  href,
+  pubblicato,
+  aggiornato,
+}: {
+  titolo: string;
+  descrizione: string;
+  /** percorso relativo, es. '/guide/polizza-catastrofale-pmi' */
+  href: string;
+  pubblicato: string;
+  aggiornato?: string;
+}) {
+  const { brand, collaboratore } = OPERATORE;
+  const url = `${brand.url}${href}`;
+  return (
+    <Script
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: titolo,
+        description: descrizione,
+        inLanguage: 'it-IT',
+        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+        url,
+        image: `${brand.url}/og-image.png`,
+        datePublished: pubblicato,
+        dateModified: aggiornato ?? pubblicato,
+        author: {
+          '@type': 'Person',
+          name: collaboratore.nome_completo,
+          url: `${brand.url}/chi-siamo`,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: brand.name,
+          logo: { '@type': 'ImageObject', url: `${brand.url}/apple-icon.png` },
+        },
       }}
     />
   );

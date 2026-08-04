@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { OPERATORE } from '@/config/operatore';
 import { getAllPolizze } from '@/config/polizze';
+import { getAllArticoli } from '@/config/guide';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = OPERATORE.brand.url;
@@ -10,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/`, lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: `${baseUrl}/polizze`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${baseUrl}/luce`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${baseUrl}/guide`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/piano-pensione`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/piano-pensione/guida`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/piano-pensione/schema`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/piano-pensione/glossario`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
@@ -29,5 +32,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticPages, ...productPages];
+  // Le guide si registrano da sole: basta aggiungerle a config/guide.ts
+  const guidePages: MetadataRoute.Sitemap = getAllArticoli().map(a => ({
+    url: `${baseUrl}/guide/${a.slug}`,
+    lastModified: new Date(`${a.aggiornato ?? a.pubblicato}T00:00:00`),
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }));
+
+  return [...staticPages, ...productPages, ...guidePages];
 }

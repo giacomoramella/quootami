@@ -124,12 +124,15 @@
     @apply text-ink-muted text-base sm:text-lg leading-relaxed mt-3 max-w-prose-wide;
   }
 
-  /* ── Prose per pagine legali ── */
+  /* ── Prose per pagine legali e articoli/guide ── */
   .prose-quootami h2 {
-    @apply font-sans font-bold text-2xl sm:text-3xl text-ink mt-12 mb-4 leading-tight;
+    @apply font-sans font-bold text-2xl sm:text-3xl text-ink mt-12 mb-4 leading-tight scroll-mt-28;
   }
   .prose-quootami h3 {
-    @apply font-sans font-semibold text-base sm:text-lg text-ink mt-8 mb-2;
+    @apply font-sans font-semibold text-base sm:text-lg text-ink mt-8 mb-2 scroll-mt-28;
+  }
+  .prose-quootami h4 {
+    @apply font-sans font-semibold text-base text-ink mt-6 mb-2;
   }
   .prose-quootami p,
   .prose-quootami li {
@@ -138,7 +141,11 @@
   .prose-quootami ul {
     @apply pl-6 list-disc mb-6;
   }
-  .prose-quootami ul li {
+  .prose-quootami ol {
+    @apply pl-6 list-decimal mb-6;
+  }
+  .prose-quootami ul li,
+  .prose-quootami ol li {
     @apply mb-2;
   }
   .prose-quootami a {
@@ -149,6 +156,35 @@
   }
   .prose-quootami code {
     @apply bg-bg-alt px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+  /* Citazione / richiamo normativo */
+  .prose-quootami blockquote {
+    @apply border-l-4 border-brand-yellow bg-bg-alt rounded-r-xl py-3 pr-4 pl-5 my-6;
+  }
+  .prose-quootami blockquote p:last-child {
+    @apply mb-0;
+  }
+  /* Tabelle: scrollabili su mobile senza rompere il layout */
+  .prose-quootami .tabella-scroll {
+    @apply overflow-x-auto my-6 -mx-5 px-5 sm:mx-0 sm:px-0;
+  }
+  .prose-quootami table {
+    @apply w-full text-sm border-collapse min-w-[32rem];
+  }
+  .prose-quootami thead th {
+    @apply text-left font-sans font-semibold text-ink bg-bg-alt px-3 py-2.5 border-b border-black/10;
+  }
+  .prose-quootami tbody td {
+    @apply text-ink-soft px-3 py-2.5 border-b border-black/5 align-top;
+  }
+  .prose-quootami figure {
+    @apply my-8;
+  }
+  .prose-quootami figcaption {
+    @apply mt-2 text-xs text-ink-muted text-center;
+  }
+  .prose-quootami hr {
+    @apply my-10 border-t border-black/10;
   }
 }
 

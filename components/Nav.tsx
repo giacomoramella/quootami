@@ -42,6 +42,11 @@ export function Nav() {
             </Link>
           </li>
           <li>
+            <Link href="/guide" className="text-sm text-ink-muted hover:text-ink transition-colors">
+              Guide
+            </Link>
+          </li>
+          <li>
             <Link href="/chi-siamo" className="text-sm text-ink-muted hover:text-ink transition-colors">
               Chi siamo
             </Link>
@@ -79,6 +84,7 @@ export function Nav() {
           <Link href="/polizze" onClick={() => setOpen(false)} className="text-base text-ink py-2">Polizze</Link>
           <Link href="/piano-pensione" onClick={() => setOpen(false)} className="text-base text-ink py-2">Fondo Pensione</Link>
           <Link href="/luce" onClick={() => setOpen(false)} className="text-base text-ink py-2">Luce e Gas</Link>
+          <Link href="/guide" onClick={() => setOpen(false)} className="text-base text-ink py-2">Guide</Link>
           <Link href="/chi-siamo" onClick={() => setOpen(false)} className="text-base text-ink py-2">Chi siamo</Link>
           <Link
             href="/contatti"
