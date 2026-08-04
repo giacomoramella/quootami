@@ -44,6 +44,7 @@ const SECTIONS = [
     title: 'ℹ️ Informazioni',
     links: [
       { href: '/chi-siamo', label: 'Chi siamo' },
+      { href: '/assicurazioni-biella', label: 'Assicurazioni a Biella e provincia' },
       { href: '/sinistri', label: 'Gestione sinistri' },
       { href: '/contatti', label: 'Contatti' },
       { href: '/trasparenza', label: 'Trasparenza intermediario' },

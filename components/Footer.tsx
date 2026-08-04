@@ -67,6 +67,8 @@ export function Footer() {
               <li><CookiePrefsButton /></li>
               <li><Link href="/trasparenza" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Trasparenza</Link></li>
               <li><Link href="/chi-siamo" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Chi siamo</Link></li>
+              <li><Link href="/guide" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Guide</Link></li>
+              <li><Link href="/assicurazioni-biella" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Assicurazioni a Biella</Link></li>
               <li><Link href="/contatti" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Contatti</Link></li>
             </ul>
           </div>
