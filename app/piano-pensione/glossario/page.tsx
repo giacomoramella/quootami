@@ -2,16 +2,39 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PensioneHeaderPagina } from '@/components/PensioneHeaderPagina';
 import { PensioneGlossario } from '@/components/PensioneGlossario';
+import { JsonLdBreadcrumb } from '@/components/JsonLd';
+
+/** Home → Piano pensione → sottopagina. */
+const BREADCRUMB = [
+  { nome: 'Piano pensione', href: '/piano-pensione' },
+  { nome: 'Glossario della previdenza', href: '/piano-pensione/glossario' },
+];
+
+const META_TITLE = 'Glossario della previdenza';
+const META_DESC =
+  'I termini della previdenza complementare spiegati in una riga: TFR, fondo negoziale, fondo aperto, PIP, ISC, comparto, RITA, deducibilità e altri.';
 
 export const metadata: Metadata = {
-  title: 'Glossario della previdenza',
-  description:
-    'I termini della previdenza complementare spiegati in una riga: TFR, fondo negoziale, fondo aperto, PIP, ISC, comparto, RITA, deducibilità e altri.',
+  title: META_TITLE,
+  description: META_DESC,
+  openGraph: {
+    title: META_TITLE,
+    description: META_DESC,
+    images: [
+      {
+        url: '/og-image.png',
+        alt: 'Quootami — glossario della previdenza complementare',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 export default function GlossarioPensionePage() {
   return (
     <>
+      <JsonLdBreadcrumb voci={BREADCRUMB} />
       <PensioneHeaderPagina
         eyebrow="Glossario"
         titolo="Le parole della"

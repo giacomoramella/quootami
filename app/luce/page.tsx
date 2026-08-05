@@ -3,16 +3,34 @@ import Link from 'next/link';
 import { ComparatoreLuce } from '@/components/ComparatoreLuce';
 import { LuceGuida } from '@/components/LuceGuida';
 import { OPERATORE } from '@/config/operatore';
+import { JsonLdBreadcrumb } from '@/components/JsonLd';
+
+const META_TITLE = 'Luce e Gas · Confronta le tariffe con i dati ARERA';
+const META_DESC =
+  'Confronto gratuito delle offerte luce e gas del mercato libero con i dati ufficiali del Portale Offerte ARERA. Carica la bolletta: i dati si compilano da soli.';
 
 export const metadata: Metadata = {
-  title: 'Luce e Gas · Confronta le tariffe con i dati ARERA',
-  description:
-    'Confronto gratuito delle offerte luce e gas del mercato libero con i dati ufficiali del Portale Offerte ARERA. Carica la bolletta: i dati si compilano da soli.',
+  title: META_TITLE,
+  description: META_DESC,
+  openGraph: {
+    title: META_TITLE,
+    description: META_DESC,
+    images: [
+      {
+        url: '/og-image.png',
+        alt: 'Quootami — confronto offerte luce e gas con i dati ARERA',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 export default function LucePage() {
   return (
     <>
+      <JsonLdBreadcrumb voci={[{ nome: 'Luce e Gas', href: '/luce' }]} />
+
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-20 px-5 sm:px-8">
         <div aria-hidden className="blob-yellow top-[-260px] left-[-200px] w-[700px] h-[700px]" />

@@ -1,11 +1,27 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getPolizzeByCategory, type Polizza } from '@/config/polizze';
+import { JsonLdBreadcrumb } from '@/components/JsonLd';
+
+const META_TITLE = 'Polizze assicurative · Privati e imprese';
+const META_DESC =
+  'Tutte le polizze Quootami: auto, casa, salute e vita, cyber, animali, RC professionale e Catastrofale PMI. Preventivo gratuito.';
 
 export const metadata: Metadata = {
-  title: 'Polizze assicurative · Privati e imprese',
-  description:
-    'Tutte le polizze Quootami: auto, casa, salute e vita, cyber, animali, RC professionale e Catastrofale PMI. Preventivo gratuito.',
+  title: META_TITLE,
+  description: META_DESC,
+  openGraph: {
+    title: META_TITLE,
+    description: META_DESC,
+    images: [
+      {
+        url: '/og-image.png',
+        alt: 'Quootami — le polizze per privati e imprese',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 /**
@@ -27,6 +43,8 @@ export default function PolizzePage() {
 
   return (
     <>
+      <JsonLdBreadcrumb voci={[{ nome: 'Polizze', href: '/polizze' }]} />
+
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden pt-32 pb-12 px-5 sm:px-8">
         <div

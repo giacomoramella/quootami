@@ -138,6 +138,16 @@ export function getAllArticoli(): Articolo[] {
   return [...ARTICOLI].sort((a, b) => b.pubblicato.localeCompare(a.pubblicato));
 }
 
+/**
+ * Guide collegate a un prodotto (campo `prodotto`), dalla più recente.
+ * Usata dal blocco "Approfondisci" in fondo alle pagine prodotto: il
+ * collegamento interno prodotto → guide si popola da sé, senza liste da
+ * tenere aggiornate a mano.
+ */
+export function getArticoliPerProdotto(slug: string): Articolo[] {
+  return getAllArticoli().filter(a => a.prodotto === slug);
+}
+
 export const CATEGORIE_LABEL: Record<Articolo['categoria'], string> = {
   imprese: 'Imprese',
   privati: 'Privati',

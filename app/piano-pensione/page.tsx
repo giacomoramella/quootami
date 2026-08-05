@@ -8,6 +8,7 @@ import { PensioneDati } from '@/components/PensioneDati';
 import { PensioneCovip } from '@/components/PensioneCovip';
 import { PensioneConfronto } from '@/components/PensioneConfronto';
 import { FaqAccordion } from '@/components/FaqAccordion';
+import { GuideCorrelate } from '@/components/GuideCorrelate';
 import { JsonLdFaq, JsonLdBreadcrumbProdotto } from '@/components/JsonLd';
 import { OPERATORE } from '@/config/operatore';
 import { getPolizza } from '@/config/polizze';
@@ -45,6 +46,7 @@ export default function PianoPensionePage() {
       <PensioneCovip />
       <PensioneConfronto />
       <FaqAccordion polizza={polizza} />
+      <GuideCorrelate slug={polizza.slug} />
       <CtaFinale />
     </>
   );

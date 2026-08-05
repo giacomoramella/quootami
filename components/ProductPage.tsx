@@ -3,6 +3,7 @@ import { CoverageGrid } from './CoverageGrid';
 import { ProcessSteps } from './ProcessSteps';
 import { FaqAccordion } from './FaqAccordion';
 import { PreventivoForm } from './PreventivoForm';
+import { GuideCorrelate } from './GuideCorrelate';
 import { JsonLdFaq, JsonLdBreadcrumbProdotto } from './JsonLd';
 import type { Polizza } from '@/config/polizze';
 
@@ -29,6 +30,7 @@ export function ProductPage({
       <ProcessSteps polizza={polizza} />
       <PreventivoForm polizza={polizza} />
       <FaqAccordion polizza={polizza} />
+      <GuideCorrelate slug={polizza.slug} />
     </>
   );
 }
