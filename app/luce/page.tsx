@@ -117,8 +117,7 @@ export default function LucePage() {
             Confronta le offerte <span className="hl">luce e gas.</span>
           </h1>
           <p className="mt-6 text-base sm:text-lg text-ink-muted max-w-prose-wide mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Quootami confronta le offerte reali del mercato libero — quelle che i fornitori
-            pubblicano per i clienti domestici — e ti accompagna fino al cambio.
+            Quootami confronta le offerte reali del mercato libero e ti accompagna fino al cambio.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.3s' }}>
             <a href="#confronta" className="btn-primary">
