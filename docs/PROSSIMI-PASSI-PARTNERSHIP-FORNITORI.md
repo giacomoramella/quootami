@@ -40,20 +40,28 @@ Raramente firmano un accordo diretto con un piccolo comparatore nuovo: lavorano 
 Esempi di reti attive sul mercato italiano: AgentScout, ENEXTRA, M2G Group, TuoAgente, Broker Vincente, AAAgents.
 Queste agenzie hanno già mandati con diversi fornitori (grandi e piccoli) e cercano a loro volta sub-agenti/segnalatori. Vantaggio: un solo accordo dà accesso a un paniere di fornitori, tempi di attivazione più rapidi, supporto su documentazione e formazione. Svantaggio: la commissione per contratto è più bassa perché l'agenzia trattiene una quota. Utile come ponte mentre si negoziano accordi diretti con i fornitori digitali (3a) e, più avanti, con gli incumbent (3b).
 
-### 3d. Syndication verso comparatori già affermati
+### 3d. Reti di affiliazione (canale aggiunto il 05/08/2026 — oggi la via più rapida)
+Esempi: **Awin**, **FlexOffers**.
+Verificato che sulla rete Awin sono presenti come advertiser **Eni Plenitude IT**, **NeN 2025 IT** e **Octopus Energy IT**; anche **Enel** ha una campagna di affiliazione attiva. Una sola registrazione come publisher dà quindi accesso a più fornitori insieme, incluso un incumbent che il punto 3b dava per irraggiungibile.
+Vantaggi rispetto agli altri canali: non serve un mandato di agenzia, il tracciamento (link, subid, postback) e la rendicontazione sono forniti dalla piattaforma — il che risolve da solo il problema descritto al punto 5.2, cioè registrare la conversione e non solo il lead. Svantaggio: la piattaforma trattiene una quota, quindi la commissione unitaria è inferiore a un accordo diretto.
+L'approvazione avviene per singolo programma e richiede un sito già online con privacy e cookie policy pubblicate: condizioni oggi soddisfatte.
+**È il punto di partenza consigliato, prima ancora di 3a.** Vedi `TARGET-FORNITORI-FASE1.md` per la lista operativa.
+
+### 3e. Syndication verso comparatori già affermati
 Esempi: Facile.it, Selectra/Luce-gas.it, Segugio, SosTariffe.
 Invece di negoziare con i fornitori, ci si affilia a un comparatore più grande che gira il lead e riconosce una commissione minore. È l'opzione a minor sforzo/minor margine, utile solo come bootstrap iniziale se non si riesce ad attivare nulla su 3a/3c in tempi brevi.
 
 ## 4. Roadmap operativa consigliata
 
 **Fase 1 — attivare i primi ricavi in fretta**
-Candidarsi ai programmi partner dei fornitori digitali (3a), a partire da quelli con form di adesione pubblico (es. Pulsee). In parallelo, contattare 1-2 reti di agenzia plurimandataria (3c) per avere accesso rapido a un paniere più ampio di fornitori mentre le trattative dirette maturano.
+Registrarsi su una rete di affiliazione (3d) e candidarsi ai programmi energia già presenti: è una sola pratica che copre Plenitude, NeN e Octopus, con tracciamento incluso. In parallelo, candidarsi ai programmi partner diretti dei fornitori digitali che hanno una porta d'ingresso documentata (3a): Pulsee ha una pagina pubblica "Diventa Business Partner", Wekiwi accredita come Ambassador — non tramite il Passaparola, che esclude espressamente gli intermediari online. Solo dopo, se serve ampliare, contattare 1-2 reti di agenzia plurimandataria (3c).
+La lista operativa con le porte d'ingresso verificate è in `TARGET-FORNITORI-FASE1.md`.
 
 **Fase 2 — consolidare**
 Con i primi contratti attivi e un volume di lead misurabile, riaprire il discorso con i fornitori incumbent (3b) o con le loro reti di canale "comparatori online", portando dati reali di conversione come leva negoziale.
 
 **Fase 3 — ottimizzare**
-Rinegoziare le commissioni dei fornitori più performanti, eliminare i canali a bassa marginalità (3d) man mano che si aprono accordi diretti, automatizzare la riconciliazione lead → contratto → commissione.
+Rinegoziare le commissioni dei fornitori più performanti, eliminare i canali a bassa marginalità (3e, e progressivamente 3d) man mano che si aprono accordi diretti, automatizzare la riconciliazione lead → contratto → commissione.
 
 ## 5. Cosa cambia nel sistema già costruito (collegamento tecnico)
 
