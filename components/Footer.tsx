@@ -65,7 +65,6 @@ export function Footer() {
               <li><Link href="/privacy" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Privacy Policy</Link></li>
               <li><Link href="/cookie" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Cookie Policy</Link></li>
               <li><CookiePrefsButton /></li>
-              <li><Link href="/trasparenza" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Trasparenza</Link></li>
               <li><Link href="/chi-siamo" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Chi siamo</Link></li>
               <li><Link href="/guide" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Guide</Link></li>
               <li><Link href="/sinistri" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Sinistri</Link></li>

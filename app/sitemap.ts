@@ -23,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/mappa-sito`, lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/cookie`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/trasparenza`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
   ];
 
   const productPages: MetadataRoute.Sitemap = getAllPolizze().map(p => ({

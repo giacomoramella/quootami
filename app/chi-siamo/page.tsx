@@ -157,12 +157,9 @@ export default function ChiSiamoPage() {
             Codice delle Assicurazioni Private (D.Lgs. 209/2005) e le normative IDD e POG
             sulla distribuzione assicurativa.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-10 flex justify-center">
             <Link href="/contatti" className="btn-primary">
               Parla con Quootami →
-            </Link>
-            <Link href="/trasparenza" className="btn-secondary">
-              Trasparenza intermediario
             </Link>
           </div>
         </div>

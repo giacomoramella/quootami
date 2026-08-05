@@ -47,7 +47,6 @@ const SECTIONS = [
       { href: '/chi-siamo', label: 'Chi siamo' },
       { href: '/sinistri', label: 'Gestione sinistri' },
       { href: '/contatti', label: 'Contatti' },
-      { href: '/trasparenza', label: 'Trasparenza intermediario' },
     ],
   },
   {

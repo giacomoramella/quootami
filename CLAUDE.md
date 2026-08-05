@@ -9,7 +9,7 @@ Questo file viene letto **automaticamente** ogni volta che operi in questa carte
 Sito web del broker assicurativo **Quootami**.
 
 - **Intermediario:** Giacomo Ramella Pollone, collaboratore iscritto al **RUI sez. E n. E000821549**, operante per conto del broker **Sisto Assicurazioni S.a.s.** (RUI sez. B n. B000639183, P.IVA 02696750021).
-- **Titolare del trattamento dati** (privacy + cookie): **Giacomo Ramella Pollone**, gestore del sito. (Il broker Sisto resta "titolare" solo del **mandato di intermediazione** IVASS nella pagina Trasparenza — è un "titolare" diverso, non confonderli.)
+- **Titolare del trattamento dati** (privacy + cookie): **Giacomo Ramella Pollone**, gestore del sito. (Il broker Sisto resta titolare del **mandato di intermediazione** IVASS — è un "titolare" diverso, non confonderli.)
 - **Stack:** **Next.js 16 (App Router, Turbopack) + React 19 + TypeScript**. NON è più un sito statico HTML.
 - **Produzione:** `https://quootami.it` (+ `www.quootami.it`). **Production branch = `next`**: un `git push origin next` fa partire in automatico il deploy in produzione su Vercel.
 - **Repository:** `https://github.com/giacomoramella/quootami`
@@ -59,14 +59,15 @@ Standard atteso: **A+** su securityheaders.com e Mozilla Observatory (`quootami.
 ### 3. Cosa NON modificare senza spiegare e chiedere
 
 - **Disclaimer legale IVASS nel footer** — generato da `getDisclaimerHTML()` in `config/operatore.ts`, reso in `Footer.tsx`. Obbligatorio per art. 35 Reg. IVASS 40/2018 (RUI collaboratore + broker, messaggio pubblicitario, vigilanza IVASS). Testo intoccabile.
-- **Pagine legali** `app/trasparenza/`, `app/privacy/`, `app/cookie/` — modificabili solo per allinearle a ciò che il sito effettivamente fa. La Trasparenza è obbligatoria IVASS.
+- **Pagine legali** `app/privacy/`, `app/cookie/` — modificabili solo per allinearle a ciò che il sito effettivamente fa, e ridotte ai soli elementi obbligatori (art. 13 GDPR / Linee guida Garante 10/06/2021): non rimuovere quelli, non riaggiungere trattamenti che il sito non esegue.
+- **La pagina `/trasparenza` è stata ELIMINATA il 05/08/2026 su decisione di Giacomo**, dopo che gli era stato segnalato che conteneva le informative IDD obbligatorie (ruolo, retribuzione, conflitto di interessi). L'informativa sul distributore va quindi consegnata al cliente per altra via, fuori dal sito. **Non ricrearla di iniziativa.**
 - **`next.config.js` header** e **`proxy.ts` CSP** — toccare solo per aggiungere domini autorizzati, mai per rimuovere protezioni.
 - **Web3Forms `access_key`** — non rimuoverla/cambiarla senza ok esplicito.
 - Nessun nuovo segreto in chiaro nel codice.
 
 ### 4. Convenzioni di stile
 
-- **Voce**: terza persona / impersonale ("Quootami…"). Mai "io"/"una persona". Eccezione: pagine legali (privacy/cookie/trasparenza) dove serve la prima persona per l'identificazione.
+- **Voce**: terza persona / impersonale ("Quootami…"). Mai "io"/"una persona". Eccezione: pagine legali (privacy/cookie) dove serve la prima persona per l'identificazione.
 - **Palette**: usa i token di `tailwind.config.ts` — `brand.yellow #FFD84D`, `brand.navy #0B1220`, `brand.green #1F9D55`, token `ink`/`bg`; accenti grafici teal `#2A9D8F` / coral `#E76F51` / amber `#E9B440`. Classi utility in `app/globals.css` (`.section`, `.container-content`, `.eyebrow`, `.section-title`, `.hl`, `.btn-primary`, `.btn-secondary`).
 - **Niente emoji** nei titoli/card dove non già presenti (stile sobrio).
 - **Niente claim/numeri inventati** (es. "risparmio medio €X", rendimenti promessi). Solo fatti verificabili di legge o dati con fonte dichiarata. Il broker è neutrale.
