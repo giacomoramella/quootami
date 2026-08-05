@@ -2,6 +2,44 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllArticoli, CATEGORIE_LABEL, type Articolo } from '@/config/guide';
 import { JsonLdBreadcrumb } from '@/components/JsonLd';
+import { Approfondimento } from '@/components/ProductApprofondimento';
+import type { Approfondimento as ApprofondimentoType } from '@/config/polizze';
+
+/** Sezione redazionale in fondo all'indice delle guide. */
+const APPROFONDIMENTO: ApprofondimentoType = {
+  eyebrow: 'Come sono scritte',
+  title: 'Perché queste guide si possono verificare',
+  accent: 'verificare',
+  intro:
+    'In materia assicurativa e fiscale circola molta informazione approssimativa. Queste pagine seguono tre regole fisse.',
+  blocchi: [
+    {
+      h3: 'Solo norme in vigore, mai disegni di legge',
+      p: [
+        'Un obbligo annunciato non è un obbligo esistente. Qui una regola viene descritta come vigente soltanto quando è stata pubblicata in Gazzetta Ufficiale ed è effettivamente applicabile; le proposte in discussione, se citate, sono indicate come tali.',
+        'Quando una scadenza non è ancora certa preferiamo non indicarla, piuttosto che riportare date che circolano senza un riferimento normativo.',
+      ],
+    },
+    {
+      h3: 'Le fonti sono citate, non evocate',
+      p: [
+        'Ogni articolo chiude con i riferimenti usati: articoli del Codice civile o del Codice delle Assicurazioni, regolamenti IVASS, documenti COVIP, delibere ARERA, guide dell\'Agenzia delle Entrate. Sono fonti primarie e pubbliche, verificabili da chiunque senza passare da noi.',
+      ],
+    },
+    {
+      h3: 'Nessuna cifra di premio, nessuna promessa di risparmio',
+      p: [
+        'Quootami è un intermediario vigilato IVASS: pubblicare stime di premio o percentuali di risparmio significherebbe presentare come certo ciò che dipende dal singolo profilo di rischio. Le cifre che troverai sono soltanto quelle fissate dalla legge — limiti di detrazione, massimali normativi, termini di decadenza — e sono sempre accompagnate dalla norma che le stabilisce.',
+      ],
+    },
+    {
+      h3: 'Aggiornamento dichiarato',
+      p: [
+        'Ogni guida riporta la data di ultimo aggiornamento. In un settore in cui gli obblighi cambiano di anno in anno, un contenuto senza data è un contenuto di cui non ci si può fidare.',
+      ],
+    },
+  ],
+};
 
 export const metadata: Metadata = {
   title: 'Guide su assicurazioni, obblighi di legge e detrazioni',
@@ -39,6 +77,8 @@ export default function GuidePage() {
           </ul>
         </div>
       </section>
+
+      <Approfondimento dati={APPROFONDIMENTO} />
     </>
   );
 }

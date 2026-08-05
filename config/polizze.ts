@@ -91,7 +91,7 @@ export const POLIZZE: Record<string, Polizza> = {
       sub: 'Confronto multi-compagnia per trovare la polizza migliore per il tuo veicolo.',
     },
     metaTitle: 'Polizza Auto · Confronto RC, Furto, Incendio, Kasko',
-    metaDesc: 'Polizza auto Quootami: confronto multi-compagnia per RC obbligatoria, Furto, Incendio e Kasko. Preventivo gratuito senza impegno.',
+    metaDesc: 'Confronto polizze auto fra più compagnie: RC obbligatoria, Furto, Incendio e Kasko. Come funziona la classe di merito e cosa fa salire il premio. Preventivo gratuito.',
     ogImageAlt: 'Polizza Auto Quootami — RC Auto, Furto, Incendio, Kasko',
     approfondimento: {
       eyebrow: 'Come si sceglie',
@@ -174,7 +174,7 @@ export const POLIZZE: Record<string, Polizza> = {
       sub: 'Una sola polizza per furto, incendio, eventi naturali e RC capofamiglia.',
     },
     metaTitle: 'Polizza Casa · Furto, Incendio, RC capofamiglia',
-    metaDesc: 'Polizza casa Quootami: confronto delle migliori coperture per furto, incendio, eventi atmosferici, RC capofamiglia. Preventivo gratuito.',
+    metaDesc: 'Confronto polizze casa: furto, incendio, danni da acqua, eventi atmosferici e RC capofamiglia. Come evitare la regola proporzionale. Preventivo gratuito.',
     ogImageAlt: 'Polizza Casa Quootami — Furto, Incendio, RC capofamiglia',
     approfondimento: {
       eyebrow: 'Come si sceglie',
@@ -258,7 +258,7 @@ export const POLIZZE: Record<string, Polizza> = {
       sub: 'Polizze sanitarie, vita e infortuni per ridurre le spese mediche e proteggere chi ami.',
     },
     metaTitle: 'Polizza Salute, Vita e Infortuni',
-    metaDesc: 'Polizze sanitarie, vita e infortuni con Quootami: rimborso visite, ricoveri, interventi. Confronto multi-compagnia.',
+    metaDesc: 'Confronto polizze salute, vita e infortuni: rimborso di visite, ricoveri e interventi, carenze ed esclusioni, quanto si detrae in dichiarazione. Preventivo gratuito.',
     ogImageAlt: 'Polizza Salute Quootami — Sanitaria, Vita, Infortuni',
     approfondimento: {
       eyebrow: 'Come si sceglie',
@@ -341,7 +341,7 @@ export const POLIZZE: Record<string, Polizza> = {
       sub: 'Deduci fino a €5.300/anno dal reddito IRPEF e costruisci la pensione integrativa. Calcola subito quanto risparmi.',
     },
     metaTitle: 'Fondo Pensione · Calcola il tuo risparmio fiscale',
-    metaDesc: 'Fondo pensione: calcolatore del risparmio IRPEF, deducibilità fino a €5.300/anno, rendimenti tassati al 20%. Confronto Quootami.',
+    metaDesc: 'Fondo pensione: calcola il risparmio IRPEF con il simulatore, deducibilità fino a 5.300 € l\'anno e rendimenti tassati al 20%. Confronto fra fondi e costi ISC.',
     ogImageAlt: 'Fondo Pensione Quootami — Previdenza complementare e deduzione fiscale',
     adesioneUrl: '/firma-allianz.html',
     coverages: {
@@ -395,7 +395,7 @@ export const POLIZZE: Record<string, Polizza> = {
       sub: 'Copertura per furto identità, frodi online, attacchi cyber, danni reputazionali.',
     },
     metaTitle: 'Polizza Cyber · Furto identità, frodi online',
-    metaDesc: 'Polizza cyber Quootami per privati e PMI: protezione contro furto identità, frodi online, ransomware, danni reputazionali.',
+    metaDesc: 'Polizza cyber per privati e PMI: furto d\'identità, frodi online, ransomware e fermo attività. Cosa copre davvero e perché conta la retroattività.',
     ogImageAlt: 'Polizza Cyber Quootami — Privati e Imprese',
     approfondimento: {
       eyebrow: 'Come si sceglie',
@@ -476,7 +476,7 @@ export const POLIZZE: Record<string, Polizza> = {
       sub: 'Spese veterinarie, RC danni a terzi, smarrimento, decesso. Pensa a lui come a un membro della famiglia.',
     },
     metaTitle: 'Polizza Animali · Veterinario e RC',
-    metaDesc: 'Polizza per cani e gatti: rimborso spese veterinarie, RC per danni a terzi, smarrimento. Quootami confronta le migliori coperture.',
+    metaDesc: 'Assicurazione per cani e gatti: rimborso delle spese veterinarie e responsabilità civile per i danni a terzi. Quanto si detrae e cosa resta escluso.',
     ogImageAlt: 'Polizza Animali Quootami — Cani e gatti',
     approfondimento: {
       eyebrow: 'Come si sceglie',
@@ -556,7 +556,7 @@ export const POLIZZE: Record<string, Polizza> = {
       sub: 'RC professionale, Catastrofale PMI obbligatoria, Cyber business: tutta la protezione per la tua impresa.',
     },
     metaTitle: 'RC Professionale e Catastrofale PMI',
-    metaDesc: 'RC professionale per liberi professionisti, Catastrofale PMI obbligatoria (Legge 213/2023), Cyber business. Confronto Quootami.',
+    metaDesc: 'RC professionale obbligatoria per gli iscritti agli albi, RCT e RCO per le imprese e copertura catastrofale. Claims made, retroattività e ultrattività spiegate.',
     ogImageAlt: 'RC Professionale e Catastrofale PMI — Quootami',
     approfondimento: {
       eyebrow: 'Come si sceglie',

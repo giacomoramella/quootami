@@ -42,6 +42,28 @@ export default function GlossarioPensionePage() {
         sottotitolo="Quattordici termini che tornano nella guida e nello schema, spiegati in modo semplice e neutrale."
       />
 
+      {/* H2 proprio: il componente è montato con heading={false} per non
+          ripetere l'H1, ma senza questo la pagina resterebbe priva di H2. */}
+      <section className="section pb-0">
+        <div className="container-content">
+          <div className="max-w-prose-wide mx-auto prose-quootami">
+            <h2>I termini della previdenza complementare</h2>
+            <p>
+              Il linguaggio dei fondi pensione è pieno di sigle che cambiano il senso di una scelta:
+              un ISC di mezzo punto in più erode il capitale finale, un comparto scelto senza
+              guardare l&apos;orizzonte temporale può costare rendimento, e parole come
+              anticipazione, riscatto e RITA indicano tre cose molto diverse fra loro.
+            </p>
+            <p>
+              Qui sotto trovi le quattordici voci che tornano più spesso nella{' '}
+              <Link href="/piano-pensione/guida">guida ai fondi pensione</Link> e nello{' '}
+              <Link href="/piano-pensione/schema">schema della previdenza</Link>, spiegate in una
+              riga e in modo neutrale.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <PensioneGlossario heading={false} />
 
       <section className="section bg-bg-alt">

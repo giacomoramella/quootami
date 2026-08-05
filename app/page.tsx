@@ -2,12 +2,51 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { OPERATORE } from '@/config/operatore';
 import { getPolizzeByCategory } from '@/config/polizze';
+import { Approfondimento } from '@/components/ProductApprofondimento';
+import type { Approfondimento as ApprofondimentoType } from '@/config/polizze';
 
 // Description dedicata (keyword-mirata) — il title resta quello di default
 // del sito, così la card di condivisione social non cambia.
 export const metadata: Metadata = {
   description:
     'Confronta polizze auto, casa, salute, cyber e fondo pensione: comparatore digitale e consulenza personale di un intermediario. Preventivo gratuito.',
+};
+
+/** Sezione redazionale in fondo alla home, a fisarmonica. */
+const APPROFONDIMENTO: ApprofondimentoType = {
+  eyebrow: 'Come lavora Quootami',
+  title: 'Confronto digitale, decisione con una persona',
+  accent: 'con una persona',
+  intro:
+    'Il confronto lo fa uno strumento, la scelta la fa chi conosce il tuo caso. Ecco cosa significa in concreto.',
+  blocchi: [
+    {
+      h3: 'Perché un intermediario e non un preventivatore qualsiasi',
+      p: [
+        'Un comparatore restituisce prezzi; un intermediario risponde anche di ciò che ti ha proposto. Quootami opera nell\'ambito dell\'attività di intermediazione assicurativa vigilata da IVASS, e questo comporta obblighi precisi: analizzare le esigenze prima di proporre un prodotto, consegnare la documentazione precontrattuale e restare responsabile della consulenza fornita.',
+        'La differenza si vede soprattutto dopo la firma: al momento di un sinistro c\'è un riferimento che conosce il contratto, invece di un numero verde che riparte da zero.',
+      ],
+    },
+    {
+      h3: 'Cosa si confronta, oltre al premio',
+      p: [
+        'Due polizze allo stesso prezzo possono comportarsi in modo opposto. A pesare sono i massimali, le franchigie e gli scoperti, i periodi di carenza e l\'elenco delle esclusioni. Sono le parti del contratto che quasi nessuno legge e le uniche che contano quando si apre un sinistro.',
+        'Per questo il confronto non si ferma alla cifra finale: le condizioni contrattuali vengono messe a paragone voce per voce, e le differenze rilevanti vengono spiegate prima della sottoscrizione.',
+      ],
+    },
+    {
+      h3: 'Quanto costa il servizio',
+      p: [
+        'Il confronto e il preventivo sono gratuiti e senza impegno. L\'intermediario è remunerato dalle compagnie tramite provvigione sui contratti effettivamente stipulati; eventuali compensi di natura diversa vengono comunicati per iscritto prima della sottoscrizione.',
+      ],
+    },
+    {
+      h3: 'Non solo assicurazioni',
+      p: [
+        'Accanto alle polizze, Quootami segue due aree in cui la scelta giusta produce un beneficio misurabile: la previdenza complementare, dove i versamenti si deducono dal reddito entro il limite di legge, e le forniture di luce e gas, confrontate sulle offerte pubblicate dai venditori nel Portale Offerte di ARERA.',
+      ],
+    },
+  ],
 };
 
 /** Aree di copertura raccolte sotto /polizze (previdenza ha un blocco suo). */
@@ -130,6 +169,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <Approfondimento dati={APPROFONDIMENTO} />
     </>
   );
 }
