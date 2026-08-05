@@ -55,7 +55,10 @@ export default function PianoPensionePage() {
 /* ── CTA finale: richiesta stima previdenziale via contatto diretto ── */
 function CtaFinale() {
   return (
-    <section id="richiesta" className="section bg-bg-alt">
+    // id="preventivo": stesso ancoraggio delle altre pagine prodotto, così i
+    // rimandi generici "/{slug}#preventivo" (es. la CTA in fondo alle guide)
+    // atterrano nel punto giusto anche qui.
+    <section id="preventivo" className="section bg-bg-alt">
       <div className="container-content text-center">
         <span className="eyebrow">Richiedi una stima</span>
         <h2 className="section-title">

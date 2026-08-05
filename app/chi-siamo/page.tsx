@@ -70,7 +70,7 @@ export default function ChiSiamoPage() {
               <p className="mt-6 text-xs text-ink-muted">
                 Iscrizioni verificabili sul{' '}
                 <a
-                  href="https://servizi.ivass.it/RuirPubblica/"
+                  href="https://ruipubblico.ivass.it/rui-pubblica/ng/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline underline-offset-2 hover:text-ink transition-colors"
