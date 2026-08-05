@@ -164,7 +164,7 @@ function ModuloTutele() {
     <>
       <ol className="list-none">
         <Tappa anno="2024" testo="Finisce la maggior tutela: a gennaio per il gas, a luglio per la luce." />
-        <Tappa anno="Oggi" testo="Chi non ha mai scelto un'offerta è nel Servizio a Tutele Graduali, a condizioni fissate da ARERA." />
+        <Tappa anno="Oggi" testo="Chi non ha mai scelto un'offerta è nel Servizio a Tutele Graduali, a condizioni fissate dalla regolazione di settore." />
         <Tappa anno="2027" testo="Il 31 marzo finisce anche quello: si passa tutti al mercato libero." ultimo />
       </ol>
 

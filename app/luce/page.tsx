@@ -45,7 +45,7 @@ const APPROFONDIMENTO: ApprofondimentoType = {
     {
       h3: 'Solo una voce su quattro è negoziabile',
       p: [
-        'La bolletta si compone di quattro blocchi: la spesa per la materia energia o gas naturale, la spesa per il trasporto e la gestione del contatore, gli oneri di sistema, e infine imposte e IVA. Cambiando fornitore si incide soltanto sul primo: gli altri tre sono definiti da ARERA e sono identici per tutti, qualunque sia il venditore.',
+        'La bolletta si compone di quattro blocchi: la spesa per la materia energia o gas naturale, la spesa per il trasporto e la gestione del contatore, gli oneri di sistema, e infine imposte e IVA. Cambiando fornitore si incide soltanto sul primo: gli altri tre sono fissati dalla regolazione di settore e sono identici per tutti, qualunque sia il venditore.',
         'È il motivo per cui una promessa di dimezzare la bolletta non è credibile. Il margine di manovra reale riguarda la componente energia, che a seconda dei consumi e del periodo pesa mediamente attorno alla metà del totale.',
       ],
     },
@@ -72,7 +72,7 @@ const APPROFONDIMENTO: ApprofondimentoType = {
     },
   ],
   fonti:
-    'ARERA — fine tutela elettricità e gas, Servizio a Tutele Graduali, composizione della bolletta; D.Lgs. 206/2005 (Codice del Consumo) per il diritto di recesso.',
+    'Delibere dell\'autorità di regolazione dell\'energia su fine tutela, Servizio a Tutele Graduali e composizione della bolletta; D.Lgs. 206/2005 (Codice del Consumo) per il diritto di recesso.',
 };
 
 const META_TITLE = 'Confronto offerte luce e gas del mercato libero';

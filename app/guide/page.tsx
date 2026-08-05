@@ -23,7 +23,7 @@ const APPROFONDIMENTO: ApprofondimentoType = {
     {
       h3: 'Le fonti sono citate, non evocate',
       p: [
-        'Ogni articolo chiude con i riferimenti usati: articoli del Codice civile o del Codice delle Assicurazioni, regolamenti IVASS, documenti COVIP, delibere ARERA, guide dell\'Agenzia delle Entrate. Sono fonti primarie e pubbliche, verificabili da chiunque senza passare da noi.',
+        'Ogni articolo chiude con i riferimenti usati: articoli del Codice civile o del Codice delle Assicurazioni, regolamenti IVASS, documenti COVIP, guide dell\'Agenzia delle Entrate. Sono fonti primarie e pubbliche, verificabili da chiunque senza passare da noi.',
       ],
     },
     {
