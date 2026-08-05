@@ -68,7 +68,7 @@ const FAQ = [
 
 const META_TITLE = 'Polizze assicurative · Privati e imprese';
 const META_DESC =
-  'Tutte le polizze Quootami: auto, casa, salute e vita, cyber, animali, RC professionale e Catastrofale PMI. Preventivo gratuito.';
+  'Confronto polizze per privati e imprese: auto, casa, salute e vita, cyber, animali, RC professionale e catastrofale. Quali sono obbligatorie e cosa controllare prima di firmare.';
 
 export const metadata: Metadata = {
   title: META_TITLE,

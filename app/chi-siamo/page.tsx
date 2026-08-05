@@ -4,7 +4,7 @@ import { OPERATORE } from '@/config/operatore';
 
 export const metadata: Metadata = {
   title: 'Chi siamo · Il broker assicurativo digitale',
-  description: 'Quootami confronta le polizze di più compagnie e segue il cliente con un solo referente: chi c\'è dietro, come lavora e gli estremi di iscrizione al RUI, vigilati IVASS.',
+  description: 'Quootami confronta le polizze di più compagnie con un solo referente: chi c\'è dietro, come lavora e gli estremi di iscrizione al RUI, vigilati IVASS.',
 };
 
 export default function ChiSiamoPage() {
