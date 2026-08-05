@@ -27,11 +27,11 @@ export function ProductPage({
       <JsonLdBreadcrumbProdotto polizza={polizza} />
       <ProductHero polizza={polizza} />
       <CoverageGrid polizza={polizza} />
-      <ProductApprofondimento polizza={polizza} />
       {extra}
       <ProcessSteps polizza={polizza} />
       <PreventivoForm polizza={polizza} />
       <FaqAccordion polizza={polizza} />
+      <ProductApprofondimento polizza={polizza} />
       <GuideCorrelate slug={polizza.slug} />
     </>
   );
