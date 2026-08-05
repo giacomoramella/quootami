@@ -241,7 +241,7 @@ export function ComparatoreLuce() {
           </h2>
           <p className="section-sub mx-auto">
             Carica la bolletta o inserisci due dati: il confronto usa le offerte reali del
-            Portale Offerte ARERA.
+            mercato libero.
           </p>
         </div>
 
@@ -421,7 +421,7 @@ export function ComparatoreLuce() {
 
         <p className="max-w-2xl mx-auto mt-6 text-xs text-ink-muted text-center leading-relaxed">
           Stima indicativa sulla sola componente materia energia, calcolata sulle offerte
-          pubblicate dai fornitori sul Portale Offerte ARERA; esclusi oneri, imposte e trasporto.
+          pubblicate dai fornitori per i clienti domestici; esclusi oneri, imposte e trasporto.
           Servizio gratuito per il cliente: Quootami può ricevere una commissione dal fornitore
           in caso di attivazione.
         </p>

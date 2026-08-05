@@ -19,7 +19,7 @@ const FAQ = [
   },
   {
     q: 'Da dove arrivano le offerte confrontate da Quootami?',
-    a: 'Dal Portale Offerte gestito da ARERA, l\'autorità di regolazione, dove i venditori sono tenuti a pubblicare le offerte destinate ai clienti domestici. Sono quindi condizioni ufficiali e verificabili, non stime commerciali.',
+    a: 'Sono le condizioni economiche che i venditori pubblicano per i clienti domestici: offerte realmente sottoscrivibili, non stime commerciali né simulazioni. Il confronto viene fatto a parità di consumo annuo, così i risultati sono paragonabili fra loro.',
   },
   {
     q: 'Conviene di più il prezzo fisso o quello indicizzato?',
@@ -72,12 +72,12 @@ const APPROFONDIMENTO: ApprofondimentoType = {
     },
   ],
   fonti:
-    'ARERA — fine tutela elettricità e gas, Servizio a Tutele Graduali, Portale Offerte; D.Lgs. 206/2005 (Codice del Consumo) per il diritto di recesso.',
+    'ARERA — fine tutela elettricità e gas, Servizio a Tutele Graduali, composizione della bolletta; D.Lgs. 206/2005 (Codice del Consumo) per il diritto di recesso.',
 };
 
-const META_TITLE = 'Confronto offerte luce e gas con i dati ARERA';
+const META_TITLE = 'Confronto offerte luce e gas del mercato libero';
 const META_DESC =
-  'Confronto gratuito delle offerte luce e gas del mercato libero con i dati ufficiali del Portale Offerte ARERA. Carica la bolletta: i dati si compilano da soli.';
+  'Confronto gratuito delle offerte luce e gas del mercato libero: come si legge la bolletta, quale voce è davvero negoziabile e cosa cambia fra prezzo fisso e indicizzato.';
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/og-image.png',
-        alt: 'Quootami — confronto offerte luce e gas con i dati ARERA',
+        alt: 'Quootami — confronto offerte luce e gas del mercato libero',
         width: 1200,
         height: 630,
       },
@@ -118,7 +118,7 @@ export default function LucePage() {
           </h1>
           <p className="mt-6 text-base sm:text-lg text-ink-muted max-w-prose-wide mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
             Quootami confronta le offerte reali del mercato libero — quelle che i fornitori
-            pubblicano per legge sul Portale Offerte ARERA — e ti accompagna fino al cambio.
+            pubblicano per i clienti domestici — e ti accompagna fino al cambio.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.3s' }}>
             <a href="#confronta" className="btn-primary">
@@ -129,7 +129,7 @@ export default function LucePage() {
             </a>
           </div>
           <p className="mt-8 text-xs sm:text-sm text-ink-muted animate-fade-up" style={{ animationDelay: '0.4s' }}>
-            Nessun costo &middot; Dati ufficiali ARERA &middot; Nessun impegno
+            Nessun costo &middot; Offerte reali del mercato libero &middot; Nessun impegno
           </p>
         </div>
       </section>
@@ -153,7 +153,7 @@ export default function LucePage() {
             />
             {[
               { title: 'Carica o inserisci i dati', desc: 'Foto della bolletta o due numeri a mano: bastano un paio di minuti.' },
-              { title: 'Quootami confronta', desc: 'Le offerte realmente disponibili, dai dati pubblici ufficiali ARERA.' },
+              { title: 'Quootami confronta', desc: 'Le offerte realmente disponibili sul mercato libero, non stime.' },
               { title: 'Ricevi la proposta', desc: 'Dopo la conferma email, la soluzione migliore spiegata con chiarezza.' },
               { title: 'Cambio senza pensieri', desc: 'Le pratiche del passaggio le segue Quootami. Nessuna interruzione di fornitura.' },
             ].map((step, i) => (
@@ -177,7 +177,7 @@ export default function LucePage() {
         <div className="container-content">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {[
-              { title: 'Fonte ufficiale', desc: 'Le offerte arrivano dal Portale Offerte ARERA, dove ogni fornitore è obbligato per legge a pubblicare le proprie tariffe.' },
+              { title: 'Offerte reali', desc: 'Il confronto usa le condizioni economiche che i fornitori pubblicano per i clienti domestici, non stime commerciali.' },
               { title: 'Gratis per te', desc: 'Il confronto e la consulenza non costano nulla: Quootami può ricevere una commissione dal fornitore solo se attivi un contratto.' },
               { title: 'Una persona vera', desc: 'Niente call center: lo stesso referente del resto di Quootami ti segue anche sul cambio di fornitura.' },
             ].map((v) => (
