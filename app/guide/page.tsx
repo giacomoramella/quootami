@@ -4,7 +4,7 @@ import { getAllArticoli, CATEGORIE_LABEL, type Articolo } from '@/config/guide';
 import { JsonLdBreadcrumb } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
-  title: 'Guide e approfondimenti',
+  title: 'Guide su assicurazioni, obblighi di legge e detrazioni',
   description:
     'Guide chiare su assicurazioni, obblighi di legge e detrazioni: catastrofale per le imprese, coperture casa, previdenza. Aggiornate e con le fonti.',
 };
@@ -21,7 +21,7 @@ export default function GuidePage() {
         <div className="container-content text-center">
           <span className="eyebrow">Guide</span>
           <h1 className="mt-8 font-sans font-bold text-4xl sm:text-6xl tracking-tight leading-[1.05] text-ink">
-            Capire prima di <span className="hl">firmare.</span>
+            Guide su assicurazioni e <span className="hl">previdenza.</span>
           </h1>
           <p className="mt-6 text-base sm:text-lg text-ink-muted max-w-prose-wide mx-auto">
             Approfondimenti su obblighi di legge, coperture e detrazioni. Scritti in modo

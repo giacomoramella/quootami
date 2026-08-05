@@ -5,7 +5,7 @@ import { LuceGuida } from '@/components/LuceGuida';
 import { OPERATORE } from '@/config/operatore';
 import { JsonLdBreadcrumb } from '@/components/JsonLd';
 
-const META_TITLE = 'Luce e Gas · Confronta le tariffe con i dati ARERA';
+const META_TITLE = 'Confronto offerte luce e gas con i dati ARERA';
 const META_DESC =
   'Confronto gratuito delle offerte luce e gas del mercato libero con i dati ufficiali del Portale Offerte ARERA. Carica la bolletta: i dati si compilano da soli.';
 
@@ -43,7 +43,7 @@ export default function LucePage() {
         <div className="container-content text-center relative">
           <span className="eyebrow animate-fade-in">Luce e Gas</span>
           <h1 className="mt-4 font-sans font-bold text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[1.05] text-ink animate-rise">
-            Bollette più leggere, <span className="hl">senza pensieri.</span>
+            Confronta le offerte <span className="hl">luce e gas.</span>
           </h1>
           <p className="mt-6 text-base sm:text-lg text-ink-muted max-w-prose-wide mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>
             Quootami confronta le offerte reali del mercato libero — quelle che i fornitori

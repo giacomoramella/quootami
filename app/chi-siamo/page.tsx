@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { OPERATORE } from '@/config/operatore';
 
 export const metadata: Metadata = {
-  title: 'Chi siamo',
-  description: 'Quootami è il broker assicurativo digitale: confronto multi-compagnia indipendente, vigilato IVASS.',
+  title: 'Chi siamo · Il broker assicurativo digitale',
+  description: 'Quootami confronta le polizze di più compagnie e segue il cliente con un solo referente: chi c\'è dietro, come lavora e gli estremi di iscrizione al RUI, vigilati IVASS.',
 };
 
 export default function ChiSiamoPage() {

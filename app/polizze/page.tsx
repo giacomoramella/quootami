@@ -54,7 +54,7 @@ export default function PolizzePage() {
         <div className="container-content text-center relative">
           <span className="eyebrow">Polizze assicurative</span>
           <h1 className="font-sans font-bold text-4xl sm:text-6xl tracking-tight leading-[1.05] text-ink mt-4">
-            Copertura per ogni <span className="hl">esigenza.</span>
+            Polizze assicurative, <span className="hl">confrontate.</span>
           </h1>
           <p className="section-sub mx-auto">
             Quootami confronta le proposte di più compagnie e seleziona quella adatta al tuo caso.

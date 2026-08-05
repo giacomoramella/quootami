@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { OPERATORE } from '@/config/operatore';
 
 export const metadata: Metadata = {
-  title: 'Contatti',
-  description: 'Contatti Quootami: WhatsApp, email, telefono. Risposta entro 24 ore lavorative.',
+  title: 'Contatti · Preventivi e assistenza assicurativa',
+  description: 'Contatta Quootami per un preventivo assicurativo gratuito o per assistenza su una polizza già attiva: WhatsApp, email o telefono. Risposta entro 24 ore lavorative.',
 };
 
 export default function ContattiPage() {
@@ -16,10 +16,11 @@ export default function ContattiPage() {
             Parla con Quootami
           </span>
           <h1 className="mt-8 font-sans font-bold text-4xl sm:text-6xl tracking-tight leading-[1.05] text-ink">
-            Come posso <span className="hl">aiutarti?</span>
+            Preventivi e assistenza <span className="hl">assicurativa.</span>
           </h1>
           <p className="mt-6 text-base sm:text-lg text-ink-muted max-w-prose-wide mx-auto">
-            Scegli il canale che preferisci. Risposta entro 24 ore lavorative.
+            Per un preventivo gratuito o per assistenza su una polizza già attiva, scegli il canale
+            che preferisci. Risposta entro 24 ore lavorative.
           </p>
         </div>
       </section>

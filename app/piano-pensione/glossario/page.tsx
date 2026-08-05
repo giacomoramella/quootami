@@ -10,7 +10,7 @@ const BREADCRUMB = [
   { nome: 'Glossario della previdenza', href: '/piano-pensione/glossario' },
 ];
 
-const META_TITLE = 'Glossario della previdenza';
+const META_TITLE = 'Glossario della previdenza complementare';
 const META_DESC =
   'I termini della previdenza complementare spiegati in una riga: TFR, fondo negoziale, fondo aperto, PIP, ISC, comparto, RITA, deducibilità e altri.';
 

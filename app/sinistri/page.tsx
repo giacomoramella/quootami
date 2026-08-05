@@ -26,10 +26,11 @@ export default function SinistriPage() {
             Gestione sinistri
           </span>
           <h1 className="mt-8 font-sans font-bold text-4xl sm:text-6xl tracking-tight leading-[1.05] text-ink">
-            Sinistro? Quootami <span className="hl">assiste.</span>
+            Denuncia del sinistro, <span className="hl">passo per passo.</span>
           </h1>
           <p className="mt-6 text-base sm:text-lg text-ink-muted max-w-prose-wide mx-auto">
-            Un referente unico segue la pratica dalla denuncia alla liquidazione.
+            Cosa fare subito dopo un sinistro, entro quanto va denunciato e come si arriva alla
+            liquidazione. Un referente unico segue la pratica dall&apos;inizio alla fine.
           </p>
 
           <div className="mt-10 max-w-2xl mx-auto p-6 bg-gradient-to-br from-yellow-50 to-amber-50 border-l-4 border-brand-yellow-deep rounded-2xl">

@@ -4,6 +4,7 @@ import { ProcessSteps } from './ProcessSteps';
 import { FaqAccordion } from './FaqAccordion';
 import { PreventivoForm } from './PreventivoForm';
 import { GuideCorrelate } from './GuideCorrelate';
+import { ProductApprofondimento } from './ProductApprofondimento';
 import { JsonLdFaq, JsonLdBreadcrumbProdotto } from './JsonLd';
 import type { Polizza } from '@/config/polizze';
 
@@ -26,6 +27,7 @@ export function ProductPage({
       <JsonLdBreadcrumbProdotto polizza={polizza} />
       <ProductHero polizza={polizza} />
       <CoverageGrid polizza={polizza} />
+      <ProductApprofondimento polizza={polizza} />
       {extra}
       <ProcessSteps polizza={polizza} />
       <PreventivoForm polizza={polizza} />
