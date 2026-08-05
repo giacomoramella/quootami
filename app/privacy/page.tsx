@@ -4,115 +4,81 @@ import { OPERATORE } from '@/config/operatore';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy · Reg. UE 2016/679 (GDPR)',
-  description: 'Informativa privacy ai sensi degli artt. 13 e 14 del Reg. UE 2016/679 (GDPR). Titolare, finalità, basi giuridiche, conservazione, destinatari, diritti dell\'interessato.',
+  description: 'Informativa privacy ai sensi dell\'art. 13 del Reg. UE 2016/679 (GDPR): titolare, dati trattati, finalità, basi giuridiche, conservazione, destinatari e diritti.',
 };
 
+/**
+ * Informativa essenziale: contiene TUTTI gli elementi obbligatori dell'art. 13
+ * GDPR (titolare, dati, finalità, basi giuridiche, conservazione, destinatari,
+ * trasferimenti extra-UE, assenza di decisioni automatizzate, diritti, reclamo
+ * al Garante) e nient'altro.
+ *
+ * Descrive solo ciò che il sito fa davvero: i form raccolgono contatti e dati
+ * del rischio, il comparatore energia tratta consumi + bolletta + email. Non
+ * sono previsti caricamenti di documenti d'identità.
+ */
 export default function PrivacyPage() {
   return (
     <LegalPage
       eyebrow="Reg. UE 2016/679 · GDPR"
       title="Privacy"
       titleAccent="Policy."
-      intro="Quali dati raccogliamo, perché, e cosa puoi farne tu. Resa ai sensi degli artt. 13 e 14 del Reg. UE 2016/679 (GDPR)."
-      lastUpdate="14 luglio 2026"
+      intro="Quali dati raccogliamo, perché, e cosa puoi farne tu. Resa ai sensi dell'art. 13 del Reg. UE 2016/679 (GDPR)."
+      lastUpdate="5 agosto 2026"
     >
       <h2>1. Titolare del trattamento</h2>
-      <p>Il titolare del trattamento dei dati personali raccolti tramite questo sito è:</p>
       <ul>
         <li><strong>Titolare:</strong> {OPERATORE.collaboratore.nome_completo}, gestore del sito</li>
         <li><strong>Iscrizione RUI sez. {OPERATORE.collaboratore.rui_sezione} n.</strong> {OPERATORE.collaboratore.rui_numero} — vigilato IVASS</li>
-        <li><strong>Email privacy:</strong> <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a></li>
+        <li><strong>Email:</strong> <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a></li>
         <li><strong>Telefono:</strong> <a href={`tel:${OPERATORE.contatti.telefono_tel}`}>{OPERATORE.contatti.telefono_display}</a></li>
       </ul>
-      <p>Ai sensi dell&apos;art. 37 GDPR il titolare non rientra fra i soggetti obbligati alla nomina di un Responsabile della Protezione dei Dati (DPO).</p>
 
-      <h2>2. Quali dati raccogliamo</h2>
-      <h3>2.1 Dati conferiti tramite i form</h3>
+      <h2>2. Dati trattati</h2>
       <ul>
-        <li><strong>Dati anagrafici e di contatto:</strong> nome, cognome, data di nascita, email, telefono.</li>
-        <li><strong>Dati relativi al rischio assicurato:</strong> es. targa veicolo per la polizza auto.</li>
-        <li><strong>Documenti di identità:</strong> immagini di carta d&apos;identità (fronte/retro) e libretto di circolazione, caricati su archivio cifrato (Supabase Storage, regione UE).</li>
-        <li><strong>Consenso al trattamento</strong> registrato prima dell&apos;invio.</li>
+        <li><strong>Moduli di preventivo:</strong> nome, email, telefono e i dati del rischio da assicurare (es. targa del veicolo, dati dell&apos;attività), oltre al consenso registrato prima dell&apos;invio.</li>
+        <li><strong>Comparatore luce e gas:</strong> i dati di consumo inseriti, l&apos;eventuale immagine o PDF della bolletta caricata — letta in modo automatizzato per estrarne i soli dati di fornitura — e l&apos;email, confermata con doppio opt-in.</li>
+        <li><strong>Dati di navigazione:</strong> log tecnici trasmessi dal browser (indirizzo IP, user-agent, pagine richieste), necessari al funzionamento e alla sicurezza del sito.</li>
+        <li><strong>Cookie:</strong> vedi la <a href="/cookie">Cookie Policy</a>.</li>
       </ul>
 
-      <h3>2.2 Dati raccolti in fase contrattuale</h3>
-      <p>Se decidi di procedere con una consulenza/sottoscrizione, raccogliamo gli ulteriori dati richiesti dalla normativa assicurativa (codice fiscale, dati patrimoniali, eventuali dati sanitari per polizze salute con consenso ex art. 9 GDPR).</p>
-
-      <h3>2.3 Dati di navigazione</h3>
-      <p>Log tecnici trasmessi dal browser (indirizzo IP, user-agent, pagine richieste, codice di stato). Trattati dal fornitore di hosting per il tempo strettamente necessario al funzionamento del servizio, senza profilazione.</p>
-
-      <h3>2.4 Cookie e strumenti di misurazione</h3>
-      <p>Il sito utilizza cookie tecnici e, solo previo consenso espresso tramite il banner,
-      eventuali cookie statistici e di marketing. Il consenso è modificabile o revocabile in
-      ogni momento dal link &ldquo;Preferenze cookie&rdquo; nel footer. Elenco completo, durate
-      e titolare del trattamento cookie nella <a href="/cookie">Cookie Policy</a>.</p>
-
-      <h3>2.5 Comparatore luce e gas</h3>
-      <p>La pagina di confronto tariffe energia tratta, su iniziativa dell&apos;utente: i dati di
-      consumo inseriti, l&apos;eventuale <strong>immagine della bolletta</strong> caricata (letta in
-      modo automatizzato per estrarne i soli dati di fornitura tramite Anthropic, aderente
-      all&apos;EU-U.S. Data Privacy Framework) e l&apos;indirizzo email, con conferma tramite doppio
-      opt-in prima dello sblocco dei risultati. Le offerte mostrate provengono dai dati pubblici
-      ufficiali del Portale Offerte ARERA.</p>
-
-      <h2>3. Finalità del trattamento</h2>
+      <h2>3. Finalità e basi giuridiche</h2>
       <ul>
-        <li>Ricontatto e gestione della richiesta di preventivo (su richiesta dell&apos;interessato).</li>
-        <li>Confronto tariffe luce/gas e invio della proposta di risparmio richiesta (previo consenso e verifica email).</li>
-        <li>Identificazione e verifica documentale (adempimenti antiriciclaggio e di conformità).</li>
-        <li>Analisi delle esigenze assicurative (artt. 119-bis CAP, Reg. IVASS 40/2018).</li>
-        <li>Esecuzione del contratto e gestione dei sinistri.</li>
-        <li>Adempimenti di legge (IVASS, antiriciclaggio, fiscali).</li>
-        <li>Difesa di diritti in sede giudiziaria.</li>
+        <li><strong>Rispondere alla richiesta di preventivo e ricontattare l&apos;interessato</strong> — consenso (art. 6.1.a) e misure precontrattuali (art. 6.1.b).</li>
+        <li><strong>Confronto delle tariffe energia e invio della proposta</strong> — consenso, con verifica dell&apos;indirizzo email (art. 6.1.a).</li>
+        <li><strong>Analisi delle esigenze assicurative, esecuzione del contratto e gestione dei sinistri</strong> — contratto (art. 6.1.b) e obblighi di legge (art. 6.1.c: art. 119-bis CAP, Reg. IVASS 40/2018).</li>
+        <li><strong>Adempimenti di legge</strong> (IVASS, antiriciclaggio, fiscali) e difesa di un diritto in giudizio — obbligo di legge e legittimo interesse (artt. 6.1.c e 6.1.f).</li>
+        <li><strong>Sicurezza e funzionamento del sito</strong> — legittimo interesse (art. 6.1.f).</li>
       </ul>
 
-      <h2>4. Basi giuridiche</h2>
+      <h2>4. Conservazione</h2>
       <ul>
-        <li><strong>Consenso dell&apos;interessato</strong> (art. 6 c.1 lett. a) per il ricontatto e per il trattamento dei documenti d&apos;identità.</li>
-        <li><strong>Esecuzione del contratto e misure precontrattuali</strong> (art. 6 c.1 lett. b).</li>
-        <li><strong>Obbligo di legge</strong> (art. 6 c.1 lett. c) per gli adempimenti normativi.</li>
-        <li><strong>Legittimo interesse</strong> (art. 6 c.1 lett. f) per la sicurezza del sito.</li>
-      </ul>
-
-      <h2>5. Conservazione</h2>
-      <ul>
-        <li><strong>Lead non finalizzati:</strong> fino a 24 mesi dall&apos;ultima interazione.</li>
-        <li><strong>Documenti d&apos;identità sul sito:</strong> link firmati validi 30 giorni; file cancellati dopo acquisizione contrattuale o entro 12 mesi.</li>
-        <li><strong>Dati contrattuali:</strong> durata del contratto + 10 anni (obblighi fiscali e IVASS).</li>
+        <li><strong>Richieste non finalizzate:</strong> fino a 24 mesi dall&apos;ultima interazione.</li>
+        <li><strong>Dati contrattuali:</strong> durata del contratto più 10 anni (obblighi fiscali e IVASS).</li>
         <li><strong>Dati di sinistro:</strong> 10 anni dalla chiusura.</li>
         <li><strong>Log di navigazione:</strong> massimo 12 mesi.</li>
       </ul>
 
-      <h2>6. Destinatari</h2>
+      <h2>5. Destinatari</h2>
       <ul>
         <li>Personale autorizzato del titolare (art. 29 GDPR).</li>
-        <li>Compagnie assicurative partner — quali autonomi titolari.</li>
-        <li>Responsabili esterni (art. 28 GDPR): <strong>Supabase</strong> (DB + Storage, regione Francoforte UE), <strong>Vercel</strong> (hosting, funzioni server in regione UE — Francoforte), <strong>Resend</strong> (email transazionali), <strong>Anthropic</strong> (lettura automatizzata delle bollette nel comparatore energia, EU-U.S. Data Privacy Framework).</li>
+        <li>Compagnie assicurative partner, quali autonomi titolari.</li>
+        <li>Responsabili esterni (art. 28 GDPR): <strong>Supabase</strong> (banca dati, regione Francoforte, UE), <strong>Vercel</strong> (hosting e funzioni server, regione UE), <strong>Resend</strong> (email transazionali), <strong>Anthropic</strong> (lettura automatizzata della bolletta nel comparatore energia).</li>
         <li>Autorità competenti (IVASS, UIF, autorità giudiziaria) nei casi previsti dalla legge.</li>
       </ul>
 
-      <h2>7. Trasferimenti extra-UE e processi automatizzati</h2>
-      <p>Il trattamento avviene in via prioritaria <strong>all&apos;interno dell&apos;Unione Europea</strong>:
-      database e archivio documenti su Supabase in regione Francoforte, funzioni server del sito
-      eseguite da Vercel in regione UE (Francoforte).</p>
-      <p>Trasferimenti extra-UE residui possono avvenire per: <strong>Resend</strong> (invio email,
-      Standard Contractual Clauses — decisione 2021/914); <strong>Google</strong> e <strong>Meta</strong>
-      (solo se attivati gli strumenti di misurazione e solo previo consenso cookie), sulla base
-      dell&apos;<strong>EU-U.S. Data Privacy Framework</strong> (decisione di adeguatezza del 10/07/2023),
-      cui entrambe le società aderiscono.</p>
-      <p>Non sono effettuati processi decisionali automatizzati né profilazione ex art. 22 GDPR.</p>
+      <h2>6. Trasferimenti extra-UE e decisioni automatizzate</h2>
+      <p>Il trattamento avviene in via prioritaria <strong>all&apos;interno dell&apos;Unione Europea</strong>: banca dati su Supabase e funzioni server su Vercel in regione Francoforte.</p>
+      <p>Trasferimenti extra-UE residui possono avvenire verso <strong>Resend</strong> (Standard Contractual Clauses, decisione 2021/914) e verso <strong>Anthropic</strong>, <strong>Google</strong> e <strong>Meta</strong> — questi ultimi due solo previo consenso cookie — sulla base dell&apos;<strong>EU-U.S. Data Privacy Framework</strong> (decisione di adeguatezza del 10/07/2023).</p>
+      <p>Non sono effettuati processi decisionali automatizzati né profilazione ai sensi dell&apos;art. 22 GDPR.</p>
 
-      <h2>8. Diritti dell&apos;interessato</h2>
-      <p>L&apos;interessato può esercitare in qualsiasi momento i diritti di accesso (art. 15), rettifica (art. 16), cancellazione (art. 17), limitazione (art. 18), portabilità (art. 20), opposizione (art. 21) e revoca del consenso.</p>
-      <p>Per esercitare i diritti scrivere a <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a>. Risposta entro 30 giorni (prorogabili di 60 in casi complessi, art. 12 c.3 GDPR).</p>
+      <h2>7. Diritti dell&apos;interessato</h2>
+      <p>L&apos;interessato può esercitare in qualsiasi momento i diritti di accesso (art. 15), rettifica (art. 16), cancellazione (art. 17), limitazione (art. 18), portabilità (art. 20) e opposizione (art. 21), oltre alla revoca del consenso, che non pregiudica la liceità del trattamento già effettuato.</p>
+      <p>Per esercitarli scrivere a <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a>. Risposta entro 30 giorni, prorogabili di 60 nei casi complessi (art. 12 c.3 GDPR).</p>
+      <p>Il conferimento dei dati è facoltativo, ma senza i dati di contatto non è possibile dare seguito alla richiesta di preventivo.</p>
 
-      <h2>9. Reclamo al Garante</h2>
-      <p>Diritto di proporre reclamo al <strong>Garante per la Protezione dei Dati Personali</strong>: Piazza Venezia 11, 00187 Roma · <a href="mailto:garante@gpdp.it">garante@gpdp.it</a> · <a href="https://www.garanteprivacy.it" rel="external noopener" target="_blank">www.garanteprivacy.it</a></p>
-
-      <h2>10. Note finali</h2>
-      <p><strong>Minori.</strong> Il sito è destinato a maggiorenni e non raccoglie consapevolmente dati personali di minori di 18 anni.</p>
-      <p><strong>Sicurezza.</strong> Misure tecniche e organizzative adeguate: HTTPS sull&apos;intero sito, archivio documenti cifrato a riposo, accessi limitati al personale autorizzato.</p>
-      <p><strong>Modifiche.</strong> L&apos;informativa può essere aggiornata. Data di ultimo aggiornamento in cima alla pagina.</p>
+      <h2>8. Reclamo al Garante</h2>
+      <p>L&apos;interessato ha diritto di proporre reclamo al <strong>Garante per la Protezione dei Dati Personali</strong>: Piazza Venezia 11, 00187 Roma · <a href="mailto:garante@gpdp.it">garante@gpdp.it</a> · <a href="https://www.garanteprivacy.it" rel="external noopener" target="_blank">www.garanteprivacy.it</a></p>
     </LegalPage>
   );
 }
