@@ -18,7 +18,13 @@ export const OPERATORE = {
   brand: {
     name: 'Quootami',
     domain: 'quootami.it',
-    url: 'https://quootami.it',
+    /**
+     * Host CANONICO, con www. L'apex `quootami.it` fa un 308 verso il www:
+     * dichiarare qui l'apex faceva sì che canonical, sitemap e JSON-LD
+     * puntassero a URL che rimbalzano. Se un domani si invertisse il redirect
+     * su Vercel, questa riga va cambiata di conseguenza.
+     */
+    url: 'https://www.quootami.it',
     tagline: 'Confronta. Cambia. Risparmia.',
     description:
       'Comparatore digitale e consulenza personale: polizze assicurative e previdenza complementare in tutta Italia.',
