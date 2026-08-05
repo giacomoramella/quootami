@@ -162,6 +162,28 @@ export function JsonLdArticle({
 }
 
 /** FAQPage per le pagine prodotto (usa le FAQ già presenti in config/polizze). */
+/**
+ * FAQPage per le pagine che non hanno un oggetto Polizza (hub, /luce).
+ * Le domande devono essere effettivamente visibili nella pagina: pubblicare
+ * un FAQPage senza il testo corrispondente viola le linee guida di Google.
+ */
+export function JsonLdFaqGenerico({ items }: { items: { q: string; a: string }[] }) {
+  if (!items.length) return null;
+  return (
+    <Script
+      data={{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: items.map(f => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }}
+    />
+  );
+}
+
 export function JsonLdFaq({ polizza }: { polizza: Polizza }) {
   if (!polizza.faq?.items?.length) return null;
   return (

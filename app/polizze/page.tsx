@@ -1,7 +1,34 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getPolizzeByCategory, type Polizza } from '@/config/polizze';
-import { JsonLdBreadcrumb } from '@/components/JsonLd';
+import { JsonLdBreadcrumb, JsonLdFaqGenerico } from '@/components/JsonLd';
+
+/**
+ * FAQ dell'hub. Sono rese anche visivamente più sotto: il FAQPage strutturato
+ * deve corrispondere al testo effettivamente presente in pagina.
+ */
+const FAQ = [
+  {
+    q: 'Quanto costa il servizio di Quootami?',
+    a: 'Il confronto e il preventivo sono gratuiti e senza impegno. Il broker è remunerato dalle compagnie tramite provvigione sui contratti effettivamente stipulati; eventuali compensi diversi vengono comunicati per iscritto prima della sottoscrizione.',
+  },
+  {
+    q: 'Quali assicurazioni sono obbligatorie per legge?',
+    a: 'Per i privati la responsabilità civile dei veicoli, dovuta anche a veicolo fermo se il mezzo è idoneo alla circolazione. Per i professionisti iscritti a un albo la responsabilità civile professionale. Per le imprese iscritte al registro delle imprese la copertura dei beni aziendali contro gli eventi catastrofali. La polizza incendio sulla casa non è obbligatoria per legge, ma è di norma richiesta dalla banca in presenza di un mutuo.',
+  },
+  {
+    q: 'Che differenza c\'è fra un broker e un agente assicurativo?',
+    a: 'L\'agente opera su mandato di una o più compagnie e ne propone i prodotti. Il broker opera su incarico del cliente e confronta le proposte di compagnie diverse, valutandole sulle condizioni contrattuali oltre che sul premio.',
+  },
+  {
+    q: 'Posso cambiare compagnia mantenendo la mia classe di merito?',
+    a: 'Sì. La classe di merito universale è legata al veicolo e viene rilevata dalle compagnie nella banca dati dell\'attestato di rischio, che dal 2015 è dematerializzato: non va consegnato a mano. Cambiando compagnia la classe maturata resta quella.',
+  },
+  {
+    q: 'Quali premi assicurativi si possono detrarre?',
+    a: 'Il 19% dei premi per il rischio di morte o invalidità permanente non inferiore al 5%, entro 530 euro; il 19% dei premi contro il rischio di non autosufficienza entro 1.291,14 euro; il 19% senza limite di importo per le polizze contro gli eventi calamitosi su immobili a uso abitativo. In tutti i casi il pagamento deve avvenire con strumenti tracciabili.',
+  },
+];
 
 const META_TITLE = 'Polizze assicurative · Privati e imprese';
 const META_DESC =
@@ -44,6 +71,7 @@ export default function PolizzePage() {
   return (
     <>
       <JsonLdBreadcrumb voci={[{ nome: 'Polizze', href: '/polizze' }]} />
+      <JsonLdFaqGenerico items={FAQ} />
 
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden pt-32 pb-12 px-5 sm:px-8">
@@ -92,6 +120,81 @@ export default function PolizzePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {imprese.map(p => (
               <PolizzaCard key={p.slug} polizza={p} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── APPROFONDIMENTO REDAZIONALE ─── */}
+      <section className="section pt-0">
+        <div className="container-content">
+          <div className="max-w-prose-wide mx-auto prose-quootami">
+            <h2>Come si sceglie una polizza senza sbagliare</h2>
+            <p>
+              Il prezzo è la prima cosa che si guarda ed è quasi sempre quella che conta meno. Due
+              contratti con lo stesso premio possono comportarsi in modo opposto nel momento in cui
+              serve, perché a fare la differenza sono i massimali, le franchigie, i periodi di
+              carenza e l&apos;elenco delle esclusioni. Sono le parti che nessuno legge e le uniche
+              che contano davvero quando si apre un sinistro.
+            </p>
+
+            <h3>Quali coperture sono obbligatorie e quali no</h3>
+            <p>
+              Poche assicurazioni sono imposte dalla legge. Per i privati l&apos;unico obbligo
+              generalizzato riguarda la responsabilità civile dei veicoli, prevista dall&apos;art.
+              122 del Codice delle Assicurazioni e dovuta anche quando il mezzo non circola, purché
+              sia idoneo alla circolazione. La polizza incendio sul fabbricato non è un obbligo di
+              legge, ma è normalmente richiesta dalla banca come condizione per erogare un mutuo.
+            </p>
+            <p>
+              Per professionisti e imprese il quadro è diverso. Chi è iscritto a un albo deve
+              stipulare una copertura di responsabilità professionale ai sensi dell&apos;art. 5 del
+              D.P.R. 137/2012 e comunicarne gli estremi al cliente. Le imprese tenute
+              all&apos;iscrizione nel registro delle imprese devono inoltre assicurare i beni
+              aziendali contro i danni da calamità naturali ed eventi catastrofali.
+            </p>
+
+            <h3>Le tre domande da porsi prima di firmare</h3>
+            <p>
+              <strong>Quanto è alto il massimale rispetto al danno peggiore possibile?</strong> Un
+              massimale basso su una responsabilità civile è il rischio più sottovalutato: i danni
+              alla persona raggiungono cifre che il patrimonio personale non regge.
+            </p>
+            <p>
+              <strong>Cosa resta escluso?</strong> Le esclusioni raccontano il contratto meglio
+              delle garanzie. Vale per le catastrofali, che coprono cinque eventi precisi e lasciano
+              fuori grandine e trombe d&apos;aria, e per le coperture sanitarie, che escludono
+              quasi sempre le patologie preesistenti.
+            </p>
+            <p>
+              <strong>La somma assicurata corrisponde al valore reale?</strong> Se è più bassa,
+              l&apos;art. 1907 del Codice civile consente all&apos;assicuratore di ridurre
+              l&apos;indennizzo in proporzione: dichiarare valori bassi per pagare meno significa
+              essere rimborsati meno anche sui danni piccoli.
+            </p>
+
+            <h3>Cosa cambia passando da un broker</h3>
+            <p>
+              Un agente rappresenta la compagnia da cui ha ricevuto mandato e propone i prodotti di
+              quella compagnia. Un broker lavora invece su incarico del cliente e confronta le
+              proposte di più compagnie: cambia il punto di vista, non solo l&apos;assortimento. Il
+              confronto viene fatto sulle condizioni contrattuali, non soltanto sul premio, e resta
+              un unico referente per la gestione del contratto e per l&apos;eventuale sinistro.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ ─── */}
+      <section className="section pt-0">
+        <div className="container-content">
+          <div className="max-w-prose-wide mx-auto prose-quootami">
+            <h2>Domande frequenti</h2>
+            {FAQ.map(f => (
+              <div key={f.q}>
+                <h3>{f.q}</h3>
+                <p>{f.a}</p>
+              </div>
             ))}
           </div>
         </div>
