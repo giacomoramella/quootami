@@ -43,7 +43,7 @@ const APPROFONDIMENTO: ApprofondimentoType = {
     {
       h3: 'Non solo assicurazioni',
       p: [
-        'Accanto alle polizze, Quootami segue due aree in cui la scelta giusta produce un beneficio misurabile: la previdenza complementare, dove i versamenti si deducono dal reddito entro il limite di legge, e le forniture di luce e gas, confrontate sulle offerte pubblicate dai venditori nel Portale Offerte di ARERA.',
+        'Accanto alle polizze, Quootami segue due aree in cui la scelta giusta produce un beneficio misurabile: la previdenza complementare, dove i versamenti si deducono dal reddito entro il limite di legge, e le forniture di luce e gas, confrontate sulle offerte reali del mercato libero e non su stime commerciali.',
       ],
     },
   ],
@@ -138,8 +138,8 @@ export default function HomePage() {
               href="/luce"
               accent="navy"
               title="Luce e Gas"
-              desc="Confronta le tariffe di energia elettrica e gas sui dati ufficiali ARERA. Gratuito e senza impegno."
-              items={['Dati ufficiali ARERA', 'Confronto in 2 minuti', 'Lettura automatica bolletta']}
+              desc="Confronta le offerte reali di energia elettrica e gas del mercato libero. Gratuito e senza impegno."
+              items={['Offerte reali', 'Confronto in 2 minuti', 'Lettura automatica bolletta']}
               cta="Confronta le tariffe"
               icon={<BoltIcon />}
             />
