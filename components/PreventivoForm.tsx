@@ -17,16 +17,22 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { createClient } from '@supabase/supabase-js';
 import { SUPABASE, WEB3FORMS } from '@/config/credentials';
 import { OPERATORE } from '@/config/operatore';
 import { getPreventivoFields, type PreventivoField } from '@/config/preventivo';
 import { trackLead } from '@/lib/tracking';
 import type { Polizza } from '@/config/polizze';
 
-const supabase = createClient(SUPABASE.url, SUPABASE.anonKey, {
-  auth: { persistSession: false },
-});
+/**
+ * NIENTE @supabase/supabase-js qui: importarlo per una sola RPC costava
+ * ~63 KB gzip su tutte le pagine prodotto (trascina realtime, auth e storage).
+ * PostgREST si chiama benissimo con fetch — stesso approccio di ComparatoreLuce.
+ */
+const SUPABASE_HEADERS = {
+  apikey: SUPABASE.anonKey,
+  Authorization: `Bearer ${SUPABASE.anonKey}`,
+  'Content-Type': 'application/json',
+};
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX = /^\+?[0-9 ()\-]{8,18}$/;
@@ -92,17 +98,22 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
     try {
       // [1] Archivio Supabase — best-effort (non blocca la notifica)
       try {
-        await supabase.rpc('insert_lead', {
-          payload: {
-            prodotto: polizza.title,
-            nome_cognome: nome.trim(),
-            email: email.trim(),
-            telefono: telefono.trim(),
-            messaggio,
-            fonte: 'sito web · preventivo',
-            pagina: typeof window !== 'undefined' ? window.location.pathname : '',
-            user_agent: typeof navigator !== 'undefined' ? navigator.userAgent.substring(0, 255) : '',
-          },
+        await fetch(`${SUPABASE.url}/rest/v1/rpc/insert_lead`, {
+          method: 'POST',
+          headers: SUPABASE_HEADERS,
+          body: JSON.stringify({
+            payload: {
+              prodotto: polizza.title,
+              nome_cognome: nome.trim(),
+              email: email.trim(),
+              telefono: telefono.trim(),
+              messaggio,
+              fonte: 'sito web · preventivo',
+              pagina: typeof window !== 'undefined' ? window.location.pathname : '',
+              user_agent:
+                typeof navigator !== 'undefined' ? navigator.userAgent.substring(0, 255) : '',
+            },
+          }),
         });
       } catch (dbErr) {
         console.warn('[preventivo] insert_lead non riuscito, proseguo con la notifica:', dbErr);
