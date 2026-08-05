@@ -21,7 +21,9 @@ const config: Config = {
         // Stati testo
         ink: {
           DEFAULT: '#0B1220',
-          muted: '#6B7280',
+          // #5A6270 invece di #6B7280: supera 4.5:1 (WCAG AA) su tutti e tre i
+          // fondi del sito (bg #FAFAF7, bg-alt #F3F0E8, bg-card #FFFFFF).
+          muted: '#5A6270',
           soft: '#1F2937',
         },
         // Sfondi
@@ -54,6 +56,10 @@ const config: Config = {
       },
       animation: {
         'fade-up': 'fadeUp 0.7s cubic-bezier(0.22,0.68,0,1.2) both',
+        // Variante per gli H1: anima SOLO la posizione, mai l'opacità. Il testo
+        // dell'hero è l'elemento LCP di ogni pagina (il sito non ha immagini):
+        // partire da opacity 0 rimanderebbe la misurazione LCP di 0,7s.
+        'rise': 'rise 0.7s cubic-bezier(0.22,0.68,0,1.2) both',
         'fade-in': 'fadeIn 0.4s ease-out',
         'drift': 'drift 12s ease-in-out infinite alternate',
       },
@@ -61,6 +67,10 @@ const config: Config = {
         fadeUp: {
           '0%': { opacity: '0', transform: 'translateY(28px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        rise: {
+          '0%': { transform: 'translateY(20px)' },
+          '100%': { transform: 'translateY(0)' },
         },
         fadeIn: {
           '0%': { opacity: '0' },

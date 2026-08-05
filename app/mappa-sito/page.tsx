@@ -5,7 +5,8 @@ import { getAllArticoli } from '@/config/guide';
 
 export const metadata: Metadata = {
   title: 'Mappa del sito',
-  description: 'Tutte le pagine del sito Quootami organizzate per area.',
+  description:
+    'Tutte le pagine di Quootami organizzate per area: polizze per privati e imprese, previdenza, guide, informative legali e contatti.',
 };
 
 const SECTIONS = [

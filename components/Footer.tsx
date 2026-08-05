@@ -69,13 +69,15 @@ export function Footer() {
               <li><Link href="/chi-siamo" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Chi siamo</Link></li>
               <li><Link href="/guide" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Guide</Link></li>
               <li><Link href="/assicurazioni-biella" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Assicurazioni a Biella</Link></li>
+              <li><Link href="/sinistri" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Sinistri</Link></li>
               <li><Link href="/contatti" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Contatti</Link></li>
+              <li><Link href="/mappa-sito" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Mappa del sito</Link></li>
             </ul>
           </div>
         </div>
 
         {/* Disclaimer legale IVASS (art. 35 Reg. 40/2018) — testo obbligatorio */}
-        <p className="pt-6 pb-4 text-xs text-white/40 leading-relaxed">
+        <p className="pt-6 pb-4 text-xs text-white/70 leading-relaxed">
           Questo sito è gestito da <strong>{collaboratore.nome_completo}</strong>, collaboratore
           iscritto al RUI sezione {collaboratore.rui_sezione} n.{' '}
           <strong>{collaboratore.rui_numero}</strong>, operante per conto di{' '}
@@ -96,7 +98,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-xs text-white/30">{getCopyrightText()}</p>
+          <p className="text-xs text-white/60">{getCopyrightText()}</p>
         </div>
       </div>
     </footer>

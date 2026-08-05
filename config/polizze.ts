@@ -208,7 +208,7 @@ export const POLIZZE: Record<string, Polizza> = {
       h1Accent: 'con vantaggio fiscale.',
       sub: 'Deduci fino a €5.300/anno dal reddito IRPEF e costruisci la pensione integrativa. Calcola subito quanto risparmi.',
     },
-    metaTitle: 'Fondo Pensione · Calcola il risparmio fiscale (fino a €5.300/anno)',
+    metaTitle: 'Fondo Pensione · Calcola il tuo risparmio fiscale',
     metaDesc: 'Fondo pensione: calcolatore del risparmio IRPEF, deducibilità fino a €5.300/anno, rendimenti tassati al 20%. Confronto Quootami.',
     ogImageAlt: 'Fondo Pensione Quootami — Previdenza complementare e deduzione fiscale',
     adesioneUrl: '/firma-allianz.html',
@@ -237,7 +237,7 @@ export const POLIZZE: Record<string, Polizza> = {
       title: 'Le risposte che cerchi.',
       items: [
         { q: 'Conviene sempre il fondo pensione?', a: 'Non sempre: dipende dalla tua aliquota IRPEF marginale, dal costo del fondo (ISC) e dall\'orizzonte temporale. Più alta è l\'aliquota e più lungo è l\'orizzonte, più conviene. Quootami fa un calcolo personalizzato per dirti in euro quanto guadagni.' },
-        { q: 'Quanto si risparmia con la deduzione?', a: 'I versamenti riducono il reddito imponibile fino a €5.300/anno (limite alzato dalla Legge di Bilancio 2026, prima era €5.164,57). Con reddito di €35.000 e versamento di €5.000, il risparmio IRPEF è di circa €1.750/anno (aliquota marginale 35%). Usa il calcolatore in questa pagina per la stima sul tuo reddito.' },
+        { q: 'Quanto si risparmia con la deduzione?', a: 'I versamenti riducono il reddito imponibile fino a €5.300/anno (limite elevato da €5.164,57 dalla Legge di Bilancio 2026, L. 199/2025, con decorrenza 1° gennaio 2026). Con reddito di €35.000 e versamento di €5.000, il risparmio IRPEF è di circa €1.750/anno (aliquota marginale 35%). Usa il calcolatore in questa pagina per la stima sul tuo reddito.' },
         { q: 'Come sono tassati i rendimenti?', a: 'Al 20% invece del 26% degli altri strumenti finanziari; la parte investita in titoli di Stato è tassata al 12,5%. Il fondo pensione è inoltre esente dall\'imposta di bollo dello 0,2%.' },
         { q: 'Quanto costa un fondo pensione?', a: 'Il costo si misura con l\'ISC (Indicatore Sintetico dei Costi): indicativamente 0,2–0,8% per i fondi negoziali di categoria, 0,8–1,5% per i fondi aperti, 1,5–3,5% per i PIP assicurativi. A parità di vantaggio fiscale, il costo è il fattore che pesa di più sul risultato finale: per questo Quootami lo confronta per primo.' },
         { q: 'Quando posso prelevare i soldi?', a: 'Al momento della pensione (con almeno 5 anni di partecipazione). Prima sono possibili anticipi per spese sanitarie (75%, in qualsiasi momento), acquisto/ristrutturazione prima casa (75%, dopo 8 anni) e altre esigenze (30%, dopo 8 anni).' },

@@ -24,7 +24,7 @@ export default function LucePage() {
 
         <div className="container-content text-center relative">
           <span className="eyebrow animate-fade-in">Luce e Gas</span>
-          <h1 className="mt-4 font-sans font-bold text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[1.05] text-ink animate-fade-up">
+          <h1 className="mt-4 font-sans font-bold text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[1.05] text-ink animate-rise">
             Bollette più leggere, <span className="hl">senza pensieri.</span>
           </h1>
           <p className="mt-6 text-base sm:text-lg text-ink-muted max-w-prose-wide mx-auto animate-fade-up" style={{ animationDelay: '0.2s' }}>

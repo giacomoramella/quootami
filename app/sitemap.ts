@@ -13,7 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/luce`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
     { url: `${baseUrl}/guide`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/assicurazioni-biella`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/piano-pensione`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
+    // NB: /piano-pensione non va elencata qui — è già generata dal ciclo sui
+    // prodotti più sotto (è uno slug di config/polizze.ts) e finirebbe doppia.
     { url: `${baseUrl}/piano-pensione/guida`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/piano-pensione/schema`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/piano-pensione/glossario`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },

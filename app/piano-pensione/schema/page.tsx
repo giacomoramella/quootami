@@ -4,7 +4,7 @@ import { PensioneHeaderPagina } from '@/components/PensioneHeaderPagina';
 import { PensioneSchemaVisuale } from '@/components/PensioneSchemaVisuale';
 
 export const metadata: Metadata = {
-  title: 'Schema della previdenza complementare · Come funziona un fondo pensione',
+  title: 'Schema della previdenza complementare',
   description:
     'Lo schema della previdenza complementare spiegato semplice: adesione, fondi negoziali/aperti/PIP, anticipazioni, RITA, capitale e rendita.',
 };

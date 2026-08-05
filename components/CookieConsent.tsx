@@ -99,8 +99,11 @@ function applyConsent(c: Consent) {
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [stats, setStats] = useState(true);
-  const [marketing, setMarketing] = useState(true);
+  // Consensi NON pre-selezionati: le Linee guida del Garante (10/06/2021) e
+  // l'art. 4(11) GDPR richiedono un atto positivo dell'utente. Vanno lasciati
+  // a false anche nel pannello "Personalizza".
+  const [stats, setStats] = useState(false);
+  const [marketing, setMarketing] = useState(false);
 
   useEffect(() => {
     const saved = readConsent();

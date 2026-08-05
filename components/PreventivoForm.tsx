@@ -220,7 +220,7 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
             {fieldErrors.consenso && <Errore msg={fieldErrors.consenso} />}
 
             {error && (
-              <p role="alert" className="mt-4 text-sm font-semibold" style={{ color: '#E76F51' }}>{error}</p>
+              <p role="alert" className="mt-4 text-sm font-semibold" style={{ color: '#B23A17' }}>{error}</p>
             )}
 
             <button type="submit" disabled={loading} className="btn-primary w-full mt-6 justify-center disabled:opacity-60">
@@ -254,7 +254,9 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
 
 /* ── Sotto-componenti ── */
 
-const inputCls = 'w-full rounded-xl border border-ink/15 bg-bg px-4 py-2.5 text-sm text-ink placeholder:text-ink-muted/60 focus:border-brand-yellow focus:outline-none focus:ring-2 focus:ring-brand-yellow/30';
+// text-base (16px) e NON text-sm: sotto i 16px iOS Safari zooma al focus e
+// lascia la pagina zoomata, con scorrimento orizzontale.
+const inputCls = 'w-full rounded-xl border border-ink/15 bg-bg px-4 py-2.5 text-base text-ink placeholder:text-ink-muted focus:border-brand-yellow focus:outline-none focus:ring-2 focus:ring-brand-yellow/30';
 
 function Etichetta({ htmlFor, label, required }: { htmlFor: string; label: string; required?: boolean }) {
   return (
@@ -264,8 +266,17 @@ function Etichetta({ htmlFor, label, required }: { htmlFor: string; label: strin
   );
 }
 
-function Errore({ msg }: { msg: string }) {
-  return <p className="mt-1 text-xs font-semibold" style={{ color: '#E76F51' }}>{msg}</p>;
+/**
+ * Messaggio di errore di campo: annunciato agli screen reader (role="alert") e
+ * con colore che supera il contrasto AA su fondo chiaro (#B23A17 ≈ 5.3:1;
+ * il coral #E76F51 del brand si fermava a 3.09:1).
+ */
+function Errore({ msg, id }: { msg: string; id?: string }) {
+  return (
+    <p id={id} role="alert" className="mt-1 text-xs font-semibold" style={{ color: '#B23A17' }}>
+      {msg}
+    </p>
+  );
 }
 
 function CampoDinamico({ campo, value, onText, onToggle, err }: {

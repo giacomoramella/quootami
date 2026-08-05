@@ -40,7 +40,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'polizza-catastrofale-imprese-chi-e-obbligato',
     titolo: 'Polizza catastrofale: quali imprese sono obbligate',
-    metaTitle: 'Polizza catastrofale imprese: chi è obbligato e chi è escluso',
+    metaTitle: 'Polizza catastrofale imprese: chi è obbligato',
     metaDesc:
       'Obbligo di polizza catastrofale (cat nat) per le imprese: scadenze per dimensione, chi è escluso, quali beni assicurare e cosa si rischia senza copertura.',
     eyebrow: 'Guida imprese',
@@ -85,7 +85,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'auto-ferma-in-garage-va-assicurata',
     titolo: 'Auto ferma in garage: va assicurata lo stesso?',
-    metaTitle: 'Auto ferma in garage: l’assicurazione è obbligatoria?',
+    metaTitle: 'Auto ferma in garage: va assicurata?',
     metaDesc:
       'Se il veicolo è immatricolato e funzionante l’RC auto è obbligatoria anche da fermo. I casi di esenzione, la sospensione della polizza e le formule stagionali.',
     eyebrow: 'Guida privati',
@@ -100,7 +100,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'adesione-automatica-fondo-pensione-2026',
     titolo: 'Adesione automatica al fondo pensione dal 1° luglio 2026',
-    metaTitle: 'Adesione automatica fondo pensione 2026: come funziona',
+    metaTitle: 'Adesione automatica al fondo pensione 2026',
     metaDesc:
       'Dal 1° luglio 2026 i nuovi assunti aderiscono automaticamente alla previdenza complementare. Hai 60 giorni per scegliere diversamente: cosa valutare prima.',
     eyebrow: 'Guida previdenza',

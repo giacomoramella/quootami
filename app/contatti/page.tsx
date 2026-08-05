@@ -46,7 +46,9 @@ function ContactCard({ href, icon, title, desc, external }: { href: string; icon
     >
       <div className="text-3xl mb-4">{icon}</div>
       <h3 className="font-sans font-bold text-base text-ink mb-2">{title}</h3>
-      <p className="text-sm text-ink-muted leading-relaxed">{desc}</p>
+      {/* break-words: l'email è un token unico di 33 caratteri e sborderebbe
+          dalla card nella griglia a 3 colonne */}
+      <p className="text-sm text-ink-muted leading-relaxed break-words">{desc}</p>
     </a>
   );
 }

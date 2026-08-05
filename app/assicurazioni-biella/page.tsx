@@ -125,6 +125,16 @@ export default function AssicurazioniBiellaPage() {
               </Link>
               .
             </p>
+
+            <hr />
+            <p className="text-sm">
+              <strong>Fonti:</strong> IVASS, Comunicazione statistica n. 6/2026 — indagine IPER sui
+              prezzi effettivi della R.C. auto, 1° trimestre 2026 (premio medio, variazione annua e
+              dato provinciale di Vercelli); Regione Piemonte, ordinanze commissariali e bandi per i
+              danni da eventi atmosferici eccezionali. Contenuto a carattere divulgativo, aggiornato
+              ad agosto 2026: non sostituisce le condizioni di polizza né una consulenza sul caso
+              specifico.
+            </p>
           </div>
         </div>
       </section>

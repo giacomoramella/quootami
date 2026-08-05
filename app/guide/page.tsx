@@ -6,7 +6,7 @@ import { JsonLdBreadcrumb } from '@/components/JsonLd';
 export const metadata: Metadata = {
   title: 'Guide e approfondimenti',
   description:
-    'Guide chiare su assicurazioni, obblighi di legge e detrazioni: polizza catastrofale per le imprese, coperture casa, previdenza complementare. Aggiornate e con le fonti.',
+    'Guide chiare su assicurazioni, obblighi di legge e detrazioni: catastrofale per le imprese, coperture casa, previdenza. Aggiornate e con le fonti.',
 };
 
 /** Indice della sezione Guide: elenco articoli con sommario e categoria. */

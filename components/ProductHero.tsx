@@ -20,7 +20,7 @@ export function ProductHero({ polizza }: { polizza: Polizza }) {
           {polizza.hero.eyebrow}
         </span>
 
-        <h1 className="mt-8 font-sans font-bold text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[1.05] text-ink animate-fade-up">
+        <h1 className="mt-8 font-sans font-bold text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[1.05] text-ink animate-rise">
           {polizza.hero.h1Lead}{' '}
           <span className="hl">{polizza.hero.h1Accent}</span>
         </h1>

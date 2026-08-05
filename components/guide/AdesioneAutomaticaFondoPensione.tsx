@@ -14,8 +14,11 @@ import Link from 'next/link';
  *   primaria no);
  * - contribuzione non obbligatoria sotto la retribuzione annua lorda pari
  *   all'assegno sociale INPS.
- * I dati fiscali (deducibilità, tassazione 15%→9%) NON sono citati qui perché
- * non verificati rispetto a eventuali modifiche della L. 199/2025.
+ * Deducibilità: la L. 199/2025 ha elevato il limite ordinario da €5.164,57 a
+ * €5.300 dal 1° gennaio 2026 (verificato su fonti di settore previdenziale:
+ * Mefop, Fondapi, Previbank). Qui il dato non è ripetuto perché l'articolo
+ * tratta l'adesione automatica, non il regime fiscale: per quello si rimanda
+ * alla guida ai fondi pensione.
  */
 export function AdesioneAutomaticaFondoPensione() {
   return (

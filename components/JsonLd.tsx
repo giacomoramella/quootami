@@ -45,8 +45,18 @@ export function JsonLdSito() {
           logo: `${brand.url}/apple-icon.png`,
           image: `${brand.url}/og-image.png`,
           description: brand.description,
-          telephone: contatti.telefono_display,
+          // E.164 senza spazi: formato atteso da Google
+          telephone: `+${contatti.telefono_wa}`,
           email: contatti.email,
+          // `address` è richiesto per i sottotipi di LocalBusiness: senza,
+          // il Rich Results Test segnala il campo mancante.
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Biella',
+            addressRegion: 'BI',
+            postalCode: '13900',
+            addressCountry: 'IT',
+          },
           areaServed: { '@type': 'Country', name: 'Italia' },
           founder: { '@type': 'Person', name: collaboratore.nome_completo },
           parentOrganization: { '@type': 'Organization', name: broker.ragione_sociale_breve },

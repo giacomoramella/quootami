@@ -41,7 +41,7 @@ export function PensioneHero() {
             Fondo pensione
           </span>
 
-          <h1 className="mt-6 font-sans font-bold text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[1.05] text-ink animate-fade-up">
+          <h1 className="mt-6 font-sans font-bold text-4xl sm:text-6xl md:text-7xl tracking-tight leading-[1.05] text-ink animate-rise">
             Il fondo pensione ti conviene?{' '}
             <span className="hl">Te lo diciamo in euro.</span>
           </h1>

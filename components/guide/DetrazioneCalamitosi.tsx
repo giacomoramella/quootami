@@ -104,10 +104,12 @@ export function DetrazioneCalamitosi() {
 
       <hr />
       <p className="text-sm">
-        <strong>Nota:</strong> contenuto a carattere divulgativo, aggiornato ad agosto 2026, riferito
-        alla disciplina in vigore dal 1° gennaio 2018 per le polizze contro eventi calamitosi su
-        unità immobiliari a uso abitativo. Non costituisce consulenza fiscale: per il caso specifico
-        rivolgiti al tuo intermediario e al tuo commercialista.
+        <strong>Fonti:</strong> art. 15, comma 1, lett. f-bis del TUIR (D.P.R. 917/1986), introdotta
+        dalla Legge di Bilancio 2018 (L. 205/2017) e applicabile ai premi versati dal 1° gennaio 2018
+        per polizze contro eventi calamitosi su unità immobiliari a uso abitativo; art. 15, comma 1,
+        lett. f del TUIR per il limite di €530 su vita e infortuni. Contenuto a carattere
+        divulgativo, aggiornato ad agosto 2026: non costituisce consulenza fiscale, per il caso
+        specifico rivolgiti al tuo intermediario e al tuo commercialista.
       </p>
     </>
   );

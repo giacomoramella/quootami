@@ -4,7 +4,7 @@ import { PensioneHeaderPagina } from '@/components/PensioneHeaderPagina';
 import { PensioneGlossario } from '@/components/PensioneGlossario';
 
 export const metadata: Metadata = {
-  title: 'Glossario della previdenza · I termini dei fondi pensione',
+  title: 'Glossario della previdenza',
   description:
     'I termini della previdenza complementare spiegati in una riga: TFR, fondo negoziale, fondo aperto, PIP, ISC, comparto, RITA, deducibilità e altri.',
 };

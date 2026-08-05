@@ -7,7 +7,7 @@ import { getPolizzeByCategory } from '@/config/polizze';
 // del sito, così la card di condivisione social non cambia.
 export const metadata: Metadata = {
   description:
-    'Confronta polizze auto, casa, salute, cyber e fondo pensione con Quootami: comparatore digitale e consulenza personale di un intermediario indipendente. Preventivo gratuito.',
+    'Confronta polizze auto, casa, salute, cyber e fondo pensione: comparatore digitale e consulenza personale di un intermediario. Preventivo gratuito.',
 };
 
 /** Aree di copertura raccolte sotto /polizze (previdenza ha un blocco suo). */
@@ -32,7 +32,7 @@ export default function HomePage() {
 
         <div className="container-content text-center relative">
           {/* H1 */}
-          <h1 className="mt-8 font-sans font-bold text-5xl sm:text-7xl md:text-8xl tracking-tight leading-[1.05] text-ink animate-fade-up">
+          <h1 className="mt-8 font-sans font-bold text-5xl sm:text-7xl md:text-8xl tracking-tight leading-[1.05] text-ink animate-rise">
             <span>{OPERATORE.brand.name}</span>
             <span className="text-brand-yellow-deep">.</span>
           </h1>

@@ -8,6 +8,7 @@ import { PensioneDati } from '@/components/PensioneDati';
 import { PensioneCovip } from '@/components/PensioneCovip';
 import { PensioneConfronto } from '@/components/PensioneConfronto';
 import { FaqAccordion } from '@/components/FaqAccordion';
+import { JsonLdFaq, JsonLdBreadcrumbProdotto } from '@/components/JsonLd';
 import { OPERATORE } from '@/config/operatore';
 import { getPolizza } from '@/config/polizze';
 
@@ -32,6 +33,9 @@ export const metadata: Metadata = {
 export default function PianoPensionePage() {
   return (
     <>
+      {/* Questa pagina non usa ProductPage, quindi FAQ e breadcrumb vanno montati qui */}
+      <JsonLdFaq polizza={polizza} />
+      <JsonLdBreadcrumbProdotto polizza={polizza} />
       <PensioneHero />
       <PensionePercorso />
       <PensioneEsigenze />
