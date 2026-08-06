@@ -1,22 +1,28 @@
 -- Refresh catalogo offerte — Portale Offerte, file del 06/08/2026
--- Generato da supabase/scripts/estrai_offerte_ml.py
+-- Versione 2: rispetta il vincolo di integrità con en.proposals.
 --
--- Perimetro: solo clienti DOMESTICI, solo fornitori già presenti in
--- en.suppliers, solo offerte con un prezzo utilizzabile.
+-- Il primo tentativo faceva `delete from en.offers` e Postgres l'ha respinto:
+-- 90 delle 170 offerte sono citate da proposte già generate, e cancellarle
+-- spezzerebbe il collegamento fra una proposta e l'offerta che conteneva.
+-- Il vincolo protegge lo storico, quindi si lavora attorno, non contro.
 --
--- Mapping validato sulle 61 offerte in comune col catalogo preesistente:
---   price_type, index_name, spread_eur, fixed_fee_year, name, commodity,
---   customer_type  →  100% di concordanza.
+-- Questa versione:
+--   1. cancella solo le offerte NON citate da alcuna proposta;
+--   2. inserisce il nuovo catalogo saltando i codici offerta già presenti,
+--      cioè quelli trattenuti al punto 1.
 --
--- Offerte scartate e perché: {'fornitore non in anagrafica': 2667, 'offerta fissa senza prezzo': 105}
---
--- Esegui dal SQL Editor di Supabase. È in transazione: o passa tutto o niente.
+-- Idempotente: rieseguirla non crea duplicati.
+-- 589 offerte domestiche, 36 fornitori. Mapping validato al 100% su 61
+-- offerte in comune col catalogo preesistente.
 
 begin;
 
-delete from en.offers;
+delete from en.offers o
+where not exists (select 1 from en.proposals p where p.offer_id = o.id);
 
-insert into en.offers (supplier_id,arera_offer_code,commodity,customer_type,name,price_type,index_name,spread_eur,price_f0,price_f1,price_f2,price_f3,fixed_fee_year,duration_months,validity_start,validity_end) values
+insert into en.offers (supplier_id,arera_offer_code,commodity,customer_type,name,price_type,index_name,spread_eur,price_f0,price_f1,price_f2,price_f3,fixed_fee_year,duration_months,validity_start,validity_end)
+select v.supplier_id::uuid, v.arera_offer_code::text, v.commodity::text, v.customer_type::text, v.name::text, v.price_type::text, v.index_name::text, v.spread_eur::numeric, v.price_f0::numeric, v.price_f1::numeric, v.price_f2::numeric, v.price_f3::numeric, v.fixed_fee_year::numeric, v.duration_months::integer, v.validity_start::date, v.validity_end::date
+from (values
 ('6f4086f9-a009-4458-9f0b-b20708874da7','000294ESVML01XXSmartCas260733060','ele','domestic','Smart Casa+ Luce','indexed','PUN',0.025,null,null,null,null,135.0,12,'2026-07-30','2026-08-31'),
 ('6f4086f9-a009-4458-9f0b-b20708874da7','000294ESVFL01XXBON10ELE260730002','ele','domestic','A2A Bonus 10 Luce','indexed','PUN',0.025,null,null,null,null,114.0,12,'2026-07-30','2026-08-31'),
 ('6f4086f9-a009-4458-9f0b-b20708874da7','000294ESVFL01XXSmartCas260733074','ele','domestic','Smart Casa+ Luce','indexed','PUN',0.025,null,null,null,null,135.0,12,'2026-07-30','2026-08-31'),
@@ -605,6 +611,10 @@ insert into en.offers (supplier_id,arera_offer_code,commodity,customer_type,name
 ('a388bc19-d9e0-41ab-a4ce-57804a177591','000670GSVML53XXGASDCASALEGGERA24','gas','domestic','GAS CASA LEGGERA','indexed','PSV',0.0,null,null,null,null,96.0,12,'2026-07-22','2026-08-25'),
 ('a388bc19-d9e0-41ab-a4ce-57804a177591','000670GSVML53XXXXXGMPREZZONETTO0','gas','domestic','PREZZO NETTO ZERO GAS','indexed','PSV',0.0,null,null,null,null,120.0,12,'2026-07-22','2026-08-25'),
 ('a388bc19-d9e0-41ab-a4ce-57804a177591','000670GSVML53XXGASPREZZONETTOAMI','gas','domestic','PREZZO NETTO ZERO AMICO GAS','indexed','PSV',0.0,null,null,null,null,120.0,12,'2026-07-22','2026-08-25'),
-('a388bc19-d9e0-41ab-a4ce-57804a177591','000670GSVML53XXXGMCONVENZIONECOR','gas','domestic','CONVENZIONE CORPORATE GAS','indexed','PSV',0.0,null,null,null,null,144.0,-1,'2026-07-22','2026-08-25');
+('a388bc19-d9e0-41ab-a4ce-57804a177591','000670GSVML53XXXGMCONVENZIONECOR','gas','domestic','CONVENZIONE CORPORATE GAS','indexed','PSV',0.0,null,null,null,null,144.0,-1,'2026-07-22','2026-08-25')
+) as v(supplier_id,arera_offer_code,commodity,customer_type,name,price_type,index_name,spread_eur,price_f0,price_f1,price_f2,price_f3,fixed_fee_year,duration_months,validity_start,validity_end)
+where not exists (
+  select 1 from en.offers o where o.arera_offer_code = v.arera_offer_code
+);
 
 commit;
