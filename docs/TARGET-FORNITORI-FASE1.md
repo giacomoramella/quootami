@@ -71,14 +71,17 @@ credibile sul tema energia. Entrambe le condizioni sono soddisfatte.
 
 ## Priorità 2 — programmi partner diretti (verificati)
 
-### Pulsee — gruppo Axpo
+### Pulsee — gruppo Axpo · RIMANDATO (verifica del 06/08/2026)
 - **Porta d'ingresso:** pagina pubblica "Diventa Business Partner" su pulsee.it
-- **Cosa cercano:** partner commerciali con esperienza nel settore energia, per il
-  mercato residenziale. Esiste un canale separato Axpo per micro-business e PMI.
-- **Nota:** hanno costruito una rete fisica di oltre 200 agenzie sul territorio, quindi
-  sono abituati a gestire partner esterni. È il target più adatto a un primo accordo
-  diretto.
-- **Stato:** verificato · canale di candidatura pubblico
+- **Cosa è davvero:** letta la pagina per compilare la candidatura, il canale è
+  **reclutamento di agenti con mandato diretto Enasarco**: il form chiede Partita
+  IVA, POD/PdR già in gestione e volumi di acquisizione mensile. Non è un programma
+  di affiliazione per siti.
+- **Decisione:** candidatura rimandata a dopo l'apertura della P.IVA. Candidarsi
+  oggi (senza P.IVA, zero POD) porterebbe a un rifiuto quasi certo bruciando la
+  prima impressione. Con P.IVA + dati di attivazione da Awin, la candidatura
+  diventa credibile.
+- **Stato:** verificato · richiede P.IVA e portafoglio · rivedere dopo la forfettaria
 
 ### Wekiwi
 - **Porta d'ingresso:** programma **Ambassador** (non il "Passaparola")
