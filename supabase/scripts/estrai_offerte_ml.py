@@ -23,7 +23,12 @@ TIPO_CLIENTE = {"01": "domestic", "02": "business", "03": "condominio"}
 # verificato sulle 61 offerte in comune col DB, ele→PUN (idx 12, 01) e
 # gas→PSV (idx 14, 03, 15) senza eccezioni. Se IDX manca, l'offerta è a
 # prezzo fisso e l'indice resta nullo.
-UM_KWH, UM_ANNO = "03", "01"
+# Unità del prezzo energia: 03 = €/kWh (elettrico), 04 = €/Smc (gas — i
+# componenti si chiamano proprio "SPREAD_PSV €/Smc" / "GAS_PRZ_FISSO").
+# Accettare solo la 03 azzerava TUTTI gli spread gas ed escludeva le fisse
+# gas: bug del refresh 06/08, corretto il 07/08.
+UM_ENERGIA = {"ele": "03", "gas": "04"}
+UM_ANNO = "01"
 MA_QUOTA_FISSA = "01"
 # Il valore €/kWh (spread sull'indice per le indicizzate, prezzo per le fisse)
 # non sta sempre nella stessa macroarea: 04 = materia prima, 02 = spread,
@@ -32,6 +37,7 @@ MA_QUOTA_FISSA = "01"
 MA_SPREAD = ("04", "02", "06")
 
 def estrai(path, commodity):
+    um_kwh = UM_ENERGIA[commodity]
     root = ET.parse(path).getroot()
     out = []
     for o in root:
@@ -54,7 +60,7 @@ def estrai(path, commodity):
                 if prezzo is None: continue
                 try: val = float(prezzo)
                 except ValueError: continue
-                if macro in MA_SPREAD and um == UM_KWH:
+                if macro in MA_SPREAD and um == um_kwh:
                     if kwh is None or fascia in ("", "01"): kwh = val
                     if fascia in ("01", "02", "03"): prezzi_fascia[fascia] = val
                 elif macro == MA_QUOTA_FISSA and um == UM_ANNO:
