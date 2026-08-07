@@ -20,10 +20,14 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY;
 export const INTERMEDIARIO_EMAIL =
   process.env.INTERMEDIARIO_EMAIL ?? 'giacomo.rp@sistoassicurazioni.com';
 
-// Sender — quando il dominio è verificato puoi usare adesioni@quootami.it
-// Prima della verifica del dominio Resend usa onboarding@resend.dev
-export const SENDER_EMAIL =
-  process.env.RESEND_FROM_EMAIL ?? 'Quootami <noreply@quootami.it>';
+// Mittenti per area (dominio quootami.it verificato su Resend, accertato il
+// 07/08/2026): ogni sezione firma con il proprio nome — il comparatore usa
+// "Quootami Energia" nella edge function en-lead. Stesso indirizzo per tutti,
+// cambia solo il nome visualizzato.
+export const SENDER_POLIZZE =
+  process.env.RESEND_FROM_POLIZZE ?? 'Quootami Polizze <noreply@quootami.it>';
+export const SENDER_PENSIONE =
+  process.env.RESEND_FROM_PENSIONE ?? 'Quootami Pensione <noreply@quootami.it>';
 
 /**
  * Testata brand per tutte le email: wordmark "Quootami" navy con punto giallo
@@ -110,7 +114,7 @@ export async function sendLeadEmail(payload: LeadEmailPayload) {
   `;
 
   return sendOrThrow(resend, {
-    from: SENDER_EMAIL,
+    from: SENDER_POLIZZE,
     to: [INTERMEDIARIO_EMAIL],
     replyTo: payload.email,
     subject,
@@ -168,7 +172,7 @@ export async function sendAdesioneFirmataEmail(p: AdesioneFirmataPayload) {
     </div>
   `;
   return sendOrThrow(resend, {
-    from: SENDER_EMAIL,
+    from: SENDER_PENSIONE,
     to: [INTERMEDIARIO_EMAIL],
     replyTo: p.email,
     subject,
