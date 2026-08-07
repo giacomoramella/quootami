@@ -25,9 +25,9 @@ export const INTERMEDIARIO_EMAIL =
 // "Quootami Energia" nella edge function en-lead. Stesso indirizzo per tutti,
 // cambia solo il nome visualizzato.
 export const SENDER_POLIZZE =
-  process.env.RESEND_FROM_POLIZZE ?? 'Quootami Polizze <noreply@quootami.it>';
+  process.env.RESEND_FROM_POLIZZE ?? 'Quootami Polizze <polizze@quootami.it>';
 export const SENDER_PENSIONE =
-  process.env.RESEND_FROM_PENSIONE ?? 'Quootami Pensione <noreply@quootami.it>';
+  process.env.RESEND_FROM_PENSIONE ?? 'Quootami Pensione <pensione@quootami.it>';
 
 /**
  * Testata brand per tutte le email: wordmark "Quootami" navy con punto giallo

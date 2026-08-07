@@ -9,8 +9,8 @@
 // Env richiesti: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, FROM_EMAIL?, LANDING_URL?
 //
 // Valori Quootami definitivi: landing /luce su quootami.it, mittente
-// noreply@quootami.it (richiede dominio verificato su Resend — fino ad
-// allora impostare FROM_EMAIL con il mittente onboarding di Resend).
+// "Quootami Energia <energia@quootami.it>" (dominio verificato su Resend).
+// Le risposte vanno in Reply-To alla casella presidiata del broker.
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -22,7 +22,7 @@ function json(obj: unknown, status = 200) {
 }
 
 const LANDING = Deno.env.get('LANDING_URL') || 'https://quootami.it/luce';
-const FROM = Deno.env.get('FROM_EMAIL') || 'Quootami Energia <noreply@quootami.it>';
+const FROM = Deno.env.get('FROM_EMAIL') || 'Quootami Energia <energia@quootami.it>';
 const SITE = 'quootami.it';
 // Destinatario delle notifiche lead: senza questa email il funnel finisce in
 // un database che nessuno guarda.
@@ -40,13 +40,15 @@ async function rpc(name: string, args: Record<string, unknown>) {
   return t ? JSON.parse(t) : null;
 }
 
-async function sendEmail(to: string, subject: string, html: string) {
+// `replyTo`: le risposte dei clienti vanno alla casella presidiata del
+// broker, non al mittente di sezione (che potrebbe non avere una mailbox).
+async function sendEmail(to: string, subject: string, html: string, replyTo?: string) {
   const key = Deno.env.get('RESEND_API_KEY');
   if (!key) return { ok: false, error: 'RESEND_API_KEY mancante' };
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ from: FROM, to: [to], subject, html }),
+    body: JSON.stringify({ from: FROM, to: [to], subject, html, reply_to: replyTo || BROKER }),
   });
   const d = await r.json().catch(() => ({}));
   return { ok: r.ok, error: r.ok ? null : (d.message || d.error || ('Resend HTTP ' + r.status)), id: d.id };
@@ -123,9 +125,10 @@ Deno.serve(async (req) => {
           ] as [string, string][]).map(([k, v]) =>
             `<tr><td style="padding:4px 12px 4px 0;color:#64748b;white-space:nowrap">${k}</td><td style="padding:4px 0;font-weight:600">${esc(String(v))}</td></tr>`).join('');
           await sendEmail(BROKER, `Nuovo lead luce/gas verificato — ${d.customer_name || d.email}`,
-            emailShell(`<p><b>Lead verificato</b> sul comparatore: l'utente ha confermato l'email e si aspetta di essere ricontattato.</p>
+            emailShell(`<p><b>Lead verificato</b> sul comparatore: l'utente ha confermato l'email e si aspetta di essere ricontattato. Rispondi a questa email per scrivergli direttamente.</p>
               <table style="font-size:14px;border-collapse:collapse">${righe}</table>`,
-              `Notifica automatica del comparatore luce e gas di ${SITE}.`));
+              `Notifica automatica del comparatore luce e gas di ${SITE}. Il Reply-To e' l'indirizzo del cliente.`),
+            d.email);
         } catch (e) { console.error('en-lead notifica broker:', e); }
       }
       const dest = ok ? `${LANDING}?verified=${token}` : `${LANDING}?verifyerr=1`;
