@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ComparatoreLuce } from '@/components/ComparatoreLuce';
 import { LuceGuida } from '@/components/LuceGuida';
 import { OPERATORE } from '@/config/operatore';
+import { SUPABASE } from '@/config/credentials';
 import { JsonLdBreadcrumb, JsonLdFaqGenerico } from '@/components/JsonLd';
 import { Approfondimento } from '@/components/ProductApprofondimento';
 import { FaqAccordion } from '@/components/FaqAccordion';
@@ -100,6 +101,11 @@ export const metadata: Metadata = {
 export default function LucePage() {
   return (
     <>
+      {/* Il comparatore chiama Supabase su un dominio esterno: senza preconnect
+          il primo click su «Confronta» paga DNS + TCP + TLS prima ancora di
+          inviare la richiesta. Solo qui: è l'unica pagina che lo interroga. */}
+      <link rel="preconnect" href={SUPABASE.url} crossOrigin="anonymous" />
+
       <JsonLdBreadcrumb voci={[{ nome: 'Luce e Gas', href: '/luce' }]} />
       <JsonLdFaqGenerico items={FAQ} />
 
