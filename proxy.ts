@@ -24,6 +24,11 @@ const isProd = process.env.NODE_ENV === 'production';
 export function proxy(request: NextRequest) {
   // ── CSP banking-grade ──
   // In dev permettiamo 'unsafe-eval'/'unsafe-inline' per HMR di Next.js.
+  //
+  // Niente fonts.googleapis.com / fonts.gstatic.com: `next/font/google` scarica
+  // i font in fase di build e li serve da /_next/static/media, quindi il browser
+  // non contatta mai Google. Erano permessi morti, tolti il 07/08/2026.
+  // Se un domani si aggiunge un font remoto vanno rimessi in style-src e font-src.
   const nonce = btoa(crypto.randomUUID());
   const scriptSrc = isProd
     ? `'self' 'nonce-${nonce}' 'strict-dynamic'`
@@ -32,9 +37,9 @@ export function proxy(request: NextRequest) {
   const cspHeader = `
     default-src 'self';
     script-src ${scriptSrc};
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https:;
-    font-src 'self' https://fonts.gstatic.com data:;
+    font-src 'self' data:;
     connect-src 'self' https://*.supabase.co https://api.resend.com https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://connect.facebook.net https://www.facebook.com;
     frame-src 'self';
     object-src 'none';
