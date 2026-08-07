@@ -61,7 +61,7 @@ export const OPERATORE = {
   social: {
     whatsapp: 'https://wa.me/393922198185',
     instagram: '',
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/in/giacomo-ramella-pollone',
     facebook: '',
   },
 } as const;

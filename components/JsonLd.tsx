@@ -16,6 +16,13 @@
 import { OPERATORE } from '@/config/operatore';
 import type { Polizza } from '@/config/polizze';
 
+/**
+ * Profili pubblici dell'intermediario, per `sameAs`: è il campo con cui Google
+ * collega la persona che firma le pagine ai suoi profili verificabili altrove.
+ * Le voci vuote in `OPERATORE.social` vengono scartate.
+ */
+const PROFILI_PERSONA = [OPERATORE.social.linkedin, OPERATORE.social.instagram].filter(Boolean);
+
 /** Serializzazione sicura per <script>: niente sequenze che chiudono il tag. */
 function safeJson(data: unknown): string {
   return JSON.stringify(data).replace(/</g, '\\u003c');
@@ -58,7 +65,12 @@ export function JsonLdSito() {
             addressCountry: 'IT',
           },
           areaServed: { '@type': 'Country', name: 'Italia' },
-          founder: { '@type': 'Person', name: collaboratore.nome_completo },
+          founder: {
+            '@type': 'Person',
+            name: collaboratore.nome_completo,
+            url: `${brand.url}/chi-siamo`,
+            ...(PROFILI_PERSONA.length ? { sameAs: PROFILI_PERSONA } : {}),
+          },
           parentOrganization: { '@type': 'Organization', name: broker.ragione_sociale_breve },
           knowsLanguage: 'it',
         }}
@@ -150,6 +162,7 @@ export function JsonLdArticle({
           '@type': 'Person',
           name: collaboratore.nome_completo,
           url: `${brand.url}/chi-siamo`,
+          ...(PROFILI_PERSONA.length ? { sameAs: PROFILI_PERSONA } : {}),
         },
         publisher: {
           '@type': 'Organization',
