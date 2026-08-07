@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { LegalPage } from '@/components/LegalPage';
 import { OPERATORE } from '@/config/operatore';
+import { JsonLdBreadcrumb } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy · Reg. UE 2016/679 (GDPR)',
-  description: 'Informativa privacy ai sensi dell\'art. 13 del Reg. UE 2016/679 (GDPR): titolare, dati trattati, finalità, basi giuridiche, conservazione, destinatari e diritti.',
+  description: 'Informativa privacy ai sensi dell\'art. 13 del Reg. UE 2016/679 (GDPR): titolare, dati trattati, finalità, basi giuridiche, conservazione e diritti.',
 };
 
 /**
@@ -19,7 +20,9 @@ export const metadata: Metadata = {
  */
 export default function PrivacyPage() {
   return (
-    <LegalPage
+    <>
+      <JsonLdBreadcrumb voci={[{ nome: 'Privacy Policy', href: '/privacy' }]} />
+      <LegalPage
       eyebrow="Reg. UE 2016/679 · GDPR"
       title="Privacy"
       titleAccent="Policy."
@@ -79,6 +82,7 @@ export default function PrivacyPage() {
 
       <h2>8. Reclamo al Garante</h2>
       <p>L&apos;interessato ha diritto di proporre reclamo al <strong>Garante per la Protezione dei Dati Personali</strong>: Piazza Venezia 11, 00187 Roma · <a href="mailto:garante@gpdp.it">garante@gpdp.it</a> · <a href="https://www.garanteprivacy.it" rel="external noopener" target="_blank">www.garanteprivacy.it</a></p>
-    </LegalPage>
+      </LegalPage>
+    </>
   );
 }

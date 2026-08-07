@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { OPERATORE } from '@/config/operatore';
+import { JsonLdBreadcrumb } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Contatti · Preventivi e assistenza assicurativa',
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 export default function ContattiPage() {
   return (
     <>
+      <JsonLdBreadcrumb voci={[{ nome: 'Contatti', href: '/contatti' }]} />
       <section className="relative overflow-hidden pt-32 pb-16 px-5 sm:px-8">
         <div className="container-content text-center">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-yellow/15 border border-brand-yellow/30 text-xs font-semibold tracking-wider uppercase text-brand-green-dark">
@@ -27,6 +29,12 @@ export default function ContattiPage() {
 
       <section className="section bg-bg">
         <div className="container-content">
+          {/* Senza questo H2 la pagina saltava da H1 alle card in H3, e restava
+              priva di un secondo livello di titolo su cui posizionarsi. */}
+          <div className="text-center mb-10">
+            <span className="eyebrow">Canali diretti</span>
+            <h2 className="section-title">Come contattare <span className="hl">Quootami.</span></h2>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-content mx-auto">
             <ContactCard href={OPERATORE.social.whatsapp} external icon="💬" title="WhatsApp" desc="Risposta in tempo reale durante l'orario lavorativo." />
             <ContactCard href={`mailto:${OPERATORE.contatti.email}`} icon="✉️" title="Email" desc={OPERATORE.contatti.email} />

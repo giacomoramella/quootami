@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { LegalPage } from '@/components/LegalPage';
 import { OPERATORE } from '@/config/operatore';
+import { JsonLdBreadcrumb } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Cookie Policy',
@@ -19,7 +20,9 @@ export const metadata: Metadata = {
  */
 export default function CookiePage() {
   return (
-    <LegalPage
+    <>
+      <JsonLdBreadcrumb voci={[{ nome: 'Cookie Policy', href: '/cookie' }]} />
+      <LegalPage
       eyebrow="Art. 122 D.Lgs. 196/2003 · Garante 10/06/2021"
       title="Cookie"
       titleAccent="Policy."
@@ -52,6 +55,7 @@ export default function CookiePage() {
 
       <h2>4. Diritti e reclamo</h2>
       <p>L&apos;utente può esercitare i diritti previsti dagli artt. 15-22 GDPR scrivendo a <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a>; le finalità del trattamento sono descritte nella <a href="/privacy">Privacy Policy</a>. È inoltre riconosciuto il diritto di proporre reclamo al <strong>Garante per la Protezione dei Dati Personali</strong> (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener noreferrer">www.garanteprivacy.it</a>).</p>
-    </LegalPage>
+      </LegalPage>
+    </>
   );
 }

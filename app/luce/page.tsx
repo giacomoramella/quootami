@@ -78,7 +78,7 @@ const APPROFONDIMENTO: ApprofondimentoType = {
 
 const META_TITLE = 'Confronto offerte luce e gas del mercato libero';
 const META_DESC =
-  'Confronto gratuito delle offerte luce e gas del mercato libero: come si legge la bolletta, quale voce è davvero negoziabile e cosa cambia fra prezzo fisso e indicizzato.';
+  'Confronto gratuito delle offerte luce e gas del mercato libero: come si legge la bolletta, quale voce è negoziabile e cosa cambia fra fisso e indicizzato.';
 
 export const metadata: Metadata = {
   title: META_TITLE,

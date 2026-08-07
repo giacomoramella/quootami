@@ -55,7 +55,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'polizza-catastrofale-cosa-copre',
     titolo: 'Polizza catastrofale: cosa copre davvero (e cosa no)',
-    metaTitle: 'Polizza catastrofale: cosa copre e cosa non copre',
+    metaTitle: 'Polizza catastrofale: cosa copre e cosa no',
     metaDesc:
       'L’obbligo cat nat copre sismi, alluvioni, frane, inondazioni ed esondazioni. Grandine, trombe d’aria e mareggiate restano fuori: come integrarle.',
     eyebrow: 'Guida imprese',
@@ -70,7 +70,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'detrazione-polizza-eventi-calamitosi-casa',
     titolo: 'Detrazione 19% sulla polizza casa contro gli eventi calamitosi',
-    metaTitle: 'Detrazione polizza eventi calamitosi: come funziona',
+    metaTitle: 'Detrazione 19% polizza eventi calamitosi',
     metaDesc:
       'Sui premi delle polizze contro gli eventi calamitosi su immobili residenziali spetta la detrazione del 19% senza limite di importo. Requisiti e come ottenerla.',
     eyebrow: 'Guida privati',

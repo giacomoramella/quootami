@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { OPERATORE } from '@/config/operatore';
+import { JsonLdBreadcrumb } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Chi siamo · Il broker assicurativo digitale',
@@ -12,6 +13,7 @@ export default function ChiSiamoPage() {
 
   return (
     <>
+      <JsonLdBreadcrumb voci={[{ nome: 'Chi siamo', href: '/chi-siamo' }]} />
       {/* ─── HERO ─── */}
       <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-20 px-5 sm:px-8">
         <div aria-hidden className="blob-yellow top-[-260px] left-[-200px] w-[700px] h-[700px]" />

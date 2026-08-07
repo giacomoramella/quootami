@@ -69,7 +69,7 @@ const FAQ = [
 
 const META_TITLE = 'Polizze assicurative · Privati e imprese';
 const META_DESC =
-  'Confronto polizze per privati e imprese: auto, casa, salute e vita, cyber, animali, RC professionale e catastrofale. Quali sono obbligatorie e cosa controllare prima di firmare.';
+  'Confronto polizze per privati e imprese: auto, casa, salute, cyber, animali, RC professionale e catastrofale. Quali sono obbligatorie e cosa controllare.';
 
 export const metadata: Metadata = {
   title: META_TITLE,

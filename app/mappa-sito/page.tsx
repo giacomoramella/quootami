@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllPolizze, getPolizzeByCategory } from '@/config/polizze';
 import { getAllArticoli } from '@/config/guide';
+import { JsonLdBreadcrumb } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Mappa del sito',
@@ -61,6 +62,7 @@ const SECTIONS = [
 export default function MappaSitoPage() {
   return (
     <>
+      <JsonLdBreadcrumb voci={[{ nome: 'Mappa del sito', href: '/mappa-sito' }]} />
       <section className="pt-32 pb-12 px-5 sm:px-8">
         <div className="container-content text-center">
           <span className="eyebrow">Navigazione</span>

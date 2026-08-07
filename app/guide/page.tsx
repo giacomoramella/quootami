@@ -42,7 +42,7 @@ const APPROFONDIMENTO: ApprofondimentoType = {
 };
 
 export const metadata: Metadata = {
-  title: 'Guide su assicurazioni, obblighi di legge e detrazioni',
+  title: 'Guide su assicurazioni, obblighi e detrazioni',
   description:
     'Guide chiare su assicurazioni, obblighi di legge e detrazioni: catastrofale per le imprese, coperture casa, previdenza. Aggiornate e con le fonti.',
 };

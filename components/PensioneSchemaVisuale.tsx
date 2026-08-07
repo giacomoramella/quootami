@@ -236,7 +236,7 @@ function ViaCard({ titolo, badge, desc, tono }: {
       style={{ borderColor: consigliata ? TEAL : 'rgba(0,0,0,0.06)' }}
     >
       <div className="flex items-center justify-between gap-3">
-        <h4 className="font-sans font-bold text-base text-ink">{titolo}</h4>
+        <h3 className="font-sans font-bold text-base text-ink">{titolo}</h3>
         {consigliata && (
           <span
             className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full flex-shrink-0"
@@ -274,7 +274,7 @@ function FondoCard({ titolo, sotto, desc, costo }: {
 function BloccoCard({ titolo, children }: { titolo: string; children: React.ReactNode }) {
   return (
     <div className="rounded-2xl bg-bg-alt p-6">
-      <h4 className="font-sans font-bold text-base text-ink">{titolo}</h4>
+      <h3 className="font-sans font-bold text-base text-ink">{titolo}</h3>
       <p className="mt-2 text-sm text-ink-soft leading-relaxed">{children}</p>
     </div>
   );

@@ -53,7 +53,7 @@ const BREADCRUMB = [
   { nome: 'Guida ai fondi pensione', href: '/piano-pensione/guida' },
 ];
 
-const META_TITLE = 'Guida ai fondi pensione: come funzionano e quanto si deduce';
+const META_TITLE = 'Fondi pensione: come funzionano e cosa si deduce';
 const META_DESC =
   'Guida ai fondi pensione: vantaggi fiscali, dove destinare il TFR, novità 2026, anticipazioni, RITA e premorienza. Fonti di legge.';
 

@@ -90,8 +90,8 @@ export const POLIZZE: Record<string, Polizza> = {
       h1Accent: 'giusta.',
       sub: 'Confronto multi-compagnia per trovare la polizza migliore per il tuo veicolo.',
     },
-    metaTitle: 'Polizza Auto · Confronto RC, Furto, Incendio, Kasko',
-    metaDesc: 'Confronto polizze auto fra più compagnie: RC obbligatoria, Furto, Incendio e Kasko. Come funziona la classe di merito e cosa fa salire il premio. Preventivo gratuito.',
+    metaTitle: 'Polizza Auto · RC, Furto, Incendio e Kasko',
+    metaDesc: 'Confronto polizze auto fra più compagnie: RC obbligatoria, Furto, Incendio e Kasko. Come funziona la classe di merito e cosa fa salire il premio.',
     ogImageAlt: 'Polizza Auto Quootami — RC Auto, Furto, Incendio, Kasko',
     approfondimento: {
       eyebrow: 'Come si sceglie',
@@ -340,8 +340,8 @@ export const POLIZZE: Record<string, Polizza> = {
       h1Accent: 'con vantaggio fiscale.',
       sub: 'Deduci fino a €5.300/anno dal reddito IRPEF e costruisci la pensione integrativa. Calcola subito quanto risparmi.',
     },
-    metaTitle: 'Fondo Pensione · Calcola il tuo risparmio fiscale',
-    metaDesc: 'Fondo pensione: calcola il risparmio IRPEF con il simulatore, deducibilità fino a 5.300 € l\'anno e rendimenti tassati al 20%. Confronto fra fondi e costi ISC.',
+    metaTitle: 'Fondo Pensione · Calcola il risparmio fiscale',
+    metaDesc: 'Fondo pensione: calcola il risparmio IRPEF, deducibilità fino a 5.300 € l\'anno e rendimenti tassati al 20%. Confronto fra fondi e costi ISC.',
     ogImageAlt: 'Fondo Pensione Quootami — Previdenza complementare e deduzione fiscale',
     adesioneUrl: '/firma-allianz.html',
     coverages: {

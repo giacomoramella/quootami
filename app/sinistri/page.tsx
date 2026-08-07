@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { OPERATORE } from '@/config/operatore';
+import { JsonLdBreadcrumb } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Sinistri · Come denunciare e gestire',
@@ -19,6 +20,7 @@ const STEPS = [
 export default function SinistriPage() {
   return (
     <>
+      <JsonLdBreadcrumb voci={[{ nome: 'Sinistri', href: '/sinistri' }]} />
       <section className="relative overflow-hidden pt-32 pb-16 px-5 sm:px-8">
         <div className="container-content text-center">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-yellow/15 border border-brand-yellow/30 text-xs font-semibold tracking-wider uppercase text-brand-green-dark">
@@ -34,9 +36,11 @@ export default function SinistriPage() {
           </p>
 
           <div className="mt-10 max-w-2xl mx-auto p-6 bg-gradient-to-br from-yellow-50 to-amber-50 border-l-4 border-brand-yellow-deep rounded-2xl">
-            <h3 className="font-bold text-ink mb-2 flex items-center gap-2 justify-center">
+            {/* h2 e non h3: è il primo titolo dopo l'H1 e un salto di livello
+                rompe la gerarchia del documento. La dimensione la dà la classe. */}
+            <h2 className="font-bold text-ink mb-2 flex items-center gap-2 justify-center">
               🚨 Hai appena avuto un sinistro?
-            </h3>
+            </h2>
             <p className="text-sm text-ink-soft mb-4 text-center">
               Contatta Quootami immediatamente. Più rapida è la denuncia, più efficace sarà la gestione.
             </p>
