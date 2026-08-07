@@ -74,10 +74,15 @@ def estrai(path, commodity):
             "price_type": TIPO_OFFERTA.get(tipo_off, "indexed"),
             "index_name": (None if (fisso or not idx) else ("PUN" if commodity == "ele" else "PSV")),
             "spread_eur": spread,
+            # Sulle fisse monorarie il prezzo va replicato su TUTTE le fasce:
+            # en.compute_proposals stima f1*0.35 + f2*0.31 + f3*0.34 quando la
+            # bolletta non ha fasce, e una fascia nulla renderebbe NULL il
+            # costo, facendo fallire l'inserimento della proposta (bug del
+            # refresh 06/08, corretto con fix-offerte-fisse-fasce-20260807.sql).
             "price_f0": kwh if (fisso and not prezzi_fascia) else None,
             "price_f1": prezzi_fascia.get("01") if fisso else None,
-            "price_f2": prezzi_fascia.get("02") if fisso else None,
-            "price_f3": prezzi_fascia.get("03") if fisso else None,
+            "price_f2": (prezzi_fascia.get("02") or prezzi_fascia.get("01")) if fisso else None,
+            "price_f3": (prezzi_fascia.get("03") or prezzi_fascia.get("01")) if fisso else None,
             "fixed_fee_year": round(fee, 2),
             "duration_months": int(durata) if durata and durata.lstrip("-").isdigit() else None,
             "validity_start": g(o, "ValiditaOfferta/DATA_INIZIO"),

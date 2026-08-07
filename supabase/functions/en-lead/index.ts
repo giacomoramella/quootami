@@ -24,6 +24,9 @@ function json(obj: unknown, status = 200) {
 const LANDING = Deno.env.get('LANDING_URL') || 'https://quootami.it/luce';
 const FROM = Deno.env.get('FROM_EMAIL') || 'Quootami Energia <noreply@quootami.it>';
 const SITE = 'quootami.it';
+// Destinatario delle notifiche lead: senza questa email il funnel finisce in
+// un database che nessuno guarda.
+const BROKER = Deno.env.get('INTERMEDIARIO_EMAIL') || 'giacomo.rp@sistoassicurazioni.com';
 
 async function rpc(name: string, args: Record<string, unknown>) {
   const url = Deno.env.get('SUPABASE_URL'), key = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
@@ -90,6 +93,31 @@ Deno.serve(async (req) => {
            <p style="text-align:center;margin:22px 0"><a href="${LANDING}?verified=${token}" style="background:#1d4ed8;color:#fff;text-decoration:none;padding:13px 26px;border-radius:10px;font-weight:700;display:inline-block">Vedi le offerte</a></p>
            <p>Un nostro consulente ti contattera' per accompagnarti gratuitamente nel cambio fornitore. Nessun costo, nessun impegno: il diritto di recesso e' di 14 giorni sul nuovo contratto.</p>
            <p>Per qualsiasi domanda rispondi pure a questa email.</p>`));
+
+        // Notifica al broker, solo al PRIMO click di conferma. Best-effort:
+        // qualunque errore qui non deve mai bloccare il redirect dell'utente.
+        try {
+          const res = await rpc('en_verification_results', { p_token: token });
+          const best = res && Array.isArray(res.proposals) ? res.proposals[0] : null;
+          const gas = res && res.commodity === 'gas';
+          const righe = ([
+            ['Nome', d.customer_name || '—'],
+            ['Email', d.email],
+            ['Telefono', d.customer_phone || '—'],
+            ['Fornitura', gas ? 'Gas' : 'Luce'],
+            ['Consumo annuo', res && res.annual_consumption ? res.annual_consumption + (gas ? ' Smc' : ' kWh') : '—'],
+            ['Spesa attuale', res && res.annual_cost_current ? eur(res.annual_cost_current) + '/anno' : '—'],
+            ['Migliore proposta', best ? (best.supplier_name || '') + ' — risparmio ' + eur(best.annual_saving) + '/anno' : '—'],
+            ['Proposte totali', res && Array.isArray(res.proposals) ? String(res.proposals.length) : '0'],
+          ] as [string, string][]).map(([k, v]) =>
+            `<tr><td style="padding:4px 12px 4px 0;color:#64748b;white-space:nowrap">${k}</td><td style="padding:4px 0;font-weight:600">${esc(String(v))}</td></tr>`).join('');
+          await sendEmail(BROKER, `Nuovo lead luce/gas verificato — ${d.customer_name || d.email}`,
+            `<div style="font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px;color:#0f172a;line-height:1.6">
+              <p><b>Lead verificato</b> sul comparatore di ${SITE}: l'utente ha confermato l'email e si aspetta di essere ricontattato.</p>
+              <table style="font-size:14px;border-collapse:collapse">${righe}</table>
+              <p style="color:#64748b;font-size:12.5px;margin-top:14px">Notifica automatica della edge function en-lead.</p>
+             </div>`);
+        } catch (e) { console.error('en-lead notifica broker:', e); }
       }
       const dest = ok ? `${LANDING}?verified=${token}` : `${LANDING}?verifyerr=1`;
       return new Response(null, { status: 302, headers: { ...cors, Location: dest } });
