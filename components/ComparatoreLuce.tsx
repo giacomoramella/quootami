@@ -22,14 +22,35 @@ const HEADERS = {
 
 type Commodity = 'ele' | 'gas';
 
+/**
+ * Riga di proposta. Prima della conferma email arriva da en_quote_public con
+ * i nomi MASCHERATI dal backend ("Fornitore 1", "Offerta riservata"); dopo la
+ * conferma arriva da en_verification_results in chiaro, con anche
+ * signup_url/supplier_website (il link tracciato degli accordi partner).
+ */
+type Proposal = {
+  rank?: number;
+  supplier_name?: string;
+  offer_name?: string;
+  price_type?: string;
+  index_name?: string | null;
+  fixed_fee_year?: number | null;
+  duration_months?: number | null;
+  annual_saving?: number;
+  annual_cost_offer?: number;
+  signup_url?: string | null;
+  supplier_website?: string | null;
+};
+
 type QuoteResult =
-  | { kind: 'ok'; saving: number; pct: number; current: number; count: number }
+  | { kind: 'ok'; saving: number; pct: number; current: number; count: number; proposals: Proposal[] }
   | { kind: 'empty' };
 
 type VerifiedResult = {
   title: string;
   main: string;
   sub: string;
+  proposals?: Proposal[];
 };
 
 function parseNum(v: string): number | null {
@@ -40,6 +61,123 @@ function parseNum(v: string): number | null {
 
 function eur(n: number): string {
   return Math.round(n).toLocaleString('it-IT');
+}
+
+type Filtro = 'tutte' | 'fixed' | 'indexed' | 'noquota';
+
+const CHIP: [Filtro, string][] = [
+  ['tutte', 'Tutte'],
+  ['fixed', 'Prezzo fisso'],
+  ['indexed', 'Indicizzato'],
+  ['noquota', 'Senza quota fissa'],
+];
+
+/**
+ * Lista delle offerte convenienti con filtri, ordinata per risparmio.
+ * `mascherata`: prima della conferma email i nomi arrivano già oscurati dal
+ * backend; qui si aggiunge solo l'avviso che spiega come sbloccarli.
+ * Sulle righe verificate, se il fornitore ha un accordo attivo compare il
+ * link di attivazione tracciato (signup_url in en.suppliers).
+ */
+function ListaOfferte({ proposals, mascherata }: { proposals: Proposal[]; mascherata: boolean }) {
+  const [filtro, setFiltro] = useState<Filtro>('tutte');
+  const [visibili, setVisibili] = useState(10);
+
+  const filtrate = proposals.filter((p) =>
+    filtro === 'fixed' ? p.price_type === 'fixed'
+    : filtro === 'indexed' ? p.price_type === 'indexed'
+    : filtro === 'noquota' ? !(p.fixed_fee_year && p.fixed_fee_year > 0)
+    : true
+  );
+
+  if (proposals.length === 0) return null;
+
+  return (
+    <div className="max-w-2xl mx-auto mt-6 rounded-3xl bg-bg-card border border-black/5 shadow-brand-sm p-6 sm:p-8">
+      <div className="flex items-baseline justify-between gap-3 flex-wrap">
+        <h3 className="font-sans font-bold text-lg text-ink">
+          {filtrate.length === proposals.length
+            ? `${proposals.length} offerte più convenienti della tua`
+            : `${filtrate.length} offerte su ${proposals.length}`}
+        </h3>
+      </div>
+      {mascherata && (
+        <p className="mt-1 text-xs text-ink-muted">
+          I nomi dei fornitori si sbloccano con la conferma email qui sotto — gratis e senza impegno.
+        </p>
+      )}
+
+      <div className="mt-4 flex flex-wrap gap-2" role="tablist" aria-label="Filtra le offerte">
+        {CHIP.map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            aria-selected={filtro === id}
+            onClick={() => { setFiltro(id); setVisibili(10); }}
+            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-colors ${
+              filtro === id ? 'bg-brand-navy text-white' : 'bg-bg-alt text-ink-muted hover:text-ink'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      <ul className="mt-4 space-y-2.5 list-none">
+        {filtrate.slice(0, visibili).map((p, i) => (
+          <li
+            key={`${p.rank ?? i}-${p.offer_name ?? i}`}
+            className="flex items-center justify-between gap-4 rounded-2xl border border-black/5 bg-white px-4 py-3"
+          >
+            <div className="min-w-0">
+              <p className="font-sans font-bold text-sm text-ink truncate">
+                {mascherata ? '🔒 ' : ''}{p.supplier_name || 'Fornitore'}
+                {!mascherata && p.offer_name ? <span className="font-normal text-ink-muted"> · {p.offer_name}</span> : null}
+              </p>
+              <p className="mt-0.5 text-xs text-ink-muted">
+                {p.price_type === 'fixed' ? 'Prezzo fisso' : `Indicizzato${p.index_name ? ' ' + p.index_name : ''}`}
+                {p.duration_months && p.duration_months > 0 ? ` · ${p.duration_months} mesi` : ''}
+                {p.fixed_fee_year && p.fixed_fee_year > 0 ? ` · quota ${eur(p.fixed_fee_year)} €/anno` : ' · senza quota fissa'}
+              </p>
+            </div>
+            <div className="text-right shrink-0">
+              <p className="font-bold text-sm text-brand-green-dark tabular-nums">−{eur(p.annual_saving ?? 0)} €/anno</p>
+              <p className="text-xs text-ink-muted tabular-nums">{eur(p.annual_cost_offer ?? 0)} €/anno</p>
+              {!mascherata && p.signup_url && (
+                <a
+                  href={p.signup_url}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="mt-1 inline-block text-xs font-bold text-brand-green-dark underline underline-offset-2"
+                >
+                  Attiva l&apos;offerta ↗
+                </a>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      {filtrate.length > visibili && (
+        <button
+          type="button"
+          onClick={() => setVisibili((v) => v + 10)}
+          className="mt-4 w-full text-center text-sm font-bold text-brand-green-dark hover:underline underline-offset-4"
+        >
+          Mostra altre {Math.min(10, filtrate.length - visibili)} offerte
+        </button>
+      )}
+      {filtrate.length === 0 && (
+        <p className="mt-4 text-sm text-ink-muted text-center">Nessuna offerta con questo filtro: prova &ldquo;Tutte&rdquo;.</p>
+      )}
+
+      <p className="mt-5 text-[11px] text-ink-muted leading-relaxed border-t border-black/5 pt-4">
+        Stima sulla sola componente materia energia, a parità di consumo annuo; esclusi oneri,
+        imposte e trasporto, uguali per tutti i fornitori. Ordinate per risparmio.
+      </p>
+    </div>
+  );
 }
 
 export function ComparatoreLuce() {
@@ -102,14 +240,16 @@ export function ComparatoreLuce() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data?.message || 'servizio non disponibile');
-      const proposals = data?.proposals ?? [];
+      const proposals: Proposal[] = data?.proposals ?? [];
       const best = proposals[0];
       if (!best) {
         setQuote({ kind: 'empty' });
       } else {
         const saving = Math.max(best.annual_saving ?? 0, 0);
         const pct = data.annual_cost_current > 0 ? Math.round((saving / data.annual_cost_current) * 100) : 0;
-        setQuote({ kind: 'ok', saving, pct, current: data.annual_cost_current, count: proposals.length });
+        // In lista solo le offerte che fanno risparmiare davvero.
+        const convenienti = proposals.filter((x) => (x.annual_saving ?? 0) > 0);
+        setQuote({ kind: 'ok', saving, pct, current: data.annual_cost_current, count: proposals.length, proposals: convenienti });
       }
       setLastPayload(p);
     } catch (err) {
@@ -214,13 +354,15 @@ export function ComparatoreLuce() {
         });
         const out = await res.json();
         if (!res.ok || !out.ok) return;
-        const best = (out.proposals ?? [])[0];
+        const tutte: Proposal[] = out.proposals ?? [];
+        const best = tutte[0];
         setVerified({
           title: `Email confermata${out.customer_name ? `, ${out.customer_name.split(' ')[0]}` : ''}. Ecco la proposta migliore:`,
           main: best ? `${best.supplier_name ?? ''} — ${best.offer_name ?? ''}` : 'Nessuna offerta migliorativa trovata',
           sub: best
-            ? `Risparmio stimato ${eur(best.annual_saving)} €/anno (${eur(best.annual_cost_offer)} €/anno contro ${eur(out.annual_cost_current)} €/anno attuali). Quootami ti contatterà a breve.`
+            ? `Risparmio stimato ${eur(best.annual_saving ?? 0)} €/anno (${eur(best.annual_cost_offer ?? 0)} €/anno contro ${eur(out.annual_cost_current)} €/anno attuali). Quootami ti contatterà a breve.`
             : 'Quootami ti contatterà comunque per una verifica personalizzata.',
+          proposals: tutte.filter((x) => (x.annual_saving ?? 0) > 0),
         });
       } catch {
         /* silenzioso: il confronto resta disponibile */
@@ -251,6 +393,13 @@ export function ComparatoreLuce() {
             <p className="text-sm font-semibold uppercase tracking-wider text-brand-yellow">{verified.title}</p>
             {verified.main && <p className="mt-2 text-2xl font-bold">{verified.main}</p>}
             <p className="mt-2 text-sm text-white/75">{verified.sub}</p>
+          </div>
+        )}
+
+        {/* Lista in chiaro dopo la conferma email */}
+        {verified?.proposals && verified.proposals.length > 0 && (
+          <div className="mb-8">
+            <ListaOfferte proposals={verified.proposals} mascherata={false} />
           </div>
         )}
 
@@ -365,6 +514,9 @@ export function ComparatoreLuce() {
             )}
           </div>
         )}
+
+        {/* Lista offerte (nomi mascherati fino alla conferma email) */}
+        {quote?.kind === 'ok' && <ListaOfferte proposals={quote.proposals} mascherata={true} />}
 
         {/* Lead form */}
         {quote && (
