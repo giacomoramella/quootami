@@ -55,16 +55,27 @@ async function sendEmail(to: string, subject: string, html: string) {
 const eur = (n: number) => new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n || 0);
 const esc = (s: string) => (s || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] as string));
 
-function emailShell(inner: string) {
-  return `<div style="font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f6f8fb;padding:28px 14px">
-  <div style="max-width:560px;margin:0 auto;background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden">
-    <div style="background:#1e3a8a;color:#fff;padding:18px 24px;font-weight:800;font-size:17px">⚡ ${SITE}</div>
-    <div style="padding:26px 24px;color:#0f172a;font-size:15px;line-height:1.6">${inner}</div>
-    <div style="padding:14px 24px;border-top:1px solid #e2e8f0;color:#94a3b8;font-size:11.5px;line-height:1.5">
-      Ricevi questa email perche' hai richiesto un confronto su ${SITE}. Se non sei stato tu, ignora questo messaggio: senza conferma non riceverai altre comunicazioni.
+/**
+ * Shell email con il brand del sito: sfondo bianco, wordmark "Quootami" navy
+ * (#0B1220) con il punto giallo (#FFD84D) come nella og-image, claim sotto,
+ * pulsanti gialli. Font di sistema: le email non caricano web font.
+ */
+function emailShell(inner: string, footer?: string) {
+  return `<div style="font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:#FAFAF7;padding:28px 14px">
+  <div style="max-width:560px;margin:0 auto;background:#FFFFFF;border:1px solid #E9E5DA;border-radius:16px;overflow:hidden">
+    <div style="background:#FFFFFF;padding:22px 26px 14px;border-bottom:1px solid #F0EDE4">
+      <div style="font-size:25px;font-weight:800;letter-spacing:-0.5px;color:#0B1220">Quootami<span style="color:#FFD84D">.</span></div>
+      <div style="margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:1.6px;color:#9AA0A6;text-transform:uppercase">Confronta. Cambia. Risparmia.</div>
+    </div>
+    <div style="padding:24px 26px;color:#0B1220;font-size:15px;line-height:1.65">${inner}</div>
+    <div style="padding:14px 26px;border-top:1px solid #F0EDE4;color:#9AA0A6;font-size:11.5px;line-height:1.5">
+      ${footer ?? `Ricevi questa email perche' hai richiesto un confronto su ${SITE}. Se non sei stato tu, ignora questo messaggio: senza conferma non riceverai altre comunicazioni.`}
     </div>
   </div></div>`;
 }
+
+/** Stile del pulsante principale: giallo brand con testo navy, come sul sito. */
+const BTN = 'background:#FFD84D;color:#0B1220;text-decoration:none;padding:13px 26px;border-radius:12px;font-weight:800;display:inline-block';
 
 async function rateHit(bucket: string, max: number, ttl: number): Promise<boolean> {
   try { return (await rpc('en_rate_hit', { p_bucket: bucket, p_max: max, p_ttl_seconds: ttl })) === true; }
@@ -90,7 +101,7 @@ Deno.serve(async (req) => {
         await sendEmail(d.email, 'Email confermata — i tuoi risparmi su luce e gas',
           emailShell(`<p>Ciao${name ? ' <b>' + esc(name) + '</b>' : ''},</p>
            <p>il tuo indirizzo e' confermato ✅. Ora puoi vedere i fornitori e le offerte selezionate per te:</p>
-           <p style="text-align:center;margin:22px 0"><a href="${LANDING}?verified=${token}" style="background:#1d4ed8;color:#fff;text-decoration:none;padding:13px 26px;border-radius:10px;font-weight:700;display:inline-block">Vedi le offerte</a></p>
+           <p style="text-align:center;margin:22px 0"><a href="${LANDING}?verified=${token}" style="${BTN}">Vedi le offerte</a></p>
            <p>Un nostro consulente ti contattera' per accompagnarti gratuitamente nel cambio fornitore. Nessun costo, nessun impegno: il diritto di recesso e' di 14 giorni sul nuovo contratto.</p>
            <p>Per qualsiasi domanda rispondi pure a questa email.</p>`));
 
@@ -112,11 +123,9 @@ Deno.serve(async (req) => {
           ] as [string, string][]).map(([k, v]) =>
             `<tr><td style="padding:4px 12px 4px 0;color:#64748b;white-space:nowrap">${k}</td><td style="padding:4px 0;font-weight:600">${esc(String(v))}</td></tr>`).join('');
           await sendEmail(BROKER, `Nuovo lead luce/gas verificato — ${d.customer_name || d.email}`,
-            `<div style="font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:15px;color:#0f172a;line-height:1.6">
-              <p><b>Lead verificato</b> sul comparatore di ${SITE}: l'utente ha confermato l'email e si aspetta di essere ricontattato.</p>
-              <table style="font-size:14px;border-collapse:collapse">${righe}</table>
-              <p style="color:#64748b;font-size:12.5px;margin-top:14px">Notifica automatica della edge function en-lead.</p>
-             </div>`);
+            emailShell(`<p><b>Lead verificato</b> sul comparatore: l'utente ha confermato l'email e si aspetta di essere ricontattato.</p>
+              <table style="font-size:14px;border-collapse:collapse">${righe}</table>`,
+              `Notifica automatica del comparatore luce e gas di ${SITE}.`));
         } catch (e) { console.error('en-lead notifica broker:', e); }
       }
       const dest = ok ? `${LANDING}?verified=${token}` : `${LANDING}?verifyerr=1`;
@@ -149,7 +158,7 @@ Deno.serve(async (req) => {
         emailShell(`<p>Ciao${name ? ' <b>' + esc(name) + '</b>' : ''},</p>
          <p>grazie per la tua richiesta su <b>${SITE}</b>.${best && best.annual_saving > 0 ? ' In base alla tua bolletta puoi risparmiare fino a <b>' + eur(best.annual_saving) + '/anno</b>.' : ''}</p>
          <p>Per vedere i fornitori e ricevere la proposta, conferma il tuo indirizzo email:</p>
-         <p style="text-align:center;margin:22px 0"><a href="${verifyUrl}" style="background:#1d4ed8;color:#fff;text-decoration:none;padding:13px 26px;border-radius:10px;font-weight:700;display:inline-block">Conferma e vedi le offerte</a></p>
+         <p style="text-align:center;margin:22px 0"><a href="${verifyUrl}" style="${BTN}">Conferma e vedi le offerte</a></p>
          <p style="color:#64748b;font-size:13px">Il link vale 7 giorni. Se il pulsante non funziona copia questo indirizzo nel browser:<br><span style="word-break:break-all">${verifyUrl}</span></p>`));
 
       const ps = (lead.proposals || []).filter((x: any) => x.annual_saving > 0);

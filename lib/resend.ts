@@ -25,6 +25,16 @@ export const INTERMEDIARIO_EMAIL =
 export const SENDER_EMAIL =
   process.env.RESEND_FROM_EMAIL ?? 'Quootami <noreply@quootami.it>';
 
+/**
+ * Testata brand per tutte le email: wordmark "Quootami" navy con punto giallo
+ * (come nella og-image) e claim. Stessa veste della shell di en-lead.
+ */
+export const WORDMARK = `
+      <div style="padding: 4px 0 14px;">
+        <div style="font-size: 25px; font-weight: 800; letter-spacing: -0.5px; color: #0B1220;">Quootami<span style="color: #FFD84D;">.</span></div>
+        <div style="margin-top: 3px; font-size: 10.5px; font-weight: 700; letter-spacing: 1.6px; color: #9AA0A6; text-transform: uppercase;">Confronta. Cambia. Risparmia.</div>
+      </div>`;
+
 export function getResend() {
   if (!RESEND_API_KEY) {
     throw new Error(
@@ -71,7 +81,8 @@ export async function sendLeadEmail(payload: LeadEmailPayload) {
   const subject = `Nuova richiesta preventivo ${payload.prodotto} — ${payload.nome} ${payload.cognome}`;
 
   const html = `
-    <div style="font-family: Inter, sans-serif; max-width: 600px; color: #0B1220;">
+    <div style="font-family: Inter, -apple-system, sans-serif; max-width: 600px; color: #0B1220;">
+      ${WORDMARK}
       <h2 style="color: #0B1220; border-bottom: 3px solid #FFD84D; padding-bottom: 8px;">
         Nuova richiesta preventivo via sito Quootami
       </h2>
@@ -133,7 +144,8 @@ export async function sendAdesioneFirmataEmail(p: AdesioneFirmataPayload) {
   const resend = getResend();
   const subject = `✅ Adesione ${p.prodotto} firmata — ${p.nome} ${p.cognome}`;
   const html = `
-    <div style="font-family: Inter, sans-serif; max-width: 600px; color: #0B1220;">
+    <div style="font-family: Inter, -apple-system, sans-serif; max-width: 600px; color: #0B1220;">
+      ${WORDMARK}
       <h2 style="color: #1d7a4d; border-bottom: 3px solid #1d7a4d; padding-bottom: 8px;">
         Adesione firmata via FEA ✓
       </h2>
