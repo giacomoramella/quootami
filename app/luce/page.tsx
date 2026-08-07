@@ -5,6 +5,7 @@ import { LuceGuida } from '@/components/LuceGuida';
 import { OPERATORE } from '@/config/operatore';
 import { JsonLdBreadcrumb, JsonLdFaqGenerico } from '@/components/JsonLd';
 import { Approfondimento } from '@/components/ProductApprofondimento';
+import { FaqAccordion } from '@/components/FaqAccordion';
 import type { Approfondimento as ApprofondimentoType } from '@/config/polizze';
 
 /** FAQ della pagina: rese anche visivamente più sotto, come richiede Google. */
@@ -193,19 +194,11 @@ export default function LucePage() {
       </section>
 
       {/* ─── FAQ ─── */}
-      <section className="section bg-bg">
-        <div className="container-content">
-          <div className="max-w-prose-wide mx-auto prose-quootami">
-            <h2>Domande frequenti su luce e gas</h2>
-            {FAQ.map(f => (
-              <div key={f.q}>
-                <h3>{f.q}</h3>
-                <p>{f.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqAccordion
+        items={FAQ}
+        title="Domande frequenti su luce e gas"
+        className="section bg-bg"
+      />
 
       {/* ─── APPROFONDIMENTO (a fisarmonica) ─── */}
       <Approfondimento dati={APPROFONDIMENTO} />

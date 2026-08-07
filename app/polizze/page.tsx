@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getPolizzeByCategory, type Polizza } from '@/config/polizze';
 import { JsonLdBreadcrumb, JsonLdFaqGenerico } from '@/components/JsonLd';
 import { Approfondimento } from '@/components/ProductApprofondimento';
+import { FaqAccordion } from '@/components/FaqAccordion';
 import type { Approfondimento as ApprofondimentoType } from '@/config/polizze';
 
 /** Sezione redazionale dell'hub, resa a fisarmonica in fondo alla pagina. */
@@ -162,19 +163,7 @@ export default function PolizzePage() {
       </section>
 
       {/* ─── FAQ ─── */}
-      <section className="section pt-0">
-        <div className="container-content">
-          <div className="max-w-prose-wide mx-auto prose-quootami">
-            <h2>Domande frequenti</h2>
-            {FAQ.map(f => (
-              <div key={f.q}>
-                <h3>{f.q}</h3>
-                <p>{f.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqAccordion items={FAQ} title="Domande frequenti" className="section pt-0" />
 
       {/* ─── APPROFONDIMENTO (a fisarmonica, sotto le FAQ) ─── */}
       <Approfondimento dati={APPROFONDIMENTO} />

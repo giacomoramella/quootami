@@ -1,7 +1,7 @@
 import { ProductHero } from './ProductHero';
 import { CoverageGrid } from './CoverageGrid';
 import { ProcessSteps } from './ProcessSteps';
-import { FaqAccordion } from './FaqAccordion';
+import { FaqAccordionPolizza } from './FaqAccordion';
 import { PreventivoForm } from './PreventivoForm';
 import { GuideCorrelate } from './GuideCorrelate';
 import { ProductApprofondimento } from './ProductApprofondimento';
@@ -30,7 +30,7 @@ export function ProductPage({
       {extra}
       <ProcessSteps polizza={polizza} />
       <PreventivoForm polizza={polizza} />
-      <FaqAccordion polizza={polizza} />
+      <FaqAccordionPolizza polizza={polizza} />
       <ProductApprofondimento polizza={polizza} />
       <GuideCorrelate slug={polizza.slug} />
     </>
