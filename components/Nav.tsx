@@ -51,14 +51,6 @@ export function Nav() {
               Chi siamo
             </Link>
           </li>
-          <li>
-            <Link
-              href="/contatti"
-              className="text-sm font-bold text-ink bg-brand-yellow px-5 py-2 rounded-full shadow-glow-yellow hover:bg-brand-navy hover:text-white transition-all duration-200"
-            >
-              Parla con Quootami →
-            </Link>
-          </li>
         </ul>
 
         {/* Toggle mobile */}
@@ -67,7 +59,7 @@ export function Nav() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label="Apri/chiudi menu"
-          className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg border border-black/10"
+          className="md:hidden flex flex-col items-center justify-center gap-1.5 p-3 rounded-lg border border-black/10"
         >
           <span className={`w-5 h-0.5 bg-ink transition-transform ${open ? 'rotate-45 translate-y-2' : ''}`} />
           <span className={`w-5 h-0.5 bg-ink transition-opacity ${open ? 'opacity-0' : ''}`} />
@@ -86,13 +78,6 @@ export function Nav() {
           <Link href="/luce" onClick={() => setOpen(false)} className="text-base text-ink py-2">Luce e Gas</Link>
           <Link href="/guide" onClick={() => setOpen(false)} className="text-base text-ink py-2">Guide</Link>
           <Link href="/chi-siamo" onClick={() => setOpen(false)} className="text-base text-ink py-2">Chi siamo</Link>
-          <Link
-            href="/contatti"
-            onClick={() => setOpen(false)}
-            className="btn-primary w-full mt-2 justify-center"
-          >
-            Parla con Quootami →
-          </Link>
         </div>
       )}
     </nav>

@@ -252,7 +252,7 @@ export function CookiePrefsButton() {
   return (
     <button
       onClick={() => window.dispatchEvent(new Event('qtm-open-cookie-prefs'))}
-      className="text-sm text-white/55 hover:text-brand-yellow transition-colors underline-offset-2"
+      className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors underline-offset-2"
     >
       Preferenze cookie
     </button>

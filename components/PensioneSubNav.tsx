@@ -28,11 +28,13 @@ export function PensioneSubNav() {
       aria-label="Sezioni previdenza"
       className="pt-24 sm:pt-28 pb-1 px-4 sm:px-8"
     >
-      <div className="container-content flex items-center gap-2 overflow-x-auto no-scrollbar">
+      {/* Su mobile le voci vanno a capo: con `nowrap` il CTA "Calcola" finiva
+          fuori dallo schermo dietro uno scroll orizzontale che nessuno scopre. */}
+      <div className="container-content flex flex-wrap md:flex-nowrap items-center gap-2 md:overflow-x-auto md:no-scrollbar">
         <span className="hidden sm:inline text-xs font-semibold uppercase tracking-wider text-ink-muted mr-2 flex-shrink-0">
           Previdenza
         </span>
-        <ul className="flex items-center gap-1.5 list-none flex-shrink-0">
+        <ul className="flex flex-wrap md:flex-nowrap items-center gap-1.5 list-none md:flex-shrink-0">
           {VOCI.map((v) => {
             const attiva = pathname === v.href;
             return (
@@ -53,7 +55,7 @@ export function PensioneSubNav() {
         </ul>
         <Link
           href="/piano-pensione#calcolatore"
-          className="ml-auto flex-shrink-0 inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-bold text-ink border border-ink/15 hover:border-brand-yellow hover:bg-brand-yellow/10 transition-colors duration-200 whitespace-nowrap"
+          className="md:ml-auto flex-shrink-0 inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-bold text-ink border border-ink/15 hover:border-brand-yellow hover:bg-brand-yellow/10 transition-colors duration-200 whitespace-nowrap"
         >
           Calcola →
         </Link>

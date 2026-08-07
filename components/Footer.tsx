@@ -38,38 +38,38 @@ export function Footer() {
           {/* Polizze privati */}
           <div>
             <h5 className="text-xs font-semibold uppercase tracking-wider text-white mb-4">Privati</h5>
-            <ul className="space-y-2.5 list-none">
-              <li><Link href="/polizza-auto" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Polizza Auto</Link></li>
-              <li><Link href="/polizza-casa" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Polizza Casa</Link></li>
-              <li><Link href="/salute" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Salute &amp; Vita</Link></li>
-              <li><Link href="/cyber" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Polizza Cyber</Link></li>
-              <li><Link href="/polizza-animali" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Polizza Animali</Link></li>
-              <li><Link href="/piano-pensione" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Fondo Pensione</Link></li>
+            <ul className="space-y-1 md:space-y-2.5 list-none">
+              <li><Link href="/polizza-auto" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Polizza Auto</Link></li>
+              <li><Link href="/polizza-casa" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Polizza Casa</Link></li>
+              <li><Link href="/salute" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Salute &amp; Vita</Link></li>
+              <li><Link href="/cyber" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Polizza Cyber</Link></li>
+              <li><Link href="/polizza-animali" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Polizza Animali</Link></li>
+              <li><Link href="/piano-pensione" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Fondo Pensione</Link></li>
             </ul>
           </div>
 
           {/* Imprese */}
           <div>
             <h5 className="text-xs font-semibold uppercase tracking-wider text-white mb-4">Imprese</h5>
-            <ul className="space-y-2.5 list-none">
-              <li><Link href="/rc" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">RC Professionale</Link></li>
-              <li><Link href="/rc#coperture" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Catastrofale PMI</Link></li>
-              <li><Link href="/cyber" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Cyber Business</Link></li>
+            <ul className="space-y-1 md:space-y-2.5 list-none">
+              <li><Link href="/rc" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">RC Professionale</Link></li>
+              <li><Link href="/rc#coperture" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Catastrofale PMI</Link></li>
+              <li><Link href="/cyber" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Cyber Business</Link></li>
             </ul>
           </div>
 
           {/* Informative */}
           <div>
             <h5 className="text-xs font-semibold uppercase tracking-wider text-white mb-4">Informative</h5>
-            <ul className="space-y-2.5 list-none">
-              <li><Link href="/privacy" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/cookie" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Cookie Policy</Link></li>
+            <ul className="space-y-1 md:space-y-2.5 list-none">
+              <li><Link href="/privacy" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/cookie" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Cookie Policy</Link></li>
               <li><CookiePrefsButton /></li>
-              <li><Link href="/chi-siamo" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Chi siamo</Link></li>
-              <li><Link href="/guide" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Guide</Link></li>
-              <li><Link href="/sinistri" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Sinistri</Link></li>
-              <li><Link href="/contatti" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Contatti</Link></li>
-              <li><Link href="/mappa-sito" className="text-sm text-white/55 hover:text-brand-yellow transition-colors">Mappa del sito</Link></li>
+              <li><Link href="/chi-siamo" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Chi siamo</Link></li>
+              <li><Link href="/guide" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Guide</Link></li>
+              <li><Link href="/sinistri" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Sinistri</Link></li>
+              <li><Link href="/contatti" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Contatti</Link></li>
+              <li><Link href="/mappa-sito" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Mappa del sito</Link></li>
             </ul>
           </div>
         </div>
