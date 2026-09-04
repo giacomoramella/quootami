@@ -19,7 +19,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { SUPABASE, WEB3FORMS } from '@/config/credentials';
 import { OPERATORE } from '@/config/operatore';
-import { getPreventivoFields, type PreventivoField } from '@/config/preventivo';
+import { getPreventivoFields, getPreventivoAllegato, type PreventivoField } from '@/config/preventivo';
 import { trackLead } from '@/lib/tracking';
 import type { Polizza } from '@/config/polizze';
 
@@ -36,11 +36,25 @@ const SUPABASE_HEADERS = {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX = /^\+?[0-9 ()\-]{8,18}$/;
+const CAP_REGEX = /^\d{5}$/;
+
+/** Stessi limiti del bucket `documenti-lead` (vedi supabase/schema.sql). */
+const MAX_FILE_BYTES = 10 * 1024 * 1024;
+const TIPI_AMMESSI = ['application/pdf', 'image/jpeg', 'image/png', 'image/heic', 'image/heif', 'image/webp'];
+
+/** Ref del progetto Supabase, per comporre il link al file nel dashboard. */
+const PROJECT_REF = SUPABASE.url.replace(/^https?:\/\//, '').split('.')[0];
 
 type Valore = string | string[];
+type Modo = 'dati' | 'allegato';
 
 export function PreventivoForm({ polizza }: { polizza: Polizza }) {
   const campi = getPreventivoFields(polizza.slug);
+  const allegato = getPreventivoAllegato(polizza.slug);
+
+  const [modo, setModo] = useState<Modo>('dati');
+  const [file, setFile] = useState<File | null>(null);
+  const conAllegato = modo === 'allegato';
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -72,22 +86,67 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
 
   function validate(): boolean {
     const err: Record<string, string> = {};
-    if (nome.trim().length < 2) err.nome = 'Inserisci il tuo nome';
     if (!EMAIL_REGEX.test(email)) err.email = 'Email non valida';
     if (!PHONE_REGEX.test(telefono)) err.telefono = 'Telefono non valido (es. +39 333 1234567)';
-    for (const c of campi) {
-      const valore = valoreLeggibile(dati[c.name]);
-      if (c.required && !valore) {
-        err[c.name] = 'Campo obbligatorio';
-      } else if (c.pattern && valore && !new RegExp(c.pattern).test(valore)) {
-        // Il formato si controlla solo se il campo è compilato: un facoltativo
-        // lasciato vuoto resta valido.
-        err[c.name] = c.patternMessage ?? 'Formato non valido';
+
+    if (conAllegato) {
+      // Con la visura allegata i dati anagrafici arrivano dal documento: si
+      // chiedono solo recapiti, CAP e file.
+      if (!CAP_REGEX.test(valoreLeggibile(dati.cap))) err.cap = 'Il CAP è composto da 5 cifre';
+      if (!file) err.file = 'Allega la visura camerale';
+    } else {
+      if (nome.trim().length < 2) err.nome = 'Inserisci il tuo nome';
+      for (const c of campi) {
+        const valore = valoreLeggibile(dati[c.name]);
+        if (c.required && !valore) {
+          err[c.name] = 'Campo obbligatorio';
+        } else if (c.pattern && valore && !new RegExp(c.pattern).test(valore)) {
+          // Il formato si controlla solo se il campo è compilato: un facoltativo
+          // lasciato vuoto resta valido.
+          err[c.name] = c.patternMessage ?? 'Formato non valido';
+        }
       }
     }
+
     if (!consenso) err.consenso = 'Devi accettare il trattamento dati';
     setFieldErrors(err);
     return Object.keys(err).length === 0;
+  }
+
+  function onFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0] ?? null;
+    setFieldErrors(prev => ({ ...prev, file: '' }));
+    if (!f) return setFile(null);
+    if (!TIPI_AMMESSI.includes(f.type)) {
+      setFieldErrors(prev => ({ ...prev, file: 'Formati ammessi: PDF, JPG, PNG, HEIC, WEBP' }));
+      return setFile(null);
+    }
+    if (f.size > MAX_FILE_BYTES) {
+      setFieldErrors(prev => ({ ...prev, file: 'Il file supera i 10 MB' }));
+      return setFile(null);
+    }
+    setFile(f);
+  }
+
+  /**
+   * Carica la visura nel bucket privato e restituisce il percorso.
+   * Il file non viaggia mai per email: nella notifica finisce solo il link al
+   * dashboard, che richiede l'accesso al progetto Supabase.
+   */
+  async function caricaVisura(f: File, cartella: string): Promise<string> {
+    const ext = (f.name.split('.').pop() ?? 'bin').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const path = `leads/${cartella}/visura.${ext}`;
+    const res = await fetch(`${SUPABASE.url}/storage/v1/object/${SUPABASE.bucket}/${path}`, {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE.anonKey,
+        Authorization: `Bearer ${SUPABASE.anonKey}`,
+        'Content-Type': f.type || 'application/octet-stream',
+      },
+      body: f,
+    });
+    if (!res.ok) throw new Error('Caricamento della visura non riuscito. Riprova o scrivici su WhatsApp.');
+    return path;
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -97,12 +156,35 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
     setLoading(true);
 
     // Serializza i campi specifici in righe leggibili
-    const righe = campi
-      .map(c => ({ label: c.label, val: valoreLeggibile(dati[c.name]) }))
-      .filter(r => r.val);
-    const messaggio = righe.map(r => `${r.label}: ${r.val}`).join('\n');
+    const righe = conAllegato
+      ? [{ label: 'CAP di residenza', val: valoreLeggibile(dati.cap) }]
+      : campi
+          .map(c => ({ label: c.label, val: valoreLeggibile(dati[c.name]) }))
+          .filter(r => r.val);
+
+    // Senza nome (percorso con allegato) l'oggetto della mail userebbe una
+    // stringa vuota: meglio dirlo esplicitamente.
+    const riferimento = nome.trim() || 'visura allegata';
 
     try {
+      // [0] La visura va caricata prima: se fallisce non ha senso notificare
+      // una richiesta a cui manca il documento su cui si basa.
+      if (conAllegato && file) {
+        const cartella =
+          typeof crypto !== 'undefined' && crypto.randomUUID
+            ? crypto.randomUUID()
+            : String(Date.now());
+        const path = await caricaVisura(file, cartella);
+        righe.push({ label: 'Visura camerale', val: `${file.name} (${Math.round(file.size / 1024)} KB)` });
+        righe.push({ label: 'Percorso del file', val: path });
+        righe.push({
+          label: 'Apri su Supabase',
+          val: `https://supabase.com/dashboard/project/${PROJECT_REF}/storage/buckets/${SUPABASE.bucket}?path=${encodeURIComponent(`leads/${cartella}`)}`,
+        });
+      }
+
+      const messaggio = righe.map(r => `${r.label}: ${r.val}`).join('\n');
+
       // [1] Archivio Supabase — best-effort (non blocca la notifica)
       try {
         await fetch(`${SUPABASE.url}/rest/v1/rpc/insert_lead`, {
@@ -129,11 +211,11 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
       // [2] Notifica al broker — canale critico
       const fd = new FormData();
       fd.append('access_key', WEB3FORMS.accessKey);
-      fd.append('subject', `Nuova richiesta preventivo ${polizza.title} — ${nome.trim()}`);
+      fd.append('subject', `Nuova richiesta preventivo ${polizza.title} — ${riferimento}`);
       fd.append('from_name', 'Quootami — sito web');
       fd.append('replyto', email.trim());
       fd.append('Prodotto', polizza.title);
-      fd.append('Nome', nome.trim());
+      fd.append('Nome', riferimento);
       fd.append('Email', email.trim());
       fd.append('Telefono', telefono.trim());
       for (const r of righe) fd.append(r.label, r.val);
@@ -185,8 +267,49 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
           <form onSubmit={handleSubmit} className="max-w-2xl mx-auto rounded-3xl bg-bg-card border border-black/5 shadow-brand-md p-6 sm:p-8 text-left">
             <p className="text-xs font-bold uppercase tracking-wide text-ink mb-5">Preventivo rapido</p>
 
+            {/* Scelta del percorso: compilare i dati oppure allegare la visura,
+                che quei dati li contiene già. */}
+            {allegato && (
+              <div className="mb-6">
+                <div className="flex flex-col sm:flex-row gap-2 p-1 rounded-2xl bg-bg-alt">
+                  <BottoneModo attivo={!conAllegato} onClick={() => setModo('dati')}>
+                    Compila i dati
+                  </BottoneModo>
+                  <BottoneModo attivo={conAllegato} onClick={() => setModo('allegato')}>
+                    {allegato.etichetta}
+                  </BottoneModo>
+                </div>
+                {conAllegato && (
+                  <p className="mt-3 text-sm text-ink-muted leading-relaxed">{allegato.descrizione}</p>
+                )}
+              </div>
+            )}
+
+            {/* Percorso con allegato: CAP e file, il resto arriva dalla visura */}
+            {conAllegato && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Etichetta htmlFor="pv-cap" label="CAP di residenza" required />
+                  <input id="pv-cap" name="cap" type="text" inputMode="numeric" placeholder="13900"
+                    value={valoreLeggibile(dati.cap)} onChange={e => setCampo('cap', e.target.value)}
+                    className={inputCls} required />
+                  {fieldErrors.cap && <Errore msg={fieldErrors.cap} />}
+                </div>
+                <div className="sm:col-span-2">
+                  <Etichetta htmlFor="pv-visura" label="Visura camerale" required />
+                  <input id="pv-visura" name="visura" type="file"
+                    accept=".pdf,.jpg,.jpeg,.png,.heic,.heif,.webp"
+                    onChange={onFileChange}
+                    className="w-full text-sm text-ink-muted file:mr-4 file:py-2.5 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-yellow file:text-ink hover:file:bg-brand-yellow-deep file:cursor-pointer" />
+                  {file && <p className="mt-2 text-xs text-ink-muted">{file.name} · {Math.round(file.size / 1024)} KB</p>}
+                  <p className="mt-2 text-xs text-ink-muted">PDF o foto, massimo 10 MB. Il file viene caricato su archivio privato, non allegato a un&apos;email.</p>
+                  {fieldErrors.file && <Errore msg={fieldErrors.file} />}
+                </div>
+              </div>
+            )}
+
             {/* Campi specifici del prodotto */}
-            {campi.length > 0 && (
+            {!conAllegato && campi.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {campi.map(c => (
                   <div key={c.name} className={c.full ? 'sm:col-span-2' : undefined}>
@@ -203,13 +326,16 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
             )}
 
             {/* Contatti */}
-            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${campi.length > 0 ? 'mt-4 pt-5 border-t border-black/5' : ''}`}>
-              <div className="sm:col-span-2">
-                <Etichetta htmlFor="pv-nome" label="Nome e cognome" required />
-                <input id="pv-nome" name="nome" type="text" autoComplete="name" value={nome}
-                  onChange={e => setNome(e.target.value)} className={inputCls} required />
-                {fieldErrors.nome && <Errore msg={fieldErrors.nome} />}
-              </div>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 ${campi.length > 0 || conAllegato ? 'mt-4 pt-5 border-t border-black/5' : ''}`}>
+              {/* Con la visura allegata il nominativo è già nel documento */}
+              {!conAllegato && (
+                <div className="sm:col-span-2">
+                  <Etichetta htmlFor="pv-nome" label="Nome e cognome" required />
+                  <input id="pv-nome" name="nome" type="text" autoComplete="name" value={nome}
+                    onChange={e => setNome(e.target.value)} className={inputCls} required />
+                  {fieldErrors.nome && <Errore msg={fieldErrors.nome} />}
+                </div>
+              )}
               <div>
                 <Etichetta htmlFor="pv-email" label="Email" required />
                 <input id="pv-email" name="email" type="email" autoComplete="email" inputMode="email" value={email}
@@ -275,6 +401,26 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
 // text-base (16px) e NON text-sm: sotto i 16px iOS Safari zooma al focus e
 // lascia la pagina zoomata, con scorrimento orizzontale.
 const inputCls = 'w-full rounded-xl border border-ink/15 bg-bg px-4 py-2.5 text-base text-ink placeholder:text-ink-muted focus:border-brand-yellow focus:outline-none focus:ring-2 focus:ring-brand-yellow/30';
+
+/** Selettore fra i due percorsi del form. `type="button"` per non inviarlo. */
+function BottoneModo({ attivo, onClick, children }: {
+  attivo: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={attivo}
+      className={`flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+        attivo ? 'bg-bg-card text-ink shadow-sm' : 'text-ink-muted hover:text-ink'
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
 
 function Etichetta({ htmlFor, label, required }: { htmlFor: string; label: string; required?: boolean }) {
   return (
