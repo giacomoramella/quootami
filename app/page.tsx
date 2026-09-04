@@ -107,14 +107,14 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <span className="eyebrow">Cosa cerchi</span>
             <h2 className="section-title">
-              Tre modi per <span className="hl">risparmiare.</span>
+              Due modi per <span className="hl">risparmiare.</span>
             </h2>
             <p className="section-sub mx-auto">
               Scegli l&apos;area che ti interessa: Quootami confronta e ti segue fino alla firma.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <AreaCard
               href="/polizze"
               accent="yellow"
@@ -133,15 +133,6 @@ export default function HomePage() {
               items={['Deduzione fino a €5.300', 'Rendimenti tassati al 20%', 'Calcolatore del risparmio']}
               cta="Calcola il vantaggio fiscale"
               icon={<GrowthIcon />}
-            />
-            <AreaCard
-              href="/luce"
-              accent="navy"
-              title="Luce e Gas"
-              desc="Confronta le offerte reali di energia elettrica e gas del mercato libero. Gratuito e senza impegno."
-              items={['Offerte reali', 'Confronto in 2 minuti', 'Lettura automatica bolletta']}
-              cta="Confronta le tariffe"
-              icon={<BoltIcon />}
             />
           </div>
         </div>
@@ -312,6 +303,8 @@ function GrowthIcon() {
     </svg>
   );
 }
+/** Non usata finché il comparatore luce e gas è sospeso: resta qui perché la
+ *  card energia va rimessa con la sua icona quando il servizio riapre. */
 function BoltIcon() {
   return (
     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

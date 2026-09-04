@@ -177,14 +177,11 @@ export default function PolizzePage() {
             </h2>
             <p className="text-sm sm:text-base text-ink-soft mt-2 max-w-prose-wide mx-auto">
               Oltre alle coperture assicurative puoi costruire la pensione integrativa con vantaggio
-              fiscale e confrontare le offerte reali di luce e gas del mercato libero.
+              fiscale e dedurre i versamenti dal reddito IRPEF.
             </p>
             <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/piano-pensione" className="btn-secondary">
                 Fondo pensione
-              </Link>
-              <Link href="/luce" className="btn-secondary">
-                Luce e Gas
               </Link>
             </div>
           </div>
