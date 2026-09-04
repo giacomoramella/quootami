@@ -23,17 +23,43 @@ export type PreventivoField = {
   suffix?: string;
   /** occupa l'intera larghezza nella griglia a 2 colonne */
   full?: boolean;
+  /**
+   * Formato atteso, validato solo se il campo è valorizzato. Serve a fermare i
+   * dati inutilizzabili prima dell'invio: una richiesta RC arrivata senza P.IVA
+   * e con la ragione sociale inventata non è lavorabile, e la si scopre solo
+   * richiamando il cliente.
+   */
+  pattern?: string;
+  patternMessage?: string;
 };
 
 export const PREVENTIVO_FIELDS: Record<string, PreventivoField[]> = {
+  // RC professionale e Catastrofale PMI. Il cliente è sempre un'impresa o un
+  // professionista, quindi P.IVA e CAP sono obbligatori: senza P.IVA il
+  // soggetto non è identificabile e senza CAP non si conosce la provincia, che
+  // serve sia per quotare sia per sapere chi si sta richiamando.
   rc: [
-    { name: 'ragione_sociale', label: 'Ragione sociale', type: 'text', required: true, full: true },
-    { name: 'piva', label: 'Partita IVA', type: 'text', placeholder: 'facoltativa' },
-    { name: 'attivita', label: 'Attività svolta', type: 'text', required: true, placeholder: 'es. officina, studio, negozio' },
+    { name: 'ragione_sociale', label: 'Ragione sociale o nome dello studio', type: 'text', required: true, full: true },
+    { name: 'piva', label: 'Partita IVA', type: 'text', required: true, placeholder: '11 cifre',
+      pattern: '^\\d{11}$', patternMessage: 'La partita IVA è composta da 11 cifre' },
+    { name: 'cap', label: 'CAP della sede', type: 'text', required: true, placeholder: '13900',
+      pattern: '^\\d{5}$', patternMessage: 'Il CAP è composto da 5 cifre' },
+    { name: 'soggetto', label: 'Tipo di soggetto', type: 'select', required: true,
+      options: ['Professionista iscritto a un albo', 'Impresa', 'Ditta individuale', 'Altro'] },
+    { name: 'attivita', label: 'Attività o professione', type: 'text', required: true, full: true,
+      placeholder: 'es. studio commercialista, officina, impresa edile' },
     { name: 'fatturato', label: 'Fatturato annuo', type: 'number', suffix: '€', placeholder: '100.000' },
     { name: 'dipendenti', label: 'N° dipendenti', type: 'number', placeholder: '0' },
+    // Il massimale è il primo parametro su cui le compagnie quotano: senza,
+    // il preventivo non si può nemmeno impostare.
+    { name: 'massimale', label: 'Massimale desiderato', type: 'select',
+      options: ['250.000 €', '500.000 €', '1.000.000 €', '2.000.000 € o più', 'Non so, mi faccio consigliare'] },
+    // La scadenza dice quando richiamare: una polizza in scadenza fra un mese
+    // è un cliente che decide adesso, una appena rinnovata no.
+    { name: 'polizza_attuale', label: 'Hai già una polizza?', type: 'select',
+      options: ['No, è la prima', 'Sì, scade entro 3 mesi', 'Sì, scade oltre 3 mesi', 'Non so'] },
     { name: 'garanzie', label: 'Garanzie che cerchi', type: 'checkboxes', full: true,
-      options: ['Responsabilità Civile (RCT)', 'Responsabilità prestatore di lavoro (RCO)', 'Catastrofale PMI', 'Altro'] },
+      options: ['RC professionale', 'Responsabilità Civile verso terzi (RCT)', 'Responsabilità prestatore di lavoro (RCO)', 'Catastrofale PMI', 'Tutela legale', 'Altro'] },
   ],
 
   'polizza-auto': [

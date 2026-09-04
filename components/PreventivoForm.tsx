@@ -76,7 +76,14 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
     if (!EMAIL_REGEX.test(email)) err.email = 'Email non valida';
     if (!PHONE_REGEX.test(telefono)) err.telefono = 'Telefono non valido (es. +39 333 1234567)';
     for (const c of campi) {
-      if (c.required && !valoreLeggibile(dati[c.name])) err[c.name] = 'Campo obbligatorio';
+      const valore = valoreLeggibile(dati[c.name]);
+      if (c.required && !valore) {
+        err[c.name] = 'Campo obbligatorio';
+      } else if (c.pattern && valore && !new RegExp(c.pattern).test(valore)) {
+        // Il formato si controlla solo se il campo è compilato: un facoltativo
+        // lasciato vuoto resta valido.
+        err[c.name] = c.patternMessage ?? 'Formato non valido';
+      }
     }
     if (!consenso) err.consenso = 'Devi accettare il trattamento dati';
     setFieldErrors(err);
