@@ -57,6 +57,8 @@ export const OPERATORE = {
     },
     pec: 'sistoassicurazioni@pec.esseweb.eu',
     email: 'info@sistoassicurazioni.net',
+    sito: 'https://www.sistoassicurazioni.net',
+    sito_display: 'sistoassicurazioni.net',
     telefono_display: '+39 320 260 4666',
     telefono_tel: '+393202604666',
   },

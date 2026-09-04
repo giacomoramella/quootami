@@ -27,6 +27,20 @@ export function Footer() {
             <p className="inline-block mt-1 px-3 py-1 bg-white/5 border border-white/10 rounded-md text-sm tracking-wide">
               n. {collaboratore.rui_numero}
             </p>
+            {/* Il broker per conto del quale opera il collaboratore sez. E. Sta
+                qui e non nel disclaimer sotto, che è testo obbligatorio e non
+                va modificato. */}
+            <p className="mt-4 text-sm text-white/50">
+              Per conto di{' '}
+              <a
+                href={broker.sito}
+                rel="external noopener noreferrer"
+                target="_blank"
+                className="text-white/70 underline underline-offset-2 hover:text-brand-yellow transition-colors"
+              >
+                {broker.sito_display}
+              </a>
+            </p>
             <p className="mt-4 text-sm">
               📞 <a href={`tel:${contatti.telefono_tel}`} className="hover:text-brand-yellow transition-colors">{contatti.telefono_display}</a>
             </p>
