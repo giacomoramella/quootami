@@ -62,6 +62,7 @@ export function Footer() {
           <div>
             <h5 className="text-xs font-semibold uppercase tracking-wider text-white mb-4">Informative</h5>
             <ul className="space-y-1 md:space-y-2.5 list-none">
+              <li><Link href="/informazioni-intermediario" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Informazioni intermediario</Link></li>
               <li><Link href="/privacy" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Privacy Policy</Link></li>
               <li><Link href="/cookie" className="block py-2.5 md:py-0 text-sm text-white/55 hover:text-brand-yellow transition-colors">Cookie Policy</Link></li>
               <li><CookiePrefsButton /></li>

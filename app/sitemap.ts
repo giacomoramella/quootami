@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/sinistri`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/contatti`, lastModified: now, changeFrequency: 'monthly', priority: 0.75 },
     { url: `${baseUrl}/mappa-sito`, lastModified: now, changeFrequency: 'monthly', priority: 0.3 },
+    { url: `${baseUrl}/informazioni-intermediario`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/cookie`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
   ];

@@ -46,6 +46,19 @@ export const OPERATORE = {
     rui_sezione: 'B',
     rui_numero: 'B000639183',
     partita_iva: '02696750021',
+    // Sede e PEC servono all'art. 79, comma 1, lett. b) e c) del Reg. IVASS
+    // 40/2018: vanno pubblicate in home page o in una pagina raggiungibile
+    // direttamente da lì. La PEC è quella pubblicata da Sisto sul proprio sito.
+    sede: {
+      via: 'Via Torino 47',
+      cap: '13900',
+      citta: 'Biella',
+      provincia: 'BI',
+    },
+    pec: 'sistoassicurazioni@pec.esseweb.eu',
+    email: 'info@sistoassicurazioni.net',
+    telefono_display: '+39 320 260 4666',
+    telefono_tel: '+393202604666',
   },
 
   // ─── CONTATTI OPERATIVI (cambia con la vendita) ───

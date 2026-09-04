@@ -53,6 +53,7 @@ const SECTIONS = [
   {
     title: '📋 Informative legali',
     links: [
+      { href: '/informazioni-intermediario', label: 'Informazioni sull\'intermediario' },
       { href: '/privacy', label: 'Privacy policy' },
       { href: '/cookie', label: 'Cookie policy' },
     ],
