@@ -5,7 +5,6 @@
  */
 import type { Metadata } from 'next';
 import { OPERATORE } from './operatore';
-import { MANUTENZIONE } from './manutenzione';
 
 const baseUrl = OPERATORE.brand.url;
 
@@ -28,12 +27,7 @@ export const defaultMetadata: Metadata = {
     'polizza casa',
   ],
   referrer: 'strict-origin-when-cross-origin',
-  // Durante la pausa del sito ogni pagina esce dai motori. Il crawling resta
-  // permesso in robots.txt: senza poter scaricare la pagina Google non
-  // leggerebbe mai questo noindex, e il vecchio risultato resterebbe in SERP.
-  robots: MANUTENZIONE
-    ? { index: false, follow: false }
-    : { index: true, follow: true, 'max-image-preview': 'large' },
+  robots: { index: true, follow: true, 'max-image-preview': 'large' },
   alternates: {
     // './' = canonical relativo: si risolve contro metadataBase + path della
     // pagina corrente, così OGNI pagina è canonica di se stessa (prima tutte

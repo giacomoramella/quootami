@@ -18,7 +18,11 @@
  */
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { MANUTENZIONE } from '@/config/manutenzione';
+import {
+  MANUTENZIONE,
+  RETRY_AFTER_SECONDI,
+  htmlManutenzione,
+} from '@/config/manutenzione';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -60,19 +64,26 @@ export function proxy(request: NextRequest) {
   requestHeaders.set('Content-Security-Policy', cspHeader);
 
   // ── Pausa del sito (config/manutenzione.ts) ──
-  // Riscrittura, non redirect: l'URL richiesto resta in barra e risponde 200
-  // con la pagina di cortesia. Serve proprio questo perche' Google possa
-  // scaricare ogni vecchio indirizzo e leggerci dentro il noindex: un 404 o un
-  // blocco in robots.txt lascerebbe i risultati in SERP piu' a lungo.
-  const inPausa =
-    MANUTENZIONE && !request.nextUrl.pathname.startsWith('/manutenzione');
-  if (inPausa) {
-    const pausa = NextResponse.rewrite(new URL('/manutenzione', request.url), {
-      request: { headers: requestHeaders },
+  // 503 e non 200: e' la risposta che Google interpreta come fermo
+  // temporaneo, quindi tiene gli URL nell'indice e congela le posizioni
+  // invece di deindicizzare. Con un 200 (o peggio un noindex) le pagine
+  // uscirebbero dall'indice e alla riapertura si ripartirebbe da capo.
+  //
+  // La pagina viene servita direttamente da qui, non riscritta su una route:
+  // una pagina dell'App Router non puo' scegliere il proprio status HTTP, e
+  // qui lo status e' l'unica cosa che conta davvero.
+  if (MANUTENZIONE) {
+    return new NextResponse(htmlManutenzione(), {
+      status: 503,
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Retry-After': String(RETRY_AFTER_SECONDI),
+        // Nessuna copia in cache: alla riapertura la pagina di cortesia non
+        // deve restare appesa in CDN o nel browser di chi e' gia' passato.
+        'Cache-Control': 'no-store, must-revalidate',
+        'Content-Security-Policy': cspHeader,
+      },
     });
-    pausa.headers.set('Content-Security-Policy', cspHeader);
-    pausa.headers.set('X-Robots-Tag', 'noindex, nofollow');
-    return pausa;
   }
 
   const response = NextResponse.next({
