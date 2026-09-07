@@ -46,3 +46,6 @@ package-lock *.json
 
 # Supabase CLI temp
 supabase/.temp/
+
+# Materiali di lavoro (documenti, brand, versioni vecchie) - non vanno nel repo
+_materiali/
