@@ -57,13 +57,23 @@ function clearTrackingCookies() {
 
 function loadGA4(id: string) {
   if (document.getElementById('qtm-ga4')) return;
-  (window as any).dataLayer = (window as any).dataLayer || [];
-  function gtag(...args: unknown[]) {
-    (window as any).dataLayer.push(args);
+  const w = window as any;
+  w.dataLayer = w.dataLayer || [];
+  /**
+   * Deve spingere nel dataLayer l'oggetto `arguments`, non un array: gtag.js
+   * riconosce i comandi solo in quella forma. Con i rest parameters (`...args`)
+   * `js` e `config` finivano nel dataLayer come normali array e venivano
+   * ignorati — il tag si caricava e girava, ma non inizializzava la
+   * misurazione: nessun cookie `_ga`, nessun hit, property a zero.
+   * Corretto il 07/09/2026, allineandolo allo snippet ufficiale di Google.
+   */
+  function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    w.dataLayer.push(arguments);
   }
-  (window as any).gtag = gtag;
-  gtag('js', new Date());
-  gtag('config', id, { anonymize_ip: true });
+  w.gtag = gtag;
+  (gtag as (...a: unknown[]) => void)('js', new Date());
+  (gtag as (...a: unknown[]) => void)('config', id, { anonymize_ip: true });
   const s = document.createElement('script');
   s.id = 'qtm-ga4';
   s.async = true;
@@ -74,8 +84,11 @@ function loadGA4(id: string) {
 function loadMetaPixel(id: string) {
   const w = window as any;
   if (w.fbq) return;
-  const fbq: any = (...args: unknown[]) => {
-    fbq.callMethod ? fbq.callMethod(...args) : fbq.queue.push(args);
+  // Stessa regola di gtag: `arguments`, non un array. fbevents.js legge la coda
+  // aspettandosi la forma dello snippet ufficiale di Meta.
+  const fbq: any = function (this: unknown) {
+    // eslint-disable-next-line prefer-rest-params
+    fbq.callMethod ? fbq.callMethod.apply(fbq, arguments) : fbq.queue.push(arguments);
   };
   fbq.push = fbq;
   fbq.loaded = true;
