@@ -58,16 +58,55 @@ const FORME_GIURIDICHE = [
  * Il file finisce nel bucket privato `documenti-lead`, mai in un'email: la
  * visura contiene dati identificativi e non va spedita in chiaro.
  */
+const ALLEGATO_VISURA = {
+  etichetta: 'Allega la visura camerale',
+  titolo: 'Allega la visura camerale',
+  descrizione:
+    'Se hai la visura camerale a portata di mano, allegala: contiene già tutti i dati dell\'attività. Bastano i tuoi recapiti e il CAP.',
+};
+
 export const PREVENTIVO_ALLEGATO: Record<
   string,
   { etichetta: string; titolo: string; descrizione: string }
 > = {
-  rc: {
-    etichetta: 'Allega la visura camerale',
-    titolo: 'Allega la visura camerale',
-    descrizione:
-      'Se hai la visura camerale a portata di mano, allegala: contiene già tutti i dati dell\'attività. Bastano i tuoi recapiti e il CAP.',
-  },
+  rc: ALLEGATO_VISURA,
+  cyber: ALLEGATO_VISURA,
+};
+
+/**
+ * Blocco anagrafico comune ai prodotti per imprese e professionisti (rc, cyber).
+ * Sono esattamente i dati che compaiono sulla visura camerale: per questo, se
+ * il cliente la allega, questo blocco non viene chiesto.
+ */
+const CAMPI_IMPRESA: PreventivoField[] = [
+  { name: 'ragione_sociale', label: 'Ragione sociale o nome dello studio', type: 'text', required: true, full: true },
+  { name: 'forma_giuridica', label: 'Forma giuridica', type: 'select', required: true, options: FORME_GIURIDICHE },
+  { name: 'piva', label: 'Partita IVA', type: 'text', required: true, placeholder: '11 cifre',
+    pattern: '^\\d{11}$', patternMessage: 'La partita IVA è composta da 11 cifre' },
+  // Facoltativo: per le società coincide con la partita IVA, per i
+  // professionisti è quello personale a 16 caratteri. Il formato accetta
+  // entrambi, ma solo se il campo viene compilato.
+  { name: 'codice_fiscale', label: 'Codice fiscale', type: 'text', placeholder: 'facoltativo',
+    pattern: '^([A-Za-z]{6}\\d{2}[A-Za-z]\\d{2}[A-Za-z]\\d{3}[A-Za-z]|\\d{11})$',
+    patternMessage: 'Codice fiscale non valido (16 caratteri, o 11 cifre per le società)' },
+  { name: 'ateco', label: 'Codice ATECO', type: 'text', placeholder: 'facoltativo, es. 62.01',
+    pattern: '^\\d{2}(\\.\\d{1,2}){0,3}$', patternMessage: 'Formato ATECO non valido (es. 62.01 o 62.01.00)' },
+  { name: 'cap', label: 'CAP di residenza', type: 'text', required: true, placeholder: '13900',
+    pattern: '^\\d{5}$', patternMessage: 'Il CAP è composto da 5 cifre' },
+];
+
+/** Le tre soglie su cui Quootami fa quotare. */
+const MASSIMALI = ['500.000 €', '1.000.000 €', '1.500.000 €'];
+
+/**
+ * La scadenza dice quando richiamare: una polizza in scadenza fra un mese è un
+ * cliente che decide adesso, una appena rinnovata no.
+ */
+const CAMPO_POLIZZA_ATTUALE: PreventivoField = {
+  name: 'polizza_attuale',
+  label: 'Hai già una polizza?',
+  type: 'select',
+  options: ['No, è la prima', 'Sì, scade entro 3 mesi', 'Sì, scade oltre 3 mesi', 'Non so'],
 };
 
 export const PREVENTIVO_FIELDS: Record<string, PreventivoField[]> = {
@@ -76,31 +115,14 @@ export const PREVENTIVO_FIELDS: Record<string, PreventivoField[]> = {
   // soggetto non è identificabile e senza CAP non si conosce la provincia, che
   // serve sia per quotare sia per sapere chi si sta richiamando.
   rc: [
-    { name: 'ragione_sociale', label: 'Ragione sociale o nome dello studio', type: 'text', required: true, full: true },
-    { name: 'forma_giuridica', label: 'Forma giuridica', type: 'select', required: true, options: FORME_GIURIDICHE },
-    { name: 'piva', label: 'Partita IVA', type: 'text', required: true, placeholder: '11 cifre',
-      pattern: '^\\d{11}$', patternMessage: 'La partita IVA è composta da 11 cifre' },
-    // Facoltativo: per le società coincide con la partita IVA, per i
-    // professionisti è quello personale a 16 caratteri. Il formato accetta
-    // entrambi, ma solo se il campo viene compilato.
-    { name: 'codice_fiscale', label: 'Codice fiscale', type: 'text', placeholder: 'facoltativo',
-      pattern: '^([A-Za-z]{6}\\d{2}[A-Za-z]\\d{2}[A-Za-z]\\d{3}[A-Za-z]|\\d{11})$',
-      patternMessage: 'Codice fiscale non valido (16 caratteri, o 11 cifre per le società)' },
-    { name: 'ateco', label: 'Codice ATECO', type: 'text', placeholder: 'facoltativo, es. 62.01',
-      pattern: '^\\d{2}(\\.\\d{1,2}){0,3}$', patternMessage: 'Formato ATECO non valido (es. 62.01 o 62.01.00)' },
-    { name: 'cap', label: 'CAP di residenza', type: 'text', required: true, placeholder: '13900',
-      pattern: '^\\d{5}$', patternMessage: 'Il CAP è composto da 5 cifre' },
+    ...CAMPI_IMPRESA,
     { name: 'attivita', label: 'Attività o professione', type: 'text', required: true, full: true,
       placeholder: 'es. studio commercialista, officina, impresa edile' },
     { name: 'dipendenti', label: 'N° dipendenti', type: 'number', placeholder: '0' },
     // Il massimale è il primo parametro su cui le compagnie quotano: senza,
     // il preventivo non si può nemmeno impostare.
-    { name: 'massimale', label: 'Massimale della polizza', type: 'select',
-      options: ['500.000 €', '1.000.000 €', '1.500.000 €'] },
-    // La scadenza dice quando richiamare: una polizza in scadenza fra un mese
-    // è un cliente che decide adesso, una appena rinnovata no.
-    { name: 'polizza_attuale', label: 'Hai già una polizza?', type: 'select',
-      options: ['No, è la prima', 'Sì, scade entro 3 mesi', 'Sì, scade oltre 3 mesi', 'Non so'] },
+    { name: 'massimale', label: 'Massimale della polizza', type: 'select', options: MASSIMALI },
+    CAMPO_POLIZZA_ATTUALE,
     { name: 'garanzie', label: 'Garanzie che cerchi', type: 'checkboxes', full: true,
       options: ['RC professionale', 'Responsabilità Civile verso terzi (RCT)', 'Responsabilità prestatore di lavoro (RCO)', 'Catastrofale PMI', 'Tutela legale', 'Altro'] },
   ],
@@ -132,12 +154,25 @@ export const PREVENTIVO_FIELDS: Record<string, PreventivoField[]> = {
   ],
 
   cyber: [
+    ...CAMPI_IMPRESA,
     { name: 'settore', label: 'Settore di attività', type: 'text', required: true, full: true,
       placeholder: 'es. e-commerce, studio professionale, azienda manifatturiera' },
-    { name: 'fatturato', label: 'Fatturato annuo', type: 'number', suffix: '€', placeholder: '100.000' },
     { name: 'dipendenti', label: 'N° dipendenti', type: 'number', placeholder: '0' },
-    { name: 'incidenti', label: 'Hai già subìto attacchi informatici?', type: 'select', full: true,
+    { name: 'massimale', label: 'Massimale della polizza', type: 'select', options: MASSIMALI },
+    // Un incidente già avvenuto cambia la quotabilità del rischio: le compagnie
+    // lo chiedono sempre, tanto vale saperlo prima di chiamare.
+    { name: 'incidenti', label: 'Hai già subìto attacchi informatici?', type: 'select',
       options: ['No', 'Sì', 'Non so'] },
+    CAMPO_POLIZZA_ATTUALE,
+    { name: 'coperture', label: 'Cosa ti interessa', type: 'checkboxes', full: true,
+      options: [
+        'Interruzione dell\'attività',
+        'Ripristino di dati e sistemi',
+        'Attacchi ransomware',
+        'Responsabilità verso terzi per violazione dei dati',
+        'Spese legali e notifiche al Garante',
+        'Altro',
+      ] },
   ],
 
   'polizza-animali': [
