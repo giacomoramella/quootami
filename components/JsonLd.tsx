@@ -176,7 +176,7 @@ export function JsonLdArticle({
 
 /** FAQPage per le pagine prodotto (usa le FAQ già presenti in config/polizze). */
 /**
- * FAQPage per le pagine che non hanno un oggetto Polizza (hub, /luce).
+ * FAQPage per le pagine che non hanno un oggetto Polizza (es. gli hub).
  * Le domande devono essere effettivamente visibili nella pagina: pubblicare
  * un FAQPage senza il testo corrispondente viola le linee guida di Google.
  */

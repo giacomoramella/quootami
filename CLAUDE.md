@@ -17,12 +17,12 @@ Sito web del broker assicurativo **Quootami**.
 
 ### Struttura
 - `app/` — route (App Router) + `app/api/` (route handler) + `app/sitemap.ts`, `app/robots.ts`
-- `components/` — componenti React (Nav, Footer, form, sezioni prodotto/pensione, comparatore luce…)
+- `components/` — componenti React (Nav, Footer, form, sezioni prodotto/pensione…)
 - `config/` — dati centralizzati: `operatore.ts` (anagrafica/contatti/disclaimer), `seo.ts` (metadata default), `polizze.ts` (contenuti prodotti + FAQ), `credentials.ts` (chiavi pubbliche)
 - `lib/` — client Supabase/Resend/OTP e utility server
 - `public/` — asset statici serviti (favicon.ico/.svg, apple-icon.png, og-image.png, site.webmanifest, firma-allianz.html)
-- `supabase/` — schema SQL, seed, edge functions (comparatore luce, estrazione bolletta)
-- `docs/` — documentazione tecnica (firma FEA, migrazione luce, ecc.)
+- `supabase/` — schema SQL, seed, edge functions
+- `docs/` — documentazione tecnica (firma FEA, ecc.)
 - `next.config.js` — **security header** · `proxy.ts` — **CSP a nonce (middleware)** · `tailwind.config.ts` — design token
 
 ---
@@ -83,7 +83,7 @@ Standard atteso: **A+** su securityheaders.com e Mozilla Observatory (`quootami.
 
 ### 6. Form → email
 
-Tutti i form preventivo/contatti inviano a **`giacomo.rp@sistoassicurazioni.com`** via Web3Forms (access_key pubblica sopra). Riusa lo schema esistente — vedi i form in `components/` (es. `ComparatoreLuce.tsx`). Il comparatore luce usa anche Supabase (edge function `en-lead`, double opt-in).
+Tutti i form preventivo/contatti inviano a **`giacomo.rp@sistoassicurazioni.com`** via Web3Forms (access_key pubblica sopra). Riusa lo schema esistente — vedi i form in `components/` (es. `PreventivoForm.tsx`).
 
 ### 7. Privacy / GDPR
 

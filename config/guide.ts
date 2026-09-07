@@ -33,7 +33,7 @@ export type Articolo = {
   lettura: number;
   /** slug della polizza collegata (per il rimando commerciale) */
   prodotto?: string;
-  categoria: 'imprese' | 'privati' | 'previdenza' | 'casa-energia';
+  categoria: 'imprese' | 'privati' | 'previdenza';
 };
 
 export const ARTICOLI: Articolo[] = [
@@ -152,5 +152,4 @@ export const CATEGORIE_LABEL: Record<Articolo['categoria'], string> = {
   imprese: 'Imprese',
   privati: 'Privati',
   previdenza: 'Previdenza',
-  'casa-energia': 'Casa ed energia',
 };

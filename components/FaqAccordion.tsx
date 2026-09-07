@@ -3,7 +3,7 @@
 /**
  * FAQ a fisarmonica — unico modo in cui le domande frequenti compaiono sul sito.
  *
- * Prima le pagine hub (/polizze, /luce) rendevano le stesse FAQ come un muro di
+ * Prima le pagine hub (/polizze) rendevano le stesse FAQ come un muro di
  * h3+p dentro `prose-quootami`: contenuto corretto ma fuori dal linguaggio visivo
  * del resto del sito, tutto a card, e lunghissimo da scorrere su mobile.
  *

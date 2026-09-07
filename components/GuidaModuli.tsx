@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Guida a moduli — struttura condivisa fra le pagine (Fondo Pensione, Luce e Gas).
+ * Guida a moduli — struttura condivisa fra le pagine editoriali (Fondo Pensione).
  *
  * Cinque o più moduli selezionabili: si clicca la scheda e il contenuto si apre
  * sotto, senza cambiare pagina. Pattern ARIA tablist/tab/tabpanel: frecce,

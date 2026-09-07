@@ -5,7 +5,7 @@
  * mappa (chiave = slug della polizza). I campi contatto (Nome, Email, Telefono)
  * e il consenso GDPR sono comuni e gestiti dal componente PreventivoForm.
  *
- * Prodotti con flusso proprio (piano-pensione, luce) non compaiono qui.
+ * Prodotti con flusso proprio (piano-pensione) non compaiono qui.
  */
 
 export type PreventivoFieldType = 'text' | 'number' | 'select' | 'checkboxes';

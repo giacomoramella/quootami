@@ -26,7 +26,7 @@ import type { Polizza } from '@/config/polizze';
 /**
  * NIENTE @supabase/supabase-js qui: importarlo per una sola RPC costava
  * ~63 KB gzip su tutte le pagine prodotto (trascina realtime, auth e storage).
- * PostgREST si chiama benissimo con fetch — stesso approccio di ComparatoreLuce.
+ * PostgREST si chiama benissimo con fetch: nessun client SDK da caricare.
  */
 const SUPABASE_HEADERS = {
   apikey: SUPABASE.anonKey,

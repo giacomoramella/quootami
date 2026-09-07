@@ -136,10 +136,15 @@ const nextConfig = {
   // URL SEO-friendly: no trailing slash, no estensione
   trailingSlash: false,
 
-  // Il comparatore era una pagina statica /luce.html: redirect permanente
-  // alla pagina Next (link in email di verifica già inviate, segnalibri).
+  // Il verticale luce e gas è archiviato (07/09/2026): gli URL storici (la
+  // vecchia pagina statica /luce.html e la rotta Next /luce) reindirizzano alla
+  // home con un 301, così i link già in giro e i segnalibri non finiscono su
+  // un 404. Quando il verticale riapre, /luce.html torna a puntare su /luce.
   async redirects() {
-    return [{ source: '/luce.html', destination: '/luce', permanent: true }];
+    return [
+      { source: '/luce.html', destination: '/', permanent: true },
+      { source: '/luce', destination: '/', permanent: true },
+    ];
   },
 
   // Ottimizzazione immagini con next/image

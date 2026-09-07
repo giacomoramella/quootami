@@ -21,9 +21,8 @@ export const INTERMEDIARIO_EMAIL =
   process.env.INTERMEDIARIO_EMAIL ?? 'giacomo.rp@sistoassicurazioni.com';
 
 // Mittenti per area (dominio quootami.it verificato su Resend, accertato il
-// 07/08/2026): ogni sezione firma con il proprio nome — il comparatore usa
-// "Quootami Energia" nella edge function en-lead. Stesso indirizzo per tutti,
-// cambia solo il nome visualizzato.
+// 07/08/2026): ogni sezione firma con il proprio nome. Stesso indirizzo per
+// tutti, cambia solo il nome visualizzato.
 export const SENDER_POLIZZE =
   process.env.RESEND_FROM_POLIZZE ?? 'Quootami Polizze <polizze@quootami.it>';
 export const SENDER_PENSIONE =

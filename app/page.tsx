@@ -43,7 +43,7 @@ const APPROFONDIMENTO: ApprofondimentoType = {
     {
       h3: 'Non solo assicurazioni',
       p: [
-        'Accanto alle polizze, Quootami segue due aree in cui la scelta giusta produce un beneficio misurabile: la previdenza complementare, dove i versamenti si deducono dal reddito entro il limite di legge, e le forniture di luce e gas, confrontate sulle offerte reali del mercato libero e non su stime commerciali.',
+        'Accanto alle polizze, Quootami segue la previdenza complementare: un\'area in cui la scelta giusta produce un beneficio misurabile e immediato, perché i versamenti al fondo pensione si deducono dal reddito entro il limite di legge e la destinazione del TFR si decide una volta sola.',
       ],
     },
   ],
@@ -180,13 +180,12 @@ function Stat({ num, label }: { num: string; label: React.ReactNode }) {
 }
 
 /**
- * Blocco grande di una delle 3 aree della home. L'accento colorato
- * riprende la palette già in uso: giallo = brand, verde = previdenza,
- * navy = energia.
+ * Blocco grande di una delle aree della home. L'accento colorato
+ * riprende la palette già in uso: giallo = brand, verde = previdenza.
  */
 function AreaCard({ href, accent, badge, title, desc, items, cta, icon }: {
   href: string;
-  accent: 'yellow' | 'green' | 'navy';
+  accent: 'yellow' | 'green';
   badge?: string;
   title: string;
   desc: string;
@@ -208,13 +207,6 @@ function AreaCard({ href, accent, badge, title, desc, items, cta, icon }: {
       dot: 'bg-brand-green',
       cta: 'text-brand-green-dark',
       badge: 'bg-brand-green/10 text-brand-green-dark',
-    },
-    navy: {
-      border: 'hover:border-brand-navy',
-      iconBox: 'bg-brand-navy/10 text-brand-navy group-hover:bg-brand-navy group-hover:text-white',
-      dot: 'bg-brand-navy',
-      cta: 'text-brand-navy',
-      badge: 'bg-brand-navy/10 text-brand-navy',
     },
   } as const;
   const s = styles[accent];
@@ -300,15 +292,6 @@ function GrowthIcon() {
       <path d="M3 3v18h18" />
       <path d="M7 15l4-4 3 3 5-6" />
       <path d="M15 8h4v4" />
-    </svg>
-  );
-}
-/** Non usata finché il comparatore luce e gas è sospeso: resta qui perché la
- *  card energia va rimessa con la sua icona quando il servizio riapre. */
-function BoltIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M13 2L4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5z" />
     </svg>
   );
 }
