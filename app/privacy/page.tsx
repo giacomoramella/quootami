@@ -39,7 +39,7 @@ export default function PrivacyPage() {
 
       <h2>2. Dati trattati</h2>
       <ul>
-        <li><strong>Moduli di preventivo:</strong> nome, email, telefono e i dati del rischio da assicurare (es. targa del veicolo, dati dell&apos;attività), oltre al consenso registrato prima dell&apos;invio.</li>
+        <li><strong>Moduli di preventivo e di contatto rapido:</strong> nome, email, telefono, CAP, l&apos;area di interesse e i dati del rischio da assicurare (es. targa del veicolo, dati dell&apos;attività), oltre all&apos;eventuale messaggio libero e al consenso registrato prima dell&apos;invio.</li>
         <li><strong>Dati di navigazione:</strong> log tecnici trasmessi dal browser (indirizzo IP, user-agent, pagine richieste), necessari al funzionamento e alla sicurezza del sito.</li>
         <li><strong>Cookie:</strong> vedi la <a href="/cookie">Cookie Policy</a>.</li>
       </ul>
