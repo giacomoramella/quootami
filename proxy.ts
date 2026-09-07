@@ -18,6 +18,7 @@
  */
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { MANUTENZIONE } from '@/config/manutenzione';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -57,6 +58,22 @@ export function proxy(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-nonce', nonce);
   requestHeaders.set('Content-Security-Policy', cspHeader);
+
+  // ── Pausa del sito (config/manutenzione.ts) ──
+  // Riscrittura, non redirect: l'URL richiesto resta in barra e risponde 200
+  // con la pagina di cortesia. Serve proprio questo perche' Google possa
+  // scaricare ogni vecchio indirizzo e leggerci dentro il noindex: un 404 o un
+  // blocco in robots.txt lascerebbe i risultati in SERP piu' a lungo.
+  const inPausa =
+    MANUTENZIONE && !request.nextUrl.pathname.startsWith('/manutenzione');
+  if (inPausa) {
+    const pausa = NextResponse.rewrite(new URL('/manutenzione', request.url), {
+      request: { headers: requestHeaders },
+    });
+    pausa.headers.set('Content-Security-Policy', cspHeader);
+    pausa.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    return pausa;
+  }
 
   const response = NextResponse.next({
     request: { headers: requestHeaders },

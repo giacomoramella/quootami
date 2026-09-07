@@ -83,8 +83,13 @@ const nextConfig = {
       { key: 'Origin-Agent-Cluster', value: '?1' },
       // ── Disabilita Adobe Reader "open with" ──
       { key: 'X-Download-Options', value: 'noopen' },
-      // ── Indicizzazione: index, follow ──
-      { key: 'X-Robots-Tag', value: 'index, follow' },
+      // ── Indicizzazione ──
+      // PAUSA DEL SITO: finche' `MANUTENZIONE` in config/manutenzione.ts vale
+      // `true`, questo header deve restare `noindex, nofollow`. Non puo' leggere
+      // quel flag da solo perche' questo file e' CommonJS e non importa TS: e'
+      // l'unico punto della pausa che va rimesso a mano su `index, follow`
+      // quando si riapre. Procedura completa in docs/PAUSA-SITO.md.
+      { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
     ];
 
     // ── CSP per il form di adesione statico (public/firma-allianz.html) ──

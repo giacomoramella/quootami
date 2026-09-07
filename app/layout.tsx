@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
 import { JsonLdSito } from '@/components/JsonLd';
 import { defaultMetadata } from '@/config/seo';
+import { MANUTENZIONE } from '@/config/manutenzione';
 import './globals.css';
 
 const inter = Inter({
@@ -40,6 +41,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // A sito in pausa resta solo la pagina di cortesia: niente menu, footer,
+  // banner cookie ne' dati strutturati, che descriverebbero un'attivita' e un
+  // catalogo al momento non raggiungibili.
+  if (MANUTENZIONE) {
+    return (
+      <html lang="it" className={`${inter.variable} ${jetbrains.variable}`}>
+        <body className="font-sans antialiased bg-bg text-ink min-h-screen">
+          {children}
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="it" className={`${inter.variable} ${jetbrains.variable}`}>
       <body className="font-sans antialiased bg-bg text-ink min-h-screen flex flex-col">

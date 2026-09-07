@@ -2,8 +2,14 @@ import type { MetadataRoute } from 'next';
 import { OPERATORE } from '@/config/operatore';
 import { getAllPolizze } from '@/config/polizze';
 import { getAllArticoli } from '@/config/guide';
+import { MANUTENZIONE } from '@/config/manutenzione';
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // A sito in pausa non si dichiarano URL da indicizzare. La sitemap resta
+  // servita (200, vuota) invece di sparire, cosi' Search Console non segnala
+  // un errore di recupero per tutto il periodo.
+  if (MANUTENZIONE) return [];
+
   const baseUrl = OPERATORE.brand.url;
   const now = new Date();
 
