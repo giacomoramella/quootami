@@ -23,7 +23,7 @@ const APPROFONDIMENTO: ApprofondimentoType = {
     {
       h3: 'Perché un intermediario e non un preventivatore qualsiasi',
       p: [
-        'Un comparatore restituisce prezzi; un intermediario risponde anche di ciò che ti ha proposto. Quootami opera nell\'ambito dell\'attività di intermediazione assicurativa vigilata da IVASS, e questo comporta obblighi precisi: analizzare le esigenze prima di proporre un prodotto, consegnare la documentazione precontrattuale e restare responsabile della consulenza fornita.',
+        'Un comparatore restituisce prezzi; un intermediario risponde anche di ciò che ti ha proposto. Quootami opera nell\'ambito dell\'attività di intermediazione assicurativa disciplinata dal Codice delle Assicurazioni Private, e questo comporta obblighi precisi: analizzare le esigenze prima di proporre un prodotto, consegnare la documentazione precontrattuale e restare responsabile della consulenza fornita.',
         'La differenza si vede soprattutto dopo la firma: al momento di un sinistro c\'è un riferimento che conosce il contratto, invece di un numero verde che riparte da zero.',
       ],
     },

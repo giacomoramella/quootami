@@ -29,7 +29,7 @@ const APPROFONDIMENTO: ApprofondimentoType = {
     {
       h3: 'Nessuna cifra di premio, nessuna promessa di risparmio',
       p: [
-        'Quootami è un intermediario vigilato IVASS: pubblicare stime di premio o percentuali di risparmio significherebbe presentare come certo ciò che dipende dal singolo profilo di rischio. Le cifre che troverai sono soltanto quelle fissate dalla legge — limiti di detrazione, massimali normativi, termini di decadenza — e sono sempre accompagnate dalla norma che le stabilisce.',
+        'Quootami è un intermediario iscritto al RUI: pubblicare stime di premio o percentuali di risparmio significherebbe presentare come certo ciò che dipende dal singolo profilo di rischio. Le cifre che troverai sono soltanto quelle fissate dalla legge — limiti di detrazione, massimali normativi, termini di decadenza — e sono sempre accompagnate dalla norma che le stabilisce.',
       ],
     },
     {

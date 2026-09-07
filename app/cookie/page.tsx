@@ -30,7 +30,7 @@ export default function CookiePage() {
       lastUpdate="5 agosto 2026"
     >
       <h2>1. Titolare del trattamento</h2>
-      <p>Il titolare è <strong>{OPERATORE.collaboratore.nome_completo}</strong>, gestore del sito, iscritto al RUI sez. {OPERATORE.collaboratore.rui_sezione} n. {OPERATORE.collaboratore.rui_numero} e vigilato IVASS. Contatto: <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a>.</p>
+      <p>Il titolare è <strong>{OPERATORE.collaboratore.nome_completo}</strong>, gestore del sito, iscritto al RUI sez. {OPERATORE.collaboratore.rui_sezione} n. {OPERATORE.collaboratore.rui_numero}. Contatto: <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a>.</p>
 
       <h2>2. Cookie utilizzati</h2>
       <p>Nessun cookie diverso da quelli tecnici viene installato prima della scelta espressa dall&apos;utente nel banner.</p>

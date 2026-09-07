@@ -32,7 +32,7 @@ export default function PrivacyPage() {
       <h2>1. Titolare del trattamento</h2>
       <ul>
         <li><strong>Titolare:</strong> {OPERATORE.collaboratore.nome_completo}, gestore del sito</li>
-        <li><strong>Iscrizione RUI sez. {OPERATORE.collaboratore.rui_sezione} n.</strong> {OPERATORE.collaboratore.rui_numero} — vigilato IVASS</li>
+        <li><strong>Iscrizione RUI sez. {OPERATORE.collaboratore.rui_sezione} n.</strong> {OPERATORE.collaboratore.rui_numero}</li>
         <li><strong>Email:</strong> <a href={`mailto:${OPERATORE.contatti.email}`}>{OPERATORE.contatti.email}</a></li>
         <li><strong>Telefono:</strong> <a href={`tel:${OPERATORE.contatti.telefono_tel}`}>{OPERATORE.contatti.telefono_display}</a></li>
       </ul>

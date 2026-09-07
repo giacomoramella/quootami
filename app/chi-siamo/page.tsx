@@ -5,7 +5,7 @@ import { JsonLdBreadcrumb } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   title: 'Chi siamo · Il broker assicurativo digitale',
-  description: 'Quootami confronta le polizze di più compagnie con un solo referente: chi c\'è dietro, come lavora e gli estremi di iscrizione al RUI, vigilati IVASS.',
+  description: 'Quootami confronta le polizze di più compagnie con un solo referente: chi c\'è dietro, come lavora e gli estremi di iscrizione al RUI.',
 };
 
 export default function ChiSiamoPage() {
@@ -50,8 +50,8 @@ export default function ChiSiamoPage() {
               con tutti gli elementi sul tavolo.
             </p>
             <p className="mt-4 text-ink-muted text-base sm:text-lg leading-relaxed">
-              Dietro al sito c&apos;è un intermediario in carne e ossa, iscritto al RUI e
-              vigilato IVASS — non un call center.
+              Dietro al sito c&apos;è un intermediario in carne e ossa, iscritto al RUI —
+              non un call center.
             </p>
           </div>
 
@@ -152,10 +152,10 @@ export default function ChiSiamoPage() {
         <div className="container-content text-center">
           <span className="eyebrow">Compliance</span>
           <h2 className="section-title">
-            Vigilato IVASS, <span className="hl">conforme normativa.</span>
+            Iscritto al RUI, <span className="hl">conforme normativa.</span>
           </h2>
           <p className="section-sub mx-auto">
-            L&apos;attività di Quootami è vigilata dall&apos;IVASS e svolta in conformità con il
+            L&apos;attività di Quootami è svolta in conformità con il
             Codice delle Assicurazioni Private (D.Lgs. 209/2005) e le normative IDD e POG
             sulla distribuzione assicurativa.
           </p>
