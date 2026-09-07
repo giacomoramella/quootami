@@ -74,6 +74,24 @@ export const PREVENTIVO_ALLEGATO: Record<
 };
 
 /**
+ * Il CAP è obbligatorio su tutti i prodotti in cui il rischio è territoriale:
+ * su auto e casa determina il premio, su imprese e professionisti serve almeno
+ * a sapere in che provincia si trova chi ha scritto. L'etichetta cambia perché
+ * cambia a cosa si riferisce — la residenza, il veicolo o l'immobile.
+ */
+function campoCap(label = 'CAP di residenza'): PreventivoField {
+  return {
+    name: 'cap',
+    label,
+    type: 'text',
+    required: true,
+    placeholder: '13900',
+    pattern: '^\\d{5}$',
+    patternMessage: 'Il CAP è composto da 5 cifre',
+  };
+}
+
+/**
  * Blocco anagrafico comune ai prodotti per imprese e professionisti (rc, cyber).
  * Sono esattamente i dati che compaiono sulla visura camerale: per questo, se
  * il cliente la allega, questo blocco non viene chiesto.
@@ -91,8 +109,7 @@ const CAMPI_IMPRESA: PreventivoField[] = [
     patternMessage: 'Codice fiscale non valido (16 caratteri, o 11 cifre per le società)' },
   { name: 'ateco', label: 'Codice ATECO', type: 'text', placeholder: 'facoltativo, es. 62.01',
     pattern: '^\\d{2}(\\.\\d{1,2}){0,3}$', patternMessage: 'Formato ATECO non valido (es. 62.01 o 62.01.00)' },
-  { name: 'cap', label: 'CAP di residenza', type: 'text', required: true, placeholder: '13900',
-    pattern: '^\\d{5}$', patternMessage: 'Il CAP è composto da 5 cifre' },
+  campoCap(),
 ];
 
 /** Le tre soglie su cui Quootami fa quotare. */
@@ -131,6 +148,8 @@ export const PREVENTIVO_FIELDS: Record<string, PreventivoField[]> = {
     { name: 'targa', label: 'Targa', type: 'text', required: true, placeholder: 'AB123CD' },
     { name: 'tipo_veicolo', label: 'Tipo di veicolo', type: 'select', required: true,
       options: ['Auto', 'Moto', 'Autocarro', 'Altro'] },
+    // Il premio RC auto dipende dalla provincia in cui il veicolo circola.
+    campoCap('CAP di residenza'),
     { name: 'uso', label: 'Uso del veicolo', type: 'select', options: ['Privato', 'Professionale'] },
     { name: 'garanzie', label: 'Garanzie che cerchi', type: 'checkboxes', full: true,
       options: ['RC Auto', 'Furto e Incendio', 'Kasko', 'Assistenza stradale', 'Tutela legale'] },
@@ -139,6 +158,9 @@ export const PREVENTIVO_FIELDS: Record<string, PreventivoField[]> = {
   'polizza-casa': [
     { name: 'tipo_immobile', label: 'Tipo di immobile', type: 'select', required: true,
       options: ['Appartamento', 'Villa / Villetta', 'Altro'] },
+    // Qui il CAP è quello dell'immobile, non del contraente: rischio furto,
+    // zona sismica e alluvionale si valutano su dove sta la casa.
+    campoCap('CAP dell\'immobile'),
     { name: 'mq', label: 'Metratura', type: 'number', suffix: 'mq', placeholder: '100' },
     { name: 'titolo', label: 'Sei…', type: 'select', options: ['Proprietario', 'Affittuario'] },
     { name: 'garanzie', label: 'Garanzie che cerchi', type: 'checkboxes', full: true,
