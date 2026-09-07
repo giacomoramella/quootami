@@ -40,7 +40,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'polizza-catastrofale-imprese-chi-e-obbligato',
     titolo: 'Polizza catastrofale: quali imprese sono obbligate',
-    metaTitle: 'Polizza catastrofale imprese: chi è obbligato',
+    metaTitle: 'Polizza catastrofale obbligatoria imprese 2026: chi e quando',
     metaDesc:
       'Obbligo di polizza catastrofale (cat nat) per le imprese: scadenze per dimensione, chi è escluso, quali beni assicurare e cosa si rischia senza copertura.',
     eyebrow: 'Guida imprese',
@@ -55,7 +55,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'polizza-catastrofale-cosa-copre',
     titolo: 'Polizza catastrofale: cosa copre davvero (e cosa no)',
-    metaTitle: 'Polizza catastrofale: cosa copre e cosa no',
+    metaTitle: 'Polizza catastrofale 2026: cosa copre e cosa resta escluso',
     metaDesc:
       'L’obbligo cat nat copre sismi, alluvioni, frane, inondazioni ed esondazioni. Grandine, trombe d’aria e mareggiate restano fuori: come integrarle.',
     eyebrow: 'Guida imprese',
@@ -70,7 +70,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'detrazione-polizza-eventi-calamitosi-casa',
     titolo: 'Detrazione 19% sulla polizza casa contro gli eventi calamitosi',
-    metaTitle: 'Detrazione 19% polizza eventi calamitosi',
+    metaTitle: 'Detrazione 19% polizza eventi calamitosi: requisiti',
     metaDesc:
       'Sui premi delle polizze contro gli eventi calamitosi su immobili residenziali spetta la detrazione del 19% senza limite di importo. Requisiti e come ottenerla.',
     eyebrow: 'Guida privati',
@@ -85,7 +85,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'auto-ferma-in-garage-va-assicurata',
     titolo: 'Auto ferma in garage: va assicurata lo stesso?',
-    metaTitle: 'Auto ferma in garage: va assicurata?',
+    metaTitle: 'Auto ferma in garage: RC obbligatoria o si può sospendere',
     metaDesc:
       'Se il veicolo è immatricolato e funzionante l’RC auto è obbligatoria anche da fermo. I casi di esenzione, la sospensione della polizza e le formule stagionali.',
     eyebrow: 'Guida privati',
@@ -100,7 +100,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'adesione-automatica-fondo-pensione-2026',
     titolo: 'Adesione automatica al fondo pensione dal 1° luglio 2026',
-    metaTitle: 'Adesione automatica al fondo pensione 2026',
+    metaTitle: 'Adesione automatica fondo pensione 2026: regole e 60 giorni',
     metaDesc:
       'Dal 1° luglio 2026 i nuovi assunti aderiscono automaticamente alla previdenza complementare. Hai 60 giorni per scegliere diversamente: cosa valutare prima.',
     eyebrow: 'Guida previdenza',
@@ -115,7 +115,7 @@ export const ARTICOLI: Articolo[] = [
   {
     slug: 'nis2-pmi-obblighi-cybersicurezza',
     titolo: 'NIS2: la mia PMI è obbligata?',
-    metaTitle: 'NIS2 PMI: chi è obbligato e cosa comporta',
+    metaTitle: 'NIS2 PMI: soglie, effetto sui fornitori e sanzioni',
     metaDesc:
       'NIS2 e D.Lgs. 138/2024: settori e soglie dimensionali, l’effetto catena sui fornitori, sanzioni e dove entra davvero la polizza cyber.',
     eyebrow: 'Guida imprese',
