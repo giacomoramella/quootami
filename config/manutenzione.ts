@@ -36,7 +36,7 @@ import { OPERATORE } from './operatore';
  * restano quelli del sito normale — di proposito: una sitemap vuota o un
  * `noindex` direbbero a Google che le pagine non ci sono più.
  */
-export const MANUTENZIONE = true;
+export const MANUTENZIONE = false;
 
 /** Data di inizio della pausa, per sapere quando si sta sforando. */
 export const PAUSA_DAL = '2026-09-07';
