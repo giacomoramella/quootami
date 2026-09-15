@@ -45,7 +45,7 @@ export function proxy(request: NextRequest) {
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https:;
     font-src 'self' data:;
-    connect-src 'self' https://*.supabase.co https://api.resend.com https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://connect.facebook.net https://www.facebook.com;
+    connect-src 'self' https://*.supabase.co https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com;
     frame-src 'self';
     object-src 'none';
     base-uri 'self';
@@ -56,6 +56,14 @@ export function proxy(request: NextRequest) {
   `
     .replace(/\s{2,}/g, ' ')
     .trim();
+
+  // Tolti da connect-src il 15/09/2026 perche' erano permessi concessi a vuoto:
+  //  - api.resend.com: Resend gira solo lato server (lib/resend, route firma),
+  //    e il server non e' soggetto alla CSP del browser;
+  //  - connect.facebook.net e www.facebook.com: il Meta Pixel non ha un ID
+  //    configurato (NEXT_PUBLIC_META_PIXEL_ID assente su Vercel), quindi non
+  //    viene mai caricato. VANNO RIMESSI qui il giorno in cui si attiva il
+  //    Pixel, altrimenti la CSP lo blocca e il blocco e' silenzioso.
 
   // Il nonce deve viaggiare anche sulla request: Next.js lo legge
   // dall'header CSP e lo applica ai propri <script> in rendering dinamico.
