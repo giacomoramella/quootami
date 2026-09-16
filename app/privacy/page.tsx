@@ -61,7 +61,7 @@ export default function PrivacyPage() {
       <p>Il sito eroga servizi con regimi diversi. Le sezioni 1, 3, 6, 9, 10, 11 e 12 valgono per tutti; le sezioni 7 e 8 contengono le parti specifiche.</p>
       <ul>
         <li><strong>Assicurazioni e previdenza complementare</strong> — il titolare opera come intermediario iscritto al RUI in sezione {OPERATORE.collaboratore.rui_sezione} n. {OPERATORE.collaboratore.rui_numero}, per conto di {OPERATORE.broker.ragione_sociale}, iscritta al RUI in sezione {OPERATORE.broker.rui_sezione} n. {OPERATORE.broker.rui_numero}.</li>
-        <li><strong>Comparazione forniture luce e gas</strong> — <em>servizio in attivazione.</em> Non è intermediazione assicurativa, non rientra nel perimetro RUI e non è soggetto alla vigilanza IVASS: il titolare opera in proprio.</li>
+        <li><strong>Comparazione forniture luce e gas</strong> — <em>servizio attualmente sospeso.</em> Questa informativa continua a descriverlo perché riguarda i dati raccolti quando era attivo, che restano in archivio e sui quali l&apos;interessato conserva i diritti di cui alla § 10. Non è intermediazione assicurativa, non rientra nel perimetro RUI e non è soggetto alla vigilanza IVASS: il titolare opera in proprio.</li>
       </ul>
 
       <h2>3. Dati trattati</h2>
