@@ -147,6 +147,7 @@ export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
     const dob = `${dobYear}-${dobMonth.padStart(2, '0')}-${dobDay.padStart(2, '0')}`;
     const nomeCognome = `${nome} ${cognome}`;
     let leadId: string | null = null;
+    let dbFallito: string | null = null;
     const documenti: Record<string, string> = {};
 
     try {
@@ -164,10 +165,18 @@ export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
           user_agent: typeof navigator !== 'undefined' ? navigator.userAgent.substring(0, 255) : '',
         },
       });
-      if (rpcErr) throw new Error(`DB: ${rpcErr.message}`);
+      // Il database non e' l'unica copia del lead: la notifica Web3Forms
+      // contiene gia' tutti i dati. Se Supabase e' in pausa o irraggiungibile
+      // annotiamo il guasto e tiriamo dritto, invece di perdere la richiesta.
+      if (rpcErr) {
+        dbFallito = rpcErr.message;
+        console.warn('[lead] insert_lead non riuscito, proseguo con la notifica:', rpcErr.message);
+      }
       leadId = (lead as { id?: string })?.id ?? null;
 
       // === [2] Upload documenti su Storage privato ===
+      // Senza leadId finirebbero tutti in leads/noid/: meglio saltarli e
+      // dirlo nella mail, cosi' i documenti si richiedono via risposta.
       setLoadingMsg('Caricamento sicuro dei documenti…');
       const filesToUpload: Array<[string, File | null]> = [
         ['ci_fronte', ciFronte],
@@ -175,15 +184,19 @@ export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
         ...(requiresVehicle ? [['libretto', libretto] as [string, File | null]] : []),
       ];
 
-      const uploads = filesToUpload
+      const uploads = (leadId ? filesToUpload : [])
         .filter(([, f]) => !!f)
         .map(async ([key, file]) => {
           const ext = (file!.name.split('.').pop() ?? 'bin').toLowerCase().replace(/[^a-z0-9]/g, '');
           const path = `leads/${leadId ?? 'noid'}/${key}-${Date.now()}.${ext || 'bin'}`;
-          const { error: upErr } = await supabase.storage
-            .from(SUPABASE.bucket)
-            .upload(path, file!, { contentType: file!.type || 'application/octet-stream' });
-          if (!upErr) documenti[key] = path;
+          try {
+            const { error: upErr } = await supabase.storage
+              .from(SUPABASE.bucket)
+              .upload(path, file!, { contentType: file!.type || 'application/octet-stream' });
+            if (!upErr) documenti[key] = path;
+          } catch {
+            /* Storage giu': lo dice la mail, l'invio prosegue. */
+          }
         });
       await Promise.all(uploads);
 
@@ -208,6 +221,13 @@ export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
       fd.append('Lead ID Supabase', leadId ?? 'n/d');
       fd.append('Link dashboard documenti', dashboardLink);
       fd.append('Documenti caricati', Object.keys(documenti).join(', ') || 'nessuno');
+      if (dbFallito) {
+        fd.append(
+          'ATTENZIONE',
+          `Il lead NON e' stato salvato su Supabase (${dbFallito}). Questa email e' l'unica copia: ` +
+            'rispondi al cliente e ricarica i dati a mano. Controlla se il progetto Supabase e\' in pausa.'
+        );
+      }
       fd.append('Data invio', new Date().toLocaleString('it-IT'));
       fd.append('Pagina di provenienza', typeof window !== 'undefined' ? window.location.pathname : '');
 

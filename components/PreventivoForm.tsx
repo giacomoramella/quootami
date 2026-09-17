@@ -175,20 +175,30 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
     const riferimento = nome.trim() || 'visura allegata';
 
     try {
-      // [0] La visura va caricata prima: se fallisce non ha senso notificare
-      // una richiesta a cui manca il documento su cui si basa.
+      // [0] La visura si carica per prima. Se l'archivio e' irraggiungibile
+      // non buttiamo via la richiesta: la notifica parte lo stesso e dice che
+      // il documento va richiesto al cliente rispondendo alla mail.
       if (conAllegato && file) {
         const cartella =
           typeof crypto !== 'undefined' && crypto.randomUUID
             ? crypto.randomUUID()
             : String(Date.now());
-        const path = await caricaVisura(file, cartella);
-        righe.push({ label: 'Visura camerale', val: `${file.name} (${Math.round(file.size / 1024)} KB)` });
-        righe.push({ label: 'Percorso del file', val: path });
-        righe.push({
-          label: 'Apri su Supabase',
-          val: `https://supabase.com/dashboard/project/${PROJECT_REF}/storage/buckets/${SUPABASE.bucket}?path=${encodeURIComponent(`leads/${cartella}`)}`,
-        });
+        try {
+          const path = await caricaVisura(file, cartella);
+          righe.push({ label: 'Visura camerale', val: `${file.name} (${Math.round(file.size / 1024)} KB)` });
+          righe.push({ label: 'Percorso del file', val: path });
+          righe.push({
+            label: 'Apri su Supabase',
+            val: `https://supabase.com/dashboard/project/${PROJECT_REF}/storage/buckets/${SUPABASE.bucket}?path=${encodeURIComponent(`leads/${cartella}`)}`,
+          });
+        } catch (upErr) {
+          console.warn('[preventivo] caricamento visura non riuscito, proseguo:', upErr);
+          righe.push({ label: 'Visura camerale', val: `${file.name} — CARICAMENTO NON RIUSCITO` });
+          righe.push({
+            label: 'ATTENZIONE',
+            val: "L'archivio documenti non ha risposto: la visura non e' stata salvata. Richiedila al cliente rispondendo a questa email, e controlla se il progetto Supabase e' in pausa.",
+          });
+        }
       }
 
       const messaggio = righe.map(r => `${r.label}: ${r.val}`).join('\n');
