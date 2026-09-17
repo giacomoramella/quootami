@@ -21,6 +21,8 @@ import { SUPABASE, WEB3FORMS } from '@/config/credentials';
 import { OPERATORE } from '@/config/operatore';
 import { getPreventivoFields, getPreventivoAllegato, type PreventivoField } from '@/config/preventivo';
 import { trackLead } from '@/lib/tracking';
+import { useAntispam } from '@/lib/antispam';
+import { CampoTrappola } from './CampoTrappola';
 import type { Polizza } from '@/config/polizze';
 
 /**
@@ -66,6 +68,7 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const { trappola, setTrappola, invioSospetto } = useAntispam();
 
   function setCampo(name: string, v: Valore) {
     setDati(prev => ({ ...prev, [name]: v }));
@@ -152,6 +155,11 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    // Invio automatico: mostriamo la conferma senza far partire nulla.
+    if (invioSospetto()) {
+      setSuccess(true);
+      return;
+    }
     if (!validate()) return;
     setLoading(true);
 
@@ -265,6 +273,8 @@ export function PreventivoForm({ polizza }: { polizza: Polizza }) {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="max-w-2xl mx-auto rounded-3xl bg-bg-card border border-black/5 shadow-brand-md p-6 sm:p-8 text-left">
+            <CampoTrappola id="preventivo-sito-azienda" value={trappola} onChange={setTrappola} />
+
             <p className="text-xs font-bold uppercase tracking-wide text-ink mb-5">Preventivo rapido</p>
 
             {/* Scelta del percorso: compilare i dati oppure allegare la visura,

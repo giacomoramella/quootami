@@ -4,6 +4,8 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { createClient } from '@supabase/supabase-js';
 import { SUPABASE, WEB3FORMS } from '@/config/credentials';
+import { useAntispam } from '@/lib/antispam';
+import { CampoTrappola } from './CampoTrappola';
 
 /**
  * Quootami — LeadForm universale (client-side, no env vars)
@@ -72,6 +74,7 @@ export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
   const [libretto, setLibretto] = useState<File | null>(null);
   const [consenso, setConsenso] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const { trappola, setTrappola, invioSospetto } = useAntispam();
 
   const years = useMemo(() => {
     const cy = new Date().getFullYear();
@@ -132,6 +135,11 @@ export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    // Invio automatico: mostriamo la conferma senza far partire nulla.
+    if (invioSospetto()) {
+      setSuccess(true);
+      return;
+    }
     if (!validate()) return;
     setLoading(true);
     setLoadingMsg('Salvataggio dati in corso…');
@@ -240,6 +248,8 @@ export function LeadForm({ prodotto, requiresVehicle = false }: Props) {
       onSubmit={handleSubmit}
       className="max-w-prose-wide mx-auto p-8 sm:p-10 bg-bg-card border border-black/5 rounded-3xl shadow-brand-md"
     >
+      <CampoTrappola id="lead-sito-azienda" value={trappola} onChange={setTrappola} />
+
       <Section title="Dati personali">
         <Row>
           <Field id="nome" label="Nome" err={fieldErrors.nome}>
