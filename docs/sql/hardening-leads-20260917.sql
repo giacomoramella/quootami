@@ -34,8 +34,23 @@ drop policy if exists "Anyone can insert leads" on public.leads;
 -- [3] Cintura: niente UPDATE/DELETE per anon nemmeno a livello di grant.
 revoke update, delete on public.leads from anon;
 
+-- [4] Grant che non servono a nessuno e uno che fa paura: TRUNCATE non
+--     passa dalle RLS. Oggi non e' raggiungibile via PostgREST, ma non
+--     c'e' motivo perche' anon ce l'abbia.
+revoke truncate, references, trigger on public.leads from anon;
+
 -- ================================================================
--- VERIFICA (attesa: solo le policy volute, nessuna su update/delete)
+-- ESEGUITO il 17 settembre 2026 sul progetto ivcdwizhkdubjxxrukbs.
+-- Stato finale verificato:
+--   - policy su public.leads: NESSUNA (le scritture passano solo da
+--     insert_lead(), che essendo SECURITY DEFINER scavalca le RLS)
+--   - grant residui per anon: INSERT, SELECT — entrambi comunque
+--     fermati dalle RLS senza policy
+--   - test con `set local role anon`: insert_lead() funziona ancora
+-- ================================================================
+
+-- ================================================================
+-- VERIFICA
 -- ================================================================
 -- select policyname, cmd, roles
 --   from pg_policies
