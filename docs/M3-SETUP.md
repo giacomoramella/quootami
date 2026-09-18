@@ -1,5 +1,24 @@
 # Quootami — Milestone 3: Backend Lead Form
 
+> **ATTENZIONE — DOCUMENTO STORICO, NON DESCRIVE IL SITO DI OGGI.**
+>
+> L'architettura qui sotto (route `/api/lead` server-side, Resend con
+> allegati PDF, `components/LeadForm.tsx`) e' stata **abbandonata**.
+> Route e componente sono stati rimossi dal repo il 18 settembre 2026.
+>
+> Come funziona davvero oggi la raccolta dei lead:
+>
+> | Modulo | Dove sta | Cosa fa |
+> |---|---|---|
+> | `components/ContattoRapido.tsx` | home page | RPC `insert_lead` best-effort + Web3Forms |
+> | `components/PreventivoForm.tsx` | pagine prodotto (via `ProductPage`) | idem, piu' upload visura su Storage |
+>
+> Tutto client-side con la chiave anon: niente Resend, niente env vars,
+> niente service_role. Il database e' una copia, la notifica Web3Forms e'
+> il canale che conta.
+>
+> Questo file resta solo come storia di cosa si era provato e perche'.
+
 Questa milestone aggiunge il backend completo per ricevere i lead dal sito.
 
 ## Cosa è stato fatto
