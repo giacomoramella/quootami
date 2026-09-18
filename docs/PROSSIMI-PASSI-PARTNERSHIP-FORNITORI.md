@@ -13,6 +13,32 @@ Da tenere in conto quando si negozia: soglie minime di volume, over-commission o
 
 ## 2. Vincoli normativi da rispettare (ARERA + privacy)
 
+### 2.0 Il divieto di teleselling (aggiunto il 07/09/2026) — cambia il rapporto di forza
+
+Dall'**8 aprile 2026**, con la conversione in legge del Decreto Bollette
+(D.L. 21/2026), **le chiamate commerciali non richieste per vendere contratti
+luce e gas sono vietate** e i contratti conclusi in violazione sono nulli.
+
+È il fatto più importante di tutto questo documento e non c'era quando è stato
+scritto. Conseguenze pratiche:
+
+- **Sul modello.** Chi acquisiva da liste telefoniche sta ricostruendo il canale
+  inbound da zero. Un comparatore con traffico spontaneo e consenso raccolto
+  correttamente vale oggi molto più che a inizio anno: è la leva negoziale
+  principale verso ogni fornitore, e va messa nel primo paragrafo di ogni mail.
+- **Su cosa si vende davvero.** Non traffico, ma **un contatto che ha chiesto di
+  essere contattato e di cui si può dimostrare il consenso**. Un lead senza prova
+  del consenso è un rischio che nessun ufficio compliance si prende. Da qui la
+  tracciatura descritta in `LANDING-LUCE-E-GAS.md` e implementata in
+  `archivio/luce-e-gas/supabase/en-waitlist.sql`.
+- **Su cosa NON si può più fare.** Nessun contatto telefonico verso chi non ha
+  prestato consenso esplicito, a prescindere dal Registro Pubblico delle
+  Opposizioni.
+- **Eccezione da ricordare:** Octopus Energy dichiara pubblicamente di non fare
+  telemarketing né usare call center esterni. Con loro la leva va girata, non
+  ripetuta.
+
+
 Prima di attivare qualunque canale che promuove o conclude contratti per conto di un fornitore, valgono le regole del **Codice di Condotta Commerciale ARERA** (Allegato A delibera 366/2018/R/com, più volte aggiornato, ultimo adeguamento aprile 2026):
 
 - Chi promuove/conclude contratti (anche online) deve dichiarare chiaramente lo scopo commerciale del contatto prima di chiedere dati.
@@ -22,7 +48,17 @@ Prima di attivare qualunque canale che promuove o conclude contratti per conto d
 
 Nota importante: il **Portale Offerte** di ARERA (portaleofferte.it) è l'unico comparatore pubblico e non ha accordi commerciali con i fornitori — è la fonte dati "neutra" già usata per popolare `en.offers` (vedi `fetch_arera_opendata.py`), ma non è un canale di remunerazione: i ricavi arrivano solo dagli accordi commerciali diretti descritti sotto.
 
-Requisito pratico preliminare: Quootami deve operare con una P.IVA/società (già presumibilmente esistente), avere privacy policy e cookie policy pubblicate (i file `privacy.html`/`cookie.html` già presenti nel repo vanno tenuti aggiornati e coerenti con l'attività di comparazione/lead generation).
+Requisito pratico preliminare: Quootami deve operare con una P.IVA/società, avere privacy policy e cookie policy pubblicate e coerenti con l'attività di comparazione/lead generation.
+
+> **Stato al 07/09/2026.** L'informativa privacy è stata riscritta (versione 2.0,
+> `app/privacy/page.tsx`) e copre già il verticale energia: perimetro dichiarato
+> fuori RUI/IVASS, dati del modulo energia, base giuridica del confronto,
+> **consenso distinto** per la comunicazione ai fornitori, e i fornitori
+> qualificati come **titolari autonomi** — che è la distinzione giuridica
+> centrale del modello. Restano aperte due lacune preesistenti, non legate
+> all'energia: **P.IVA e sede del titolare non sono pubblicate** (art. 13 GDPR le
+> richiede) e il recapito privacy è ancora un indirizzo `@sistoassicurazioni.com`,
+> che per dati raccolti in un'attività estranea a Sisto confonde i ruoli.
 
 ## 3. Approcci diversi per tipo di fornitore
 
@@ -44,8 +80,14 @@ Queste agenzie hanno già mandati con diversi fornitori (grandi e piccoli) e cer
 Esempi: **Awin**, **FlexOffers**.
 Verificato che sulla rete Awin sono presenti come advertiser **Eni Plenitude IT**, **NeN 2025 IT** e **Octopus Energy IT**; anche **Enel** ha una campagna di affiliazione attiva. Una sola registrazione come publisher dà quindi accesso a più fornitori insieme, incluso un incumbent che il punto 3b dava per irraggiungibile.
 Vantaggi rispetto agli altri canali: non serve un mandato di agenzia, il tracciamento (link, subid, postback) e la rendicontazione sono forniti dalla piattaforma — il che risolve da solo il problema descritto al punto 5.2, cioè registrare la conversione e non solo il lead. Svantaggio: la piattaforma trattiene una quota, quindi la commissione unitaria è inferiore a un accordo diretto.
-L'approvazione avviene per singolo programma e richiede un sito già online con privacy e cookie policy pubblicate: condizioni oggi soddisfatte.
-**È il punto di partenza consigliato, prima ancora di 3a.** Vedi `TARGET-FORNITORI-FASE1.md` per la lista operativa.
+L'approvazione avviene per singolo programma e richiede un sito già online con privacy e cookie policy pubblicate **e un contenuto credibile sul tema energia**.
+
+> **Aggiornamento 07/09/2026:** l'ultima condizione non è più soddisfatta, perché
+> il verticale è archiviato. Va pubblicata prima la landing di lista d'attesa
+> (`LANDING-LUCE-E-GAS.md`), poi ci si candida. Aggiungere **Sorgenia**
+> (merchant ID `9584`) ai programmi energia su Awin: sono quattro, non tre.
+
+**È il punto di partenza consigliato, prima ancora di 3a.** Vedi `TARGET-FORNITORI-FASE1.md` per la lista operativa e `OUTREACH-FORNITORI-2026-09.md` per lo stato reale dei contatti.
 
 ### 3e. Syndication verso comparatori già affermati
 Esempi: Facile.it, Selectra/Luce-gas.it, Segugio, SosTariffe.

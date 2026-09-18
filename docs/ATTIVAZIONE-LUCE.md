@@ -1,5 +1,16 @@
 # Attivazione comparatore Luce e Gas — stato
 
+> **STATO AL 07/09/2026 — il comparatore è ARCHIVIATO, non attivo.**
+> Tutto quello che segue descrive un'infrastruttura che *funziona ed è ancora in
+> piedi* (schema `en`, 92 fornitori, 170 offerte, Edge Functions attive), ma la
+> rotta `/luce` è stata archiviata: vedi `archivio/luce-e-gas/README.md`.
+>
+> Il verticale riparte da una **landing di lista d'attesa**, non dal comparatore:
+> senza almeno un mandato firmato un confronto prezzi sarebbe finto. Specifica e
+> codice pronto in `LANDING-LUCE-E-GAS.md`. Il comparatore si riattiva quando il
+> primo accordo è chiuso — trattative in corso con Wekiwi e Illumia, vedi
+> `OUTREACH-FORNITORI-2026-09.md`.
+
 > Backend sul progetto Supabase attivo `ivcdwizhkdubjxxrukbs` (Francoforte).
 > Pagina: `/luce` (React) + `components/ComparatoreLuce.tsx`.
 

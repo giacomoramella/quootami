@@ -1,5 +1,21 @@
 # Fase 1 — lista operativa dei fornitori da contattare
 
+> **AGGIORNAMENTO 07/09/2026 — leggere prima del resto.**
+> Tre cose in questo documento non sono più vere:
+> 1. **Sorgenia non è in priorità 3.** Ha un programma di affiliazione su Awin
+>    (merchant ID `9584`, "Sorgenia 2017 NEW IT"). Vedi la voce corretta sotto.
+> 2. **Il prerequisito "sito online con contenuto credibile sul tema energia"
+>    NON è più soddisfatto**: il verticale è archiviato dal 07/09/2026. Va
+>    pubblicata la landing (`LANDING-LUCE-E-GAS.md`) **prima** di candidarsi ad
+>    Awin — un rifiuto per irrilevanza è più difficile da recuperare di una
+>    candidatura mai presentata.
+> 3. **Dall'8 aprile 2026 il teleselling energia è vietato** (D.L. 21/2026): è
+>    la leva negoziale principale verso ogni fornitore, e non era ancora nota
+>    quando questo documento è stato scritto.
+>
+> Stato reale dei contatti, indirizzi verificati e testi delle mail:
+> `OUTREACH-FORNITORI-2026-09.md`.
+
 Documento di lavoro. Deriva da `PROSSIMI-PASSI-PARTNERSHIP-FORNITORI.md` (la strategia)
 e dai 92 fornitori censiti in `en.suppliers` (seed in `supabase/seed/en-seed-suppliers.sql`).
 
@@ -62,7 +78,15 @@ giusta per partire, non quella definitiva.
 **Azione:** registrarsi su Awin come publisher indicando quootami.it come sito, poi
 candidarsi ai singoli programmi. L'approvazione è per programma, non automatica: serve
 che il sito sia già online, con privacy e cookie policy pubblicate e un contenuto
-credibile sul tema energia. Entrambe le condizioni sono soddisfatte.
+credibile sul tema energia.
+
+> **Non più vero dal 07/09/2026.** Privacy e cookie policy ci sono (l'informativa
+> v2.0 copre già il verticale energia), ma il **contenuto sul tema energia non
+> c'è più**: il verticale è archiviato. Pubblicare prima la landing di lista
+> d'attesa — vedi `LANDING-LUCE-E-GAS.md` — e solo dopo candidarsi.
+
+Aggiungere alla tabella qui sopra: **Sorgenia** è su Awin con merchant ID `9584`.
+Sono quindi **quattro** i fornitori raggiungibili con una sola registrazione.
 
 > Awin applica in genere una quota di iscrizione rimborsabile al primo pagamento.
 > Verificare l'importo corrente in fase di registrazione.
@@ -100,7 +124,15 @@ credibile sul tema energia. Entrambe le condizioni sono soddisfatte.
 - **Da usare:** il canale affiliazione. Il referral è pensato per i clienti, non per un
   intermediario.
 - **Telefono:** 02 385 827 76 (anche WhatsApp), lun-ven 9-17
-- **Stato:** verificato
+- **Aggiornamento 07/09/2026:** sul sito italiano **non esiste alcun indirizzo
+  business né pagina partner** — solo `ciao@octopusenergy.it`, che è assistenza
+  clienti e apre un ticket. Il formato email interno non è ricostruibile da fonti
+  pubbliche: si passa da LinkedIn.
+- **Attenzione al testo della mail:** Octopus dichiara pubblicamente di non fare
+  telemarketing e di non usare call center esterni. Con loro la leva del divieto
+  di teleselling **non va usata come con gli altri** — spiegare una regola che
+  rispettavano già per scelta fa la figura di chi non ha letto il loro sito.
+- **Stato:** verificato · canale da aprire via LinkedIn
 
 ### NeN
 - **Porta d'ingresso:** programma di affiliazione su Awin ("NeN 2025 IT").
@@ -114,6 +146,45 @@ credibile sul tema energia. Entrambe le condizioni sono soddisfatte.
 - **Porta d'ingresso:** programma di affiliazione su Awin, remunerazione a lead.
 - **Stato:** verificato · è l'incumbent più accessibile
 
+### Sorgenia — CORRETTO il 07/09/2026
+- **Porta d'ingresso:** programma di affiliazione su Awin, merchant ID **9584**
+  ("Sorgenia 2017 NEW IT"). Link con programma preagganciato:
+  `ui.awin.com/publisher-signup/it/awin?advertiser=9584`
+- **Condizioni:** cookie di attribuzione 30 giorni; remunerazione **solo dopo
+  l'attivazione della fornitura**, non alla richiesta; controlli incrociati
+  mensili di Sorgenia sulla qualità, spontaneità e veridicità degli account
+  registrati tramite i canali di affiliazione, con chiusura della collaborazione
+  in caso di attività forzate. Per un comparatore è una buona notizia: premia il
+  traffico spontaneo e taglia fuori chi farma lead.
+- **Nota:** questo documento la classificava in priorità 3 come "nessun programma
+  partner pubblico trovato". Era un errore di ricerca, non un cambiamento del
+  mercato: il programma è attivo da anni.
+- **Contatto interno, solo per farsi instradare:** `federica.petra.colombo@sorgenia.it`
+  (relazioni esterne — non è sviluppo commerciale, serve a farsi passare alla
+  persona giusta).
+- **Stato:** verificato 07/09/2026 · mail di richiesta contatto inviata
+
+### E.ON Italia — AGGIUNTO il 07/09/2026
+- **Porta d'ingresso:** pagina "Diventa nostro partner", con un solo indirizzo e
+  nessun form di filtro: **`Partnership@eon.com`** (backup:
+  `grandiaziende@eon-energia.com`).
+- **Perché conta:** nei mercati europei in cui opera, E.ON tratta i comparatori
+  come canale di acquisizione ordinario. È l'invito più esplicito trovato in
+  tutta la ricerca.
+- **Stato:** verificato 07/09/2026 · mail inviata
+
+### Iren — AGGIUNTO il 07/09/2026
+- **Porta d'ingresso:** nessuna. Niente pagina partner, niente rete vendita
+  pubblica. Il portale acquisti è l'albo fornitori per gli appalti: canale
+  sbagliato.
+- **Miglior tentativo:** `adriana.mosca@gruppoiren.it` (Brand Strategy, Digital
+  and Sponsorship), backup `ufficio.stampa@gruppoiren.it`. Formato aziendale
+  `nome.cognome@gruppoiren.it`: con un nome migliore da LinkedIn l'indirizzo si
+  ricostruisce.
+- **Leva specifica:** presidio territoriale — Iren è l'operatore di riferimento
+  del biellese.
+- **Stato:** verificato 07/09/2026 · mail di richiesta instradamento inviata
+
 ---
 
 ## Priorità 3 — da verificare con contatto diretto
@@ -123,7 +194,6 @@ o una telefonata all'ufficio commerciale.
 
 | Fornitore | Tipo | Perché è in lista |
 |---|---|---|
-| **Sorgenia** | digital | già marcato `target`, nessun programma partner pubblico trovato |
 | **A2A Energia** | incumbent | già marcato `target`, commissione stimata alta |
 | **Illumia** | digital | oltre 1 milione di clienti, indipendente, sede Bologna |
 | **Optima Italia** | digital | multiservizi in abbonamento, modello adatto al bundling |
@@ -177,5 +247,6 @@ urgente, perché il tracciamento lo fa già la piattaforma.
 
 ---
 
-*Ultimo aggiornamento: 5 agosto 2026. Le informazioni sui programmi partner vanno
-riverificate prima dell'invio: i canali commerciali cambiano senza preavviso.*
+*Ultimo aggiornamento: 7 settembre 2026 (correzioni su Sorgenia, Octopus e il
+prerequisito Awin; aggiunte E.ON e Iren). Le informazioni sui programmi partner
+vanno riverificate prima dell'invio: i canali commerciali cambiano senza preavviso.*
