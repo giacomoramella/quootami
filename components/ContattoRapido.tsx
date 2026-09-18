@@ -25,6 +25,8 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import { SUPABASE, WEB3FORMS } from '@/config/credentials';
+import { useAntispam } from '@/lib/antispam';
+import { CampoTrappola } from './CampoTrappola';
 import { OPERATORE } from '@/config/operatore';
 import { trackLead } from '@/lib/tracking';
 
@@ -113,6 +115,7 @@ function ModaleContatto({
   const [waUrl, setWaUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [errs, setErrs] = useState<Record<string, string>>({});
+  const { trappola, setTrappola, invioSospetto } = useAntispam();
 
   // Chiusura con Esc + blocco dello scorrimento sotto la modale.
   useEffect(() => {
@@ -228,6 +231,12 @@ function ModaleContatto({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    // Invio automatico: conferma di facciata, e soprattutto nessuna finestra
+    // WhatsApp aperta a vuoto.
+    if (invioSospetto()) {
+      setSuccess(true);
+      return;
+    }
     if (!validate()) return;
 
     const testo = componiMessaggio();
@@ -326,6 +335,8 @@ function ModaleContatto({
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-1">
+            <CampoTrappola id="contatto-sito-azienda" value={trappola} onChange={setTrappola} />
+
             <p className="text-sm text-ink-muted leading-relaxed">
               {isWa
                 ? 'Tre campi e la chat si apre con il messaggio già pronto: niente foglio bianco.'
